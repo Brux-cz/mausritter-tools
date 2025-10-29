@@ -1,0 +1,261 @@
+{
+  "metadata": {
+    "source": "docs/knowledge_base/02_CHARACTER_CREATION.md",
+    "description": "Tabulka původů postav - určuje původ postavy podle HP a počtu ďobků",
+    "lookup_method": "hp_and_pips"
+  },
+  "origins": [
+    {
+      "hp": 1,
+      "pips": 1,
+      "name": "Pokusná myš",
+      "item_a": "Kouzlo: Kouzelná střela",
+      "item_b": "Olověný plášť (těžká zbroj)"
+    },
+    {
+      "hp": 1,
+      "pips": 2,
+      "name": "Kuchyňský slídil",
+      "item_a": "Štít a kabátec (lehká zbroj)",
+      "item_b": "Hrnce"
+    },
+    {
+      "hp": 1,
+      "pips": 3,
+      "name": "Uprchlík z klece",
+      "item_a": "Kouzlo: Srozumitelnost",
+      "item_b": "Láhev mléka"
+    },
+    {
+      "hp": 1,
+      "pips": 4,
+      "name": "Čarodějnice",
+      "item_a": "Kouzlo: Zahojení",
+      "item_b": "Vonná tyčka"
+    },
+    {
+      "hp": 1,
+      "pips": 5,
+      "name": "Kožešník",
+      "item_a": "Štít a kabátec (lehká zbroj)",
+      "item_b": "Silné nůžky"
+    },
+    {
+      "hp": 1,
+      "pips": 6,
+      "name": "Pouliční rváč",
+      "item_a": "Dýka (lehká, k6)",
+      "item_b": "Láhev kávy"
+    },
+    {
+      "hp": 2,
+      "pips": 1,
+      "name": "Žebravý kněz",
+      "item_a": "Kouzlo: Zotavení",
+      "item_b": "Svatý symbol"
+    },
+    {
+      "hp": 2,
+      "pips": 2,
+      "name": "Honák brouků",
+      "item_a": "Pomocník: věrný brouk",
+      "item_b": "Tyč, 15 cm"
+    },
+    {
+      "hp": 2,
+      "pips": 3,
+      "name": "Sládek",
+      "item_a": "Pomocník: opilý světlonoš",
+      "item_b": "Soudek piva"
+    },
+    {
+      "hp": 2,
+      "pips": 4,
+      "name": "Rybář",
+      "item_a": "Síť",
+      "item_b": "Jehla (lehká, k6)"
+    },
+    {
+      "hp": 2,
+      "pips": 5,
+      "name": "Kovář",
+      "item_a": "Kladivo (střední, k6/k8)",
+      "item_b": "Pilník na železo"
+    },
+    {
+      "hp": 2,
+      "pips": 6,
+      "name": "Dráteník",
+      "item_a": "Drát, klubko",
+      "item_b": "Elektrická lampa"
+    },
+    {
+      "hp": 3,
+      "pips": 1,
+      "name": "Dřevorubec",
+      "item_a": "Sekera (střední, k6/k8)",
+      "item_b": "Motouz, klubko"
+    },
+    {
+      "hp": 3,
+      "pips": 2,
+      "name": "Člen netopýřího kultu",
+      "item_a": "Kouzlo: Tma",
+      "item_b": "Pytlík netopýřích zubů"
+    },
+    {
+      "hp": 3,
+      "pips": 3,
+      "name": "Horník v cínovém dole",
+      "item_a": "Krumpáč (střední, k6/k8)",
+      "item_b": "Lucerna"
+    },
+    {
+      "hp": 3,
+      "pips": 4,
+      "name": "Sběrač odpadků",
+      "item_a": "Hák na odpadky (těžká, k10)",
+      "item_b": "Zrcátko"
+    },
+    {
+      "hp": 3,
+      "pips": 5,
+      "name": "Stěnolezec",
+      "item_a": "Rybářský háček",
+      "item_b": "Nit, cívka"
+    },
+    {
+      "hp": 3,
+      "pips": 6,
+      "name": "Kupec",
+      "item_a": "Pomocník: tažná krysa",
+      "item_b": "Směnka od šlechtice na 20 ď"
+    },
+    {
+      "hp": 4,
+      "pips": 1,
+      "name": "Vorář",
+      "item_a": "Kladivo (střední, k6/k8)",
+      "item_b": "Dřevěné klíny"
+    },
+    {
+      "hp": 4,
+      "pips": 2,
+      "name": "Honák žížal",
+      "item_a": "Tyč, 15 cm",
+      "item_b": "Mýdlo"
+    },
+    {
+      "hp": 4,
+      "pips": 3,
+      "name": "Vlaštovkář",
+      "item_a": "Rybářský háček",
+      "item_b": "Ochranné brýle"
+    },
+    {
+      "hp": 4,
+      "pips": 4,
+      "name": "Kanálník",
+      "item_a": "Pilník na železo",
+      "item_b": "Nit, cívka"
+    },
+    {
+      "hp": 4,
+      "pips": 5,
+      "name": "Žalářník",
+      "item_a": "Řetěz, 15 cm",
+      "item_b": "Kopí (těžká, k10)"
+    },
+    {
+      "hp": 4,
+      "pips": 6,
+      "name": "Pěstitel hub",
+      "item_a": "Sušené houby (zásoby)",
+      "item_b": "Maska proti spórám"
+    },
+    {
+      "hp": 5,
+      "pips": 1,
+      "name": "Stavitel hrází",
+      "item_a": "Lopata",
+      "item_b": "Dřevěné klíny"
+    },
+    {
+      "hp": 5,
+      "pips": 2,
+      "name": "Kartograf",
+      "item_a": "Brk a inkoust",
+      "item_b": "Kompas"
+    },
+    {
+      "hp": 5,
+      "pips": 3,
+      "name": "Vykradač pastiček",
+      "item_a": "Kus sýra",
+      "item_b": "Lepidlo"
+    },
+    {
+      "hp": 5,
+      "pips": 4,
+      "name": "Tulák",
+      "item_a": "Stan",
+      "item_b": "Mapa k pokladu, pochybná"
+    },
+    {
+      "hp": 5,
+      "pips": 5,
+      "name": "Pěstitel obilí",
+      "item_a": "Kopí (těžká, k10)",
+      "item_b": "Píšťalka"
+    },
+    {
+      "hp": 5,
+      "pips": 6,
+      "name": "Poslíček",
+      "item_a": "Deka",
+      "item_b": "Dokumenty, zapečetěné"
+    },
+    {
+      "hp": 6,
+      "pips": 1,
+      "name": "Trubadúr",
+      "item_a": "Hudební nástroj",
+      "item_b": "Maskovací sada"
+    },
+    {
+      "hp": 6,
+      "pips": 2,
+      "name": "Hazardní hráč",
+      "item_a": "Zatížené kostky",
+      "item_b": "Zrcátko"
+    },
+    {
+      "hp": 6,
+      "pips": 3,
+      "name": "Sběrač mízy",
+      "item_a": "Vědro",
+      "item_b": "Dřevěné klíny"
+    },
+    {
+      "hp": 6,
+      "pips": 4,
+      "name": "Včelař",
+      "item_a": "Sklenice medu",
+      "item_b": "Síť"
+    },
+    {
+      "hp": 6,
+      "pips": 5,
+      "name": "Knihovník",
+      "item_a": "Útržek ze starodávné knihy",
+      "item_b": "Brk a inkoust"
+    },
+    {
+      "hp": 6,
+      "pips": 6,
+      "name": "Zchudlý šlechtic",
+      "item_a": "Plstěný klobouk",
+      "item_b": "Parfém"
+    }
+  ]
+}

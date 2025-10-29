@@ -1,0 +1,13 @@
+# Core dependencies
+pydantic>=2.0.0  # Pro validaci dat (volitelně)
+
+# Development dependencies
+pytest>=7.0.0
+pytest-cov>=4.0.0
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.0.0
+
+# CLI utilities
+click>=8.0.0  # Pro CLI rozhraní
+rich>=13.0.0  # Pro barevný terminál

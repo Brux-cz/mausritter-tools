@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "source": "docs/knowledge_base/02_CHARACTER_CREATION.md",
+    "description": "Mateřská jména myší - hoď k20",
+    "dice": "d20",
+    "note": "Rodové příjmení podle matky - muži používají mužský tvar, ženy ženský tvar"
+  },
+  "names": [
+    {"roll": 1, "name_male": "Bílý", "name_female": "Bílá"},
+    {"roll": 2, "name_male": "Černý", "name_female": "Černá"},
+    {"roll": 3, "name_male": "Čihař", "name_female": "Čihařová"},
+    {"roll": 4, "name_male": "Darček", "name_female": "Darčeková"},
+    {"roll": 5, "name_male": "Durman", "name_female": "Durmanová"},
+    {"roll": 6, "name_male": "Hrabal", "name_female": "Hrabalová"},
+    {"roll": 7, "name_male": "Chalva", "name_female": "Chalvová"},
+    {"roll": 8, "name_male": "Jařinka", "name_female": "Jařinková"},
+    {"roll": 9, "name_male": "Jeleňák", "name_female": "Jeleňáková"},
+    {"roll": 10, "name_male": "Jeseň", "name_female": "Jeseňová"},
+    {"roll": 11, "name_male": "Katzenreiser", "name_female": "Katzenreiserová"},
+    {"roll": 12, "name_male": "Máselník", "name_female": "Máselníková"},
+    {"roll": 13, "name_male": "Píp", "name_female": "Pípová"},
+    {"roll": 14, "name_male": "Řešetlák", "name_female": "Řešetláková"},
+    {"roll": 15, "name_male": "Semínko", "name_female": "Semínková"},
+    {"roll": 16, "name_male": "Sníh", "name_female": "Sněhová"},
+    {"roll": 17, "name_male": "Strážný", "name_female": "Strážná"},
+    {"roll": 18, "name_male": "Trnka", "name_female": "Trnková"},
+    {"roll": 19, "name_male": "Urobil", "name_female": "Urobilová"},
+    {"roll": 20, "name_male": "Žvanil", "name_female": "Žvanilová"}
+  ]
+}
