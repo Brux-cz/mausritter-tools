@@ -27,8 +27,12 @@
   - Všechny typy kostek (d4, d6, d8, d10, d12, d20, d66)
   - Advantage/Disadvantage mechaniky
   - Attribute tests (roll-under d20)
+  - roll_3d6_keep_2() pro generování vlastností ✨ NOVÉ
 - ✅ `models.py` - Datové třídy
   - Character, NPC, Item, Condition, Background, Location
+- ✅ `tables.py` - TableLoader pro načítání JSON dat ✨ NOVÉ
+  - Cachované načítání tabulek
+  - Lookup funkce pro origins, names
 
 **CLI Tool (`src/cli.py`)**
 - ✅ Základní struktura s Click + Rich
@@ -56,9 +60,11 @@
 - ❌ Dungeon Generator
 
 **Data Files** (`data/`)
-- ❌ JSON tabulky extrahovány z knowledge base
-- ❌ Origins table (36 položek)
-- ❌ Names table (100 jmen)
+- ✅ Adresářová struktura vytvořena ✨ NOVÉ
+- ✅ Origins table (36 položek) → data/core/origins.json ✨ NOVÉ
+- ✅ Names table (100 jmen) → data/core/names_first.json ✨ NOVÉ
+- ✅ Family names (20 příjmení) → data/core/names_family.json ✨ NOVÉ
+- ❌ Birthsigns, coat colors/patterns (pro Fázi 2)
 - ❌ Settlements tables
 - ❌ Spells, Creatures, Equipment...
 
@@ -68,6 +74,7 @@
 - ❌ REST API
 
 **Tests** (`tests/`)
+- ✅ test_tableloader.py - Testy pro TableLoader ✨ NOVÉ
 - ❌ Unit tests pro generátory
 - ❌ Integration tests
 
@@ -144,13 +151,24 @@
 
 ---
 
-### **FÁZE 1: Data Extraction**
+### **FÁZE 1: Data Extraction** ✅ DOKONČENO
+
+**Status:** ✅ **HOTOVO** (2025-10-29)
 
 **Goal:** Převést všechny tabulky z knowledge_base/*.md do JSON formátu
 
-**Duration:** 1-2 dny
+**Duration:** 1-2 dny (dokončeno za 1 den)
 
 **Priority:** HIGH (blokuje všechny generátory)
+
+**Co bylo implementováno:**
+- ✅ Vytvořena data/ struktura (core, creatures, magic, settlements)
+- ✅ Extrahována Origins tabulka (36 původů) → data/core/origins.json
+- ✅ Extrahována Names tabulka (100 jmen) → data/core/names_first.json
+- ✅ Extrahována Family Names tabulka (20 příjmení) → data/core/names_family.json
+- ✅ Vytvořena TableLoader třída → src/core/tables.py
+- ✅ Přidána roll_3d6_keep_2() → src/core/dice.py
+- ✅ Vytvořeny testy → test_tableloader.py (všechny prošly)
 
 #### 1.1 Vytvoř data/ strukturu
 
@@ -279,12 +297,15 @@ if __name__ == "__main__":
 ```
 
 **Action Items:**
-- [ ] Vytvoř `data/` strukturu
-- [ ] Vytvoř `scripts/extract_tables.py`
-- [ ] Extrahuj origins.json
-- [ ] Extrahuj names.json
-- [ ] Extrahuj všechny core tables
-- [ ] Validuj JSON (správný formát)
+- [x] Vytvoř `data/` strukturu ✅
+- [x] Extrahuj origins.json ✅
+- [x] Extrahuj names_first.json ✅
+- [x] Extrahuj names_family.json ✅
+- [x] Vytvoř TableLoader class ✅
+- [x] Validuj JSON (správný formát) ✅
+- [ ] Vytvoř `scripts/extract_tables.py` (volitelné - můžeme udělat manuálně)
+- [ ] Extrahuj ostatní core tables (birthsigns, coat colors/patterns) - pro Fázi 2
+- [ ] Extrahuj creatures, spells, equipment tables - pro Fázi 3
 
 ---
 
