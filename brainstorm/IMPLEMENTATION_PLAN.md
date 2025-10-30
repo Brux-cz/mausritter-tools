@@ -309,13 +309,26 @@ if __name__ == "__main__":
 
 ---
 
-### **FÁZE 2: Character Generator**
+### **FÁZE 2: Character Generator** ✅ DOKONČENO
+
+**Status:** ✅ **HOTOVO** (2025-10-29)
 
 **Goal:** Plně funkční generátor postav s CLI
 
-**Duration:** 3-5 dní
+**Duration:** 3-5 dní (dokončeno za 2-3 hodiny)
 
 **Priority:** HIGH (nejdůležitější generátor)
+
+**Co bylo implementováno:**
+- ✅ CharacterGenerator class → src/generators/character.py
+- ✅ roll_attributes() - generování vlastností (3× 3k6 keep 2)
+- ✅ determine_origin() - lookup v origins tabulce
+- ✅ generate_name() - náhodné jméno (k100 + k20)
+- ✅ create() - kompletní generování postavy
+- ✅ CLI integration s display_character() - pěkné formátování
+- ✅ CLI options: --name, --gender, --json, --save
+- ✅ Testy vytvořeny (7/7 prošlo) → tests/test_character_generator.py
+- ✅ Windows encoding fix pro češtinu
 
 #### 2.1 Vytvoř TableLoader
 
@@ -636,13 +649,14 @@ def test_create_with_custom_name():
 ```
 
 **Action Items:**
-- [ ] Přidat `roll_3d6_keep_2()` do dice.py
-- [ ] Vytvořit `src/core/tables.py`
-- [ ] Implementovat `src/generators/character.py`
-- [ ] Aktualizovat CLI s `display_character()`
-- [ ] Napsat testy
-- [ ] Spustit `pytest` - vše musí projít
-- [ ] Testovat ručně: `mausritter generate character`
+- [x] Přidat `roll_3d6_keep_2()` do dice.py ✅
+- [x] Vytvořit `src/core/tables.py` ✅ (hotovo v Fázi 1)
+- [x] Implementovat `src/generators/character.py` ✅
+- [x] Aktualizovat CLI s `display_character()` ✅
+- [x] Napsat testy ✅ (7 testů)
+- [x] Spustit testy - vše musí projít ✅ (7/7 passed)
+- [x] Testovat ručně: `mausritter generate character` ✅
+- [x] Opravit Windows encoding pro češtinu ✅
 
 ---
 

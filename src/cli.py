@@ -1,10 +1,23 @@
 """
 CLI rozhraní pro Mausritter Tools
 """
+import sys
 import click
 from rich.console import Console
 from rich.table import Table
+from rich.panel import Panel
+from rich.text import Text
 from src.core.dice import roll, roll_with_details, attribute_test
+from src.core.models import Character
+from src.generators.character import CharacterGenerator
+
+# Fix Windows console encoding for Czech characters
+if sys.platform == 'win32':
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
+    except AttributeError:
+        pass
 
 console = Console()
 
@@ -70,16 +83,93 @@ def generate():
 
 
 @generate.command()
-@click.option("--name", "-n", help="Jméno postavy")
-def character(name: str):
+@click.option("--name", "-n", help="Vlastní jméno postavy")
+@click.option("--gender", "-g", type=click.Choice(["male", "female"]), default="male", help="Pohlaví (pro správný tvar příjmení)")
+@click.option("--json", "-j", "output_json", is_flag=True, help="Výstup jako JSON")
+@click.option("--save", "-s", type=click.Path(), help="Uložit do souboru")
+def character(name: str, gender: str, output_json: bool, save: str):
     """
-    Vygeneruj náhodnou postavu
+    Vygeneruj náhodnou myší postavu
 
-    TODO: Implementovat
+    Příklady:
+        mausritter generate character
+        mausritter generate character --name "Pepřík"
+        mausritter generate character --gender female
+        mausritter generate character --json
+        mausritter generate character --save postava.json
     """
-    console.print("[yellow]Generátor postav zatím není implementován[/yellow]")
-    if name:
-        console.print(f"Jméno: {name}")
+    try:
+        # Generuj postavu
+        char = CharacterGenerator.create(name=name, gender=gender)
+
+        if output_json:
+            # JSON výstup
+            output = CharacterGenerator.to_json(char)
+            console.print(output)
+        else:
+            # Pěkný formátovaný výstup
+            display_character(char)
+
+        # Uložení do souboru
+        if save:
+            with open(save, 'w', encoding='utf-8') as f:
+                f.write(CharacterGenerator.to_json(char))
+            console.print(f"\n[green]✓[/green] Uloženo do {save}")
+
+    except Exception as e:
+        console.print(f"[bold red]Chyba:[/bold red] {e}", style="red")
+        import traceback
+        traceback.print_exc()
+
+
+def display_character(char: Character):
+    """
+    Zobraz postavu v pěkném formátu s Rich formátováním.
+
+    Args:
+        char: Character instance k zobrazení
+    """
+    # Header - jméno a původ
+    title = Text(char.name, style="bold cyan", justify="center")
+    subtitle = Text(f"⭐ {char.background}", style="dim italic", justify="center")
+
+    # Vlastnosti s vizuálními bary
+    def make_bar(value: int, max_val: int = 12) -> str:
+        """Vytvoř progress bar pro vlastnost"""
+        filled = int((value / max_val) * 10)
+        return "█" * filled + "░" * (10 - filled)
+
+    attrs_text = f"""[bold]Vlastnosti:[/bold]
+  Síla:      {char.strength:2d}  [{make_bar(char.strength)}]
+  Mrštnost:  {char.dexterity:2d}  [{make_bar(char.dexterity)}]
+  Vůle:      {char.willpower:2d}  [{make_bar(char.willpower)}]
+
+[bold]Zdraví:[/bold]
+  BO: {char.current_hp}/{char.max_hp}  {"❤️" * char.current_hp}
+
+[bold]Počáteční výbava:[/bold]"""
+
+    # Přidej inventář (jen vyplněné sloty)
+    for i, item in enumerate(char.inventory):
+        if item:
+            attrs_text += f"\n  {i+1}. {item}"
+
+    # Poznámky (počáteční ďobky)
+    if char.notes:
+        attrs_text += f"\n\n[bold]Poznámky:[/bold]\n  {char.notes}"
+
+    # Vytvoř panel
+    panel = Panel(
+        attrs_text,
+        title=title,
+        subtitle=subtitle,
+        border_style="cyan",
+        padding=(1, 2)
+    )
+
+    console.print("\n")
+    console.print(panel)
+    console.print("\n")
 
 
 @main.group()
