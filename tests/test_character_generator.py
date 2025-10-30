@@ -134,6 +134,56 @@ def test_generate_coat_multiple_times():
     assert len(coats) > 1, "Všechny srsti jsou stejné - možná problém s RNG"
 
 
+def test_generate_distinctive_trait():
+    """Test generování výrazného rysu"""
+    trait = CharacterGenerator.generate_distinctive_trait()
+
+    assert isinstance(trait, str), "Výrazný rys musí být string"
+    assert len(trait) > 0, "Výrazný rys nesmí být prázdný"
+
+
+def test_generate_distinctive_trait_multiple_times():
+    """Test že generování výrazných rysů dává různé výsledky"""
+    traits = set()
+    for _ in range(30):
+        trait = CharacterGenerator.generate_distinctive_trait()
+        traits.add(trait)
+
+    # Měli bychom dostat variaci (máme 36 možností)
+    assert len(traits) > 1, "Všechny výrazné rysy jsou stejné - možná problém s RNG"
+
+
+def test_select_weapon():
+    """Test výběru zbraně"""
+    weapon = CharacterGenerator.select_weapon()
+
+    assert isinstance(weapon, str), "Zbraň musí být string"
+    assert len(weapon) > 0, "Zbraň nesmí být prázdná"
+    assert "(" in weapon and ")" in weapon, "Zbraň musí obsahovat název a příklady"
+
+
+def test_select_weapon_specific():
+    """Test výběru konkrétní zbraně podle ID"""
+    # Test ID 1 = Improvizovaná zbraň
+    weapon1 = CharacterGenerator.select_weapon(weapon_id=1)
+    assert "Improvizovaná" in weapon1, "ID 1 musí být Improvizovaná zbraň"
+
+    # Test ID 2 = Lehká zbraň
+    weapon2 = CharacterGenerator.select_weapon(weapon_id=2)
+    assert "Lehká zbraň" in weapon2, "ID 2 musí být Lehká zbraň"
+
+
+def test_select_weapon_multiple_times():
+    """Test že výběr zbraně dává různé výsledky"""
+    weapons = set()
+    for _ in range(20):
+        weapon = CharacterGenerator.select_weapon()
+        weapons.add(weapon)
+
+    # Měli bychom dostat variaci (máme 6 typů)
+    assert len(weapons) > 1, "Všechny zbraně jsou stejné - možná problém s RNG"
+
+
 def test_create_character():
     """Test kompletní generování postavy"""
     char = CharacterGenerator.create()
@@ -163,6 +213,7 @@ def test_create_character():
     assert char.inventory[1] is not None, "Slot 2 musí obsahovat Zásoby"
     assert char.inventory[2] is not None, "Slot 3 musí obsahovat item_a z původu"
     assert char.inventory[3] is not None, "Slot 4 musí obsahovat item_b z původu"
+    assert char.inventory[4] is not None, "Slot 5 musí obsahovat zbraň"
 
     # Ověř rodné znamení a srst
     assert char.birthsign, "Postava musí mít rodné znamení"
@@ -172,6 +223,10 @@ def test_create_character():
     assert char.coat, "Postava musí mít srst"
     assert isinstance(char.coat, str), "Srst musí být string"
     assert " " in char.coat, "Srst musí obsahovat barvu a vzor"
+
+    # Ověř výrazný rys (appearance)
+    assert char.appearance, "Postava musí mít výrazný rys"
+    assert isinstance(char.appearance, str), "Výrazný rys musí být string"
 
 
 def test_create_with_custom_name():

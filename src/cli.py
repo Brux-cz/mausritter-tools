@@ -162,6 +162,10 @@ def display_character(char: Character):
     if char.coat:
         attrs_text += f"\n\n[bold]Srst:[/bold]\n  {char.coat}"
 
+    # Výrazný rys
+    if char.appearance:
+        attrs_text += f"\n\n[bold]Výrazný rys:[/bold]\n  {char.appearance}"
+
     # Poznámky (počáteční ďobky)
     if char.notes:
         attrs_text += f"\n\n[bold]Poznámky:[/bold]\n  {char.notes}"

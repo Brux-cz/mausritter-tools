@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "source": "docs/knowledge_base/04_EQUIPMENT.md",
+    "description": "Zbraně dostupné při tvorbě postavy",
+    "note": "Pravidla říkají 'jednu zbraň podle tvého výběru'"
+  },
+  "weapons": [
+    {
+      "id": 1,
+      "name": "Improvizovaná zbraň",
+      "examples": "klacek, kámen",
+      "damage": "k6",
+      "hands": "jedna nebo dvě",
+      "cost": 1
+    },
+    {
+      "id": 2,
+      "name": "Lehká zbraň",
+      "examples": "dýka, jehla",
+      "damage": "k6",
+      "hands": "jedna nebo dvě",
+      "cost": 10
+    },
+    {
+      "id": 3,
+      "name": "Střední zbraň",
+      "examples": "meč, sekera",
+      "damage": "k6/k8",
+      "hands": "jedna pro k6, dvě pro k8",
+      "cost": 20
+    },
+    {
+      "id": 4,
+      "name": "Těžká zbraň",
+      "examples": "kopí, hákopí",
+      "damage": "k10",
+      "hands": "dvě",
+      "cost": 40
+    },
+    {
+      "id": 5,
+      "name": "Lehká střelná zbraň",
+      "examples": "prak, ruční kuše",
+      "damage": "k6",
+      "hands": "jedna",
+      "cost": 10
+    },
+    {
+      "id": 6,
+      "name": "Těžká střelná zbraň",
+      "examples": "luk",
+      "damage": "k8",
+      "hands": "dvě",
+      "cost": 40
+    }
+  ]
+}

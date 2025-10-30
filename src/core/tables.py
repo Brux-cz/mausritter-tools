@@ -214,6 +214,54 @@ class TableLoader:
         return None
 
     @staticmethod
+    def get_distinctive_traits() -> Dict[str, Any]:
+        """Načte tabulku výrazných rysů."""
+        return TableLoader.load_table("core/distinctive_traits.json")
+
+    @staticmethod
+    def lookup_distinctive_trait(roll: int) -> Optional[str]:
+        """Najde výrazný rys podle hodu k66.
+
+        Args:
+            roll: Výsledek hodu k66 (11-16, 21-26, 31-36, 41-46, 51-56, 61-66)
+
+        Returns:
+            Text výrazného rysu nebo None pokud nenalezen
+        """
+        traits_data = TableLoader.get_distinctive_traits()
+        traits_list = traits_data.get("traits", [])
+
+        for trait in traits_list:
+            if trait["roll"] == roll:
+                return trait["text"]
+
+        return None
+
+    @staticmethod
+    def get_weapons() -> Dict[str, Any]:
+        """Načte tabulku zbraní."""
+        return TableLoader.load_table("core/weapons.json")
+
+    @staticmethod
+    def lookup_weapon(weapon_id: int) -> Optional[Dict[str, Any]]:
+        """Najde zbraň podle ID.
+
+        Args:
+            weapon_id: ID zbraně (1-6)
+
+        Returns:
+            Dictionary se zbraní nebo None pokud nenalezena
+        """
+        weapons_data = TableLoader.get_weapons()
+        weapons_list = weapons_data.get("weapons", [])
+
+        for weapon in weapons_list:
+            if weapon["id"] == weapon_id:
+                return weapon
+
+        return None
+
+    @staticmethod
     def clear_cache():
         """Vyčistí cache načtených tabulek. Užitečné pro testy."""
         TableLoader.load_table.cache_clear()

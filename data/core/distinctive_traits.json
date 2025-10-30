@@ -1,0 +1,50 @@
+{
+  "metadata": {
+    "source": "docs/knowledge_base/02_CHARACTER_CREATION.md",
+    "description": "Výrazné rysy myší - hoď k66 (k6 × 10 + k6)",
+    "dice": "d66"
+  },
+  "traits": [
+    {"roll": 11, "text": "Tělo plné jizev"},
+    {"roll": 12, "text": "Korpulentní tělo"},
+    {"roll": 13, "text": "Vychrtlé tělo"},
+    {"roll": 14, "text": "Klackovité tělo"},
+    {"roll": 15, "text": "Drobné tělíčko"},
+    {"roll": 16, "text": "Rozložité tělo"},
+
+    {"roll": 21, "text": "Válečné malování"},
+    {"roll": 22, "text": "Cizokrajné oblečení"},
+    {"roll": 23, "text": "Elegantní oblečení"},
+    {"roll": 24, "text": "Záplatované oblečení"},
+    {"roll": 25, "text": "Módní oblečení"},
+    {"roll": 26, "text": "Neprané oblečení"},
+
+    {"roll": 31, "text": "Useknuté ucho"},
+    {"roll": 32, "text": "Neforemný obličej"},
+    {"roll": 33, "text": "Krásný obličej"},
+    {"roll": 34, "text": "Baculatý obličej"},
+    {"roll": 35, "text": "Jemné rysy v obličeji"},
+    {"roll": 36, "text": "Protáhlý obličej"},
+
+    {"roll": 41, "text": "Načesaná srst"},
+    {"roll": 42, "text": "Dredy"},
+    {"roll": 43, "text": "Nabarvená srst"},
+    {"roll": 44, "text": "Oholená srst"},
+    {"roll": 45, "text": "Kudrnatá srst"},
+    {"roll": 46, "text": "Sametová srst"},
+
+    {"roll": 51, "text": "Oči temné jako noc"},
+    {"roll": 52, "text": "Páska přes oko"},
+    {"roll": 53, "text": "Krvavě rudé oči"},
+    {"roll": 54, "text": "Moudrý pohled"},
+    {"roll": 55, "text": "Pronikavý pohled"},
+    {"roll": 56, "text": "Blyštivé oči"},
+
+    {"roll": 61, "text": "Zastřižený ocásek"},
+    {"roll": 62, "text": "Ocásek jako bič"},
+    {"roll": 63, "text": "Chocholatý ocásek"},
+    {"roll": 64, "text": "Pahýl ocásku"},
+    {"roll": 65, "text": "Chápavý ocásek"},
+    {"roll": 66, "text": "Zakroucený ocásek"}
+  ]
+}
