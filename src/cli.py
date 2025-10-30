@@ -154,6 +154,14 @@ def display_character(char: Character):
         if item:
             attrs_text += f"\n  {i+1}. {item}"
 
+    # Rodné znamení
+    if char.birthsign:
+        attrs_text += f"\n\n[bold]Rodné znamení:[/bold]\n  {char.birthsign}"
+
+    # Srst
+    if char.coat:
+        attrs_text += f"\n\n[bold]Srst:[/bold]\n  {char.coat}"
+
     # Poznámky (počáteční ďobky)
     if char.notes:
         attrs_text += f"\n\n[bold]Poznámky:[/bold]\n  {char.notes}"

@@ -1,0 +1,39 @@
+{
+  "metadata": {
+    "source": "docs/knowledge_base/02_CHARACTER_CREATION.md",
+    "description": "Rodná znamení myší - hoď k6",
+    "dice": "d6"
+  },
+  "birthsigns": [
+    {
+      "roll": 1,
+      "name": "Hvězda",
+      "trait": "Statečná/zbrklá"
+    },
+    {
+      "roll": 2,
+      "name": "Kolo",
+      "trait": "Pracovitá/nenápaditá"
+    },
+    {
+      "roll": 3,
+      "name": "Žalud",
+      "trait": "Zvědavá/paličatá"
+    },
+    {
+      "roll": 4,
+      "name": "Bouřka",
+      "trait": "Štědrá/popudlivá"
+    },
+    {
+      "roll": 5,
+      "name": "Měsíc",
+      "trait": "Moudrá/záhadná"
+    },
+    {
+      "roll": 6,
+      "name": "Matka",
+      "trait": "Pečující/ustaraná"
+    }
+  ]
+}

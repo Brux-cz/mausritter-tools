@@ -1,7 +1,6 @@
 """
 Testy pro CharacterGenerator
 """
-import pytest
 from src.generators.character import CharacterGenerator
 from src.core.models import Character
 
@@ -87,6 +86,54 @@ def test_generate_name_multiple_times():
     assert len(names) > 1, "Všechna jména jsou stejná - možná problém s RNG"
 
 
+def test_generate_birthsign():
+    """Test generování rodného znamení"""
+    birthsign = CharacterGenerator.generate_birthsign()
+
+    assert isinstance(birthsign, dict), "Rodné znamení musí být dictionary"
+    assert "name" in birthsign, "Rodné znamení musí mít 'name'"
+    assert "trait" in birthsign, "Rodné znamení musí mít 'trait'"
+    assert isinstance(birthsign["name"], str), "Jméno znamení musí být string"
+    assert isinstance(birthsign["trait"], str), "Povaha musí být string"
+    assert len(birthsign["name"]) > 0, "Jméno znamení nesmí být prázdné"
+    assert len(birthsign["trait"]) > 0, "Povaha nesmí být prázdná"
+
+
+def test_generate_birthsign_multiple_times():
+    """Test že generování rodných znamení dává různé výsledky"""
+    birthsigns = set()
+    for _ in range(20):
+        birthsign = CharacterGenerator.generate_birthsign()
+        birthsigns.add(birthsign["name"])
+
+    # Měli bychom dostat alespoň nějakou variaci (máme 6 možností)
+    assert len(birthsigns) > 1, "Všechna znamení jsou stejná - možná problém s RNG"
+
+
+def test_generate_coat():
+    """Test generování barvy a vzoru srsti"""
+    coat = CharacterGenerator.generate_coat()
+
+    assert isinstance(coat, str), "Srst musí být string"
+    assert len(coat) > 0, "Srst nesmí být prázdná"
+    assert " " in coat, "Srst musí obsahovat mezeru (barva + vzor)"
+
+    # Test že jsou dvě části (barva a vzor)
+    parts = coat.split()
+    assert len(parts) >= 2, f"Srst musí mít alespoň 2 části, má: {parts}"
+
+
+def test_generate_coat_multiple_times():
+    """Test že generování srsti dává různé výsledky"""
+    coats = set()
+    for _ in range(20):
+        coat = CharacterGenerator.generate_coat()
+        coats.add(coat)
+
+    # Měli bychom dostat variaci (máme 6 barev × 6 vzorů = 36 kombinací)
+    assert len(coats) > 1, "Všechny srsti jsou stejné - možná problém s RNG"
+
+
 def test_create_character():
     """Test kompletní generování postavy"""
     char = CharacterGenerator.create()
@@ -116,6 +163,15 @@ def test_create_character():
     assert char.inventory[1] is not None, "Slot 2 musí obsahovat Zásoby"
     assert char.inventory[2] is not None, "Slot 3 musí obsahovat item_a z původu"
     assert char.inventory[3] is not None, "Slot 4 musí obsahovat item_b z původu"
+
+    # Ověř rodné znamení a srst
+    assert char.birthsign, "Postava musí mít rodné znamení"
+    assert isinstance(char.birthsign, str), "Rodné znamení musí být string"
+    assert "(" in char.birthsign and ")" in char.birthsign, "Rodné znamení musí obsahovat jméno a povahu"
+
+    assert char.coat, "Postava musí mít srst"
+    assert isinstance(char.coat, str), "Srst musí být string"
+    assert " " in char.coat, "Srst musí obsahovat barvu a vzor"
 
 
 def test_create_with_custom_name():
@@ -184,8 +240,3 @@ def test_create_multiple_characters():
     # Postavy by měly být různé (alespoň v některých atributech)
     names = [c.name for c in characters]
     assert len(set(names)) > 1, "Všechny postavy mají stejné jméno"
-
-
-if __name__ == "__main__":
-    # Spusť testy při přímém spuštění
-    pytest.main([__file__, "-v"])

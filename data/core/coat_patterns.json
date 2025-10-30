@@ -1,0 +1,15 @@
+{
+  "metadata": {
+    "source": "docs/knowledge_base/02_CHARACTER_CREATION.md",
+    "description": "Vzory srsti myší - hoď k6",
+    "dice": "d6"
+  },
+  "patterns": [
+    {"roll": 1, "name": "jednolitá"},
+    {"roll": 2, "name": "mourovatá"},
+    {"roll": 3, "name": "strakatá"},
+    {"roll": 4, "name": "pruhovaná"},
+    {"roll": 5, "name": "tečkovaná"},
+    {"roll": 6, "name": "skvrnitá"}
+  ]
+}

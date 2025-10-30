@@ -88,6 +88,54 @@ class CharacterGenerator:
         # Fallback pokud lookup selže
         return "Bezejmenná Myš"
 
+    @staticmethod
+    def generate_birthsign() -> Dict[str, str]:
+        """
+        Vygeneruj rodné znamení.
+
+        Returns:
+            Dictionary s názvem a povahou {"name": "Hvězda", "trait": "Statečná/zbrklá"}
+
+        Example:
+            >>> birthsign = CharacterGenerator.generate_birthsign()
+            >>> print(f"{birthsign['name']} ({birthsign['trait']})")
+        """
+        roll = roll_d6()
+        birthsign = TableLoader.lookup_birthsign(roll)
+
+        if birthsign:
+            return {
+                "name": birthsign["name"],
+                "trait": birthsign["trait"]
+            }
+
+        # Fallback
+        return {"name": "Neznámé", "trait": "Tajemná"}
+
+    @staticmethod
+    def generate_coat() -> str:
+        """
+        Vygeneruj barvu a vzor srsti.
+
+        Returns:
+            String s barvou a vzorem (např. "Černá mourovatá")
+
+        Example:
+            >>> coat = CharacterGenerator.generate_coat()
+            >>> print(coat)  # "Černá mourovatá"
+        """
+        color_roll = roll_d6()
+        pattern_roll = roll_d6()
+
+        color = TableLoader.lookup_coat_color(color_roll)
+        pattern = TableLoader.lookup_coat_pattern(pattern_roll)
+
+        if color and pattern:
+            return f"{color} {pattern}"
+
+        # Fallback
+        return "Hnědá jednolitá"
+
     @classmethod
     def create(cls,
                name: Optional[str] = None,
@@ -127,7 +175,11 @@ class CharacterGenerator:
         if name is None:
             name = cls.generate_name(gender)
 
-        # 5. Sestavit postavu
+        # 5. Generovat rodné znamení a srst
+        birthsign_data = cls.generate_birthsign()
+        coat = cls.generate_coat()
+
+        # 6. Sestavit postavu
         character = Character(
             name=name,
             background=origin_data["name"],
@@ -144,6 +196,8 @@ class CharacterGenerator:
                 origin_data["item_b"],
                 None, None, None, None, None, None  # Zbylých 6 slotů prázdných
             ],
+            birthsign=f"{birthsign_data['name']} ({birthsign_data['trait']})",
+            coat=coat,
             notes=f"Počáteční ďobky: {pips} ď"
         )
 

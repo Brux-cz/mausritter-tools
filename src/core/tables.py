@@ -135,6 +135,85 @@ class TableLoader:
         return None
 
     @staticmethod
+    def get_birthsigns() -> Dict[str, Any]:
+        """Načte tabulku rodných znamení."""
+        return TableLoader.load_table("core/birthsigns.json")
+
+    @staticmethod
+    def get_coat_colors() -> Dict[str, Any]:
+        """Načte tabulku barev srsti."""
+        return TableLoader.load_table("core/coat_colors.json")
+
+    @staticmethod
+    def get_coat_patterns() -> Dict[str, Any]:
+        """Načte tabulku vzorů srsti."""
+        return TableLoader.load_table("core/coat_patterns.json")
+
+    @staticmethod
+    def lookup_birthsign(roll: int) -> Optional[Dict[str, Any]]:
+        """
+        Najde rodné znamení podle hodu k6.
+
+        Args:
+            roll: Výsledek hodu k6 (1-6)
+
+        Returns:
+            Dict s informacemi o znamení nebo None pokud nenalezeno
+
+        Example:
+            >>> birthsign = TableLoader.lookup_birthsign(1)
+            >>> print(birthsign["name"])  # "Hvězda"
+        """
+        birthsigns_data = TableLoader.get_birthsigns()
+        birthsigns_list = birthsigns_data.get("birthsigns", [])
+
+        for birthsign in birthsigns_list:
+            if birthsign["roll"] == roll:
+                return birthsign
+
+        return None
+
+    @staticmethod
+    def lookup_coat_color(roll: int) -> Optional[str]:
+        """
+        Najde barvu srsti podle hodu k6.
+
+        Args:
+            roll: Výsledek hodu k6 (1-6)
+
+        Returns:
+            Název barvy nebo None pokud nenalezena
+        """
+        colors_data = TableLoader.get_coat_colors()
+        colors_list = colors_data.get("colors", [])
+
+        for color in colors_list:
+            if color["roll"] == roll:
+                return color["name"]
+
+        return None
+
+    @staticmethod
+    def lookup_coat_pattern(roll: int) -> Optional[str]:
+        """
+        Najde vzor srsti podle hodu k6.
+
+        Args:
+            roll: Výsledek hodu k6 (1-6)
+
+        Returns:
+            Název vzoru nebo None pokud nenalezen
+        """
+        patterns_data = TableLoader.get_coat_patterns()
+        patterns_list = patterns_data.get("patterns", [])
+
+        for pattern in patterns_list:
+            if pattern["roll"] == roll:
+                return pattern["name"]
+
+        return None
+
+    @staticmethod
     def clear_cache():
         """Vyčistí cache načtených tabulek. Užitečné pro testy."""
         TableLoader.load_table.cache_clear()

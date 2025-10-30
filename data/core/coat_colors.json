@@ -1,0 +1,15 @@
+{
+  "metadata": {
+    "source": "docs/knowledge_base/02_CHARACTER_CREATION.md",
+    "description": "Barvy srsti myší - hoď k6",
+    "dice": "d6"
+  },
+  "colors": [
+    {"roll": 1, "name": "Čokoládová"},
+    {"roll": 2, "name": "Černá"},
+    {"roll": 3, "name": "Bílá"},
+    {"roll": 4, "name": "Světle hnědá"},
+    {"roll": 5, "name": "Šedá"},
+    {"roll": 6, "name": "Namodralá"}
+  ]
+}
