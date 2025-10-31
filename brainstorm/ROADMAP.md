@@ -63,6 +63,206 @@ python -m src.cli generate character --save postava.json
 
 ---
 
+## 📖 Oficiální Mausritter Generátory z Pravidel
+
+Tento přehled obsahuje **všechny náhodné generátory a tabulky** z oficiálních Mausritter pravidel (nalezeno v `docs/knowledge_base/`). Pomáhá identifikovat, co by mělo být v projektu implementováno, aby pokrýval celý systém.
+
+### 🎯 Legenda priorit
+
+- **P1 (Priorita 1):** 🔴 Základní nástroje pro PJ - používají se často během hry
+- **P2 (Priorita 2):** 🟡 Důležité nástroje pro tvorbu světa - používají se při přípravě kampaně
+- **P3 (Priorita 3):** 🟢 Volitelné varianty - přidávají rozmanitost a atmosféru
+
+**Status:** ✅ Hotovo | 🚧 Probíhá | 📝 Naplánováno | 💡 Nápad
+
+---
+
+### P1: Základní PJ nástroje (8 generátorů) 🔴
+
+Tyto generátory jsou **nejdůležitější** pro vedení hry. Používají se průběžně během herních sezení.
+
+#### 1. ✅ Generátor myších postav
+**Název:** Character Generator / Generátor myších dobrodruhů
+**Popis:** Kompletní tvorba hráčských postav včetně vlastností, pozadí, vzhledu, vybavení
+**Zdroj:** `02_CHARACTER_CREATION.md`
+**Složitost:** ⭐⭐⭐ Střední
+**Stav:** ✅ **HOTOVO** - Fáze 2 + 2A + 2B
+**Tabulky:** origins, names, birthsigns, coat_colors/patterns, distinctive_traits, weapons
+
+#### 2. 📝 Generátor NPC myší
+**Název:** NPC Generator / Generátor nehráčských myší
+**Popis:** Rychlé vytváření NPC - společenské postavení, vzhled, zvláštnosti, touhy, vztahy
+**Zdroj:** `16_RANDOM_TABLES.md` (řádky 15-140)
+**Složitost:** ⭐⭐ Jednoduchá
+**Tabulky:** Společenské postavení (k6), Rodné znamení (k6), Vzhled (k20), Zvláštnost (k20), Po čem touží (k20), Vztah (k20)
+**Priorita:** Vysoká - podobné Character Generatoru, ale rychlejší
+
+#### 3. 📝 Generátor počasí
+**Název:** Weather Generator / Generátor počasí a sezónních událostí
+**Popis:** Určení počasí (2k6) podle ročního období + sezónní události (k6)
+**Zdroj:** `16_RANDOM_TABLES.md` (řádky 194-293)
+**Složitost:** ⭐ Velmi jednoduchá
+**Tabulky:** Jaro/Léto/Podzim/Zima - každé má počasí (2k6) + události (k6)
+**Priorita:** Střední - rychlá implementace, používá se denně v hexcrawl
+
+#### 4. 📝 Tabulka reakcí
+**Název:** Reaction Roll / Tabulka reakcí tvorů
+**Popis:** Určení nálady tvora při setkání (2k6)
+**Zdroj:** `08_GM_GUIDE.md` (řádky 213-224)
+**Složitost:** ⭐ Velmi jednoduchá
+**Tabulka:** 2k6 - Agresivní (2), Nepřátelská (3-5), Nejistá (6-8), Povídavá (9-11), Nápomocná (12)
+**Priorita:** Vysoká - používá se v každém setkání
+
+#### 5. 📝 Generátor pokladů
+**Název:** Treasure Generator / Generátor pokladů
+**Popis:** Určení obsahu pokladu - ďobky, předměty, kouzelné meče, kouzla
+**Zdroj:** `15_TREASURE.md` (řádky 17-115)
+**Složitost:** ⭐⭐⭐ Střední až složitá
+**Tabulky:** Hlavní (k20), Drobnosti (k6), Cenný (k6), Objemný (k6), Neobvyklý (k6), Užitečný (k6), Meče + Kouzla
+**Priorita:** Vysoká - důležité pro odměňování hráčů
+
+#### 6. 📝 Generátor kouzelných mečů
+**Název:** Magic Sword Generator / Generátor kouzelných mečů
+**Popis:** Typ zbraně (k6), schopnost (k10), šance na prokletí (1/6), typ kletby (k6)
+**Zdroj:** `15_TREASURE.md` (řádky 118-216)
+**Složitost:** ⭐⭐ Střední
+**Tabulky:** Typ (k6), 10 druhů mečů, Prokletí (k6)
+**Priorita:** Střední - součást Treasure Generatoru
+
+#### 7. 📝 Generátor semínek dobrodružství
+**Název:** Adventure Seeds / Generátor semínek dobrodružství
+**Popis:** Kombinace Tvor + Problém + Komplikace (k66 tabulka)
+**Zdroj:** `16_RANDOM_TABLES.md` (řádky 143-191)
+**Složitost:** ⭐⭐ Střední
+**Tabulka:** k66 (36 kombinací)
+**Priorita:** Střední - inspirace pro PJ při tvorbě questů
+
+#### 8. 📝 Generátor kouzel
+**Název:** Spell Generator / Generátor náhodných kouzel
+**Popis:** Náhodné kouzlo z tabulky (2k8 na 16 kouzel)
+**Zdroj:** `06_MAGIC.md` (řádky 83-107)
+**Složitost:** ⭐ Velmi jednoduchá
+**Tabulka:** 2k8 - 16 kouzel
+**Priorita:** Střední - náhodné nalezení kouzel
+
+---
+
+### P2: Nástroje pro tvorbu světa (6 generátorů) 🟡
+
+Tyto generátory se používají **při přípravě kampaně** a tvorby hexcrawl mapy.
+
+#### 9. 📝 Generátor myších osad
+**Název:** Settlement Generator / Generátor myších osad
+**Popis:** Velikost, společenské zřízení, podrobnosti, živnost, výrazné prvky, události, název
+**Zdroj:** `12_SETTLEMENTS.md` (řádky 22-237)
+**Složitost:** ⭐⭐⭐ Střední
+**Tabulky:** Velikost (2k6 nižší), Zřízení (k6+velikost), Podrobnosti (k20), Živnost (k20), Prvky (k20), Události (k20), Název (4×k12)
+**Priorita:** Vysoká - klíčové pro hexcrawl
+
+#### 10. 📝 Generátor hospod a hostinců
+**Název:** Tavern Generator / Generátor hospod
+**Popis:** Název hospody (2×k12), specialita hostince (k12)
+**Zdroj:** `12_SETTLEMENTS.md` (řádky 240-296)
+**Složitost:** ⭐ Velmi jednoduchá
+**Tabulky:** Část 1 (k12), Část 2 (k12), Specialita (k12)
+**Priorita:** Nízká - doplněk Settlement Generatoru
+
+#### 11. 📝 Generátor hexů
+**Název:** Hex Generator / Generátor obsahu hexů
+**Popis:** Typ hexu (k6), výrazný prvek, detaily (k6+k8)
+**Zdroj:** `11_HEXCRAWL_SETUP.md` (řádky 93-160)
+**Složitost:** ⭐⭐⭐ Střední
+**Tabulky:** Typ hexu (k6), Detaily výrazných prvků (k6 pak k8 - 48 možností)
+**Priorita:** Střední - důležité pro hexcrawl kampaně
+
+#### 12. 📝 Generátor dobrodružných míst (Dungeon)
+**Název:** Dungeon/Adventure Site Generator / Generátor dobrodružných míst
+**Popis:** Téma místa (minulost + chátrání), obyvatelé, tajemství, místnosti
+**Zdroj:** `14_DUNGEON_CREATION.md` (řádky 69-268)
+**Složitost:** ⭐⭐⭐⭐ Složitá
+**Tabulky:** Minulost budovy (k20), Chátrání (k12), Obyvatelé-bytosti (k10), Obyvatelé-co hledají (k8), Tajemství (k6), Místnosti (3×k6), Prázdné (k20), Překážky (k8), Pasti (k8), Hlavolamy (k6), Doupata (k6)
+**Priorita:** Vysoká - klíčové pro tvorbu dungeonů
+
+#### 13. 📝 Generátor háčků dobrodružství
+**Název:** Adventure Hook Generator / Generátor háčků
+**Popis:** Důvod, proč se myši vydají na dobrodružství (k6)
+**Zdroj:** `11_HEXCRAWL_SETUP.md` (řádky 66-75)
+**Složitost:** ⭐ Velmi jednoduchá
+**Tabulka (k6):** Ztracený člen rodiny, Vyšetřování, Přísada, Doupě, Mapa, Útočiště
+**Priorita:** Nízká - doplněk pro první sezení
+
+#### 14. 📝 Framework zvěstí
+**Název:** Rumor Generator / Framework pro tvorbu zvěstí
+**Popis:** Návod na tvorbu tabulky k6 zvěstí (pravdivé 1-3, částečně 4-5, nepravdivé 6)
+**Zdroj:** `11_HEXCRAWL_SETUP.md` (řádky 43-50)
+**Složitost:** ⭐⭐ Střední
+**Priorita:** Nízká - spíš framework než konkrétní generátor
+
+---
+
+### P3: Varianty tvorů (14 generátorů) 🟢
+
+Tyto generátory **přidávají rozmanitost** do setkání s tvory. Jsou volitelné, ale zvyšují atmosféru.
+
+#### 15-28. 💡 Creature Variant Generators
+**Popis:** Varianty pro různé typy tvorů - každý má tabulku k6
+**Zdroj:** `09_CREATURES.md` (různé sekce)
+**Složitost:** ⭐ Velmi jednoduchá (každý)
+**Priorita:** Nízká - flavor pro jednotlivé tvory
+
+**Seznam:**
+- Přízračné schopnosti duchů (k6) - Ghost Abilities
+- Zvláštní hadi (k6) - Snake Types
+- Kočičí pánové (k6) - Cat Lords
+- Krysí gangy (k6) - Rat Gangs
+- Konkurenční myši (k6) - Rival Mice
+- Druhy pavouků (k6) - Spider Types
+- Soví čarodějové (k6) - Owl Wizards
+- Zevlující stonožky (k6) - Centipede Types
+- Vílí plány (k6) - Fairy Schemes
+- Vraní písně (k6) - Crow Songs
+- Žabí rytíři (k6) - Frog Knights
+- Pomocníci dostupnost (různé) - Hireling Availability
+- (+další creature specifics)
+
+---
+
+## 📊 Souhrn: Oficiální generátory
+
+### Celkem identifikováno: **28 generátorů** z oficiálních pravidel
+
+| Priorita | Počet | Hotovo | Zbývá | Popis |
+|----------|-------|--------|-------|-------|
+| **P1 🔴** | 8 | 1 ✅ | 7 📝 | Základní PJ nástroje - nutné pro hru |
+| **P2 🟡** | 6 | 0 ✅ | 6 📝 | Nástroje pro tvorbu světa - důležité pro kampaň |
+| **P3 🟢** | 14 | 0 ✅ | 14 💡 | Varianty tvorů - volitelné, ale atmosférické |
+| **CELKEM** | **28** | **1** | **27** | |
+
+### 🎯 Doporučené pořadí implementace (podle priorit z pravidel)
+
+**Fáze 3 - Základní PJ nástroje (P1):**
+1. ✅ Character Generator (HOTOVO)
+2. 📝 NPC Generator - podobný Character Gen, rychlá implementace
+3. 📝 Treasure Generator - důležité pro odměny
+4. 📝 Weather Generator - velmi jednoduché, denní použití
+5. 📝 Reaction Roll - velmi jednoduché, časté použití
+6. 📝 Magic Sword Generator - součást Treasure Gen
+7. 📝 Adventure Seeds - inspirace pro PJ
+8. 📝 Spell Generator - velmi jednoduché
+
+**Fáze 4 - Tvorba světa (P2):**
+9. 📝 Settlement Generator - klíčové pro hexcrawl
+10. 📝 Hex Generator - pro hexcrawl kampaně
+11. 📝 Dungeon Generator - složitější, ale důležité
+12. 📝 Tavern Generator - doplněk Settlement Gen
+13. 📝 Adventure Hooks - jednoduché, session starters
+14. 📝 Rumor Framework - framework pro zvěsti
+
+**Fáze 5 - Flavor & Rozmanitost (P3):**
+15-28. 💡 Creature Variants - všechny varianty tvorů
+
+---
+
 ## 📝 Budoucí vývoj
 
 ### B: Settlement Generator (Generátor sídel)
