@@ -269,3 +269,22 @@ class TreasureHoard:
     bonus_rolls: int = 0  # Počet bonusových hodů (0-4)
     total_rolls: int = 2  # Celkový počet hodů k20 (2-6)
     notes: str = ""
+
+
+@dataclass
+class AdventureSeed:
+    """
+    Model pro semínko dobrodružství.
+
+    Kombinuje Tvora, Problém a Komplikaci podle oficiálních pravidel Mausritter.
+    Používá se pro inspiraci při tvorbě dobrodružství.
+
+    Dvě možnosti generování:
+    - Jeden hod k66 → celý řádek (Tvor + Problém + Komplikace)
+    - Tři hody k66 → custom kombinace sloupců
+    """
+    roll: int  # k66 hod (11-66), nebo 0 pro custom kombinaci
+    creature: str  # Tvor zapojen do situace (KDO)
+    problem: str  # Co se stalo (CO)
+    complication: str  # Co to zhoršuje (JAK)
+    notes: str = ""  # Volitelné poznámky GM

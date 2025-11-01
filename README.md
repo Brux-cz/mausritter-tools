@@ -11,11 +11,12 @@ Python nástroje a generátory pro stolní hru **Mausritter** - OSR TTRPG o myš
 - ✅ **Generátor reakcí** - reakce NPC/tvorů při setkání (2k6 tabulka)
 - ✅ **Generátor kouzel** - náhodná kouzla pro objevování pokladů (2d8 tabulka, 16 kouzel)
 - ✅ **Generátor pokladů** - kompletní treasure hoard (2-6× k20, kouzelné meče, kouzla, předměty)
+- ✅ **Generátor semínek dobrodružství** - kombinace tvora, problému a komplikace (k66, 36 semínek)
 - ✅ **Hody kostkami** - všechny typy kostek (d4, d6, d8, d10, d12, d20, d66)
 - ✅ **Testy vlastností** - roll-under d20 mechanika
-- ✅ **JSON databáze** - původy, jména, NPC, pomocníci, počasí, kouzla, poklady, nástroje
+- ✅ **JSON databáze** - původy, jména, NPC, pomocníci, počasí, kouzla, poklady, nástroje, semínka dobrodružství
 
-**Status:** Fáze 1, 2, 3A, 3B, 3C, 3D, 3E a 3F dokončeny (2025-11-01)
+**Status:** Fáze 1, 2, 3A, 3B, 3C, 3D, 3E, 3F a 4A dokončeny (2025-11-01) - **P1 COMPLETE (100%)**
 
 ---
 
@@ -233,7 +234,43 @@ python -m src.cli generate treasure --save hoard.json
 - Broušený diamant (1000 ď, šperk)
 - 3× Zásoby (15 ď, ○○○ každé)
 
-### 🎲 8. Hody kostkami
+### 📖 8. Generování semínek dobrodružství
+```bash
+# Základní semínko (jeden hod k66)
+python -m src.cli generate adventure
+
+# Custom kombinace (tři hody k66)
+python -m src.cli generate adventure --custom
+
+# S inspiračním textem pro GM
+python -m src.cli generate adventure --inspiration
+
+# JSON výstup
+python -m src.cli generate adventure --json
+
+# Uložit do souboru
+python -m src.cli generate adventure --save seed.json
+```
+
+**Co je semínko dobrodružství:**
+- **Tvor** (KDO) - Kdo je zapojen do situace
+- **Problém** (CO) - Co se stalo
+- **Komplikace** (JAK) - Co to zhoršuje
+
+**Dva způsoby generování:**
+1. **Základní** - Jeden hod k66 → celý řádek (kompletní příběh)
+2. **Custom** - Tři hody k66 → mix a match ze sloupců
+
+**Příklady:**
+- Rybář / Obviněn ze zločinu / Může za to pomocník hráčské myši
+- Pokusná myš / Je na útěku před lidmi / Sledují ho pomocí čipu
+- Káčátko / Ztratilo maminku / Potřebuje se dostat na ostrov
+
+**Inspirační text:**
+- Otázky pro rozvíjení (Kde? Proč? Jak? Co když?)
+- Nápady na motivace, vzhled, odměnu
+
+### 🎲 9. Hody kostkami
 ```bash
 python -m src.cli roll-dice d6
 python -m src.cli roll-dice d20
@@ -241,26 +278,27 @@ python -m src.cli roll-dice 2d6
 python -m src.cli roll-dice d66
 ```
 
-### 🎯 9. Test vlastnosti
+### 🎯 10. Test vlastnosti
 ```bash
 python -m src.cli test 12
 python -m src.cli test 10 --modifier 2
 ```
 
-### ❓ 10. Zobrazit help
+### ❓ 11. Zobrazit help
 ```bash
 python -m src.cli --help
 python -m src.cli generate --help
 ```
 
-### 🧪 11. Spustit testy
+### 🧪 12. Spustit testy
 ```bash
 python test_character_simple.py
 python test_tableloader.py
-python test_weather_generator.py
+python -m tests.test_weather_generator
 python -m tests.test_reaction_generator
 python -m tests.test_spell_generator
 python -m tests.test_treasure_generator
+python -m tests.test_adventure_generator
 ```
 
 ---
@@ -289,7 +327,9 @@ Obsahuje:
 | **Fáze 3D** | ✅ HOTOVO | Reaction Roll Generator (2025-11-01) |
 | **Fáze 3E** | ✅ HOTOVO | Spell Generator (2025-11-01) |
 | **Fáze 3F** | ✅ HOTOVO | Treasure Generator (2025-11-01) |
-| **Fáze 3G+** | 🚧 DALŠÍ | Další generátory (Adventure Seeds, Magic Sword, Maze) |
+| **Fáze 4A** | ✅ HOTOVO | Adventure Seeds Generator (2025-11-01) |
+| **P1 Priority** | ✅ 100% (8/8) | Všechny P1 generátory kompletní |
+| **Fáze 3G+** | 🚧 DALŠÍ | Další generátory (Magic Sword, Maze, Settlement) |
 | **Fáze 4** | ❌ TODO | Web interface |
 
 ---

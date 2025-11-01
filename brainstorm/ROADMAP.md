@@ -111,13 +111,16 @@ Tyto generátory jsou **nejdůležitější** pro vedení hry. Používají se p
 **CLI:** `python -m src.cli generate weather --season winter --with-event`
 **Testy:** 14 unit testů (všechny prošly ✅)
 
-#### 4. 📝 Tabulka reakcí
+#### 4. ✅ Tabulka reakcí
 **Název:** Reaction Roll / Tabulka reakcí tvorů
 **Popis:** Určení nálady tvora při setkání (2k6)
 **Zdroj:** `08_GM_GUIDE.md` (řádky 213-224)
 **Složitost:** ⭐ Velmi jednoduchá
+**Stav:** ✅ **HOTOVO** - Fáze 3D (2025-11-01)
 **Tabulka:** 2k6 - Agresivní (2), Nepřátelská (3-5), Nejistá (6-8), Povídavá (9-11), Nápomocná (12)
 **Priorita:** Vysoká - používá se v každém setkání
+**CLI:** `python -m src.cli generate reaction --modifier 0`
+**Testy:** 14 unit testů (všechny prošly ✅)
 
 #### 5. ✅ Generátor pokladů
 **Název:** Treasure Generator / Generátor pokladů
@@ -145,13 +148,20 @@ Tyto generátory jsou **nejdůležitější** pro vedení hry. Používají se p
 **Priorita:** Střední - součást Treasure Generatoru
 **Poznámka:** Tato funkcionalita je plně implementovaná jako součást TreasureGeneratoru
 
-#### 7. 📝 Generátor semínek dobrodružství
+#### 7. ✅ Generátor semínek dobrodružství
 **Název:** Adventure Seeds / Generátor semínek dobrodružství
 **Popis:** Kombinace Tvor + Problém + Komplikace (k66 tabulka)
 **Zdroj:** `16_RANDOM_TABLES.md` (řádky 143-191)
 **Složitost:** ⭐⭐ Střední
+**Stav:** ✅ **HOTOVO** - Fáze 4A (2025-11-01)
 **Tabulka:** k66 (36 kombinací)
 **Priorita:** Střední - inspirace pro PJ při tvorbě questů
+**CLI:** `python -m src.cli generate adventure --custom --inspiration`
+**Testy:** 20 unit testů (všechny prošly ✅)
+**Mechanika:**
+- Základní: 1× k66 → celý řádek (Tvor + Problém + Komplikace)
+- Custom: 3× k66 → kombinace ze sloupců (mix & match)
+- Inspirační text pro GM s otázkami na rozvíjení příběhu
 
 #### 8. ✅ Generátor kouzel
 **Název:** Spell Generator / Generátor náhodných kouzel
@@ -614,7 +624,7 @@ Nápady, které zatím nejsou v hlavním roadmap:
 
 ## 📊 Aktuální stav projektu
 
-**Celková dokončenost:** ~44% (7/28 generátorů, 75% P1) 🎯
+**Celková dokončenost:** ~29% (8/28 generátorů, **100% P1** ✅) 🎯
 
 | Feature               | Status | Progress |
 |-----------------------|--------|----------|
@@ -626,6 +636,8 @@ Nápady, které zatím nejsou v hlavním roadmap:
 | Reaction Roll         | ✅     | 100%     |
 | Spell Generator       | ✅     | 100%     |
 | Treasure Generator    | ✅     | 100%     |
+| Adventure Seeds       | ✅     | 100%     |
+| **P1 Priority**       | **✅** | **100% (8/8)** |
 | Settlement Generator  | 💡     | 0%       |
 | Hex Generator         | 💡     | 0%       |
 | Documentation         | 🚧     | 70%      |
@@ -650,6 +662,25 @@ Pokud chceš přidat novou feature:
 ---
 
 ## 📝 Changelog
+
+### 2025-11-01 - Fáze 4A dokončena - P1 COMPLETE! 🎉
+- ✅ Implementován Adventure Seeds Generator (generátor semínek dobrodružství)
+- ✅ AdventureSeedGenerator class v src/generators/adventure.py
+- ✅ data/core/adventure_seeds.json - všech 36 semínek z oficiálních pravidel (16_RANDOM_TABLES.md)
+- ✅ Každé semínko kombinuje: Tvor (KDO) + Problém (CO) + Komplikace (JAK)
+- ✅ CLI příkaz `generate adventure` s --custom, --inspiration, --json, --save
+- ✅ Dva režimy generování:
+  - Základní: 1× k66 → celý řádek (kompletní příběh)
+  - Custom: 3× k66 → kombinace ze sloupců (mix & match)
+- ✅ Inspirační text pro GM s otázkami na rozvíjení příběhu
+- ✅ k66 mechanika implementována v dice.py (roll_d66)
+- ✅ TableLoader.lookup_adventure_seed() metoda
+- ✅ Color-coded výstup s panely (🎭 Tvor, ⚠️ Problém, 💥 Komplikace)
+- ✅ AdventureSeed dataclass přidán do models.py
+- ✅ 20 unit testů v test_adventure_generator.py (všechny prošly ✅)
+- ✅ Dokumentace aktualizována (README.md sekce 8, ROADMAP.md)
+- ✅ **P1 generátory: 100% hotovo (8/8)** 🎯🎉
+- ✅ **Celková dokončenost: ~29% (8/28 generátorů)**
 
 ### 2025-11-01 - Fáze 3E dokončena
 - ✅ Implementován Spell Generator (generátor náhodných kouzel)

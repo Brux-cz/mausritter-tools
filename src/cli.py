@@ -8,7 +8,7 @@ from rich.table import Table
 from rich.panel import Panel
 from rich.text import Text
 from src.core.dice import roll, roll_with_details, attribute_test
-from src.core.models import Character, NPC, Hireling, Weather, Reaction, Spell, TreasureHoard, TreasureItem, MagicSword
+from src.core.models import Character, NPC, Hireling, Weather, Reaction, Spell, TreasureHoard, TreasureItem, MagicSword, AdventureSeed
 from src.generators.character import CharacterGenerator
 from src.generators.npc import NPCGenerator
 from src.generators.hireling import HirelingGenerator
@@ -16,6 +16,7 @@ from src.generators.weather import WeatherGenerator
 from src.generators.reaction import ReactionGenerator
 from src.generators.spell import SpellGenerator
 from src.generators.treasure import TreasureGenerator
+from src.generators.adventure import AdventureSeedGenerator
 
 # Fix Windows console encoding for Czech characters
 if sys.platform == 'win32':
@@ -866,6 +867,131 @@ def get_treasure_icon(treasure_type: str) -> str:
         "hireling": "🐭"
     }
     return icons.get(treasure_type, "📜")
+
+
+@generate.command()
+@click.option("--custom", "-c", is_flag=True, help="Hoď na každý sloupec zvlášť (custom kombinace)")
+@click.option("--json", "output_json", is_flag=True, help="Výstup v JSON formátu")
+@click.option("--save", type=str, help="Ulož do souboru")
+@click.option("--inspiration", "-i", is_flag=True, help="Zobraz inspirační text pro GM")
+def adventure(custom: bool, output_json: bool, save: str, inspiration: bool):
+    """
+    Vygeneruj semínko dobrodružství.
+
+    Kombinuje Tvora, Problém a Komplikaci pro inspiraci při tvorbě questů.
+
+    Příklady:
+    \b
+        python -m src.cli generate adventure
+        python -m src.cli generate adventure --custom
+        python -m src.cli generate adventure --inspiration
+        python -m src.cli generate adventure --json
+    """
+    # Vygeneruj semínko
+    if custom:
+        seed = AdventureSeedGenerator.create_custom()
+    else:
+        seed = AdventureSeedGenerator.create()
+
+    # JSON výstup
+    if output_json:
+        json_output = AdventureSeedGenerator.to_json(seed)
+        console.print(json_output)
+
+        if save:
+            with open(save, 'w', encoding='utf-8') as f:
+                f.write(json_output)
+            console.print(f"\n[green]Uloženo do {save}[/green]")
+
+        return
+
+    # Normální výstup
+    display_adventure_seed(seed, show_inspiration=inspiration)
+
+    if save:
+        # Ulož jako JSON
+        json_output = AdventureSeedGenerator.to_json(seed)
+        with open(save, 'w', encoding='utf-8') as f:
+            f.write(json_output)
+        console.print(f"\n[green]Uloženo do {save}[/green]")
+
+
+def display_adventure_seed(seed: AdventureSeed, show_inspiration: bool = False):
+    """
+    Zobrazí semínko dobrodružství v terminálu s barevným formátováním.
+
+    Args:
+        seed: AdventureSeed instance
+        show_inspiration: Pokud True, zobrazí inspirační text pro GM
+    """
+    # Hlavička
+    if seed.roll > 0:
+        title = f"🎲 Semínko dobrodružství (k66: {seed.roll})"
+    else:
+        title = "🎲 Semínko dobrodružství (Custom kombinace)"
+
+    # Obsah panelu
+    lines = []
+
+    # Tvor
+    lines.append(f"[bold cyan]🎭 Tvor:[/bold cyan]")
+    lines.append(f"   {seed.creature}")
+    lines.append("")
+
+    # Problém
+    lines.append(f"[bold yellow]⚠️  Problém:[/bold yellow]")
+    lines.append(f"   {seed.problem}")
+    lines.append("")
+
+    # Komplikace
+    lines.append(f"[bold red]💥 Komplikace:[/bold red]")
+    lines.append(f"   {seed.complication}")
+
+    # Poznámky
+    if seed.notes and not seed.notes.startswith("Custom"):
+        lines.append("")
+        lines.append(f"[dim]📝 {seed.notes}[/dim]")
+
+    content = "\n".join(lines)
+
+    panel = Panel(
+        content,
+        title=title,
+        border_style="green",
+        padding=(1, 2)
+    )
+
+    console.print("\n")
+    console.print(panel)
+    console.print("\n")
+
+    # Zobraz inspirační text pokud je požadováno
+    if show_inspiration:
+        inspiration_text = AdventureSeedGenerator.get_inspiration_text(seed)
+
+        # Rozdel na řádky a obarvuj
+        insp_lines = []
+        for line in inspiration_text.split("\n"):
+            if line.startswith("💡"):
+                insp_lines.append(f"[bold magenta]{line}[/bold magenta]")
+            elif line.startswith("KDO:") or line.startswith("CO:") or line.startswith("JAK:"):
+                insp_lines.append(f"[bold cyan]{line}[/bold cyan]")
+            elif line.startswith("❓"):
+                insp_lines.append(f"[bold yellow]{line}[/bold yellow]")
+            elif line.startswith("  →") or line.startswith("  -"):
+                insp_lines.append(f"[dim]{line}[/dim]")
+            else:
+                insp_lines.append(line)
+
+        inspiration_panel = Panel(
+            "\n".join(insp_lines),
+            title="💡 Inspirace pro GM",
+            border_style="magenta",
+            padding=(1, 2)
+        )
+
+        console.print(inspiration_panel)
+        console.print("\n")
 
 
 @main.group()
