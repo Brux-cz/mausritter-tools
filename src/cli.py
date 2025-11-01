@@ -8,7 +8,7 @@ from rich.table import Table
 from rich.panel import Panel
 from rich.text import Text
 from src.core.dice import roll, roll_with_details, attribute_test
-from src.core.models import Character, NPC, Hireling, Weather, Reaction, Spell, TreasureHoard, TreasureItem, MagicSword, AdventureSeed, Tavern, Settlement
+from src.core.models import Character, NPC, Hireling, Weather, Reaction, Spell, TreasureHoard, TreasureItem, MagicSword, AdventureSeed, Tavern, Settlement, AdventureHook
 from src.generators.character import CharacterGenerator
 from src.generators.npc import NPCGenerator
 from src.generators.hireling import HirelingGenerator
@@ -19,6 +19,7 @@ from src.generators.treasure import TreasureGenerator
 from src.generators.adventure import AdventureSeedGenerator
 from src.generators.tavern import TavernGenerator
 from src.generators.settlement import SettlementGenerator
+from src.generators.adventure_hook import AdventureHookGenerator
 
 # Fix Windows console encoding for Czech characters
 if sys.platform == 'win32':
@@ -1184,6 +1185,87 @@ def display_settlement(settlement: Settlement):
     rolls_text.append(" (vláda), ", style="dim")
     rolls_text.append(f"{settlement.roll_detail}", style="dim cyan")
     rolls_text.append(" (detail)", style="dim")
+
+    console.print(rolls_text)
+    console.print("\n")
+
+
+@generate.command()
+@click.option("--json", "output_json", is_flag=True, help="Výstup v JSON formátu")
+@click.option("--save", type=str, help="Ulož do souboru")
+def hook(output_json: bool, save: str):
+    """
+    Vygeneruj háček dobrodružství.
+
+    Háček poskytuje důvod, proč se myši vydají na dobrodružství.
+    Používá se pro motivaci hráčů na začátku kampaně nebo sezení.
+
+    Generuje:
+    - Háček (k6): Typ motivace (rodina, povinnost, úkol, hrozba, poklad, přežití)
+    - Kategorie: Pro filtrování a organizaci
+    - Otázky: Inspirační otázky pro rozvíjení příběhu
+
+    Příklady:
+    - Hledání ztraceného člena rodiny
+    - Vyšetřování na příkaz šlechtice
+    - Čaroděj potřebuje přísadu do kouzla
+    """
+    hook_obj = AdventureHookGenerator.create()
+
+    if output_json:
+        json_output = AdventureHookGenerator.to_json(hook_obj)
+        console.print(json_output)
+        if save:
+            with open(save, 'w', encoding='utf-8') as f:
+                f.write(json_output)
+            console.print(f"\n[green]Uloženo do {save}[/green]")
+        return
+
+    display_adventure_hook(hook_obj)
+
+    if save:
+        json_output = AdventureHookGenerator.to_json(hook_obj)
+        with open(save, 'w', encoding='utf-8') as f:
+            f.write(json_output)
+        console.print(f"\n[green]Uloženo do {save}[/green]")
+
+
+def display_adventure_hook(hook: AdventureHook):
+    """Zobraz háček dobrodružství v terminálu s barevným formátováním."""
+
+    # Hlavní panel s háčkem
+    title_text = f"{hook.category_emoji}  HÁČEK DOBRODRUŽSTVÍ"
+
+    main_panel = Panel(
+        f"[bold cyan]{hook.hook}[/bold cyan]",
+        title=title_text,
+        title_align="left",
+        border_style="cyan",
+        padding=(1, 2)
+    )
+
+    console.print("\n")
+    console.print(main_panel)
+
+    # Kategorie
+    category_text = Text()
+    category_text.append("📋 Kategorie: ", style="bold magenta")
+    category_text.append(hook.category_name_cz, style="white")
+    console.print(category_text)
+    console.print()
+
+    # Otázky pro rozvíjení
+    if hook.questions:
+        console.print("[bold yellow]❓ Otázky pro rozvíjení:[/bold yellow]")
+        for question in hook.questions:
+            console.print(f"   • {question}", style="white")
+        console.print()
+
+    # Hod
+    rolls_text = Text()
+    rolls_text.append("🎲 Hod: ", style="dim")
+    rolls_text.append(f"{hook.roll}", style="dim cyan")
+    rolls_text.append(" (k6)", style="dim")
 
     console.print(rolls_text)
     console.print("\n")

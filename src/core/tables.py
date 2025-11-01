@@ -1170,6 +1170,33 @@ class TableLoader:
 
         return None
 
+    # === ADVENTURE HOOKS ===
+
+    @staticmethod
+    def get_adventure_hooks() -> Dict[str, Any]:
+        """Načte tabulku háčků dobrodružství (k6)."""
+        return TableLoader.load_table("core/adventure_hooks.json")
+
+    @staticmethod
+    def lookup_adventure_hook(roll: int) -> Optional[Dict[str, Any]]:
+        """
+        Najde háček dobrodružství podle hodu k6.
+
+        Args:
+            roll: Výsledek hodu k6 (1-6)
+
+        Returns:
+            Dict s informacemi o háčku (hook, category, questions) nebo None
+        """
+        data = TableLoader.get_adventure_hooks()
+        hooks = data.get("hooks", [])
+
+        for hook in hooks:
+            if hook["roll"] == roll:
+                return hook
+
+        return None
+
 
 # Convenience funkce pro rychlé použití
 # === SHORTCUTS ===

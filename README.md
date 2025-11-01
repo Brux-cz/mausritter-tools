@@ -14,6 +14,7 @@ Python nástroje a generátory pro stolní hru **Mausritter** - OSR TTRPG o myš
 - ✅ **Generátor semínek dobrodružství** - kombinace tvora, problému a komplikace (k66, 36 semínek)
 - ✅ **Generátor hospod** - názvy a speciality hospod (2× k12 + k12, pro vísky a větší osady)
 - ✅ **Generátor osad** - kompletní generování settlements (2d6 keep-lower velikost, vláda, detaily, řemesla, prvky, události, názvy, hospody)
+- ✅ **Generátor háčků dobrodružství** - motivace pro hráče (k6, 6 typů háčků s otázkami)
 - ✅ **Hody kostkami** - všechny typy kostek (d4, d6, d8, d10, d12, d20, d66)
 - ✅ **Testy vlastností** - roll-under d20 mechanika
 - ✅ **JSON databáze** - původy, jména, NPC, pomocníci, počasí, kouzla, poklady, nástroje, semínka dobrodružství, osady
@@ -348,7 +349,53 @@ python -m src.cli generate settlement --save osada.json
 - Větší osady mají více služeb a možností
 - Hospoda se automaticky generuje pro velikost 3+
 
-### 🎲 11. Hody kostkami
+### 🎣 11. Generování háčků dobrodružství
+```bash
+# Náhodný háček
+python -m src.cli generate hook
+
+# JSON výstup
+python -m src.cli generate hook --json
+
+# Uložit do souboru
+python -m src.cli generate hook --save hacek.json
+```
+
+**Co je háček:**
+- **Motivace** (k6) - Důvod, proč se myši vydají na dobrodružství
+- **Kategorie** - Osobní, Povinnost, Úkol, Hrozba, Poklad, Přežití
+- **Otázky** - Inspirační otázky pro rozvíjení příběhu
+
+**6 typů háčků:**
+| # | Háček | Kategorie |
+|---|-------|-----------|
+| 1 | Hledání ztraceného člena rodiny | 👨‍👩‍👧‍👦 Osobní |
+| 2 | Vyšetřování na příkaz šlechtice | ⚔️ Povinnost |
+| 3 | Čaroděj potřebuje přísadu do kouzla | 🔮 Úkol |
+| 4 | Tvor trápí myší osadu | ⚠️ Hrozba |
+| 5 | Zděděná mapa k pokladu | 💰 Poklad |
+| 6 | Útočiště před hroznou bouřkou | 🌪️ Přežití |
+
+**Příklad výstupu:**
+```
+⚔️ HÁČEK DOBRODRUŽSTVÍ
+Vyšetřování na příkaz myšího šlechtice
+
+📋 Kategorie: Povinnost
+
+❓ Otázky pro rozvíjení:
+   • Kdo je šlechtic?
+   • Co má být vyšetřeno?
+   • Proč to šlechtic nemůže udělat sám?
+   • Jaká je odměna?
+```
+
+**Použití:**
+- Session starters - začátek nové kampaně nebo sezení
+- Motivace hráčů - důvod proč se vydat na výpravu
+- Improvizace - když potřebuješ rychle háček
+
+### 🎲 12. Hody kostkami
 ```bash
 python -m src.cli roll-dice d6
 python -m src.cli roll-dice d20
@@ -356,19 +403,19 @@ python -m src.cli roll-dice 2d6
 python -m src.cli roll-dice d66
 ```
 
-### 🎯 12. Test vlastnosti
+### 🎯 13. Test vlastnosti
 ```bash
 python -m src.cli test 12
 python -m src.cli test 10 --modifier 2
 ```
 
-### ❓ 13. Zobrazit help
+### ❓ 14. Zobrazit help
 ```bash
 python -m src.cli --help
 python -m src.cli generate --help
 ```
 
-### 🧪 14. Spustit testy
+### 🧪 15. Spustit testy
 ```bash
 python test_character_simple.py
 python test_tableloader.py
@@ -379,6 +426,7 @@ python -m tests.test_treasure_generator
 python -m tests.test_adventure_generator
 python -m tests.test_tavern_generator
 python -m tests.test_settlement_generator
+python -m tests.test_adventure_hook_generator
 ```
 
 ---

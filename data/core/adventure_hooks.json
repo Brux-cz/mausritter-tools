@@ -1,0 +1,78 @@
+{
+  "metadata": {
+    "name": "Adventure Hooks",
+    "description": "Háčky pro počáteční dobrodružství - důvod, proč se myši vydají na výpravu",
+    "source": "docs/knowledge_base/11_HEXCRAWL_SETUP.md (řádky 65-74)",
+    "dice": "d6",
+    "category": "adventure",
+    "usage": "Session starters, motivace pro hráče"
+  },
+  "hooks": [
+    {
+      "roll": 1,
+      "hook": "Hledání ztraceného člena rodiny",
+      "category": "personal",
+      "questions": [
+        "Kdo se ztratil?",
+        "Jak dlouho je pryč?",
+        "Kde byl naposledy viděn?",
+        "Co se mohlo stát?"
+      ]
+    },
+    {
+      "roll": 2,
+      "hook": "Vyšetřování na příkaz myšího šlechtice",
+      "category": "duty",
+      "questions": [
+        "Kdo je šlechtic?",
+        "Co má být vyšetřeno?",
+        "Proč to šlechtic nemůže udělat sám?",
+        "Jaká je odměna?"
+      ]
+    },
+    {
+      "roll": 3,
+      "hook": "Myší čaroděj potřebuje přísadu do kouzla",
+      "category": "quest",
+      "questions": [
+        "Jakou přísadu čaroděj potřebuje?",
+        "K jakému kouzlu ji použije?",
+        "Proč je přísada vzácná?",
+        "Co čaroděj nabízí?"
+      ]
+    },
+    {
+      "roll": 4,
+      "hook": "Místo je doupětem tvora, který trápí myší osadu",
+      "category": "threat",
+      "questions": [
+        "Jaký tvor osadu sužuje?",
+        "Jak dlouho to trvá?",
+        "Co už způsobil?",
+        "Proč nikdo nezasáhl dřív?"
+      ]
+    },
+    {
+      "roll": 5,
+      "hook": "Vede sem zděděná mapa k pokladu",
+      "category": "treasure",
+      "questions": [
+        "Kdo mapu vytvořil?",
+        "Jaký poklad má být ukrytý?",
+        "Proč nebyl nalezen dřív?",
+        "Je mapa kompletní?"
+      ]
+    },
+    {
+      "roll": 6,
+      "hook": "Myši hledají útočiště před hroznou bouřkou",
+      "category": "survival",
+      "questions": [
+        "Jak silná je bouřka?",
+        "Odkud myši přicházejí?",
+        "Co zanechaly za sebou?",
+        "Jak dlouho vydrží zásoby?"
+      ]
+    }
+  ]
+}

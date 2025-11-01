@@ -394,3 +394,56 @@ class Settlement:
     def features_count(self) -> int:
         """Počet prvků podle velikosti"""
         return 2 if self.size_value >= 6 else 1
+
+
+@dataclass
+class AdventureHook:
+    """
+    Model pro háček dobrodružství.
+
+    Háček poskytuje důvod, proč se myši vydají na dobrodružství.
+    Používá se pro motivaci hráčů na začátku kampaně nebo sezení.
+
+    Generování:
+    - Háček: k6 (6 typů motivací)
+    - Kategorie: personal, duty, quest, threat, treasure, survival
+    - Otázky: Inspirační otázky pro rozvíjení háčku
+
+    Příklady:
+    - Hledání ztraceného člena rodiny (personal)
+    - Vyšetřování na příkaz šlechtice (duty)
+    - Čaroděj potřebuje přísadu (quest)
+    - Tvor trápí osadu (threat)
+    - Mapa k pokladu (treasure)
+    - Útočiště před bouřkou (survival)
+    """
+    hook: str  # Text háčku
+    category: str  # Kategorie (personal, duty, quest, threat, treasure, survival)
+    questions: List[str]  # Inspirační otázky pro GM
+    roll: int = 0  # Hod k6 (1-6)
+
+    @property
+    def category_emoji(self) -> str:
+        """Vrať emoji podle kategorie háčku"""
+        emoji_map = {
+            "personal": "👨‍👩‍👧‍👦",  # Rodina
+            "duty": "⚔️",  # Povinnost
+            "quest": "🔮",  # Hledání
+            "threat": "⚠️",  # Hrozba
+            "treasure": "💰",  # Poklad
+            "survival": "🌪️",  # Přežití
+        }
+        return emoji_map.get(self.category, "🎯")
+
+    @property
+    def category_name_cz(self) -> str:
+        """Vrať český název kategorie"""
+        names = {
+            "personal": "Osobní",
+            "duty": "Povinnost",
+            "quest": "Úkol",
+            "threat": "Hrozba",
+            "treasure": "Poklad",
+            "survival": "Přežití",
+        }
+        return names.get(self.category, "Jiné")
