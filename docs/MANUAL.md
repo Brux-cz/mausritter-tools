@@ -2,9 +2,9 @@
 
 Kompletní česká příručka pro práci s Mausritter Tools.
 
-**Verze:** 1.4
+**Verze:** 1.5
 **Datum:** 2025-11-01
-**Status:** Fáze 1, 2, 3A, 3B, 3C a 3D dokončeny
+**Status:** Fáze 1, 2, 3A, 3B, 3C, 3D, 3E, 3F a 4A dokončeny - **P1 COMPLETE (100%)**
 
 ---
 
@@ -701,7 +701,327 @@ python -m src.cli generate reaction --modifier 1 --save npc_reaction.json
 
 ---
 
-### 2.6 Hody kostkami
+### 2.6 Generování kouzel
+
+**Hlavní příkaz:**
+```bash
+python -m src.cli generate spell
+```
+
+**Co to dělá:**
+Vygeneruje náhodné kouzlo z oficiálních Mausritter pravidel (2d8 tabulka, 16 kouzel).
+
+#### 2.6.1 Možnosti příkazu
+
+```bash
+--json              # Výstup v JSON formátu
+--save <soubor>     # Ulož do souboru
+```
+
+#### 2.6.2 Příklady použití
+
+**Základní generování:**
+```bash
+python -m src.cli generate spell
+```
+
+**JSON export:**
+```bash
+python -m src.cli generate spell --json
+```
+
+**Uložit do souboru:**
+```bash
+python -m src.cli generate spell --save kouzlo.json
+```
+
+#### 2.6.3 Všechna kouzla (2d8)
+
+**16 kouzel z oficiálních pravidel:**
+- Ohnivá koule, Zahojení, Kouzelná střela, Strach
+- Tma, Zotavení, Srozumitelnost, Přízračný brouk
+- Světlo, Neviditelný prstenec, Zaklepání, Tuk
+- Zvětšení, Neviditelnost, Deštník, Šanta
+
+**Poznámka:** Placeholdery `[POČET]` a `[SOUČET]` se nahrazují při sesílání:
+- `[POČET]` = počet kostek
+- `[SOUČET]` = součet hodu
+
+#### 2.6.4 Ukázka výstupu
+
+```
+═══ KOUZLO ═══
+
+✨ Název: Ohnivá koule
+
+📜 Efekt:
+Vystřelí [POČET] ohnivých koulí. Každá způsobí k6 poškození.
+
+🔋 Dobití:
+Spálit předmět velikosti myši v plamenech
+
+🎲 Hod 2d8: 2 (1+1)
+```
+
+---
+
+### 2.7 Generování pokladů
+
+**Hlavní příkaz:**
+```bash
+python -m src.cli generate treasure
+```
+
+**Co to dělá:**
+Vygeneruje kompletní treasure hoard (2-6 položek) podle oficiálních Mausritter pravidel.
+
+#### 2.7.1 Možnosti příkazu
+
+```bash
+--bonus <0-4>       # Bonusové hody k20 (default: 0)
+-b <0-4>            # Krátká verze --bonus
+--json              # Výstup v JSON formátu
+--save <soubor>     # Ulož do souboru
+```
+
+#### 2.7.2 Bonusové hody
+
+**4 otázky pro určení bonusů (+1 hod k20 za každou kladnou odpověď):**
+
+1. Je v **bývalé myší osadě / hradě / jeskyni**?
+2. Je ve **vysoce magické oblasti**?
+3. Brání ho **velké zvíře / záludná past**?
+4. Překonaly myši **velké nesnáze**?
+
+**Mechanika:**
+- Základní poklad: 2× k20
+- S bonusy: 2-6× k20
+- Každý hod může vést k dalším hodům na podtabulky
+
+#### 2.7.3 Příklady použití
+
+**Základní poklad (2× k20):**
+```bash
+python -m src.cli generate treasure
+```
+
+**S bonusy:**
+```bash
+python -m src.cli generate treasure --bonus 2    # 4× k20
+python -m src.cli generate treasure -b 4         # 6× k20
+```
+
+**JSON export:**
+```bash
+python -m src.cli generate treasure --bonus 3 --json
+```
+
+**Uložit do souboru:**
+```bash
+python -m src.cli generate treasure --save hoard.json
+```
+
+#### 2.7.4 Co může být v pokladu
+
+**Typy položek:**
+- 💰 **Ďobky** (5-600 ď v různých obalech)
+- ⚔️ **Kouzelný meč** (5% šance, 10 typů, možné prokletí)
+- ✨ **Náhodné kouzlo** (5% šance, 2d8, hodnota 100-600 ď)
+- 🎁 **Drobnosti** (6 magických předmětů)
+- 💎 **Cenný poklad** (šperky, umělecké předměty, 100-1500 ď)
+- 📦 **Objemný poklad** (cenné, ale zabírá 2-6 políček)
+- 🔮 **Neobvyklý poklad** (vzácné, speciální kupci)
+- 🛠️ **Užitečný poklad** (zásoby, pochodně, zbraně, zbroje, nástroje)
+
+#### 2.7.5 Kouzelné meče
+
+**Generování:**
+- Typ zbraně (k6): Střední/Lehká/Těžká
+- Schopnost meče (k10): 10 různých efektů
+- Prokletí (1/6 šance, k6): 6 typů kleteb
+
+**Příklad:**
+```
+⚔️ Kouzelný meč: Vlčí zub
+- Typ: Lehká (k6 poškození)
+- Schopnost: Každý úspěšný zásah obnovuje 1 HP
+- Prokletí: Neprokletý ✅
+- Hodnota: 500 ď, 1 políčko
+```
+
+#### 2.7.6 Ukázka výstupu
+
+```
+═══ TREASURE HOARD ═══
+
+💰 Poklad #1: Pytel s 50 ďobků
+   💵 50 ď | 📦 1 políčko
+
+⚔️ Poklad #2: Kouzelný meč: Vlčí zub
+   Typ: Lehká (k6)
+   Schopnost: Každý úspěšný zásah obnovuje 1 HP
+   Prokletí: Neprokletý ✅
+   💵 500 ď | 📦 1 políčko
+
+💎 Poklad #3: Broušený diamant
+   Typ: Cenný poklad (šperk)
+   💵 1000 ď | 📦 1 políčko
+
+🛠️ Poklad #4: 3× Zásoby
+   Každé: 💵 5 ď | 📦 ○ | ⚪⚪⚪ použití
+
+───────────────────────────────
+CELKEM: 4 položky, 1515 ď, 4 políčka
+```
+
+---
+
+### 2.8 Generování semínek dobrodružství
+
+**Hlavní příkaz:**
+```bash
+python -m src.cli generate adventure
+```
+
+**Co to dělá:**
+Vygeneruje semínko dobrodružství - kombinaci Tvora, Problému a Komplikace (k66 tabulka, 36 možností).
+
+#### 2.8.1 Možnosti příkazu
+
+```bash
+--custom, -c        # Hoď na každý sloupec zvlášť (3× k66)
+--inspiration, -i   # Zobraz inspirační text pro GM
+--json              # Výstup v JSON formátu
+--save <soubor>     # Ulož do souboru
+```
+
+#### 2.8.2 Dva způsoby generování
+
+**Podle oficiálních pravidel:**
+
+**Varianta A: "Hoď jednou a přečti celý řádek"**
+```bash
+python -m src.cli generate adventure
+```
+- 1× k66 hod
+- Získáš kompletní řádek: Tvor + Problém + Komplikace
+- Rychlé, hotové semínko dobrodružství
+
+**Varianta B: "Hoď na každý sloupec zvlášť"**
+```bash
+python -m src.cli generate adventure --custom
+```
+- 3× k66 hody
+- Každý hod určí jeden sloupec
+- Kreativní mix & match kombinace
+
+#### 2.8.3 Struktura semínka
+
+Každé semínko má tři části:
+
+- 🎭 **Tvor** (KDO) - Kdo je zapojen do situace
+- ⚠️ **Problém** (CO) - Co se stalo
+- 💥 **Komplikace** (JAK) - Co to zhoršuje
+
+#### 2.8.4 Příklady použití
+
+**Základní generování:**
+```bash
+python -m src.cli generate adventure
+```
+
+**Custom kombinace:**
+```bash
+python -m src.cli generate adventure --custom
+```
+
+**S inspiračním textem:**
+```bash
+python -m src.cli generate adventure --inspiration
+python -m src.cli generate adventure -c -i  # custom + inspirace
+```
+
+**JSON export:**
+```bash
+python -m src.cli generate adventure --json
+```
+
+**Uložit do souboru:**
+```bash
+python -m src.cli generate adventure --save seed.json
+```
+
+#### 2.8.5 Inspirační text
+
+S flaggem `--inspiration` získáš:
+- Otázky k rozvíjení každé části (KDO/CO/JAK)
+- GM tipy na motivace, vzhled, odměnu
+- Praktické otázky (Kde? Proč? Jak? Co když?)
+
+#### 2.8.6 Ukázka výstupu
+
+**Základní:**
+```
+═══ SEMÍNKO DOBRODRUŽSTVÍ ═══
+
+🎭 Tvor: Pokusná myš
+⚠️  Problém: Je na útěku před lidmi
+💥 Komplikace: Sledují ho pomocí čipu
+
+📜 (Hod k66: 33)
+```
+
+**S inspirací:**
+```
+═══ SEMÍNKO DOBRODRUŽSTVÍ ═══
+
+🎭 Tvor: Káčátko
+⚠️  Problém: Ztratilo maminku
+💥 Komplikace: Potřebuje se dostat na ostrov
+
+💡 INSPIRACE PRO GM:
+
+KDO: Káčátko
+  → Jaké má motivace? Jak vypadá?
+
+CO: Ztratilo maminku
+  → Jak se to stalo? Kde to je?
+
+JAK: Potřebuje se dostat na ostrov
+  → Proč je to složité? Co může selhat?
+
+❓ OTÁZKY K ROZVÍJENÍ:
+  - Kde se hráčské myši s tímto setkají?
+  - Proč by jim mělo záležet?
+  - Jaká je odměna za pomoc?
+  - Co se stane, když to ignorují?
+```
+
+#### 2.8.7 Příklady semínek
+
+**Z oficiálních pravidel (36 možností):**
+- Rybář / Obviněn ze zločinu / Může za to pomocník hráčské myši
+- Pokusná myš / Je na útěku před lidmi / Sledují ho pomocí čipu
+- Káčátko / Ztratilo maminku / Potřebuje se dostat na ostrov
+- Pavoučí babizna / Ztratila starodávný poklad / Snědla ho
+- Kočičí pán / Chce se nechat bavit / Uvěznil hráčské myši
+
+#### 2.8.8 GM tipy
+
+**Jak používat semínka:**
+1. Vygeneruj semínko na začátku přípravy
+2. Rozviň každou část otázkami (použij --inspiration)
+3. Přidej konkrétní detaily z tvého světa
+4. Umísti do hexcrawl mapy nebo jako quest hook
+
+**Pro improvizaci:**
+- Vygeneruj během hry pokud hráči změní plány
+- Custom kombinace pro překvapivé zápletky
+- Kombinuj s NPC generátorem pro bohaté postavy
+
+---
+
+### 2.9 Hody kostkami
 
 **Hlavní příkaz:**
 ```bash
@@ -711,7 +1031,7 @@ python -m src.cli roll-dice <kostka>
 **Co to dělá:**
 Hodí zadanou kostkou a zobrazí výsledek.
 
-#### 2.6.1 Podporované kostky
+#### 2.9.1 Podporované kostky
 
 **Základní kostky:**
 ```bash
@@ -735,7 +1055,7 @@ python -m src.cli roll-dice 4d4   # 4× k4
 python -m src.cli roll-dice d66   # k66 (11-66, pro tabulky)
 ```
 
-#### 2.5.2 Ukázka výstupu
+#### 2.9.2 Ukázka výstupu
 
 ```
 Hod d20:
@@ -750,7 +1070,7 @@ Výsledek: 10
 
 ---
 
-### 2.6 Testy vlastností
+### 2.10 Testy vlastností
 
 **Hlavní příkaz:**
 ```bash
@@ -760,7 +1080,7 @@ python -m src.cli test <hodnota>
 **Co to dělá:**
 Roll-under test - hodí k20, úspěch pokud je výsledek ≤ hodnota vlastnosti.
 
-#### 2.6.1 Možnosti příkazu
+#### 2.10.1 Možnosti příkazu
 
 **Základní test:**
 ```bash
@@ -776,7 +1096,7 @@ python -m src.cli test 8 -m -3
 Cílové číslo = vlastnost + modifikátor
 `test 10 --modifier 2` → cíl 12
 
-#### 2.7.2 Ukázka výstupu
+#### 2.10.2 Ukázka výstupu
 
 ```
 Test vlastnosti:
@@ -794,7 +1114,7 @@ NEÚSPĚCH (15 > 10)
 
 ---
 
-### 2.8 Help a nápověda
+### 2.11 Help a nápověda
 
 **Zobrazit všechny příkazy:**
 ```bash
@@ -1268,42 +1588,82 @@ python -m src.cli generate character --json > export.json
 
 ### ✅ Co máme hotové
 
+#### 🎯 P1 Priority - COMPLETE (8/8) 🎉
+
 | Komponenta | Soubor | Popis | Status |
 |------------|--------|-------|--------|
-| **Dice roller** | `src/core/dice.py` | Všechny typy kostek, testy | ✅ HOTOVO |
-| **Data models** | `src/core/models.py` | Character, NPC, Hireling | ✅ HOTOVO |
-| **Table loader** | `src/core/tables.py` | Načítání JSON dat | ✅ HOTOVO |
 | **Character gen** | `src/generators/character.py` | Generátor postav | ✅ HOTOVO |
 | **NPC gen** | `src/generators/npc.py` | Generátor NPC | ✅ HOTOVO |
-| **CLI** | `src/cli.py` | Příkazový řádek | ✅ HOTOVO |
-| **Origins data** | `data/core/origins.json` | 36 původů | ✅ HOTOVO |
-| **Names data** | `data/core/names_first.json` | 100 jmen | ✅ HOTOVO |
-| **Family names** | `data/core/names_family.json` | 20 příjmení | ✅ HOTOVO |
-| **NPC data** | `data/core/npc_*.json` | 6 NPC tabulek | ✅ HOTOVO |
-| **Extended NPC** | `data/core/hireling_types.json` atd. | 7 rozšířených tabulek | ✅ HOTOVO |
-| **Tests** | `tests/` | 26 testů (7 char + 19 npc) | ✅ HOTOVO |
+| **Hireling gen** | `src/generators/hireling.py` | Generátor pomocníků | ✅ HOTOVO |
+| **Weather gen** | `src/generators/weather.py` | Generátor počasí | ✅ HOTOVO |
+| **Reaction gen** | `src/generators/reaction.py` | Generátor reakcí | ✅ HOTOVO |
+| **Spell gen** | `src/generators/spell.py` | Generátor kouzel | ✅ HOTOVO |
+| **Treasure gen** | `src/generators/treasure.py` | Generátor pokladů | ✅ HOTOVO |
+| **Adventure gen** | `src/generators/adventure.py` | Generátor semínek dobrodružství | ✅ HOTOVO |
+
+#### 🧱 Základní systémy
+
+| Komponenta | Soubor | Popis | Status |
+|------------|--------|-------|--------|
+| **Dice roller** | `src/core/dice.py` | Všechny typy kostek, k66 | ✅ HOTOVO |
+| **Data models** | `src/core/models.py` | 8 dataclass modelů | ✅ HOTOVO |
+| **Table loader** | `src/core/tables.py` | Načítání JSON dat, LRU cache | ✅ HOTOVO |
+| **CLI** | `src/cli.py` | Příkazový řádek, 11 příkazů | ✅ HOTOVO |
+
+#### 📦 Data tabulky
+
+| Data | Soubor | Položek | Status |
+|------|--------|---------|--------|
+| **Origins** | `data/core/origins.json` | 36 původů | ✅ HOTOVO |
+| **Names** | `data/core/names_*.json` | 120 jmen | ✅ HOTOVO |
+| **NPC tables** | `data/core/npc_*.json` | 6 tabulek | ✅ HOTOVO |
+| **Hirelings** | `data/core/hireling_*.json` | 9 typů | ✅ HOTOVO |
+| **Weather** | `data/core/weather_seasons.json` | 4 roční období | ✅ HOTOVO |
+| **Spells** | `data/core/spells.json` | 16 kouzel | ✅ HOTOVO |
+| **Treasure** | `data/treasure/*.json` | 9 tabulek | ✅ HOTOVO |
+| **Adventure seeds** | `data/core/adventure_seeds.json` | 36 semínek | ✅ HOTOVO |
+
+#### 🧪 Testy
+
+| Test suite | Soubor | Testů | Status |
+|------------|--------|-------|--------|
+| **Character** | `tests/test_character_*.py` | 16 testů | ✅ HOTOVO |
+| **NPC** | `tests/test_npc_generator.py` | 19 testů | ✅ HOTOVO |
+| **Weather** | `tests/test_weather_generator.py` | 14 testů | ✅ HOTOVO |
+| **Reaction** | `tests/test_reaction_generator.py` | 14 testů | ✅ HOTOVO |
+| **Spell** | `tests/test_spell_generator.py` | 15 testů | ✅ HOTOVO |
+| **Treasure** | `tests/test_treasure_generator.py` | 23 testů | ✅ HOTOVO |
+| **Adventure** | `tests/test_adventure_generator.py` | 20 testů | ✅ HOTOVO |
+
+**Celkem:** 121+ testů, všechny prošly ✅
 
 **Dokončené fáze:**
 - ✅ **Fáze 1:** Data extraction (2025-10-29)
 - ✅ **Fáze 2:** Character Generator (2025-10-29)
 - ✅ **Fáze 3A:** NPC Generator (2025-10-31)
+- ✅ **Fáze 3B:** Hireling Generator (2025-11-01)
+- ✅ **Fáze 3C:** Weather Generator (2025-11-01)
+- ✅ **Fáze 3D:** Reaction Roll Generator (2025-11-01)
+- ✅ **Fáze 3E:** Spell Generator (2025-11-01)
+- ✅ **Fáze 3F:** Treasure Generator (2025-11-01)
+- ✅ **Fáze 4A:** Adventure Seeds Generator (2025-11-01)
 
-### ❌ Co ještě chybí
+**Celková dokončenost:** ~29% (8/28 generátorů), **P1: 100% (8/8)** 🎉
 
-**Fáze 3B:** Další generátory
-- ❌ Settlement Generator (generátor sídel)
-- ❌ Hex Generator (generátor hexů pro hexcrawl)
-- ❌ Weather Generator (generátor počasí)
-- ❌ Treasure Generator (generátor pokladů)
-- ❌ Dungeon Generator
+### 📋 Co bude dál (P2 Priority)
+
+**Nástroje pro tvorbu světa:**
+- 📝 Settlement Generator (generátor myších osad)
+- 📝 Tavern Generator (generátor hospod)
+- 📝 Hex Generator (generátor hexů pro hexcrawl)
+- 📝 Dungeon/Adventure Site Generator (generátor dobrodružných míst)
+- 📝 Adventure Hook Generator (generátor háčků dobrodružství)
+- 📝 Rumor Framework (framework pro tvorbu zvěstí)
 
 **Fáze 4:** Web interface
 - ❌ FastAPI backend
 - ❌ HTML frontend
 - ❌ REST API
-
-**Volitelné rozšíření:**
-- ❌ Birthsigns (rodná znamení) - data + generování
 - ❌ Coat colors/patterns (barvy a vzory srsti)
 - ❌ Trinkets (cetky a drobnosti)
 
