@@ -275,53 +275,165 @@ Tyto generátory **přidávají rozmanitost** do setkání s tvory. Jsou volitel
 | **P3 🟢** | 14 | 0 ✅ | 14 💡 | Varianty tvorů - volitelné, ale atmosférické |
 | **CELKEM** | **28** | **5** | **23** | |
 
-### 🎯 Doporučené pořadí implementace (podle priorit z pravidel)
+### 🎯 Doporučené pořadí implementace (Bottom-up podle závislostí)
 
-**Fáze 3 - Základní PJ nástroje (P1):**
-1. ✅ Character Generator (HOTOVO)
-2. ✅ NPC Generator (HOTOVO)
-3. ✅ Weather Generator (HOTOVO) - velmi jednoduché, denní použití
-4. ✅ Reaction Roll (HOTOVO) - velmi jednoduché, časté použití
-5. ✅ Spell Generator (HOTOVO) - velmi jednoduché, při objevování pokladů
-6. 📝 Treasure Generator - důležité pro odměny
-7. 📝 Magic Sword Generator - součást Treasure Gen
-8. 📝 Adventure Seeds - inspirace pro PJ
+**📊 STROM ZÁVISLOSTÍ:**
+```
+Úroveň 1: Tavern Generator ✅ (4B)
+              ↓
+Úroveň 2: Settlement Generator ✅ (4C) - používá Tavern
+              ↓
+Úroveň 3: Hex Generator (6A) + Dungeon Generator (6B) - používají Settlement
+              +
+          Adventure Hooks (4D) + Creature Variants (5×) - žádné závislosti
+```
+
+**Fáze 3 - Základní PJ nástroje (P1) - HOTOVO:**
+1. ✅ Character Generator
+2. ✅ NPC Generator
+3. ✅ Hireling Generator
+4. ✅ Weather Generator
+5. ✅ Reaction Roll
+6. ✅ Spell Generator
+7. ✅ Treasure Generator
+8. ✅ Adventure Seeds
 
 **Fáze 4 - Tvorba světa (P2):**
-9. 📝 Settlement Generator - klíčové pro hexcrawl
-10. 📝 Hex Generator - pro hexcrawl kampaně
-11. 📝 Dungeon Generator - složitější, ale důležité
-12. 📝 Tavern Generator - doplněk Settlement Gen
-13. 📝 Adventure Hooks - jednoduché, session starters
-14. 📝 Rumor Framework - framework pro zvěsti
+9. ✅ Tavern Generator (4B) - nejmenší komponenta
+10. ✅ Settlement Generator (4C) - používá Tavern
+11. 📝 **Adventure Hooks (4D)** ← **DALŠÍ! (30-45 min, žádné závislosti)**
 
-**Fáze 5 - Flavor & Rozmanitost (P3):**
-15-28. 💡 Creature Variants - všechny varianty tvorů
+**Fáze 5 - Varianty tvorů (P3):**
+12-25. 📝 **Creature Variants (5A-N)** - 14× k6 tabulky, žádné závislosti (2-4 hod)
+
+**Fáze 6 - Pokročilé hexcrawl (P2):**
+26. 📝 **Hex Generator (6A)** - používá Settlement ✅ (2-3 hod)
+27. 📝 **Dungeon Generator (6B)** - používá Settlement ✅ (6-8 hod)
+28. 📝 **Rumor Framework** - framework pro zvěsti (volitelné)
 
 ---
 
-## 📝 Budoucí vývoj
+## 📝 Další kroky
 
-### B: Settlement Generator (Generátor sídel)
+### 🎯 FÁZE 4D: Adventure Hooks Generator (DOPORUČENO JAKO DALŠÍ)
 
-**Priorita:** 🔴 Vysoká
-**Čas:** ~4 hodiny
-**Stav:** 💡 Nápad
+**Priorita:** 🟡 Střední (ale nejjednodušší ze zbývajících)
+**Čas:** ~30-45 minut
+**Stav:** 📝 Připraveno k implementaci
+**Složitost:** ⭐ Velmi jednoduchá
+**Závislosti:** ❌ Žádné
 
 **Popis:**
-Generátor náhodných myších osad/vesnic podle Mausritter pravidel.
+Generátor háčků pro začátek dobrodružství - důvod, proč se myši vydají na výpravu.
+
+**Zdroj:** `11_HEXCRAWL_SETUP.md` (řádky 66-75)
 
 **Co implementovat:**
-1. **Data a tabulky** (1 hod)
-   - `data/settlements/settlement_types.json` - Typy sídel (vesnice, měřič, předsunutá základna)
-   - `data/settlements/settlement_features.json` - Rysy sídel
-   - `data/settlements/settlement_problems.json` - Problémy sídla
-   - Rozšířit `TableLoader` o settlement lookup metody
+1. **Data** (10 min)
+   - `data/core/adventure_hooks.json` - 6 háčků (k6)
+   - Položky: Ztracený člen rodiny, Vyšetřování, Přísada do kouzla, Doupě tvora, Mapa k pokladu, Útočiště před bouřkou
 
-2. **Generátor** (2 hod)
-   - `src/generators/settlement.py` - SettlementGenerator
-   - Metody: `generate_type()`, `generate_features()`, `generate_population()`, `create()`
-   - Model: `src/core/models.py` - Settlement dataclass
+2. **Generátor** (15 min)
+   - `src/generators/adventure_hook.py` - AdventureHookGenerator
+   - Metody: `create()`, `to_dict()`, `to_json()`, `format_text()`
+   - Model: `src/core/models.py` - AdventureHook dataclass
+
+3. **TableLoader** (5 min)
+   - `get_adventure_hooks()`, `lookup_adventure_hook(roll)`
+
+4. **CLI** (10 min)
+   - `python -m src.cli generate hook`
+   - Options: --json, --save
+
+5. **Testy** (10 min)
+   - `tests/test_adventure_hook_generator.py` - 6+ testů
+
+**Proč první:** Nejrychlejší quick win, žádné závislosti, užitečné pro session starters
+
+---
+
+### 🎯 FÁZE 5: Creature Variants (14× generátorů)
+
+**Priorita:** 🟢 Nízká (ale rychlé zvýšení dokončenosti)
+**Čas:** ~2-4 hodiny (všech 14)
+**Stav:** 📝 Připraveno k implementaci
+**Složitost:** ⭐ Velmi jednoduchá (každý)
+**Závislosti:** ❌ Žádné
+
+**Popis:**
+14 variant tvorů - každý má k6 tabulku s flavor texty.
+
+**Zdroj:** `09_CREATURES.md` (různé sekce)
+
+**Seznam:**
+- 5A: Ghost Abilities (k6) - Přízračné schopnosti duchů
+- 5B: Snake Types (k6) - Zvláštní hadi
+- 5C: Cat Lords (k6) - Kočičí pánové
+- 5D: Rat Gangs (k6) - Krysí gangy
+- 5E: Rival Mice (k6) - Konkurenční myši
+- 5F: Spider Types (k6) - Druhy pavouků
+- 5G: Owl Wizards (k6) - Soví čarodějové
+- 5H: Centipede Types (k6) - Zevlující stonožky
+- 5I: Fairy Schemes (k6) - Vílí plány
+- 5J: Crow Songs (k6) - Vraní písně
+- 5K: Frog Knights (k6) - Žabí rytíři
+- 5L-N: +3 další varianty
+
+**Proč druhé:** Rychle zvýší dokončenost na ~86% (24/28), jednoduché implementace
+
+---
+
+### 🎯 FÁZE 6A: Hex Generator
+
+**Priorita:** 🟡 Vysoká (pro hexcrawl)
+**Čas:** ~2-3 hodiny
+**Stav:** 📝 Připraveno k implementaci
+**Složitost:** ⭐⭐⭐ Střední
+**Závislosti:** ✅ Settlement Generator (HOTOVO)
+
+**Popis:**
+Generátor obsahu hexů pro hexcrawl kampaně.
+
+**Zdroj:** `11_HEXCRAWL_SETUP.md` (řádky 93-160)
+
+**Co implementovat:**
+1. **Data** (1 hod)
+   - `data/core/hex_types.json` - 4 typy hexů (k6)
+   - `data/core/hex_details.json` - 48 detailů (k6×k8)
+   - ❗ **Používá Settlement Generator** (detail k6=1: "Myší osada...")
+
+2. **Generátor** (1 hod)
+   - `src/generators/hex.py` - HexGenerator
+   - Integrace s SettlementGenerator
+
+**Proč třetí:** Klíčové pro hexcrawl, používá Settlement který už máme ✅
+
+---
+
+### 🎯 FÁZE 6B: Dungeon Generator
+
+**Priorita:** 🟡 Vysoká (pro dungeon crawl)
+**Čas:** ~6-8 hodin
+**Stav:** 📝 Připraveno k implementaci
+**Složitost:** ⭐⭐⭐⭐ Složitá (nejvyšší!)
+**Závislosti:** ✅ Settlement Generator (HOTOVO)
+
+**Popis:**
+Generátor dobrodružných míst (dungeonů).
+
+**Zdroj:** `14_DUNGEON_CREATION.md` (řádky 69-268)
+
+**Co implementovat:**
+1. **Data** (2-3 hod)
+   - 11 různých JSON souborů (k20, k12, k10, k8, k6)
+   - ❗ **Používá Settlement Generator** (k20=20: "Myší osada")
+
+2. **Generátor** (3-4 hod)
+   - `src/generators/dungeon.py` - DungeonGenerator
+   - Komplexní logika pro místnosti (3×k6)
+   - Integrace s SettlementGenerator
+
+**Proč poslední:** Nejsložitější ze všech, používá Settlement který už máme ✅
 
 3. **CLI příkaz** (30 min)
    - `python -m src.cli generate settlement`
@@ -665,8 +777,14 @@ Pokud chceš přidat novou feature:
 
 ---
 
-**Poslední aktualizace:** 2025-01
+**Poslední aktualizace:** 2025-11-02
 **Autor:** Claude Code + uživatel
+
+---
+
+## 📋 Související dokumenty
+
+- **[DEPENDENCY_ORDER.md](DEPENDENCY_ORDER.md)** - Detailní analýza závislostí mezi generátory a bottom-up pořadí implementace
 
 ---
 
