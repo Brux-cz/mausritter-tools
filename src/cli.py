@@ -8,12 +8,13 @@ from rich.table import Table
 from rich.panel import Panel
 from rich.text import Text
 from src.core.dice import roll, roll_with_details, attribute_test
-from src.core.models import Character, NPC, Hireling, Weather, Reaction
+from src.core.models import Character, NPC, Hireling, Weather, Reaction, Spell
 from src.generators.character import CharacterGenerator
 from src.generators.npc import NPCGenerator
 from src.generators.hireling import HirelingGenerator
 from src.generators.weather import WeatherGenerator
 from src.generators.reaction import ReactionGenerator
+from src.generators.spell import SpellGenerator
 
 # Fix Windows console encoding for Czech characters
 if sys.platform == 'win32':
@@ -537,6 +538,86 @@ def display_reaction(reaction_obj: Reaction):
     # Vytvoř panel
     panel = Panel(
         reaction_text,
+        title=title,
+        border_style=color,
+        padding=(1, 2)
+    )
+
+    console.print("\n")
+    console.print(panel)
+    console.print("\n")
+
+
+@generate.command()
+@click.option("--json", "-j", "output_json", is_flag=True, help="Výstup jako JSON")
+@click.option("--save", type=click.Path(), help="Uložit do souboru")
+def spell(output_json: bool, save: str):
+    """
+    Vygeneruj náhodné kouzlo
+
+    Hoď 2d8 a urči náhodné kouzlo z tabulky kouzel Mausritter.
+    Každé kouzlo má efekt s placeholdery [POČET] a [SOUČET] pro sesílání,
+    plus podmínku dobití.
+
+    Příklady:
+        python -m src.cli generate spell
+        python -m src.cli generate spell --json
+        python -m src.cli generate spell --save kouzlo.json
+    """
+    import traceback
+    try:
+        # Generuj kouzlo
+        spell_obj = SpellGenerator.create()
+
+        if output_json:
+            # JSON výstup
+            output = SpellGenerator.to_json(spell_obj)
+            console.print(output)
+        else:
+            # Pěkný formátovaný výstup
+            display_spell(spell_obj)
+
+        # Uložení do souboru
+        if save:
+            with open(save, 'w', encoding='utf-8') as f:
+                f.write(SpellGenerator.to_json(spell_obj))
+            console.print(f"\n[green]✓[/green] Uloženo do {save}")
+
+    except Exception as e:
+        console.print(f"[red]Chyba při generování kouzla: {e}[/red]")
+        traceback.print_exc()
+
+
+def display_spell(spell_obj: Spell):
+    """Zobraz kouzlo v pěkném formátu"""
+
+    # Barva podle kategorie
+    color = SpellGenerator.get_spell_color(spell_obj.tags)
+    category = SpellGenerator.get_spell_category(spell_obj.tags)
+
+    # Header
+    title = Text(f"✨ {spell_obj.name}", style=f"bold {color}", justify="center")
+
+    # Obsah
+    content_parts = []
+    content_parts.append(f"[bold]Hod:[/bold] {spell_obj.roll} (2d8)")
+    content_parts.append(f"[bold]Kategorie:[/bold] {category}")
+
+    content_parts.append(f"\n[bold]Efekt:[/bold]")
+    content_parts.append(f"{spell_obj.effect}")
+
+    content_parts.append(f"\n[bold]Dobití:[/bold]")
+    content_parts.append(f"{spell_obj.recharge}")
+
+    # Vysvětlení placeholderů
+    content_parts.append("\n[dim]💡 [POČET] = počet kostek při sesílání, [SOUČET] = součet hodnot[/dim]")
+    content_parts.append("[dim]   Kouzlo má 3 tečky použití (●●●) když je plně nabité[/dim]")
+
+    spell_text = "\n".join(content_parts)
+
+    # Vytvoř panel
+    panel = Panel(
+        spell_text,
         title=title,
         border_style=color,
         padding=(1, 2)

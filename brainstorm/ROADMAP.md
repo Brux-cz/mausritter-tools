@@ -143,13 +143,16 @@ Tyto generátory jsou **nejdůležitější** pro vedení hry. Používají se p
 **Tabulka:** k66 (36 kombinací)
 **Priorita:** Střední - inspirace pro PJ při tvorbě questů
 
-#### 8. 📝 Generátor kouzel
+#### 8. ✅ Generátor kouzel
 **Název:** Spell Generator / Generátor náhodných kouzel
 **Popis:** Náhodné kouzlo z tabulky (2k8 na 16 kouzel)
 **Zdroj:** `06_MAGIC.md` (řádky 83-107)
 **Složitost:** ⭐ Velmi jednoduchá
-**Tabulka:** 2k8 - 16 kouzel
+**Stav:** ✅ **HOTOVO** - Fáze 3E (2025-11-01)
+**Tabulka:** 2k8 - 16 kouzel s efekty ([POČET]/[SOUČET] placeholdery) a podmínkami dobití
 **Priorita:** Střední - náhodné nalezení kouzel
+**CLI:** `python -m src.cli generate spell`
+**Testy:** 15 unit testů (všechny prošly ✅)
 
 ---
 
@@ -239,10 +242,10 @@ Tyto generátory **přidávají rozmanitost** do setkání s tvory. Jsou volitel
 
 | Priorita | Počet | Hotovo | Zbývá | Popis |
 |----------|-------|--------|-------|-------|
-| **P1 🔴** | 8 | 4 ✅ | 4 📝 | Základní PJ nástroje - nutné pro hru |
+| **P1 🔴** | 8 | 5 ✅ | 3 📝 | Základní PJ nástroje - nutné pro hru |
 | **P2 🟡** | 6 | 0 ✅ | 6 📝 | Nástroje pro tvorbu světa - důležité pro kampaň |
 | **P3 🟢** | 14 | 0 ✅ | 14 💡 | Varianty tvorů - volitelné, ale atmosférické |
-| **CELKEM** | **28** | **4** | **24** | |
+| **CELKEM** | **28** | **5** | **23** | |
 
 ### 🎯 Doporučené pořadí implementace (podle priorit z pravidel)
 
@@ -251,10 +254,10 @@ Tyto generátory **přidávají rozmanitost** do setkání s tvory. Jsou volitel
 2. ✅ NPC Generator (HOTOVO)
 3. ✅ Weather Generator (HOTOVO) - velmi jednoduché, denní použití
 4. ✅ Reaction Roll (HOTOVO) - velmi jednoduché, časté použití
-5. 📝 Treasure Generator - důležité pro odměny
-6. 📝 Magic Sword Generator - součást Treasure Gen
-7. 📝 Adventure Seeds - inspirace pro PJ
-8. 📝 Spell Generator - velmi jednoduché
+5. ✅ Spell Generator (HOTOVO) - velmi jednoduché, při objevování pokladů
+6. 📝 Treasure Generator - důležité pro odměny
+7. 📝 Magic Sword Generator - součást Treasure Gen
+8. 📝 Adventure Seeds - inspirace pro PJ
 
 **Fáze 4 - Tvorba světa (P2):**
 9. 📝 Settlement Generator - klíčové pro hexcrawl
@@ -601,7 +604,7 @@ Nápady, které zatím nejsou v hlavním roadmap:
 
 ## 📊 Aktuální stav projektu
 
-**Celková dokončenost:** ~28% (4/28 generátorů, 50% P1)
+**Celková dokončenost:** ~32% (5/28 generátorů, 62.5% P1) 🎯
 
 | Feature               | Status | Progress |
 |-----------------------|--------|----------|
@@ -611,6 +614,7 @@ Nápady, které zatím nejsou v hlavním roadmap:
 | Hireling Generator    | ✅     | 100%     |
 | Weather Generator     | ✅     | 100%     |
 | Reaction Roll         | ✅     | 100%     |
+| Spell Generator       | ✅     | 100%     |
 | Settlement Generator  | 💡     | 0%       |
 | Hex Generator         | 💡     | 0%       |
 | Documentation         | 🚧     | 70%      |
@@ -635,6 +639,20 @@ Pokud chceš přidat novou feature:
 ---
 
 ## 📝 Changelog
+
+### 2025-11-01 - Fáze 3E dokončena
+- ✅ Implementován Spell Generator (generátor náhodných kouzel)
+- ✅ SpellGenerator class v src/generators/spell.py
+- ✅ data/core/spells.json - všech 16 kouzel z oficiálních pravidel (06_MAGIC.md)
+- ✅ Každé kouzlo má: název, efekt s placeholdery [POČET] a [SOUČET], podmínku dobití
+- ✅ CLI příkaz `generate spell` s --json, --save
+- ✅ roll_d8() přidáno do dice.py pro hody 2d8
+- ✅ TableLoader.lookup_spell() metoda a get_spells()
+- ✅ Color-coded výstup podle kategorie (⚔️ Útok, 💚 Podpora, 🔮 Utilita, 💀 Oslabení)
+- ✅ Spell dataclass přidán do models.py
+- ✅ 15 unit testů (všechny prošly ✅)
+- ✅ Dokumentace aktualizována (README.md sekce 6, ROADMAP.md)
+- ✅ P1 generátory: 62.5% hotovo (5/8) 🎯
 
 ### 2025-11-01 - Fáze 3D dokončena
 - ✅ Implementován Reaction Roll Generator (generátor reakcí NPC/tvorů)

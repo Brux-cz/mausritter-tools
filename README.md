@@ -9,11 +9,12 @@ Python nástroje a generátory pro stolní hru **Mausritter** - OSR TTRPG o myš
 - ✅ **Generátor pomocníků** - generování hirelingů s plnými statistikami
 - ✅ **Generátor počasí** - generování počasí a sezónních událostí pro všechny čtyři roční období
 - ✅ **Generátor reakcí** - reakce NPC/tvorů při setkání (2k6 tabulka)
+- ✅ **Generátor kouzel** - náhodná kouzla pro objevování pokladů (2d8 tabulka, 16 kouzel)
 - ✅ **Hody kostkami** - všechny typy kostek (d4, d6, d8, d10, d12, d20, d66)
 - ✅ **Testy vlastností** - roll-under d20 mechanika
-- ✅ **JSON databáze** - původy postav, jména, příjmení, NPC tabulky, hireling typy, počasí
+- ✅ **JSON databáze** - původy postav, jména, příjmení, NPC tabulky, hireling typy, počasí, kouzla
 
-**Status:** Fáze 1, 2, 3A, 3B, 3C a 3D dokončeny (2025-11-01)
+**Status:** Fáze 1, 2, 3A, 3B, 3C, 3D a 3E dokončeny (2025-11-01)
 
 ---
 
@@ -169,7 +170,27 @@ python -m src.cli generate reaction --save reaction.json
 - **9-11** - Povídavá 😊
 - **12** - Nápomocná 💚
 
-### 🎲 6. Hody kostkami
+### ✨ 6. Generování kouzel
+```bash
+# Náhodné kouzlo
+python -m src.cli generate spell
+
+# JSON výstup
+python -m src.cli generate spell --json
+
+# Uložit do souboru
+python -m src.cli generate spell --save kouzlo.json
+```
+
+**Kouzla (2d8, 16 kouzel):**
+- Ohnivá koule, Zahojení, Kouzelná střela, Strach
+- Tma, Zotavení, Srozumitelnost, Přízračný brouk
+- Světlo, Neviditelný prstenec, Zaklepání, Tuk
+- Zvětšení, Neviditelnost, Šanta
+
+**Note:** [POČET] a [SOUČET] jsou placeholdery pro sesílání
+
+### 🎲 7. Hody kostkami
 ```bash
 python -m src.cli roll-dice d6
 python -m src.cli roll-dice d20
@@ -177,24 +198,25 @@ python -m src.cli roll-dice 2d6
 python -m src.cli roll-dice d66
 ```
 
-### 🎯 7. Test vlastnosti
+### 🎯 8. Test vlastnosti
 ```bash
 python -m src.cli test 12
 python -m src.cli test 10 --modifier 2
 ```
 
-### ❓ 8. Zobrazit help
+### ❓ 9. Zobrazit help
 ```bash
 python -m src.cli --help
 python -m src.cli generate --help
 ```
 
-### 🧪 9. Spustit testy
+### 🧪 10. Spustit testy
 ```bash
 python test_character_simple.py
 python test_tableloader.py
 python test_weather_generator.py
 python -m tests.test_reaction_generator
+python -m tests.test_spell_generator
 ```
 
 ---
@@ -221,7 +243,8 @@ Obsahuje:
 | **Fáze 3B** | ✅ HOTOVO | Hireling Generator (2025-11-01) |
 | **Fáze 3C** | ✅ HOTOVO | Weather Generator (2025-11-01) |
 | **Fáze 3D** | ✅ HOTOVO | Reaction Roll Generator (2025-11-01) |
-| **Fáze 3E+** | 🚧 DALŠÍ | Další generátory (Spell, Treasure, Adventure Seeds, Maze) |
+| **Fáze 3E** | ✅ HOTOVO | Spell Generator (2025-11-01) |
+| **Fáze 3F+** | 🚧 DALŠÍ | Další generátory (Treasure, Adventure Seeds, Maze) |
 | **Fáze 4** | ❌ TODO | Web interface |
 
 ---

@@ -22,6 +22,11 @@ def roll_d6() -> int:
     return random.randint(1, 6)
 
 
+def roll_d8() -> int:
+    """Hod 1d8"""
+    return random.randint(1, 8)
+
+
 def roll_d20() -> int:
     """Hod 1d20"""
     return random.randint(1, 20)

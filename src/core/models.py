@@ -157,3 +157,20 @@ class Reaction:
     reaction: str  # Typ reakce (Agresivní, Nepřátelská, Nejistá, Povídavá, Nápomocná)
     question: str  # GM otázka pro inspiraci
     notes: str = ""
+
+
+@dataclass
+class Spell:
+    """
+    Model pro kouzlo.
+    Používá se pro generování náhodných kouzel při objevování pokladů.
+
+    Note: [POČET] a [SOUČET] jsou placeholdery pro casting, ne pro generation.
+    Při sesílání: [POČET] = počet kostek, [SOUČET] = součet hodnot.
+    """
+    roll: int  # Výsledek hodu 2d8 (2-16)
+    name: str  # Název kouzla
+    effect: str  # Popis efektu (s placeholdery [POČET] a [SOUČET])
+    recharge: str  # Podmínka dobití kouzla
+    tags: List[str] = field(default_factory=list)  # Kategorie (damage, healing, utility, atd.)
+    notes: str = ""

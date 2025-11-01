@@ -656,6 +656,37 @@ class TableLoader:
 
         return None
 
+    # === SPELLS / KOUZLA ===
+
+    @staticmethod
+    def get_spells() -> Dict[str, Any]:
+        """Načte tabulku kouzel."""
+        return TableLoader.load_table("core/spells.json")
+
+    @staticmethod
+    def lookup_spell(roll: int) -> Optional[Dict[str, Any]]:
+        """
+        Najde kouzlo podle hodu 2d8.
+
+        Args:
+            roll: Výsledek hodu 2d8 (2-16)
+
+        Returns:
+            Dict s informacemi o kouzlu nebo None pokud nenalezeno
+
+        Example:
+            >>> spell = TableLoader.lookup_spell(10)
+            >>> print(spell["name"])  # "Světlo"
+        """
+        spells_data = TableLoader.get_spells()
+        spells_list = spells_data.get("spells", [])
+
+        for spell in spells_list:
+            if spell["roll"] == roll:
+                return spell
+
+        return None
+
     @staticmethod
     def clear_cache():
         """Vyčistí cache načtených tabulek. Užitečné pro testy."""

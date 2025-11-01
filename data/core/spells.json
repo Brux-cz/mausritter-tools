@@ -1,0 +1,117 @@
+{
+  "metadata": {
+    "source": "docs/knowledge_base/06_MAGIC.md",
+    "description": "Tabulka kouzel pro generování náhodných kouzel",
+    "dice": "2d8",
+    "lookup_method": "direct",
+    "total_spells": 16,
+    "notes": "Placeholdery [POČET] a [SOUČET] se použijí při sesílání kouzla, ne při generování"
+  },
+  "spells": [
+    {
+      "roll": 2,
+      "name": "Ohnivá koule",
+      "effect": "Dostřel až 60 cm. Všichni v okruhu 15 cm utrpí [POČET] + [SOUČET] zranění.",
+      "recharge": "Po tři dny a tři noci peč kouzlo v plamenech divokého ohně.",
+      "tags": ["damage", "area"]
+    },
+    {
+      "roll": 3,
+      "name": "Zahojení",
+      "effect": "Zahojí léčenému tvorovi [SOUČET] bodů zranění síly a odstraní stav Poranění.",
+      "recharge": "Pořež se za k6 zranění síly a potřísni kouzlo svojí krví.",
+      "tags": ["healing"]
+    },
+    {
+      "roll": 4,
+      "name": "Kouzelná střela",
+      "effect": "Jednomu tvorovi v dohledu způsobí [POČET] + [SOUČET] zranění.",
+      "recharge": "Upusť kouzlo z výšky aspoň 10 metrů. Potom se do jedné směny kouzla dotkni.",
+      "tags": ["damage", "single-target"]
+    },
+    {
+      "roll": 5,
+      "name": "Strach",
+      "effect": "[POČTU] tvorů udělí stav Vystrašení.",
+      "recharge": "Nech si jiným tvorem způsobit stav Vystrašení, zatímco máš kouzlo u sebe.",
+      "tags": ["debuff", "crowd-control"]
+    },
+    {
+      "roll": 6,
+      "name": "Tma",
+      "effect": "Na [POČET] kol vytvoří kouli černočerné tmy o průměru [SOUČET] x 5 cm.",
+      "recharge": "Nech kouzlo tři dny nezakryté na neosvětleném místě.",
+      "tags": ["utility", "crowd-control"]
+    },
+    {
+      "roll": 7,
+      "name": "Zotavení",
+      "effect": "Odebere ([POČET] + 1) tvorům stav Vyčerpání nebo Vystrašení.",
+      "recharge": "Zakopej kouzlo na tři dny na poklidném poli nebo říčním břehu.",
+      "tags": ["healing", "buff"]
+    },
+    {
+      "roll": 8,
+      "name": "Srozumitelnost",
+      "effect": "[POČET] tvorů jiného živočišného druhu ti bude na [POČET] směn rozumět.",
+      "recharge": "Obdaruj nezištně tvora jiného druhu.",
+      "tags": ["utility", "social"]
+    },
+    {
+      "roll": 9,
+      "name": "Přízračný brouk",
+      "effect": "Vytvoří na [POČET] x 6 směn přízračného brouka, který unese 6 políček inventáře.",
+      "recharge": "Zakopej kouzlo na tři noci na broučím hřbitově.",
+      "tags": ["utility", "summon"]
+    },
+    {
+      "roll": 10,
+      "name": "Světlo",
+      "effect": "[POČET] musí uspět v záchraně na vůli, jinak budou omámeni. Anebo na [SOUČET] směn vytvoří světlo o síle pochodně.",
+      "recharge": "Po tři dny vystavuj kouzlo prvním paprskům vycházejícího slunce i posledním paprskům zapadajícího slunce.",
+      "tags": ["utility", "debuff"]
+    },
+    {
+      "roll": 11,
+      "name": "Neviditelný prstenec",
+      "effect": "Vytvoří neviditelnou a nehybnou bariéru o průměru [POČET] x 15 cm. Vydrží [POČET] směn.",
+      "recharge": "Vyrob železný kruh veliký jako posledně seslaný prstenec. Kouzlo jím protáhni. Kruh se rozplyne.",
+      "tags": ["utility", "defensive"]
+    },
+    {
+      "roll": 12,
+      "name": "Zaklepání",
+      "effect": "Otevře dveře nebo nádobu, jak kdyby myš se silou 10 + [POČET] x 4 uspěla v záchraně.",
+      "recharge": "Na tři dny zavři kouzlo do zamčené skříňky v zamčené skříňce v zamčené skříňce.",
+      "tags": ["utility"]
+    },
+    {
+      "roll": 13,
+      "name": "Tuk",
+      "effect": "Pokryje plochu o průměru [POČET] x 15 cm kluzkým hořlavým tukem. Kdo neuspěje v záchraně na mrštnost, ten spadne.",
+      "recharge": "Pomaž kouzlo zvířecím tukem a počkej, dokud nezežlukne.",
+      "tags": ["utility", "crowd-control"]
+    },
+    {
+      "roll": 14,
+      "name": "Zvětšení",
+      "effect": "Na 1 směnu zvětší tvora na ([POČET] + 1) násobek jeho původní velikosti.",
+      "recharge": "Nech kouzlo na tři dny v nejvyšších větvích vysokého stromu.",
+      "tags": ["buff", "utility"]
+    },
+    {
+      "roll": 15,
+      "name": "Neviditelnost",
+      "effect": "Na [POČET] směn zneviditelní jednoho tvora. Jakýkoli pohyb zkrátí trvání o 1 směnu.",
+      "recharge": "Celý jeden den ani jednou neotevři oči, zatímco kouzlo držíš v pacce.",
+      "tags": ["utility", "stealth"]
+    },
+    {
+      "roll": 16,
+      "name": "Šanta",
+      "effect": "Promění nějaký předmět v neodolatelnou vábničku koček. Trvá [POČET] směn.",
+      "recharge": "Dej kočce dárek, po jakém doopravdy touží.",
+      "tags": ["utility", "summon"]
+    }
+  ]
+}
