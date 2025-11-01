@@ -1,0 +1,93 @@
+{
+  "metadata": {
+    "source": "Mausritter CZ - pravidla.pdf",
+    "page": "39",
+    "section": "Kouzelné meče",
+    "dice": "k10",
+    "description": "Seznam 10 kouzelných mečů s unikátními schopnostmi. Tečky použití se zaškrtávají JENOM když padne 6."
+  },
+  "usage_rule": "Zaškrtává se použití JENOM když padne 6 (při útoku). Standardní kouzelné meče mají ○○○ (3 tečky).",
+  "repair": "Může jedině velmi šikovný kovář nebo nezvykle praktický čaroděj. Oba budou chtít zaplatit něčím důležitějším než ďobky.",
+  "swords": [
+    {
+      "roll": 1,
+      "name": "Tepané železo",
+      "ability": "Při nošení: Záchrany před kritickými zraněními házíš s výhodou",
+      "trigger": "passive",
+      "effect_type": "defensive",
+      "tags": ["defensive", "save"]
+    },
+    {
+      "roll": 2,
+      "name": "Spletité vílí vzory",
+      "ability": "Při nošení: Dovedeš se přestrojit za libovolného tvora velikého jako myš",
+      "trigger": "passive",
+      "effect_type": "utility",
+      "tags": ["utility", "disguise", "social"]
+    },
+    {
+      "roll": 3,
+      "name": "Rezavý hřebík",
+      "ability": "Kritické zranění: Dává stav Vystrašení",
+      "trigger": "critical",
+      "effect_type": "debuff",
+      "tags": ["debuff", "condition", "fear"]
+    },
+    {
+      "roll": 4,
+      "name": "Hadí zub",
+      "ability": "Kritické zranění: Způsobuje navíc k6 zranění mrštnosti",
+      "trigger": "critical",
+      "effect_type": "damage",
+      "tags": ["damage", "dexterity", "poison"]
+    },
+    {
+      "roll": 5,
+      "name": "Šavle vojáčka ze stavebnice",
+      "ability": "Při nošení: Když vedeš tlupu, mají členové +1 ke zbroji",
+      "trigger": "passive",
+      "effect_type": "buff",
+      "tags": ["buff", "leadership", "armor"]
+    },
+    {
+      "roll": 6,
+      "name": "Vodou ohlazené sklo",
+      "ability": "Při nošení: Pod vodou zadržíš dech na jednu celou směnu",
+      "trigger": "passive",
+      "effect_type": "utility",
+      "tags": ["utility", "underwater", "exploration"]
+    },
+    {
+      "roll": 7,
+      "name": "Vlčí zub",
+      "ability": "Kritické zranění: Tvůj příští útok je zesílený",
+      "trigger": "critical",
+      "effect_type": "buff",
+      "tags": ["buff", "damage", "combo"]
+    },
+    {
+      "roll": 8,
+      "name": "Stříbrná jehla",
+      "ability": "Kritické zranění: U jednoho předmětu v inventáři (kromě kouzel) si vygumuj všechny tečky použití",
+      "trigger": "critical",
+      "effect_type": "utility",
+      "tags": ["utility", "item", "restore"]
+    },
+    {
+      "roll": 9,
+      "name": "Trnitý stonek růže",
+      "ability": "Kritické zranění: Odstraň si nějaký stav",
+      "trigger": "critical",
+      "effect_type": "utility",
+      "tags": ["utility", "condition", "cleanse"]
+    },
+    {
+      "roll": 10,
+      "name": "Vysrážený stín",
+      "ability": "Při nošení: Když se nehýbeš, nikdo tě nevidí",
+      "trigger": "passive",
+      "effect_type": "utility",
+      "tags": ["utility", "stealth", "invisibility"]
+    }
+  ]
+}

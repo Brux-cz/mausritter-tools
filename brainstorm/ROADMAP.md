@@ -119,21 +119,31 @@ Tyto generátory jsou **nejdůležitější** pro vedení hry. Používají se p
 **Tabulka:** 2k6 - Agresivní (2), Nepřátelská (3-5), Nejistá (6-8), Povídavá (9-11), Nápomocná (12)
 **Priorita:** Vysoká - používá se v každém setkání
 
-#### 5. 📝 Generátor pokladů
+#### 5. ✅ Generátor pokladů
 **Název:** Treasure Generator / Generátor pokladů
 **Popis:** Určení obsahu pokladu - ďobky, předměty, kouzelné meče, kouzla
 **Zdroj:** `15_TREASURE.md` (řádky 17-115)
 **Složitost:** ⭐⭐⭐ Střední až složitá
+**Stav:** ✅ **HOTOVO** - Fáze 3F (2025-11-01)
 **Tabulky:** Hlavní (k20), Drobnosti (k6), Cenný (k6), Objemný (k6), Neobvyklý (k6), Užitečný (k6), Meče + Kouzla
 **Priorita:** Vysoká - důležité pro odměňování hráčů
+**CLI:** `python -m src.cli generate treasure --bonus 0-4`
+**Testy:** 23 unit testů (všechny prošly ✅)
+**Mechanika:**
+- 2-6× k20 na hlavní tabulku (2 základní + 0-4 bonusové)
+- Bonusové hody za: bývalá osada, magická oblast, velké zvíře, velké nesnáze
+- Generuje: ďobky (5-600 ď), kouzelné meče (1/20), kouzla (1/20), předměty z 5 podtabulek
+**Součásti:** Obsahuje generátor kouzelných mečů (typ, schopnost, prokletí) a nástroje/zbroje
 
-#### 6. 📝 Generátor kouzelných mečů
+#### 6. ✅ Generátor kouzelných mečů
 **Název:** Magic Sword Generator / Generátor kouzelných mečů
 **Popis:** Typ zbraně (k6), schopnost (k10), šance na prokletí (1/6), typ kletby (k6)
 **Zdroj:** `15_TREASURE.md` (řádky 118-216)
 **Složitost:** ⭐⭐ Střední
+**Stav:** ✅ **HOTOVO** - Integrováno do Treasure Generatoru (Fáze 3F)
 **Tabulky:** Typ (k6), 10 druhů mečů, Prokletí (k6)
 **Priorita:** Střední - součást Treasure Generatoru
+**Poznámka:** Tato funkcionalita je plně implementovaná jako součást TreasureGeneratoru
 
 #### 7. 📝 Generátor semínek dobrodružství
 **Název:** Adventure Seeds / Generátor semínek dobrodružství
@@ -604,7 +614,7 @@ Nápady, které zatím nejsou v hlavním roadmap:
 
 ## 📊 Aktuální stav projektu
 
-**Celková dokončenost:** ~32% (5/28 generátorů, 62.5% P1) 🎯
+**Celková dokončenost:** ~44% (7/28 generátorů, 75% P1) 🎯
 
 | Feature               | Status | Progress |
 |-----------------------|--------|----------|
@@ -615,6 +625,7 @@ Nápady, které zatím nejsou v hlavním roadmap:
 | Weather Generator     | ✅     | 100%     |
 | Reaction Roll         | ✅     | 100%     |
 | Spell Generator       | ✅     | 100%     |
+| Treasure Generator    | ✅     | 100%     |
 | Settlement Generator  | 💡     | 0%       |
 | Hex Generator         | 💡     | 0%       |
 | Documentation         | 🚧     | 70%      |
@@ -653,6 +664,37 @@ Pokud chceš přidat novou feature:
 - ✅ 15 unit testů (všechny prošly ✅)
 - ✅ Dokumentace aktualizována (README.md sekce 6, ROADMAP.md)
 - ✅ P1 generátory: 62.5% hotovo (5/8) 🎯
+
+### 2025-11-01 - Fáze 3F dokončena
+- ✅ Implementován Treasure Generator (generátor pokladů / hoard)
+- ✅ TreasureGenerator class v src/generators/treasure.py
+- ✅ 9 JSON datových souborů v data/treasure/:
+  - treasure_main.json - Hlavní tabulka (k20)
+  - treasure_trinkets.json - Drobnosti (k6, 6 položek)
+  - treasure_valuable.json - Cenný poklad (k6, 6 položek, 100-1500 ď)
+  - treasure_bulky.json - Objemný poklad (k6, 6 položek, 2-6 políček)
+  - treasure_unusual.json - Neobvyklý poklad (k6, 6 položek, speciální kupci)
+  - treasure_useful.json - Užitečný poklad (k6, zásoby/pochodně/zbraně/zbroje/nástroje)
+  - magic_swords.json - 10 kouzelných mečů (k10)
+  - magic_sword_types.json - Typy zbraní (k6: Střední/Lehká/Těžká)
+  - magic_sword_curses.json - Kletby (k6, 6 kleteb s podmínkami sejmutí)
+- ✅ 2 nové datové soubory v data/core/:
+  - tools.json - 44 nástrojů (32 myších + 12 lidských)
+  - armor.json - 3 typy zbrojí (Lehká/Těžká/Štít)
+- ✅ CLI příkaz `generate treasure` s --bonus (0-4), --json, --save
+- ✅ Mechanika bonusových hodů: 2-6× k20 (2 základní + 0-4 bonusové)
+- ✅ Bonusové otázky: bývalá osada, magická oblast, velké zvíře, velké nesnáze
+- ✅ Generuje: ďobky (5-600 ď), kouzelné meče (5% šance), kouzla (5% šance), 5 typů předmětů
+- ✅ Kouzelné meče s prokletím (16.7% šance), 10 typů schopností, 6 typů kleteb
+- ✅ Nové modely: TreasureHoard, TreasureItem, MagicSword, Tool, Armor
+- ✅ TableLoader rozšířen o 15 nových metod pro treasure tabulky
+- ✅ Color-coded výstup podle typu (💰 Ďobky, ⚔️ Meč, ✨ Kouzlo, 💎 Cenné, 📦 Objemné, 🔮 Neobvyklé, 🛠️ Užitečné)
+- ✅ Detailní display pro každou položku (hodnota, políčka, tečky použití, prokletí)
+- ✅ 23 unit testů v test_treasure_generator.py (všechny prošly ✅)
+- ✅ Dokumentace aktualizována (README.md sekce 7, ROADMAP.md)
+- ✅ P1 generátory: 75% hotovo (6/8) 🎯
+- ✅ Celková dokončenost: ~44% (7/28 generátorů)
+- ✅ Magic Sword Generator integrován do Treasure Generatoru
 
 ### 2025-11-01 - Fáze 3D dokončena
 - ✅ Implementován Reaction Roll Generator (generátor reakcí NPC/tvorů)

@@ -261,6 +261,18 @@ class TableLoader:
 
         return None
 
+    @staticmethod
+    def get_random_weapon() -> Optional[Dict[str, Any]]:
+        """Vrátí náhodnou zbraň ze seznamu."""
+        import random
+        weapons_data = TableLoader.get_weapons()
+        weapons_list = weapons_data.get("weapons", [])
+
+        if not weapons_list:
+            return None
+
+        return random.choice(weapons_list)
+
     # === NPC TABULKY ===
 
     @staticmethod
@@ -686,6 +698,217 @@ class TableLoader:
                 return spell
 
         return None
+
+    # === TREASURE / POKLADY ===
+
+    @staticmethod
+    def get_treasure_main() -> Dict[str, Any]:
+        """Načte hlavní tabulku pokladu."""
+        return TableLoader.load_table("treasure/treasure_main.json")
+
+    @staticmethod
+    def get_treasure_trinkets() -> Dict[str, Any]:
+        """Načte tabulku drobností."""
+        return TableLoader.load_table("treasure/treasure_trinkets.json")
+
+    @staticmethod
+    def get_treasure_valuable() -> Dict[str, Any]:
+        """Načte tabulku cenného pokladu."""
+        return TableLoader.load_table("treasure/treasure_valuable.json")
+
+    @staticmethod
+    def get_treasure_bulky() -> Dict[str, Any]:
+        """Načte tabulku objemného pokladu."""
+        return TableLoader.load_table("treasure/treasure_bulky.json")
+
+    @staticmethod
+    def get_treasure_unusual() -> Dict[str, Any]:
+        """Načte tabulku neobvyklého pokladu."""
+        return TableLoader.load_table("treasure/treasure_unusual.json")
+
+    @staticmethod
+    def get_treasure_useful() -> Dict[str, Any]:
+        """Načte tabulku užitečného pokladu."""
+        return TableLoader.load_table("treasure/treasure_useful.json")
+
+    @staticmethod
+    def get_magic_swords() -> Dict[str, Any]:
+        """Načte tabulku kouzelných mečů."""
+        return TableLoader.load_table("treasure/magic_swords.json")
+
+    @staticmethod
+    def get_magic_sword_types() -> Dict[str, Any]:
+        """Načte tabulku typů kouzelných mečů."""
+        return TableLoader.load_table("treasure/magic_sword_types.json")
+
+    @staticmethod
+    def get_magic_sword_curses() -> Dict[str, Any]:
+        """Načte tabulku kleteb kouzelných mečů."""
+        return TableLoader.load_table("treasure/magic_sword_curses.json")
+
+    @staticmethod
+    def get_tools() -> Dict[str, Any]:
+        """Načte tabulku nástrojů."""
+        return TableLoader.load_table("core/tools.json")
+
+    @staticmethod
+    def get_armor() -> Dict[str, Any]:
+        """Načte tabulku zbrojí."""
+        return TableLoader.load_table("core/armor.json")
+
+    @staticmethod
+    def lookup_treasure_main(roll: int) -> Optional[Dict[str, Any]]:
+        """
+        Najde položku v hlavní tabulce pokladu podle hodu k20.
+
+        Args:
+            roll: Výsledek hodu k20 (1-20)
+
+        Returns:
+            Dict s informacemi o položce nebo None
+        """
+        main_data = TableLoader.get_treasure_main()
+        table = main_data.get("table", [])
+
+        for entry in table:
+            roll_value = entry.get("roll")
+            # Může být jedno číslo nebo list
+            if isinstance(roll_value, int):
+                if roll == roll_value:
+                    return entry
+            elif isinstance(roll_value, list):
+                if roll in roll_value:
+                    return entry
+
+        return None
+
+    @staticmethod
+    def lookup_trinket(roll: int) -> Optional[Dict[str, Any]]:
+        """Najde drobnost podle hodu k6."""
+        data = TableLoader.get_treasure_trinkets()
+        trinkets = data.get("trinkets", [])
+
+        for trinket in trinkets:
+            if trinket["roll"] == roll:
+                return trinket
+
+        return None
+
+    @staticmethod
+    def lookup_valuable(roll: int) -> Optional[Dict[str, Any]]:
+        """Najde cenný poklad podle hodu k6."""
+        data = TableLoader.get_treasure_valuable()
+        valuable = data.get("valuable", [])
+
+        for item in valuable:
+            if item["roll"] == roll:
+                return item
+
+        return None
+
+    @staticmethod
+    def lookup_bulky(roll: int) -> Optional[Dict[str, Any]]:
+        """Najde objemný poklad podle hodu k6."""
+        data = TableLoader.get_treasure_bulky()
+        bulky = data.get("bulky", [])
+
+        for item in bulky:
+            if item["roll"] == roll:
+                return item
+
+        return None
+
+    @staticmethod
+    def lookup_unusual(roll: int) -> Optional[Dict[str, Any]]:
+        """Najde neobvyklý poklad podle hodu k6."""
+        data = TableLoader.get_treasure_unusual()
+        unusual = data.get("unusual", [])
+
+        for item in unusual:
+            if item["roll"] == roll:
+                return item
+
+        return None
+
+    @staticmethod
+    def lookup_useful(roll: int) -> Optional[Dict[str, Any]]:
+        """Najde užitečný poklad podle hodu k6."""
+        data = TableLoader.get_treasure_useful()
+        useful = data.get("useful", [])
+
+        for item in useful:
+            if item["roll"] == roll:
+                return item
+
+        return None
+
+    @staticmethod
+    def lookup_magic_sword(roll: int) -> Optional[Dict[str, Any]]:
+        """Najde kouzelný meč podle hodu k10."""
+        data = TableLoader.get_magic_swords()
+        swords = data.get("swords", [])
+
+        for sword in swords:
+            if sword["roll"] == roll:
+                return sword
+
+        return None
+
+    @staticmethod
+    def lookup_magic_sword_type(roll: int) -> Optional[Dict[str, Any]]:
+        """Najde typ kouzelného meče podle hodu k6."""
+        data = TableLoader.get_magic_sword_types()
+        types = data.get("types", [])
+
+        for sword_type in types:
+            roll_value = sword_type.get("roll")
+            # Může být jedno číslo nebo list
+            if isinstance(roll_value, int):
+                if roll == roll_value:
+                    return sword_type
+            elif isinstance(roll_value, list):
+                if roll in roll_value:
+                    return sword_type
+
+        return None
+
+    @staticmethod
+    def lookup_magic_sword_curse(roll: int) -> Optional[Dict[str, Any]]:
+        """Najde kletbu kouzelného meče podle hodu k6."""
+        data = TableLoader.get_magic_sword_curses()
+        curses = data.get("curses", [])
+
+        for curse in curses:
+            if curse["roll"] == roll:
+                return curse
+
+        return None
+
+    @staticmethod
+    def get_random_tool() -> Optional[Dict[str, Any]]:
+        """Vrátí náhodný nástroj ze seznamu."""
+        import random
+        data = TableLoader.get_tools()
+        mouse_made = data.get("mouse_made", [])
+        human_made = data.get("human_made", [])
+        all_tools = mouse_made + human_made
+
+        if not all_tools:
+            return None
+
+        return random.choice(all_tools)
+
+    @staticmethod
+    def get_random_armor() -> Optional[Dict[str, Any]]:
+        """Vrátí náhodnou zbroj ze seznamu."""
+        import random
+        data = TableLoader.get_armor()
+        armor_types = data.get("armor_types", [])
+
+        if not armor_types:
+            return None
+
+        return random.choice(armor_types)
 
     @staticmethod
     def clear_cache():

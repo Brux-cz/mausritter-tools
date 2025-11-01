@@ -1,0 +1,366 @@
+{
+  "metadata": {
+    "source": "Mausritter CZ - pravidla.pdf",
+    "page": "2, 9",
+    "section": "Vybavení - Nástroje",
+    "description": "Seznam 44 nástrojů (32 myší výroba + 12 lidská výroba)."
+  },
+  "mouse_made": [
+    {
+      "id": 1,
+      "name": "Deka",
+      "value": 10,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 2,
+      "name": "Dláto",
+      "value": 5,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 3,
+      "name": "Dřevěná tyč, 15 cm",
+      "value": 1,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 4,
+      "name": "Dřevěné klíny",
+      "value": 1,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 5,
+      "name": "Hrnce",
+      "value": 10,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 6,
+      "name": "Hudební nástroj",
+      "value": 200,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 7,
+      "name": "Ježky, váček",
+      "value": 10,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 8,
+      "name": "Kladivo",
+      "value": 10,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 9,
+      "name": "Kniha, četba",
+      "value": 600,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 10,
+      "name": "Kniha, prázdná",
+      "value": 300,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 11,
+      "name": "Kovářský měch",
+      "value": 10,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 12,
+      "name": "Krumpáč",
+      "value": 10,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 13,
+      "name": "Křída",
+      "value": 1,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 14,
+      "name": "Lahev",
+      "value": 1,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 15,
+      "name": "Lepidlo",
+      "value": 5,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 16,
+      "name": "Lopata",
+      "value": 10,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 17,
+      "name": "Měch na vodu",
+      "value": 5,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 18,
+      "name": "Páčidlo",
+      "value": 10,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 19,
+      "name": "Parfém",
+      "value": 50,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 20,
+      "name": "Pilník na železo",
+      "value": 5,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 21,
+      "name": "Píšťalka",
+      "value": 5,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 22,
+      "name": "Přesýpací hodiny",
+      "value": 300,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 23,
+      "name": "Roh",
+      "value": 10,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 24,
+      "name": "Síť",
+      "value": 10,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 25,
+      "name": "Stan",
+      "value": 80,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 26,
+      "name": "Šperháky",
+      "value": 100,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 27,
+      "name": "Tuk",
+      "value": 5,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 28,
+      "name": "Vědro",
+      "value": 5,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 29,
+      "name": "Visací zámek a klíč, malý",
+      "value": 20,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 30,
+      "name": "Vrták",
+      "value": 10,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 31,
+      "name": "Zatížené kostky",
+      "value": 5,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    },
+    {
+      "id": 32,
+      "name": "Zrcátko",
+      "value": 200,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "myší"
+    }
+  ],
+  "human_made": [
+    {
+      "id": 33,
+      "name": "Jed",
+      "value": 100,
+      "slots": 1,
+      "usage_dots": 3,
+      "origin": "lidská",
+      "notes": "Má tečky použití"
+    },
+    {
+      "id": 34,
+      "name": "Jehla",
+      "value": 20,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "lidská"
+    },
+    {
+      "id": 35,
+      "name": "Motouz, klubko",
+      "value": 40,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "lidská"
+    },
+    {
+      "id": 36,
+      "name": "Mýdlo, menší kus",
+      "value": 10,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "lidská"
+    },
+    {
+      "id": 37,
+      "name": "Nit, cívka",
+      "value": 20,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "lidská"
+    },
+    {
+      "id": 38,
+      "name": "Optická čočka",
+      "value": 200,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "lidská"
+    },
+    {
+      "id": 39,
+      "name": "Pastička na myši",
+      "value": 100,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "lidská",
+      "notes": "Ironicky nebezpečná pro myši"
+    },
+    {
+      "id": 40,
+      "name": "Rybářský háček",
+      "value": 20,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "lidská"
+    },
+    {
+      "id": 41,
+      "name": "Řetízek",
+      "value": 40,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "lidská"
+    },
+    {
+      "id": 42,
+      "name": "Visací zámek a klíč, velký",
+      "value": 100,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "lidská"
+    },
+    {
+      "id": 43,
+      "name": "Vonná tyčka",
+      "value": 20,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "lidská"
+    },
+    {
+      "id": 44,
+      "name": "Zápalky, krabička",
+      "value": 80,
+      "slots": 1,
+      "usage_dots": 0,
+      "origin": "lidská"
+    }
+  ]
+}

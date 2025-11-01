@@ -1,0 +1,60 @@
+{
+  "metadata": {
+    "source": "Mausritter CZ - pravidla.pdf",
+    "page": "39",
+    "section": "Prokletí kouzelných mečů",
+    "dice": "k6",
+    "probability": "1/6 (16.67%)",
+    "description": "Kouzelné meče mohou být prokleté. Meč se připoutá k myši a nedá se odložit. Dokud kletba účinkuje: ŽÁDNÁ kladná schopnost. Jakmile kletbu sejmeš: meč znovu získá schopnosti."
+  },
+  "curse_mechanics": {
+    "binding": "Meč se připoutá k myši, která ho vezme jako první",
+    "cannot_drop": "Nedá se odložit z inventáře",
+    "no_ability": "Dokud kletba účinkuje: ŽÁDNÁ kladná schopnost",
+    "after_lift": "Jakmile kletbu sejmeš: meč znovu získá schopnosti"
+  },
+  "curses": [
+    {
+      "roll": 1,
+      "curse": "Hody na kritické zranění házej s nevýhodou",
+      "lift_condition": "Nesobecké obětování se, když jde o život",
+      "difficulty": "high",
+      "tags": ["combat", "disadvantage"]
+    },
+    {
+      "roll": 2,
+      "curse": "Když dostaneš stav Vyčerpání, vezmi si ještě jeden",
+      "lift_condition": "Na jedno roční období se vyměnit s chudým rolníkem",
+      "difficulty": "medium",
+      "tags": ["condition", "exhaustion"]
+    },
+    {
+      "roll": 3,
+      "curse": "V ohrožení uspěj v záchraně na vůli, jinak zaútoč",
+      "lift_condition": "Trvale se usmířit s nepřítelem na život a na smrt",
+      "difficulty": "high",
+      "tags": ["will", "aggression", "berserk"]
+    },
+    {
+      "roll": 4,
+      "curse": "Úprava –1 ke všem hodům na reakci",
+      "lift_condition": "Vzdát se bez podvádění veškerého majetku",
+      "difficulty": "medium",
+      "tags": ["social", "reaction", "penalty"]
+    },
+    {
+      "roll": 5,
+      "curse": "Když ti někdo zraní společníka, vezmi si stav Vystrašení",
+      "lift_condition": "Splnit přání umírající myši",
+      "difficulty": "variable",
+      "tags": ["condition", "fear", "party"]
+    },
+    {
+      "roll": 6,
+      "curse": "U kouzel se v tvé přítomnosti vždy zaškrtává použití",
+      "lift_condition": "Zničit zdroj, ze kterého čerpá moc soví čarodějka",
+      "difficulty": "very_high",
+      "tags": ["magic", "anti-magic", "usage"]
+    }
+  ]
+}

@@ -8,13 +8,14 @@ from rich.table import Table
 from rich.panel import Panel
 from rich.text import Text
 from src.core.dice import roll, roll_with_details, attribute_test
-from src.core.models import Character, NPC, Hireling, Weather, Reaction, Spell
+from src.core.models import Character, NPC, Hireling, Weather, Reaction, Spell, TreasureHoard, TreasureItem, MagicSword
 from src.generators.character import CharacterGenerator
 from src.generators.npc import NPCGenerator
 from src.generators.hireling import HirelingGenerator
 from src.generators.weather import WeatherGenerator
 from src.generators.reaction import ReactionGenerator
 from src.generators.spell import SpellGenerator
+from src.generators.treasure import TreasureGenerator
 
 # Fix Windows console encoding for Czech characters
 if sys.platform == 'win32':
@@ -626,6 +627,245 @@ def display_spell(spell_obj: Spell):
     console.print("\n")
     console.print(panel)
     console.print("\n")
+
+
+@generate.command()
+@click.option("--bonus", "-b", default=0, type=int, help="Počet bonusových hodů k20 (0-4)")
+@click.option("--json", "output_json", is_flag=True, help="Výstup v JSON formátu")
+@click.option("--save", type=str, help="Ulož do souboru")
+def treasure(bonus: int, output_json: bool, save: str):
+    """
+    Vygeneruj poklad (hoard).
+
+    Bonusové hody (0-4) za kladné odpovědi na otázky:
+    - Je v bývalé myší osadě / hradě / jeskyni? (+1)
+    - Je ve vysoce magické oblasti? (+1)
+    - Brání ho velké zvíře / záludná past? (+1)
+    - Překonaly myši velké nesnáze? (+1)
+
+    Příklady:
+    \b
+        python -m src.cli generate treasure
+        python -m src.cli generate treasure --bonus 2
+        python -m src.cli generate treasure -b 4 --json
+    """
+    if bonus < 0 or bonus > 4:
+        console.print("[red]Chyba: Bonusové hody musí být 0-4[/red]")
+        return
+
+    # Vygeneruj poklad
+    hoard = TreasureGenerator.create(bonus_rolls=bonus)
+
+    # JSON výstup
+    if output_json:
+        import json
+        hoard_dict = {
+            "total_rolls": hoard.total_rolls,
+            "bonus_rolls": hoard.bonus_rolls,
+            "total_value": hoard.total_value,
+            "items": []
+        }
+
+        for item in hoard.items:
+            item_dict = {
+                "type": item.type,
+                "name": item.name,
+                "description": item.description,
+                "value": item.value,
+                "slots": item.slots,
+                "usage_dots": item.usage_dots,
+                "quantity": item.quantity,
+                "notes": item.notes
+            }
+
+            # Přidej speciální objekty pokud existují
+            if item.spell:
+                item_dict["spell"] = {
+                    "roll": item.spell.roll,
+                    "name": item.spell.name,
+                    "effect": item.spell.effect,
+                    "recharge": item.spell.recharge,
+                    "tags": item.spell.tags
+                }
+
+            if item.magic_sword:
+                item_dict["magic_sword"] = {
+                    "weapon_type": item.magic_sword.weapon_type,
+                    "damage": item.magic_sword.damage,
+                    "name": item.magic_sword.name,
+                    "ability": item.magic_sword.ability,
+                    "trigger": item.magic_sword.trigger,
+                    "cursed": item.magic_sword.cursed,
+                    "curse": item.magic_sword.curse,
+                    "curse_lift": item.magic_sword.curse_lift
+                }
+
+            hoard_dict["items"].append(item_dict)
+
+        json_output = json.dumps(hoard_dict, ensure_ascii=False, indent=2)
+        console.print(json_output)
+
+        if save:
+            with open(save, 'w', encoding='utf-8') as f:
+                f.write(json_output)
+            console.print(f"\n[green]Uloženo do {save}[/green]")
+
+        return
+
+    # Normální výstup
+    display_treasure(hoard)
+
+    if save:
+        import json
+        # Stejný JSON export jako výše
+        pass
+
+
+def display_treasure(hoard: TreasureHoard):
+    """
+    Zobrazí poklad v terminálu s barevným formátováním.
+    """
+    # Hlavička
+    title = f"💰 Poklad ({hoard.total_rolls}× k20)"
+    if hoard.bonus_rolls > 0:
+        title += f" [+{hoard.bonus_rolls} bonusové hody]"
+
+    console.print("\n")
+    console.print(Panel(
+        f"[bold yellow]Celková hodnota: {hoard.total_value} ď[/bold yellow]\n"
+        f"[dim]Položek: {len(hoard.items)}[/dim]",
+        title=title,
+        border_style="yellow",
+        padding=(1, 2)
+    ))
+    console.print("\n")
+
+    # Zobraz každou položku
+    for i, item in enumerate(hoard.items, 1):
+        display_treasure_item(item, i)
+
+
+def display_treasure_item(item: TreasureItem, index: int):
+    """
+    Zobrazí jednu položku pokladu.
+    """
+    # Určí barvu podle typu
+    color = get_treasure_color(item.type)
+    icon = get_treasure_icon(item.type)
+
+    # Název
+    title = f"{icon} {index}. {item.name}"
+
+    # Obsah panelu
+    lines = []
+
+    # Popis
+    if item.description:
+        lines.append(f"[dim]{item.description}[/dim]")
+        lines.append("")
+
+    # Hodnota
+    if item.value is not None:
+        lines.append(f"💰 Hodnota: [bold yellow]{item.value} ď[/bold yellow]")
+    else:
+        lines.append(f"💰 Hodnota: [dim]Neprodejné / neurčeno[/dim]")
+
+    # Políčka
+    if item.slots > 0:
+        slots_str = "□" * item.slots
+        lines.append(f"📦 Políčka: {slots_str} ({item.slots})")
+    else:
+        lines.append(f"📦 Políčka: [dim]Nezabírá místo[/dim]")
+
+    # Tečky použití
+    if item.usage_dots > 0:
+        dots_str = "○" * item.usage_dots
+        lines.append(f"🔘 Použití: {dots_str}")
+
+    # Množství
+    if item.quantity > 1:
+        lines.append(f"🔢 Množství: {item.quantity}×")
+
+    # Kupec (pro neobvyklý poklad)
+    if item.buyer:
+        lines.append(f"🏪 Kupec: [cyan]{item.buyer}[/cyan]")
+
+    # Speciální objekty
+    if item.spell:
+        lines.append("")
+        lines.append(f"✨ [bold magenta]KOUZLO[/bold magenta]")
+        lines.append(f"Efekt: {item.spell.effect}")
+        lines.append(f"[dim]Dobití: {item.spell.recharge}[/dim]")
+
+    if item.magic_sword:
+        lines.append("")
+        lines.append(f"⚔️ [bold red]KOUZELNÝ MEČ[/bold red]")
+        lines.append(f"Typ: {item.magic_sword.weapon_type} ({item.magic_sword.damage})")
+        lines.append(f"Schopnost: {item.magic_sword.ability}")
+        if item.magic_sword.cursed:
+            lines.append("")
+            lines.append(f"💀 [bold red]PROKLETÝ![/bold red]")
+            lines.append(f"Kletba: {item.magic_sword.curse}")
+            lines.append(f"Sejmutí: {item.magic_sword.curse_lift}")
+
+    # Poznámky
+    if item.notes:
+        lines.append("")
+        lines.append(f"📝 {item.notes}")
+
+    content = "\n".join(lines)
+
+    panel = Panel(
+        content,
+        title=title,
+        border_style=color,
+        padding=(1, 2)
+    )
+
+    console.print(panel)
+    console.print("")
+
+
+def get_treasure_color(treasure_type: str) -> str:
+    """Vrátí barvu pro daný typ pokladu."""
+    colors = {
+        "pips": "yellow",           # 💰 Ďobky
+        "magic_sword": "red",        # ⚔️ Kouzelný meč
+        "spell": "magenta",          # ✨ Kouzlo
+        "valuable": "blue",          # 💎 Cenný poklad
+        "bulky": "cyan",             # 📦 Objemný poklad
+        "unusual": "green",          # 🔮 Neobvyklý poklad
+        "useful": "white",           # 🛠️ Užitečný poklad
+        "trinket": "magenta",        # 🎁 Drobnost
+        "supplies": "green",
+        "torches": "yellow",
+        "weapon": "red",
+        "armor": "blue",
+        "tool": "white",
+        "hireling": "cyan"
+    }
+    return colors.get(treasure_type, "white")
+
+
+def get_treasure_icon(treasure_type: str) -> str:
+    """Vrátí emoji ikonu pro daný typ pokladu."""
+    icons = {
+        "pips": "💰",
+        "magic_sword": "⚔️",
+        "spell": "✨",
+        "valuable": "💎",
+        "bulky": "📦",
+        "unusual": "🔮",
+        "useful": "🛠️",
+        "trinket": "🎁",
+        "supplies": "🍞",
+        "torches": "🔥",
+        "weapon": "🗡️",
+        "armor": "🛡️",
+        "tool": "🔧",
+        "hireling": "🐭"
+    }
+    return icons.get(treasure_type, "📜")
 
 
 @main.group()

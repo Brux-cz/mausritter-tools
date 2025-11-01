@@ -10,11 +10,12 @@ Python nástroje a generátory pro stolní hru **Mausritter** - OSR TTRPG o myš
 - ✅ **Generátor počasí** - generování počasí a sezónních událostí pro všechny čtyři roční období
 - ✅ **Generátor reakcí** - reakce NPC/tvorů při setkání (2k6 tabulka)
 - ✅ **Generátor kouzel** - náhodná kouzla pro objevování pokladů (2d8 tabulka, 16 kouzel)
+- ✅ **Generátor pokladů** - kompletní treasure hoard (2-6× k20, kouzelné meče, kouzla, předměty)
 - ✅ **Hody kostkami** - všechny typy kostek (d4, d6, d8, d10, d12, d20, d66)
 - ✅ **Testy vlastností** - roll-under d20 mechanika
-- ✅ **JSON databáze** - původy postav, jména, příjmení, NPC tabulky, hireling typy, počasí, kouzla
+- ✅ **JSON databáze** - původy, jména, NPC, pomocníci, počasí, kouzla, poklady, nástroje
 
-**Status:** Fáze 1, 2, 3A, 3B, 3C, 3D a 3E dokončeny (2025-11-01)
+**Status:** Fáze 1, 2, 3A, 3B, 3C, 3D, 3E a 3F dokončeny (2025-11-01)
 
 ---
 
@@ -190,7 +191,49 @@ python -m src.cli generate spell --save kouzlo.json
 
 **Note:** [POČET] a [SOUČET] jsou placeholdery pro sesílání
 
-### 🎲 7. Hody kostkami
+### 💰 7. Generování pokladů
+```bash
+# Základní poklad (2× k20)
+python -m src.cli generate treasure
+
+# S bonusovými hody (0-4)
+python -m src.cli generate treasure --bonus 2
+python -m src.cli generate treasure -b 4
+
+# JSON výstup
+python -m src.cli generate treasure --bonus 3 --json
+
+# Uložit do souboru
+python -m src.cli generate treasure --save hoard.json
+```
+
+**Bonusové hody (za každou kladnou odpověď +1 hod k20):**
+1. Je v bývalé myší osadě / hradě / jeskyni?
+2. Je ve vysoce magické oblasti?
+3. Brání ho velké zvíře / záludná past?
+4. Překonaly myši velké nesnáze?
+
+**Mechanika:**
+- 2-6 hodů k20 na hlavní tabulku (2 základní + 0-4 bonusové)
+- Každý hod může vést k dalším hodům na podtabulky
+
+**Co může být v pokladu:**
+- 💰 **Ďobky** (5-600 ď v různých obalech)
+- ⚔️ **Kouzelný meč** (1/20 šance, 10 typů, možné prokletí)
+- ✨ **Náhodné kouzlo** (2d8, hodnota 100-600 ď)
+- 🎁 **Drobnosti** (6 magických předmětů)
+- 💎 **Cenný poklad** (šperky, 100-1500 ď)
+- 📦 **Objemný poklad** (cenné, ale zabírá 2-6 políček)
+- 🔮 **Neobvyklý poklad** (speciální kupci)
+- 🛠️ **Užitečný poklad** (zásoby, pochodně, zbraně, zbroje, nástroje)
+
+**Příklad výstupu:**
+- Pytel s 50 ďobků (50 ď, 1 políčko)
+- Kouzelný meč: Vlčí zub - Lehká (k6), neprokletý
+- Broušený diamant (1000 ď, šperk)
+- 3× Zásoby (15 ď, ○○○ každé)
+
+### 🎲 8. Hody kostkami
 ```bash
 python -m src.cli roll-dice d6
 python -m src.cli roll-dice d20
@@ -198,25 +241,26 @@ python -m src.cli roll-dice 2d6
 python -m src.cli roll-dice d66
 ```
 
-### 🎯 8. Test vlastnosti
+### 🎯 9. Test vlastnosti
 ```bash
 python -m src.cli test 12
 python -m src.cli test 10 --modifier 2
 ```
 
-### ❓ 9. Zobrazit help
+### ❓ 10. Zobrazit help
 ```bash
 python -m src.cli --help
 python -m src.cli generate --help
 ```
 
-### 🧪 10. Spustit testy
+### 🧪 11. Spustit testy
 ```bash
 python test_character_simple.py
 python test_tableloader.py
 python test_weather_generator.py
 python -m tests.test_reaction_generator
 python -m tests.test_spell_generator
+python -m tests.test_treasure_generator
 ```
 
 ---
@@ -244,7 +288,8 @@ Obsahuje:
 | **Fáze 3C** | ✅ HOTOVO | Weather Generator (2025-11-01) |
 | **Fáze 3D** | ✅ HOTOVO | Reaction Roll Generator (2025-11-01) |
 | **Fáze 3E** | ✅ HOTOVO | Spell Generator (2025-11-01) |
-| **Fáze 3F+** | 🚧 DALŠÍ | Další generátory (Treasure, Adventure Seeds, Maze) |
+| **Fáze 3F** | ✅ HOTOVO | Treasure Generator (2025-11-01) |
+| **Fáze 3G+** | 🚧 DALŠÍ | Další generátory (Adventure Seeds, Magic Sword, Maze) |
 | **Fáze 4** | ❌ TODO | Web interface |
 
 ---

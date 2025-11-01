@@ -1,0 +1,65 @@
+{
+  "metadata": {
+    "source": "Mausritter CZ - pravidla.pdf",
+    "page": "38",
+    "section": "Objemný poklad",
+    "dice": "k6",
+    "description": "Cenné předměty zabírající mnoho místa (300-1000 ď, 2-6 políček)."
+  },
+  "bulky": [
+    {
+      "roll": 1,
+      "name": "Nadměrná stříbrná lžíce",
+      "description": "Velká dekorativní stříbrná lžíce",
+      "value": 300,
+      "slots": 2,
+      "usage_dots": 0,
+      "notes": "Objemný šperk"
+    },
+    {
+      "roll": 2,
+      "name": "Slonovinový hřeben",
+      "description": "Luxusní hřeben ze slonoviny",
+      "value": 400,
+      "slots": 4,
+      "usage_dots": 0,
+      "notes": "Velký luxusní předmět"
+    },
+    {
+      "roll": 3,
+      "name": "Obří lahev kvalitní brandy",
+      "description": "Prémiový alkohol v obří lahvi",
+      "value": 500,
+      "slots": 4,
+      "usage_dots": 0,
+      "notes": "Těžká skleněná lahev"
+    },
+    {
+      "roll": 4,
+      "name": "Starodávná myší socha",
+      "description": "Historická socha myšího hrdiny",
+      "value": 500,
+      "slots": 4,
+      "usage_dots": 0,
+      "notes": "Historický artefakt"
+    },
+    {
+      "roll": 5,
+      "name": "Starodávný myší trůn",
+      "description": "Starověký trůn myšího krále",
+      "value": 1000,
+      "slots": 6,
+      "usage_dots": 0,
+      "notes": "Nejcennější, nejobjemnější"
+    },
+    {
+      "roll": 6,
+      "name": "Obří zlaté hodinky",
+      "description": "Masivní zlaté kapesní hodinky",
+      "value": 1000,
+      "slots": 4,
+      "usage_dots": 0,
+      "notes": "Funkční mechanizmus"
+    }
+  ]
+}

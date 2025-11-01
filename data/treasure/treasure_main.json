@@ -1,0 +1,98 @@
+{
+  "metadata": {
+    "source": "Mausritter CZ - pravidla.pdf",
+    "page": "38-39",
+    "section": "Krysarií poklad / Hoard",
+    "dice": "k20",
+    "description": "Hlavní tabulka pokladu. Hoď 2-6× k20 (2 základní + 0-4 bonusové za otázky)."
+  },
+  "bonus_questions": [
+    "Je v bývalé myší osadě, na hradě nebo v jeskyni?",
+    "Je ve vysoce magické oblasti?",
+    "Brání ho velké zvíře nebo záludná past?",
+    "Překonaly myši velké nesnáze, než ho našly?"
+  ],
+  "table": [
+    {
+      "roll": 1,
+      "type": "magic_sword",
+      "name": "Kouzelný meč",
+      "action": "generate_magic_sword"
+    },
+    {
+      "roll": 2,
+      "type": "spell",
+      "name": "Náhodné kouzlo",
+      "action": "generate_spell",
+      "value_formula": "k6 × 100"
+    },
+    {
+      "roll": 3,
+      "type": "trinket",
+      "name": "Hoď na drobnost",
+      "action": "roll_subtable",
+      "subtable": "trinkets",
+      "subtable_dice": "k6"
+    },
+    {
+      "roll": 4,
+      "type": "valuable",
+      "name": "Hoď na cenný poklad",
+      "action": "roll_subtable",
+      "subtable": "valuable",
+      "subtable_dice": "k6"
+    },
+    {
+      "roll": 5,
+      "type": "unusual",
+      "name": "Hoď na neobvyklý poklad",
+      "action": "roll_subtable",
+      "subtable": "unusual",
+      "subtable_dice": "k6"
+    },
+    {
+      "roll": [6, 7, 8],
+      "type": "bulky",
+      "name": "Hoď na objemný poklad",
+      "action": "roll_subtable",
+      "subtable": "bulky",
+      "subtable_dice": "k6"
+    },
+    {
+      "roll": [9, 10],
+      "type": "useful",
+      "name": "Hoď na užitečný poklad",
+      "action": "roll_subtable",
+      "subtable": "useful",
+      "subtable_dice": "k6"
+    },
+    {
+      "roll": 11,
+      "type": "pips",
+      "name": "Bedna s k6 × 100 ďobků",
+      "pips_formula": "k6 × 100",
+      "pips_range": [100, 600]
+    },
+    {
+      "roll": [12, 13, 14],
+      "type": "pips",
+      "name": "Pytel s k6 × 50 ďobků",
+      "pips_formula": "k6 × 50",
+      "pips_range": [50, 300]
+    },
+    {
+      "roll": [15, 16, 17],
+      "type": "pips",
+      "name": "Peněženka s k6 × 10 ďobků",
+      "pips_formula": "k6 × 10",
+      "pips_range": [10, 60]
+    },
+    {
+      "roll": [18, 19, 20],
+      "type": "pips",
+      "name": "Volně rozsypaných k6 × 5 ďobků",
+      "pips_formula": "k6 × 5",
+      "pips_range": [5, 30]
+    }
+  ]
+}

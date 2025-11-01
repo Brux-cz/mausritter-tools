@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "source": "Mausritter CZ - pravidla.pdf",
+    "page": "39",
+    "section": "Kouzelné meče - Typy zbraní",
+    "dice": "k6",
+    "description": "Určení typu kouzelného meče."
+  },
+  "types": [
+    {
+      "roll": [1, 2, 3, 4],
+      "type": "Střední",
+      "damage_one_hand": "k6",
+      "damage_two_hands": "k8",
+      "description": "k6 v jedné pacce, k8 v obou",
+      "probability": "4/6 (67%)"
+    },
+    {
+      "roll": 5,
+      "type": "Lehká",
+      "damage_one_hand": "k6",
+      "damage_two_hands": null,
+      "description": "k6 v jedné pacce, můžeš bojovat dvěma",
+      "probability": "1/6 (17%)"
+    },
+    {
+      "roll": 6,
+      "type": "Těžká",
+      "damage_one_hand": null,
+      "damage_two_hands": "k10",
+      "description": "k10 v obou packách",
+      "probability": "1/6 (17%)"
+    }
+  ]
+}

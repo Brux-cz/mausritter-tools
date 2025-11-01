@@ -1,0 +1,67 @@
+{
+  "metadata": {
+    "source": "Mausritter CZ - pravidla.pdf",
+    "page": "38",
+    "section": "Užitečný poklad",
+    "dice": "k6",
+    "description": "Praktické předměty pro dobrodružství."
+  },
+  "useful": [
+    {
+      "roll": 1,
+      "name": "k6 balení zásob",
+      "description": "Dobře zachovalé cestovní zásoby",
+      "type": "supplies",
+      "quantity_formula": "k6",
+      "item_name": "Zásoby",
+      "usage_dots": 3,
+      "value_per_item": 5,
+      "slots_per_item": 1,
+      "notes": "1-6× balení zásob (○○○)"
+    },
+    {
+      "roll": 2,
+      "name": "k6 svazků pochodní",
+      "description": "Svazky pochodní v dobrém stavu",
+      "type": "torches",
+      "quantity_formula": "k6",
+      "item_name": "Pochodně",
+      "usage_dots": 3,
+      "value_per_item": 10,
+      "slots_per_item": 1,
+      "notes": "1-6× svazky pochodní (○○○, každá tečka = 6 směn)"
+    },
+    {
+      "roll": 3,
+      "name": "Běžná zbraň",
+      "description": "Náhodná zbraň v použitelném stavu",
+      "type": "weapon",
+      "action": "generate_weapon",
+      "notes": "Generuj náhodnou zbraň z weapons.json"
+    },
+    {
+      "roll": 4,
+      "name": "Běžná zbroj",
+      "description": "Náhodná zbroj v použitelném stavu",
+      "type": "armor",
+      "action": "generate_armor",
+      "notes": "Generuj náhodnou zbroj (lehká/těžká/štít)"
+    },
+    {
+      "roll": 5,
+      "name": "Běžný nástroj",
+      "description": "Náhodný nástroj",
+      "type": "tool",
+      "action": "generate_tool",
+      "notes": "Generuj náhodný nástroj z tools.json"
+    },
+    {
+      "roll": 6,
+      "name": "Ztracená myš ochotná pomoct",
+      "description": "NPC myš připravená připojit se k družině",
+      "type": "hireling",
+      "action": "generate_npc",
+      "notes": "Generuj NPC nebo pomocníka (hireling)"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "metadata": {
+    "source": "Mausritter CZ - pravidla.pdf",
+    "page": "38",
+    "section": "Cenný poklad",
+    "dice": "k6",
+    "description": "Drahé šperky a luxusní zboží (100-1500 ď)."
+  },
+  "valuable": [
+    {
+      "roll": 1,
+      "name": "Kolo velmi uzrálého sýra",
+      "description": "Prémiový starý sýr",
+      "value": 100,
+      "slots": 1,
+      "usage_dots": 0,
+      "notes": "Delikatesa"
+    },
+    {
+      "roll": 2,
+      "name": "Stříbrný řetízek",
+      "description": "Jemný stříbrný šperk",
+      "value": 500,
+      "slots": 2,
+      "usage_dots": 0,
+      "notes": "Šperk"
+    },
+    {
+      "roll": 3,
+      "name": "Přívěsek s polodrahokamem",
+      "description": "Přívěsek s polodrahokamem",
+      "value": 400,
+      "slots": 1,
+      "usage_dots": 0,
+      "notes": "Šperk"
+    },
+    {
+      "roll": 4,
+      "name": "Zlatý prsten",
+      "description": "Masivní zlatý prsten",
+      "value": 500,
+      "slots": 1,
+      "usage_dots": 0,
+      "notes": "Šperk"
+    },
+    {
+      "roll": 5,
+      "name": "Broušený diamant",
+      "description": "Kvalitně broušený drahokam",
+      "value": 1000,
+      "slots": 1,
+      "usage_dots": 0,
+      "notes": "Drahokam nejvyšší kvality"
+    },
+    {
+      "roll": 6,
+      "name": "Perlový náhrdelník",
+      "description": "Náhrdelník z pravých perel",
+      "value": 1500,
+      "slots": 2,
+      "usage_dots": 0,
+      "notes": "Nejvzácnější šperk"
+    }
+  ]
+}

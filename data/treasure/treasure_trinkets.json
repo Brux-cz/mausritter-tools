@@ -1,0 +1,65 @@
+{
+  "metadata": {
+    "source": "Mausritter CZ - pravidla.pdf",
+    "page": "38",
+    "section": "Drobnosti",
+    "dice": "k6",
+    "description": "Magické a zvláštní předměty, většinou bez udané ceny."
+  },
+  "trinkets": [
+    {
+      "roll": 1,
+      "name": "Přízračná lucerna",
+      "description": "Vrhá světlo, které zahání duchy",
+      "value": null,
+      "slots": 1,
+      "usage_dots": 0,
+      "notes": "Magický efekt proti duchům"
+    },
+    {
+      "roll": 2,
+      "name": "Mluvící ulity",
+      "description": "Slyšíš to, co někdo říká do té druhé",
+      "value": null,
+      "slots": 1,
+      "usage_dots": 0,
+      "notes": "Komunikační pár"
+    },
+    {
+      "roll": 3,
+      "name": "Dýchací slámka",
+      "description": "Trubička, ve které je pořád vzduch",
+      "value": null,
+      "slots": 1,
+      "usage_dots": 0,
+      "notes": "Neomezené dýchání pod vodou"
+    },
+    {
+      "roll": 4,
+      "name": "Dýka netopýřího kultisty",
+      "description": "Umožní vstup do svatyně",
+      "value": null,
+      "slots": 1,
+      "usage_dots": 0,
+      "notes": "Klíč do kultistické svatyně"
+    },
+    {
+      "roll": 5,
+      "name": "Kouzelné fazole",
+      "description": "Plně vyrostou za k6 směn",
+      "value": null,
+      "slots": 1,
+      "usage_dots": 0,
+      "notes": "Rostou k6 směn"
+    },
+    {
+      "roll": 6,
+      "name": "Funkční lidské zařízení",
+      "description": "Vymysli něco zábavného",
+      "value": null,
+      "slots": 1,
+      "usage_dots": 0,
+      "notes": "GM improvizace - hračka, nástroj, gadget"
+    }
+  ]
+}

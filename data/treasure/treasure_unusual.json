@@ -1,0 +1,71 @@
+{
+  "metadata": {
+    "source": "Mausritter CZ - pravidla.pdf",
+    "page": "38",
+    "section": "Neobvyklý poklad",
+    "dice": "k6",
+    "description": "Speciální předměty s omezeným použitím nebo kupcem (200-300 ď kde určeno)."
+  },
+  "unusual": [
+    {
+      "roll": 1,
+      "name": "Svazek aromatických bylin",
+      "description": "Vzácné léčivé byliny",
+      "value": 200,
+      "slots": 1,
+      "usage_dots": 0,
+      "notes": "Prodejné u lékárníka",
+      "buyer": "lékárník"
+    },
+    {
+      "roll": 2,
+      "name": "Pestrobarevné sušené houby",
+      "description": "Magické houby s neobvyklými účinky",
+      "value": 200,
+      "slots": 1,
+      "usage_dots": 0,
+      "notes": "Prodejné u čarodějnice",
+      "buyer": "čarodějnice"
+    },
+    {
+      "roll": 3,
+      "name": "Strašidelně světélkující kámen",
+      "description": "Kámen s magickou luminiscencí",
+      "value": 300,
+      "slots": 1,
+      "usage_dots": 0,
+      "notes": "Prodejné u čaroděje",
+      "buyer": "čaroděj"
+    },
+    {
+      "roll": 4,
+      "name": "Dědictví se sentimentální hodnotou",
+      "description": "Rodinný klenot nebo památka",
+      "value": null,
+      "slots": 1,
+      "usage_dots": 0,
+      "notes": "Prodejné pouze šlechtici/původnímu majiteli",
+      "buyer": "šlechtic"
+    },
+    {
+      "roll": 5,
+      "name": "Dokumenty dávající nárok na pozemek",
+      "description": "Právní listiny na pozemek či majetek",
+      "value": null,
+      "slots": 1,
+      "usage_dots": 0,
+      "notes": "Hodnota závisí na pozemku a politické situaci",
+      "buyer": "různí"
+    },
+    {
+      "roll": 6,
+      "name": "Mapa k pokladu",
+      "description": "Stará mapa vedoucí k dalšímu pokladu",
+      "value": null,
+      "slots": 1,
+      "usage_dots": 0,
+      "notes": "Vede k novému dobrodružství",
+      "buyer": "různí"
+    }
+  ]
+}

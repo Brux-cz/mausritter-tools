@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "source": "Mausritter CZ - pravidla.pdf",
+    "page": "9",
+    "section": "Zbroj",
+    "description": "Typy zbrojí dostupné v Mausritter."
+  },
+  "armor_types": [
+    {
+      "id": 1,
+      "type": "Lehká zbroj",
+      "examples": "kabátec, kožený límec",
+      "protection": "Zabrání 1 zranění",
+      "slots": "Slabší packa + 1 políčko těla",
+      "slots_count": 2,
+      "value": 150,
+      "notes": "Obsazuje slabší packu a jedno tělo"
+    },
+    {
+      "id": 2,
+      "type": "Těžká zbroj",
+      "examples": "olověný plášť, plátová kyrys",
+      "protection": "Zabrání 1 zranění",
+      "slots": "2 políčka těla",
+      "slots_count": 2,
+      "value": 500,
+      "notes": "Více ochrany, ale těžší"
+    },
+    {
+      "id": 3,
+      "type": "Štít",
+      "examples": "dřevěný štít, kovové víčko",
+      "protection": "Používá se ve slabší pacce",
+      "slots": "Slabší packa",
+      "slots_count": 1,
+      "value": 30,
+      "notes": "Zabírá slabší packu, můžeš použít jako improvizovanou zbraň (k6)"
+    }
+  ]
+}

@@ -174,3 +174,98 @@ class Spell:
     recharge: str  # Podmínka dobití kouzla
     tags: List[str] = field(default_factory=list)  # Kategorie (damage, healing, utility, atd.)
     notes: str = ""
+
+
+@dataclass
+class Tool:
+    """
+    Model pro nástroj.
+    Používá se v pokladech a jako běžné vybavení.
+    """
+    name: str  # Název nástroje
+    value: int  # Cena v ďobcích
+    slots: int = 1  # Počet políček v inventáři (default 1)
+    usage_dots: int = 0  # Počet teček použití (0 = bez teček)
+    origin: str = "myší"  # "myší" nebo "lidská" výroba
+    notes: str = ""
+
+
+@dataclass
+class Armor:
+    """
+    Model pro zbroj.
+    Používá se v pokladech a jako běžné vybavení.
+    """
+    type: str  # Typ zbroje (Lehká zbroj, Těžká zbroj, Štít)
+    examples: str  # Příklady (kabátec, kožený límec, atd.)
+    protection: str  # Popis ochrany
+    slots: str  # Popis políček (slovní)
+    slots_count: int  # Počet políček (číselně)
+    value: int  # Cena v ďobcích
+    notes: str = ""
+
+
+@dataclass
+class MagicSword:
+    """
+    Model pro kouzelný meč.
+    Používá se při generování pokladů (1/20 šance na hlavní tabulce).
+
+    Tečky použití se zaškrtávají JENOM když padne 6 při útoku.
+    Oprava: pouze velmi šikovný kovář nebo praktický čaroděj (za víc než ďobky).
+    """
+    weapon_type: str  # Typ zbraně: "Střední", "Lehká", "Těžká"
+    damage: str  # Zranění: "k6/k8", "k6", "k10"
+    name: str  # Název meče (Tepané železo, Hadí zub, atd.)
+    ability: str  # Popis schopnosti
+    trigger: str  # Kdy se aktivuje: "passive", "critical"
+    effect_type: str  # Typ efektu: "defensive", "damage", "utility", "buff", "debuff"
+    tags: List[str] = field(default_factory=list)  # Tagy pro kategorizaci
+    usage_dots: int = 3  # Tečky použití (default 3)
+    cursed: bool = False  # Je prokletý?
+    curse: Optional[str] = None  # Popis kletby (pokud cursed=True)
+    curse_lift: Optional[str] = None  # Podmínka sejmutí kletby
+    notes: str = ""
+
+
+@dataclass
+class TreasureItem:
+    """
+    Model pro obecnou položku pokladu.
+    Může reprezentovat ďobky, předmět z tabulky, kouzlo, nebo kouzelný meč.
+    """
+    type: str  # Typ: "pips", "trinket", "valuable", "bulky", "unusual", "useful", "spell", "magic_sword"
+    name: str  # Název položky
+    description: Optional[str] = None  # Detailní popis
+    value: Optional[int] = None  # Hodnota v ďobcích (může být None pro speciální předměty)
+    slots: int = 1  # Počet políček v inventáři
+    usage_dots: int = 0  # Počet teček použití
+
+    # Pro speciální typy
+    spell: Optional[Spell] = None  # Pokud type="spell"
+    magic_sword: Optional[MagicSword] = None  # Pokud type="magic_sword"
+    tool: Optional[Tool] = None  # Pokud type="tool" (v užitečném pokladu)
+    armor: Optional[Armor] = None  # Pokud type="armor" (v užitečném pokladu)
+
+    # Metadata
+    buyer: Optional[str] = None  # Kdo to koupí (pro neobvyklý poklad)
+    quantity: int = 1  # Počet kusů (např. k6 zásob)
+    notes: str = ""
+
+
+@dataclass
+class TreasureHoard:
+    """
+    Model pro celý poklad (hoard).
+    Obsahuje seznam položek vygenerovaných z hlavní tabulky.
+
+    Počet položek závisí na bonusových otázkách:
+    - 2 základní hody k20
+    - +0 až +4 bonusové hody (za kladné odpovědi na otázky)
+    - Celkem 2-6 položek
+    """
+    items: List[TreasureItem] = field(default_factory=list)  # Seznam položek pokladu
+    total_value: int = 0  # Celková hodnota v ďobcích (bez neprodejných předmětů)
+    bonus_rolls: int = 0  # Počet bonusových hodů (0-4)
+    total_rolls: int = 2  # Celkový počet hodů k20 (2-6)
+    notes: str = ""
