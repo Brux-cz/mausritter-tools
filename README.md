@@ -19,7 +19,14 @@ Python nástroje a generátory pro stolní hru **Mausritter** - OSR TTRPG o myš
 - ✅ **Testy vlastností** - roll-under d20 mechanika
 - ✅ **JSON databáze** - původy, jména, NPC, pomocníci, počasí, kouzla, poklady, nástroje, semínka dobrodružství, osady
 
-**Status:** Fáze 1, 2, 3A-F, 4A-C dokončeny (2025-11-02) - **P1 COMPLETE (100%)** + Tavern + Settlement ✅
+**Status:** Fáze 1, 2, 3A-F, 4A-D dokončeny (2025-11-02)
+- ✅ **P1 COMPLETE (100%)** - všech 8 základních PJ nástrojů
+- ✅ **Tavern Generator** (Fáze 4B)
+- ✅ **Settlement Generator** (Fáze 4C)
+- ✅ **Adventure Hooks** (Fáze 4D)
+- 📝 **DALŠÍ:** Creature Variants (Fáze 5) nebo Hex Generator (Fáze 6A)
+
+**Dokončenost:** 39% (11/28 generátorů) | **Roadmap:** [brainstorm/ROADMAP.md](brainstorm/ROADMAP.md)
 
 ---
 
