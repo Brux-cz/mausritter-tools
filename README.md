@@ -7,11 +7,12 @@ Python nástroje a generátory pro stolní hru **Mausritter** - OSR TTRPG o myš
 - ✅ **Generátor postav** - kompletní generování myších postav podle pravidel
 - ✅ **Generátor NPC** - rychlé vytváření nehráčských myší
 - ✅ **Generátor pomocníků** - generování hirelingů s plnými statistikami
+- ✅ **Generátor počasí** - generování počasí a sezónních událostí pro všechny čtyři roční období
 - ✅ **Hody kostkami** - všechny typy kostek (d4, d6, d8, d10, d12, d20, d66)
 - ✅ **Testy vlastností** - roll-under d20 mechanika
-- ✅ **JSON databáze** - původy postav, jména, příjmení, NPC tabulky, hireling typy
+- ✅ **JSON databáze** - původy postav, jména, příjmení, NPC tabulky, hireling typy, počasí
 
-**Status:** Fáze 1, 2, 3A a 3B dokončeny (2025-11-01)
+**Status:** Fáze 1, 2, 3A, 3B a 3C dokončeny (2025-11-01)
 
 ---
 
@@ -117,7 +118,34 @@ python -m src.cli generate hireling --json
 8. Rytíř (25 ď/den)
 9. Tlumočník (30 ď/den)
 
-### 🎲 4. Hody kostkami
+### 🌦️ 4. Generování počasí
+```bash
+# Náhodné počasí (default: jaro)
+python -m src.cli generate weather
+
+# Konkrétní roční období
+python -m src.cli generate weather --season spring   # Jaro
+python -m src.cli generate weather --season summer   # Léto
+python -m src.cli generate weather --season autumn   # Podzim
+python -m src.cli generate weather --season winter   # Zima
+
+# S sezónní událostí
+python -m src.cli generate weather --season autumn --with-event
+
+# JSON výstup
+python -m src.cli generate weather --json
+
+# Uložit do souboru
+python -m src.cli generate weather --save weather.json
+```
+
+**Roční období:**
+- **Jaro** - Přívalové deště (2.78% nepříznivé)
+- **Léto** - Úmorné vedro (27.78% nepříznivé)
+- **Podzim** - Silný vítr (2.78% nepříznivé)
+- **Zima** - Vánice, mráz (72% nepříznivé!)
+
+### 🎲 6. Hody kostkami
 ```bash
 python -m src.cli roll-dice d6
 python -m src.cli roll-dice d20
@@ -125,22 +153,23 @@ python -m src.cli roll-dice 2d6
 python -m src.cli roll-dice d66
 ```
 
-### 🎯 5. Test vlastnosti
+### 🎯 7. Test vlastnosti
 ```bash
 python -m src.cli test 12
 python -m src.cli test 10 --modifier 2
 ```
 
-### ❓ 6. Zobrazit help
+### ❓ 8. Zobrazit help
 ```bash
 python -m src.cli --help
 python -m src.cli generate --help
 ```
 
-### 🧪 7. Spustit testy
+### 🧪 9. Spustit testy
 ```bash
 python test_character_simple.py
 python test_tableloader.py
+python test_weather_generator.py
 ```
 
 ---
@@ -164,7 +193,9 @@ Obsahuje:
 | **Fáze 1** | ✅ HOTOVO | Data extraction (JSON tabulky) |
 | **Fáze 2** | ✅ HOTOVO | Generátor postav + CLI |
 | **Fáze 3A** | ✅ HOTOVO | NPC Generator (2025-10-31) |
-| **Fáze 3B** | 🚧 PROBÍHÁ | Další generátory (Settlement, Hex, Weather, Treasure) |
+| **Fáze 3B** | ✅ HOTOVO | Hireling Generator (2025-11-01) |
+| **Fáze 3C** | ✅ HOTOVO | Weather Generator (2025-11-01) |
+| **Fáze 3D+** | 🚧 DALŠÍ | Další generátory (Settlement, Hex, Treasure, Maze) |
 | **Fáze 4** | ❌ TODO | Web interface |
 
 ---
@@ -176,12 +207,13 @@ mausritter/
 ├── src/
 │   ├── core/              # Základní moduly
 │   │   ├── dice.py        # ✅ Hody kostkami
-│   │   ├── models.py      # ✅ Datové modely (Character, NPC, Hireling)
+│   │   ├── models.py      # ✅ Datové modely (Character, NPC, Hireling, Weather)
 │   │   └── tables.py      # ✅ Načítání JSON dat
 │   ├── generators/
 │   │   ├── character.py   # ✅ Generátor postav
 │   │   ├── npc.py         # ✅ Generátor NPC
-│   │   └── hireling.py    # ✅ Generátor pomocníků
+│   │   ├── hireling.py    # ✅ Generátor pomocníků
+│   │   └── weather.py     # ✅ Generátor počasí
 │   └── cli.py             # ✅ CLI rozhraní
 ├── data/
 │   └── core/
@@ -190,6 +222,7 @@ mausritter/
 │       ├── names_family.json      # ✅ 20 mateřských jmen
 │       ├── npc_*.json             # ✅ 6 NPC tabulek
 │       ├── hireling_types.json    # ✅ 9 typů pomocníků
+│       ├── weather_seasons.json   # ✅ 4 roční období (počasí + události)
 │       ├── competitive_mice.json  # ✅ 6 konkurenčních dobrodruhů
 │       └── adventure_seeds.json   # ✅ 36 semínek dobrodružství
 ├── docs/

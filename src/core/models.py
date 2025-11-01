@@ -132,3 +132,16 @@ class Hireling:
     # Morálka a stav
     morale: str = "neutrální"  # neutrální, loajální, nespokojený
     notes: str = ""
+
+
+@dataclass
+class Weather:
+    """
+    Model pro počasí.
+    Používá se pro generování denního počasí podle ročních období.
+    """
+    season: str  # "spring", "summer", "autumn", "winter"
+    weather: str  # Popis počasí (např. "Jasno a slunečno")
+    unfavorable: bool  # True pokud nepřeje cestování (vyžaduje STR save)
+    event: Optional[str] = None  # Volitelná sezónní událost
+    notes: str = ""

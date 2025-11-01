@@ -2,9 +2,9 @@
 
 Kompletní česká příručka pro práci s Mausritter Tools.
 
-**Verze:** 1.0
-**Datum:** 2025-10-29
-**Status:** Fáze 1 a 2 dokončeny
+**Verze:** 1.3
+**Datum:** 2025-11-01
+**Status:** Fáze 1, 2, 3A, 3B a 3C dokončeny
 
 ---
 
@@ -440,7 +440,131 @@ python -m src.cli generate hireling --type 6 --name "Válečnice Jana" --gender 
 
 ---
 
-### 2.4 Hody kostkami
+### 2.4 Generování počasí
+
+**Hlavní příkaz:**
+```bash
+python -m src.cli generate weather
+```
+
+**Co to dělá:**
+Vygeneruje denní počasí podle ročních období a volitelně sezónní událost podle pravidel z 16_RANDOM_TABLES.md:
+- Hoď 2k6 pro denní počasí (podle tabulky pro dané roční období)
+- Určí zda je počasí nepříznivé pro cestování
+- Volitelně hoď k6 pro sezónní událost
+
+**Nepříznivé počasí:**
+Pokud je počasí nepříznivé, každá myš musí při cestování uspět v **záchraně na sílu** každou hlídku, jinak dostane stav **Vyčerpání**.
+
+#### 2.4.1 Možnosti příkazu
+
+**`--season` / `-s` - Roční období**
+```bash
+python -m src.cli generate weather --season spring   # Jaro
+python -m src.cli generate weather --season summer   # Léto
+python -m src.cli generate weather --season autumn   # Podzim
+python -m src.cli generate weather --season winter   # Zima
+```
+Možnosti: `spring` (výchozí), `summer`, `autumn`, `winter`
+
+**`--with-event` / `-e` - Zahrnout sezónní událost**
+```bash
+python -m src.cli generate weather --with-event
+python -m src.cli generate weather --season autumn -e
+```
+Přidá k počasí sezónní událost (hoď k6).
+
+**`--json` / `-j` - JSON výstup**
+```bash
+python -m src.cli generate weather --json
+```
+Zobrazí počasí jako JSON místo pěkného formátování.
+
+**`--save` - Uložit do souboru**
+```bash
+python -m src.cli generate weather --save weather.json
+python -m src.cli generate weather --season winter -e --save winter_event.json
+```
+Uloží počasí do JSON souboru.
+
+#### 2.4.2 Příklady použití
+
+**Náhodné jarní počasí (default):**
+```bash
+python -m src.cli generate weather
+```
+
+**Zimní počasí:**
+```bash
+python -m src.cli generate weather --season winter
+```
+
+**Podzimní počasí s událostí:**
+```bash
+python -m src.cli generate weather --season autumn --with-event
+```
+
+**Kombinace všech možností:**
+```bash
+python -m src.cli generate weather --season summer --with-event --save leto.json
+```
+
+#### 2.4.3 Pravděpodobnosti nepříznivého počasí
+
+**Jaro (Spring):** 2.78% šance
+- Pouze "Přívalové deště" (hod 2 na 2k6)
+
+**Léto (Summer):** 27.78% šance
+- "Úmorné vedro" (hody 3-5 na 2k6)
+
+**Podzim (Autumn):** 2.78% šance
+- Pouze "Silný vítr" (hod 2 na 2k6)
+
+**Zima (Winter):** 72.22% šance ❄️
+- "Vánice" (hod 2)
+- "Mrznoucí déšť" (hody 3-5)
+- "Třeskutá zima" (hody 6-8)
+
+#### 2.4.4 Ukázka výstupu
+
+**Příznivé počasí (jaro):**
+```
+┌────────────────────────────────── 🌸 Jaro ──────────────────────────────────┐
+│                                                                             │
+│  Počasí: Jasno a slunečno                                                   │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+**Nepříznivé počasí (zima):**
+```
+┌────────────────────────────────── ❄️ Zima ───────────────────────────────────┐
+│                                                                             │
+│  Počasí: Třeskutá zima                                                      │
+│                                                                             │
+│  ⚠️  NEPŘÍZNIVÉ pro cestování                                                │
+│                                                                             │
+│  Každá myš musí při cestování uspět v záchraně na sílu                      │
+│  každou hlídku, jinak dostane stav Vyčerpání.                               │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+**S událostí (podzim):**
+```
+┌───────────────────────────────── 🍂 Podzim ─────────────────────────────────┐
+│                                                                             │
+│  Počasí: Chladno                                                            │
+│                                                                             │
+│  Sezónní událost:                                                           │
+│  Vichřice povalila důležitý strom                                           │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### 2.5 Hody kostkami
 
 **Hlavní příkaz:**
 ```bash
@@ -450,7 +574,7 @@ python -m src.cli roll-dice <kostka>
 **Co to dělá:**
 Hodí zadanou kostkou a zobrazí výsledek.
 
-#### 2.3.1 Podporované kostky
+#### 2.5.1 Podporované kostky
 
 **Základní kostky:**
 ```bash
@@ -474,7 +598,7 @@ python -m src.cli roll-dice 4d4   # 4× k4
 python -m src.cli roll-dice d66   # k66 (11-66, pro tabulky)
 ```
 
-#### 2.3.2 Ukázka výstupu
+#### 2.5.2 Ukázka výstupu
 
 ```
 Hod d20:
@@ -489,7 +613,7 @@ Výsledek: 10
 
 ---
 
-### 2.5 Testy vlastností
+### 2.6 Testy vlastností
 
 **Hlavní příkaz:**
 ```bash
@@ -499,7 +623,7 @@ python -m src.cli test <hodnota>
 **Co to dělá:**
 Roll-under test - hodí k20, úspěch pokud je výsledek ≤ hodnota vlastnosti.
 
-#### 2.4.1 Možnosti příkazu
+#### 2.6.1 Možnosti příkazu
 
 **Základní test:**
 ```bash
@@ -515,7 +639,7 @@ python -m src.cli test 8 -m -3
 Cílové číslo = vlastnost + modifikátor
 `test 10 --modifier 2` → cíl 12
 
-#### 2.4.2 Ukázka výstupu
+#### 2.6.2 Ukázka výstupu
 
 ```
 Test vlastnosti:
@@ -533,7 +657,7 @@ NEÚSPĚCH (15 > 10)
 
 ---
 
-### 2.6 Help a nápověda
+### 2.7 Help a nápověda
 
 **Zobrazit všechny příkazy:**
 ```bash

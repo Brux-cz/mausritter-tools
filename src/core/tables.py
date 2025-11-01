@@ -594,6 +594,68 @@ class TableLoader:
 
         return None
 
+    # === WEATHER / POČASÍ ===
+
+    @staticmethod
+    def get_weather_seasons() -> Dict[str, Any]:
+        """Načte tabulku ročních období (počasí a události)."""
+        return TableLoader.load_table("core/weather_seasons.json")
+
+    @staticmethod
+    def lookup_weather(season: str, roll: int) -> Optional[Dict[str, Any]]:
+        """
+        Najde počasí podle sezóny a hodu 2k6.
+
+        Args:
+            season: "spring", "summer", "autumn", "winter"
+            roll: Výsledek hodu 2k6 (2-12)
+
+        Returns:
+            Dict s počasím {"weather": str, "unfavorable": bool} nebo None
+        """
+        data = TableLoader.get_weather_seasons()
+
+        if season not in data["seasons"]:
+            return None
+
+        weather_list = data["seasons"][season]["weather"]
+
+        for weather in weather_list:
+            # Single roll match
+            if "roll" in weather and weather["roll"] == roll:
+                return weather
+            # Roll range match
+            elif "roll_min" in weather and "roll_max" in weather:
+                if weather["roll_min"] <= roll <= weather["roll_max"]:
+                    return weather
+
+        return None
+
+    @staticmethod
+    def lookup_seasonal_event(season: str, roll: int) -> Optional[str]:
+        """
+        Najde sezónní událost podle sezóny a hodu k6.
+
+        Args:
+            season: "spring", "summer", "autumn", "winter"
+            roll: Výsledek hodu k6 (1-6)
+
+        Returns:
+            Text události nebo None
+        """
+        data = TableLoader.get_weather_seasons()
+
+        if season not in data["seasons"]:
+            return None
+
+        events_list = data["seasons"][season]["events"]
+
+        for event in events_list:
+            if event["roll"] == roll:
+                return event["event"]
+
+        return None
+
     @staticmethod
     def clear_cache():
         """Vyčistí cache načtených tabulek. Užitečné pro testy."""

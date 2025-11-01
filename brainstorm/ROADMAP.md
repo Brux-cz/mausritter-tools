@@ -100,13 +100,16 @@ Tyto generátory jsou **nejdůležitější** pro vedení hry. Používají se p
 **CLI:** `python -m src.cli generate npc`
 **Testy:** 19 unit testů (všechny prošly ✅)
 
-#### 3. 📝 Generátor počasí
+#### 3. ✅ Generátor počasí
 **Název:** Weather Generator / Generátor počasí a sezónních událostí
 **Popis:** Určení počasí (2k6) podle ročního období + sezónní události (k6)
 **Zdroj:** `16_RANDOM_TABLES.md` (řádky 194-293)
 **Složitost:** ⭐ Velmi jednoduchá
+**Stav:** ✅ **HOTOVO** - Fáze 3C (2025-11-01)
 **Tabulky:** Jaro/Léto/Podzim/Zima - každé má počasí (2k6) + události (k6)
 **Priorita:** Střední - rychlá implementace, používá se denně v hexcrawl
+**CLI:** `python -m src.cli generate weather --season winter --with-event`
+**Testy:** 14 unit testů (všechny prošly ✅)
 
 #### 4. 📝 Tabulka reakcí
 **Název:** Reaction Roll / Tabulka reakcí tvorů
@@ -236,19 +239,19 @@ Tyto generátory **přidávají rozmanitost** do setkání s tvory. Jsou volitel
 
 | Priorita | Počet | Hotovo | Zbývá | Popis |
 |----------|-------|--------|-------|-------|
-| **P1 🔴** | 8 | 2 ✅ | 6 📝 | Základní PJ nástroje - nutné pro hru |
+| **P1 🔴** | 8 | 3 ✅ | 5 📝 | Základní PJ nástroje - nutné pro hru |
 | **P2 🟡** | 6 | 0 ✅ | 6 📝 | Nástroje pro tvorbu světa - důležité pro kampaň |
 | **P3 🟢** | 14 | 0 ✅ | 14 💡 | Varianty tvorů - volitelné, ale atmosférické |
-| **CELKEM** | **28** | **2** | **26** | |
+| **CELKEM** | **28** | **3** | **25** | |
 
 ### 🎯 Doporučené pořadí implementace (podle priorit z pravidel)
 
 **Fáze 3 - Základní PJ nástroje (P1):**
 1. ✅ Character Generator (HOTOVO)
 2. ✅ NPC Generator (HOTOVO)
-3. 📝 Treasure Generator - důležité pro odměny
-4. 📝 Weather Generator - velmi jednoduché, denní použití
-5. 📝 Reaction Roll - velmi jednoduché, časté použití
+3. ✅ Weather Generator (HOTOVO) - velmi jednoduché, denní použití
+4. 📝 Reaction Roll - velmi jednoduché, časté použití
+5. 📝 Treasure Generator - důležité pro odměny
 6. 📝 Magic Sword Generator - součást Treasure Gen
 7. 📝 Adventure Seeds - inspirace pro PJ
 8. 📝 Spell Generator - velmi jednoduché
@@ -598,17 +601,18 @@ Nápady, které zatím nejsou v hlavním roadmap:
 
 ## 📊 Aktuální stav projektu
 
-**Celková dokončenost:** ~20%
+**Celková dokončenost:** ~25%
 
 | Feature               | Status | Progress |
 |-----------------------|--------|----------|
 | Data Extraction       | ✅     | 100%     |
 | Character Generator   | ✅     | 100%     |
 | NPC Generator         | ✅     | 100%     |
+| Hireling Generator    | ✅     | 100%     |
+| Weather Generator     | ✅     | 100%     |
 | Settlement Generator  | 💡     | 0%       |
 | Hex Generator         | 💡     | 0%       |
-| Weather Generator     | 💡     | 0%       |
-| Documentation         | 🚧     | 60%      |
+| Documentation         | 🚧     | 70%      |
 | Web Interface         | 💡     | 0%       |
 
 ---
@@ -630,6 +634,20 @@ Pokud chceš přidat novou feature:
 ---
 
 ## 📝 Changelog
+
+### 2025-11-01 - Fáze 3C dokončena
+- ✅ Implementován Weather Generator (generátor počasí a sezónních událostí)
+- ✅ WeatherGenerator class v src/generators/weather.py
+- ✅ data/core/weather_seasons.json - 4 roční období (jaro, léto, podzim, zima)
+- ✅ Každé roční období má tabulku počasí (2k6, 5 možností) + události (k6, 6 možností)
+- ✅ CLI příkaz `generate weather` s --season, --with-event, --json, --save
+- ✅ 14 unit testů v test_weather_generator.py (všechny prošly ✅)
+- ✅ Display funkce s barevným panelem podle sezóny (🌸🌞🍂❄️)
+- ✅ Detekce nepříznivého počasí s varováním (červený rámeček)
+- ✅ Pravděpodobnosti: Jaro/Podzim 2.78% nepříznivé, Léto 27.78%, Zima 72% nepříznivé
+- ✅ TableLoader rozšířen o 3 metody (get_weather_seasons, lookup_weather, lookup_seasonal_event)
+- ✅ Weather dataclass přidán do models.py
+- ✅ Dokumentace aktualizována (README.md, MANUAL.md sekce 2.4, ROADMAP.md)
 
 ### 2025-11-01 - Fáze 3B dokončena
 - ✅ Implementován Hireling Generator (generátor pomocníků)

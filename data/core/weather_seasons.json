@@ -1,0 +1,247 @@
+{
+  "metadata": {
+    "source": "docs/knowledge_base/16_RANDOM_TABLES.md",
+    "description": "Roční období - počasí a sezónní události",
+    "weather_dice": "2d6",
+    "event_dice": "d6",
+    "note": "Počasí tučně = nepříznivé pro cestování (vyžaduje STR save)"
+  },
+  "seasons": {
+    "spring": {
+      "name": "Jaro",
+      "weather": [
+        {
+          "roll": 2,
+          "weather": "Přívalové deště",
+          "unfavorable": true
+        },
+        {
+          "roll_min": 3,
+          "roll_max": 5,
+          "weather": "Mrholení",
+          "unfavorable": false
+        },
+        {
+          "roll_min": 6,
+          "roll_max": 8,
+          "weather": "Zataženo",
+          "unfavorable": false
+        },
+        {
+          "roll_min": 9,
+          "roll_max": 11,
+          "weather": "Jasno a slunečno",
+          "unfavorable": false
+        },
+        {
+          "roll": 12,
+          "weather": "Jasno a teplo",
+          "unfavorable": false
+        }
+      ],
+      "events": [
+        {
+          "roll": 1,
+          "event": "Povodeň spláchla důležitý výrazný prvek"
+        },
+        {
+          "roll": 2,
+          "event": "Ptačí matka chránící vajíčka"
+        },
+        {
+          "roll": 3,
+          "event": "Kupcovi uvízla kárka v rozblácené kaluži"
+        },
+        {
+          "roll": 4,
+          "event": "Migrující motýli lačnící po nektaru"
+        },
+        {
+          "roll": 5,
+          "event": "Myši tkají květinové věnce v přípravě na…"
+        },
+        {
+          "roll": 6,
+          "event": "Svatební slavnosti, veselé procesí"
+        }
+      ]
+    },
+    "summer": {
+      "name": "Léto",
+      "weather": [
+        {
+          "roll": 2,
+          "weather": "Bouřka",
+          "unfavorable": false
+        },
+        {
+          "roll_min": 3,
+          "roll_max": 5,
+          "weather": "Úmorné vedro",
+          "unfavorable": true
+        },
+        {
+          "roll_min": 6,
+          "roll_max": 8,
+          "weather": "Jasno a teplo",
+          "unfavorable": false
+        },
+        {
+          "roll_min": 9,
+          "roll_max": 11,
+          "weather": "Příjemně slunečno",
+          "unfavorable": false
+        },
+        {
+          "roll": 12,
+          "weather": "Krásně teplo",
+          "unfavorable": false
+        }
+      ],
+      "events": [
+        {
+          "roll": 1,
+          "event": "Kvůli vlně veder je cestování v příštím týdnu vyčerpávající"
+        },
+        {
+          "roll": 2,
+          "event": "Ptáčátko vypadlo z hnízda"
+        },
+        {
+          "roll": 3,
+          "event": "Příjemná, osvěžující sprška"
+        },
+        {
+          "roll": 4,
+          "event": "Hejno kobylek zničilo osadě celou úrodu"
+        },
+        {
+          "roll": 5,
+          "event": "Myši chystají důmyslné kostýmy v přípravě na…"
+        },
+        {
+          "roll": 6,
+          "event": "Slavnosti letního slunovratu, zběsilé tance"
+        }
+      ]
+    },
+    "autumn": {
+      "name": "Podzim",
+      "weather": [
+        {
+          "roll": 2,
+          "weather": "Silný vítr",
+          "unfavorable": true
+        },
+        {
+          "roll_min": 3,
+          "roll_max": 5,
+          "weather": "Slejvák",
+          "unfavorable": false
+        },
+        {
+          "roll_min": 6,
+          "roll_max": 8,
+          "weather": "Chladno",
+          "unfavorable": false
+        },
+        {
+          "roll_min": 9,
+          "roll_max": 11,
+          "weather": "Přeháňky",
+          "unfavorable": false
+        },
+        {
+          "roll": 12,
+          "weather": "Jasno a chladno",
+          "unfavorable": false
+        }
+      ],
+      "events": [
+        {
+          "roll": 1,
+          "event": "Vichřice povalila důležitý strom"
+        },
+        {
+          "roll": 2,
+          "event": "Znepokojená ptačí matka: děti vylétly z hnízda"
+        },
+        {
+          "roll": 3,
+          "event": "Přes noc vyroste ohromný trs hub"
+        },
+        {
+          "roll": 4,
+          "event": "Zvěsti, že nedaleko rostou lanýže"
+        },
+        {
+          "roll": 5,
+          "event": "Myši nosí otýpky obilí a pečou v přípravě na…"
+        },
+        {
+          "roll": 6,
+          "event": "Slavnosti sklizně, velká hostina"
+        }
+      ]
+    },
+    "winter": {
+      "name": "Zima",
+      "weather": [
+        {
+          "roll": 2,
+          "weather": "Vánice",
+          "unfavorable": true
+        },
+        {
+          "roll_min": 3,
+          "roll_max": 5,
+          "weather": "Mrznoucí déšť",
+          "unfavorable": true
+        },
+        {
+          "roll_min": 6,
+          "roll_max": 8,
+          "weather": "Třeskutá zima",
+          "unfavorable": true
+        },
+        {
+          "roll_min": 9,
+          "roll_max": 11,
+          "weather": "Zataženo",
+          "unfavorable": false
+        },
+        {
+          "roll": 12,
+          "weather": "Jasno a chladno",
+          "unfavorable": false
+        }
+      ],
+      "events": [
+        {
+          "roll": 1,
+          "event": "Sníh brání v příštím týdnu cestování po zemi"
+        },
+        {
+          "roll": 2,
+          "event": "Pták se zlomeným křídlem, starý a prošedivělý"
+        },
+        {
+          "roll": 3,
+          "event": "Ztracená migrující kačena, oddělená od hejna"
+        },
+        {
+          "roll": 4,
+          "event": "Cestovatelé zmizeli v nečekané bouřce"
+        },
+        {
+          "roll": 5,
+          "event": "Myši chystají figuríny staré Zimy v přípravě na…"
+        },
+        {
+          "roll": 6,
+          "event": "Slavnosti zimního slunovratu, obrovská vatra"
+        }
+      ]
+    }
+  }
+}

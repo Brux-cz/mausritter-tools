@@ -8,10 +8,11 @@ from rich.table import Table
 from rich.panel import Panel
 from rich.text import Text
 from src.core.dice import roll, roll_with_details, attribute_test
-from src.core.models import Character, NPC, Hireling
+from src.core.models import Character, NPC, Hireling, Weather
 from src.generators.character import CharacterGenerator
 from src.generators.npc import NPCGenerator
 from src.generators.hireling import HirelingGenerator
+from src.generators.weather import WeatherGenerator
 
 # Fix Windows console encoding for Czech characters
 if sys.platform == 'win32':
@@ -361,6 +362,90 @@ def display_hireling(hireling_obj: Hireling, availability: int):
         title=title,
         subtitle=subtitle,
         border_style="yellow",
+        padding=(1, 2)
+    )
+
+    console.print("\n")
+    console.print(panel)
+    console.print("\n")
+
+
+@generate.command()
+@click.option("--season", "-s", type=click.Choice(["spring", "summer", "autumn", "winter"]), default="spring", help="Roční období")
+@click.option("--with-event", "-e", is_flag=True, help="Zahrnout sezónní událost")
+@click.option("--json", "-j", "output_json", is_flag=True, help="Výstup jako JSON")
+@click.option("--save", type=click.Path(), help="Uložit do souboru")
+def weather(season: str, with_event: bool, output_json: bool, save: str):
+    """
+    Vygeneruj počasí pro dané roční období
+
+    Příklady:
+        python -m src.cli generate weather
+        python -m src.cli generate weather --season winter
+        python -m src.cli generate weather --season autumn --with-event
+        python -m src.cli generate weather --json
+        python -m src.cli generate weather --save weather.json
+    """
+    try:
+        # Generuj počasí
+        weather_obj = WeatherGenerator.create(season=season, with_event=with_event)
+
+        if output_json:
+            # JSON výstup
+            output = WeatherGenerator.to_json(weather_obj)
+            console.print(output)
+        else:
+            # Pěkný formátovaný výstup
+            display_weather(weather_obj)
+
+        # Uložení do souboru
+        if save:
+            with open(save, 'w', encoding='utf-8') as f:
+                f.write(WeatherGenerator.to_json(weather_obj))
+            console.print(f"\n[green]✓[/green] Uloženo do {save}")
+
+    except Exception as e:
+        console.print(f"[bold red]Chyba:[/bold red] {e}", style="red")
+        import traceback
+        traceback.print_exc()
+
+
+def display_weather(weather_obj: Weather):
+    """Zobraz počasí v pěkném formátu"""
+
+    # Emoji pro sezóny
+    season_emoji = {
+        "spring": "🌸",
+        "summer": "☀️",
+        "autumn": "🍂",
+        "winter": "❄️"
+    }
+
+    # Získej český název sezóny
+    season_name = WeatherGenerator.get_season_name(weather_obj.season)
+    emoji = season_emoji.get(weather_obj.season, "🌤️")
+
+    # Header
+    title = Text(f"{emoji} {season_name}", style="bold green", justify="center")
+
+    # Počasí
+    weather_text = f"[bold]Počasí:[/bold] {weather_obj.weather}"
+
+    # Varování pokud je nepříznivé
+    if weather_obj.unfavorable:
+        weather_text += "\n\n[bold red]⚠️  NEPŘÍZNIVÉ pro cestování[/bold red]"
+        weather_text += "\n\nKaždá myš musí při cestování uspět v [bold]záchraně na sílu[/bold]"
+        weather_text += "\nkaždou hlídku, jinak dostane stav [bold]Vyčerpání[/bold]."
+
+    # Sezónní událost (pokud je)
+    if weather_obj.event:
+        weather_text += f"\n\n[bold]Sezónní událost:[/bold]\n{weather_obj.event}"
+
+    # Vytvoř panel
+    panel = Panel(
+        weather_text,
+        title=title,
+        border_style="green" if not weather_obj.unfavorable else "red",
         padding=(1, 2)
     )
 

@@ -925,6 +925,201 @@ class Hireling:
 
 ---
 
+### **FÁZE 3C: Weather Generator** ✅ DOKONČENO
+
+**Status:** ✅ **HOTOVO** (2025-11-01)
+
+**Goal:** Plně funkční generátor počasí a sezónních událostí s CLI
+
+**Duration:** ~2-3 hodiny (dokončeno v jeden den)
+
+**Priority:** MEDIUM (často používané v hexcrawl kampani)
+
+**Co bylo implementováno:**
+
+#### 3C.1 Data - Weather Seasons
+
+**File:** `data/core/weather_seasons.json` (247 řádků)
+
+**Struktura:**
+- 4 roční období: spring, summer, autumn, winter
+- Každé má weather table (2k6, 5 možností s roll ranges)
+- Každé má events table (k6, 6 možností)
+- Metadata: source, weather_dice, event_dice
+
+**Weather probabilities:**
+- **Jaro:** 2.78% nepříznivé (pouze "Přívalové deště" na roll 2)
+- **Léto:** 27.78% nepříznivé ("Úmorné vedro" na rolls 3-5)
+- **Podzim:** 2.78% nepříznivé (pouze "Silný vítr" na roll 2)
+- **Zima:** 72.22% nepříznivé (rolls 2-8: Vánice, Mrznoucí déšť, Třeskutá zima)
+
+**Příklad dat (jaro):**
+```json
+{
+  "weather": [
+    {"roll": 2, "weather": "Přívalové deště", "unfavorable": true},
+    {"roll_min": 3, "roll_max": 5, "weather": "Mrholení", "unfavorable": false}
+  ],
+  "events": [
+    {"roll": 1, "event": "Povodeň spláchla důležitý výrazný prvek"}
+  ]
+}
+```
+
+#### 3C.2 Model - Weather Dataclass
+
+**File:** `src/core/models.py` (přidáno)
+
+**Weather dataclass:**
+```python
+@dataclass
+class Weather:
+    season: str  # "spring", "summer", "autumn", "winter"
+    weather: str  # Popis počasí (např. "Jasno a slunečno")
+    unfavorable: bool  # True pokud nepřeje cestování (vyžaduje STR save)
+    event: Optional[str] = None  # Volitelná sezónní událost
+    notes: str = ""
+```
+
+#### 3C.3 TableLoader Extensions
+
+**File:** `src/core/tables.py` (3 nové metody)
+
+**Přidané metody:**
+- ✅ `get_weather_seasons()` - načte celou tabulku weather_seasons.json
+- ✅ `lookup_weather(season, roll)` - lookup počasí podle sezóny a hodu 2k6
+  - Podporuje single roll (`"roll": 2`) i roll ranges (`"roll_min": 3, "roll_max": 5`)
+- ✅ `lookup_seasonal_event(season, roll)` - lookup události podle sezóny a hodu k6
+
+#### 3C.4 Weather Generator Implementation
+
+**File:** `src/generators/weather.py` (192 řádků)
+
+**Klíčové metody WeatherGenerator:**
+- ✅ `generate_weather(season)` - hoď 2k6, vrať (weather_text, is_unfavorable)
+- ✅ `generate_event(season)` - hoď k6, vrať event text
+- ✅ `create(season, with_event)` - hlavní generační metoda
+- ✅ `to_dict(weather)` - export do dict
+- ✅ `to_json(weather)` - export do JSON
+- ✅ `get_season_name(season)` - vrať český název sezóny
+
+**Klíčové konstanty:**
+```python
+VALID_SEASONS = ["spring", "summer", "autumn", "winter"]
+SEASON_NAMES = {
+    "spring": "Jaro", "summer": "Léto",
+    "autumn": "Podzim", "winter": "Zima"
+}
+```
+
+**Input validation:**
+- Neplatná sezóna automaticky fallbackne na "spring"
+- Všechny metody validují season před použitím
+
+#### 3C.5 CLI Integration
+
+**File:** `src/cli.py` (přidáno ~80 řádků)
+
+**Příkaz:** `python -m src.cli generate weather`
+
+**Options:**
+- `--season spring/summer/autumn/winter` - roční období (default: spring)
+- `--with-event / -e` - zahrnout sezónní událost (flag)
+- `--json / -j` - JSON výstup
+- `--save soubor.json` - uložit do souboru
+
+**Display function:**
+- `display_weather(weather)` - pěkné formátování s Rich
+- Season-specific emoji: 🌸 (spring), ☀️ (summer), 🍂 (autumn), ❄️ (winter)
+- Green border pro příznivé počasí
+- **Red border** pro nepříznivé počasí s varováním:
+  - "⚠️ NEPŘÍZNIVÉ pro cestování"
+  - "Každá myš musí uspět v záchraně na sílu každou hlídku, jinak dostane stav Vyčerpání."
+
+**Příklad outputu (nepříznivé počasí):**
+```
+┌────────────────── ❄️ Zima ──────────────────┐  (RED BORDER)
+│                                             │
+│  Počasí: Třeskutá zima                      │
+│                                             │
+│  ⚠️  NEPŘÍZNIVÉ pro cestování                │
+│                                             │
+│  Každá myš musí při cestování uspět v       │
+│  záchraně na sílu každou hlídku, jinak      │
+│  dostane stav Vyčerpání.                    │
+│                                             │
+└─────────────────────────────────────────────┘
+```
+
+#### 3C.6 Tests
+
+**File:** `test_weather_generator.py` v root (14 unit testů)
+
+**Test coverage:**
+- ✅ `test_generate_weather_spring()` - jarní počasí v rozsahu
+- ✅ `test_generate_weather_all_seasons()` - všechny 4 sezóny
+- ✅ `test_unfavorable_weather_winter()` - zima má hodně nepříznivého počasí
+- ✅ `test_generate_event()` - generování událostí
+- ✅ `test_create_weather_basic()` - kompletní Weather objekt
+- ✅ `test_create_weather_with_event()` - s událostí
+- ✅ `test_create_all_seasons()` - všechny sezóny
+- ✅ `test_invalid_season_fallback()` - fallback na spring
+- ✅ `test_get_season_name()` - české názvy
+- ✅ `test_generate_weather_randomness()` - náhodnost počasí
+- ✅ `test_generate_event_randomness()` - náhodnost událostí
+- ✅ `test_to_dict()` - serializace do dict
+- ✅ `test_to_json()` - serializace do JSON
+- ✅ `test_multiple_weather()` - generování více instancí
+- ✅ **Výsledek:** 14/14 testů prošlo (všechny ✅)
+
+**Manual CLI testing:**
+- ✅ `python -m src.cli generate weather` - jaro (default)
+- ✅ `python -m src.cli generate weather --season winter` - zima s nepříznivým počasím
+- ✅ `python -m src.cli generate weather --season autumn --with-event` - podzim s událostí
+- ✅ `python -m src.cli generate weather --json` - JSON výstup
+
+#### 3C.7 Dokumentace
+
+**Aktualizováno:**
+- ✅ README.md - přidán Weather Generator do "Co máme hotové"
+- ✅ README.md - nová sekce 4 "Generování počasí" s příklady a pravděpodobnostmi
+- ✅ README.md - přečíslovány sekce 4→5, 5→6, 6→7, 7→8
+- ✅ README.md - aktualizována struktura projektu (weather.py, weather_seasons.json)
+- ✅ README.md - aktualizována status tabulka (Fáze 3C dokončena)
+- ✅ README.md - přidán test_weather_generator.py do testů
+- ✅ docs/MANUAL.md - nová sekce 2.4 "Generování počasí" s kompletními příklady
+- ✅ docs/MANUAL.md - přečíslovány sekce 2.4→2.5, 2.5→2.6, 2.6→2.7
+- ✅ docs/MANUAL.md - ukázky výstupů (příznivé, nepříznivé, s událostí)
+- ✅ docs/MANUAL.md - pravděpodobnosti nepříznivého počasí pro každou sezónu
+- ✅ docs/MANUAL.md - verze aktualizována na 1.3, datum 2025-11-01
+- ✅ brainstorm/ROADMAP.md - Weather Generator označen jako ✅ HOTOVO
+- ✅ brainstorm/ROADMAP.md - aktualizován summary (3/8 P1 hotovo)
+- ✅ brainstorm/ROADMAP.md - changelog pro 2025-11-01 (Fáze 3C)
+- ✅ brainstorm/ROADMAP.md - aktualizována celková dokončenost (~25%)
+- ✅ brainstorm/IMPLEMENTATION_PLAN.md - tato sekce
+
+**Action Items:**
+- [x] Vytvořit weather_seasons.json ✅
+- [x] Přidat Weather dataclass ✅
+- [x] Rozšířit TableLoader ✅
+- [x] Vytvořit WeatherGenerator class ✅
+- [x] Rozšířit CLI s `generate weather` ✅
+- [x] Vytvořit display_weather() s emoji a color coding ✅
+- [x] Napsat 14 testů ✅
+- [x] Manuálně otestovat CLI ✅
+- [x] Aktualizovat dokumentaci (README, MANUAL, ROADMAP, IMPLEMENTATION_PLAN) ✅
+
+**Poznámky:**
+- Velmi rychlá implementace (~2-3 hodiny) díky jednoduchosti mechaniky
+- 2k6 tabulka s bell curve distribucí - zima je EXTRÉMNĚ drsná (72% nepříznivá)
+- Unfavorable weather znamená STR save každou hlídku nebo Vyčerpání
+- Color coding pomáhá vizuálně odlišit nebezpečné počasí (red border)
+- Season emoji (🌸☀️🍂❄️) přidávají atmosféru
+- Data structure použila pattern z npc_reaction.json (roll_min/roll_max)
+- Všechny 4 sezóny mají unikátní weather a event tables podle oficiálních pravidel
+
+---
+
 ### **FÁZE 3: Další Generátory**
 
 **Duration:** 1-2 týdny (postupně)
