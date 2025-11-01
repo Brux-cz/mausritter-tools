@@ -149,3 +149,23 @@ def roll_3d6_keep_2() -> int:
     rolls = [roll_d6() for _ in range(3)]
     rolls.sort(reverse=True)
     return rolls[0] + rolls[1]
+
+
+def roll_2d6_keep_lower() -> Tuple[int, int, int]:
+    """
+    Hod 2d6, vezmi nižší - pro velikost osady
+
+    Podle pravidel Mausritter: hod 2d6 a použij nižší hodnotu
+    pro určení velikosti osady (1-6).
+
+    Returns:
+        Tuple[result, die1, die2]: (nižší hodnota, první hod, druhý hod)
+
+    Example:
+        >>> roll_2d6_keep_lower()  # Např. hody 4, 2 -> (2, 4, 2)
+        (2, 4, 2)
+    """
+    die1 = roll_d6()
+    die2 = roll_d6()
+    result = min(die1, die2)
+    return result, die1, die2

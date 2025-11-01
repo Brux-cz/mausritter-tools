@@ -1,0 +1,47 @@
+{
+  "metadata": {
+    "name": "Settlement Government",
+    "description": "Typ vlády v osadě",
+    "source": "docs/knowledge_base/12_SETTLEMENTS.md (řádky 73-95)",
+    "dice": "d6 + sizeValue",
+    "category": "settlement"
+  },
+  "governments": [
+    {
+      "rollMin": 2,
+      "rollMax": 3,
+      "name": "Žádná",
+      "description": "1-3 rodiny se spravují samy"
+    },
+    {
+      "rollMin": 4,
+      "rollMax": 5,
+      "name": "Starosta",
+      "description": "Volený nebo jmenovaný starosta"
+    },
+    {
+      "rollMin": 6,
+      "rollMax": 7,
+      "name": "Šlechtic",
+      "description": "Vládne šlechtic nebo šlechtický rod"
+    },
+    {
+      "rollMin": 8,
+      "rollMax": 9,
+      "name": "Rada starších",
+      "description": "Kolektivní vedení rady starších"
+    },
+    {
+      "rollMin": 10,
+      "rollMax": 11,
+      "name": "Náboženský vůdce",
+      "description": "Náboženský vůdce nebo kněz"
+    },
+    {
+      "rollMin": 12,
+      "rollMax": 12,
+      "name": "Demokratické volby",
+      "description": "Pravidelné volby všech obyvatel"
+    }
+  ]
+}

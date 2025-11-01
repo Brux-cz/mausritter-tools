@@ -992,6 +992,184 @@ class TableLoader:
         """Vyčistí cache načtených tabulek. Užitečné pro testy."""
         TableLoader.load_table.cache_clear()
 
+    # === SETTLEMENT TABLES ===
+
+    @staticmethod
+    def get_settlement_sizes() -> Dict[str, Any]:
+        """Načte tabulku velikostí osad (2d6 keep-lower)."""
+        return TableLoader.load_table("core/settlement_sizes.json")
+
+    @staticmethod
+    def get_settlement_governments() -> Dict[str, Any]:
+        """Načte tabulku typů vlády v osadách (k6 + sizeValue)."""
+        return TableLoader.load_table("core/settlement_governments.json")
+
+    @staticmethod
+    def get_settlement_details() -> Dict[str, Any]:
+        """Načte tabulku detailů osad (k20)."""
+        return TableLoader.load_table("core/settlement_details.json")
+
+    @staticmethod
+    def get_settlement_trades() -> Dict[str, Any]:
+        """Načte tabulku řemesel v osadách (k20)."""
+        return TableLoader.load_table("core/settlement_trades.json")
+
+    @staticmethod
+    def get_settlement_features() -> Dict[str, Any]:
+        """Načte tabulku prvků osad (k20)."""
+        return TableLoader.load_table("core/settlement_features.json")
+
+    @staticmethod
+    def get_settlement_events() -> Dict[str, Any]:
+        """Načte tabulku událostí při příjezdu do osady (k20)."""
+        return TableLoader.load_table("core/settlement_events.json")
+
+    @staticmethod
+    def get_settlement_names() -> Dict[str, Any]:
+        """Načte tabulku semínek názvů osad (4× k12)."""
+        return TableLoader.load_table("core/settlement_names.json")
+
+    @staticmethod
+    def lookup_settlement_size(roll: int) -> Optional[Dict[str, Any]]:
+        """
+        Najde velikost osady podle hodu (2d6 keep-lower).
+
+        Args:
+            roll: Výsledek hodu 2d6 keep-lower (1-6)
+
+        Returns:
+            Dict s informacemi o velikosti nebo None
+        """
+        data = TableLoader.get_settlement_sizes()
+        sizes = data.get("sizes", [])
+
+        for size in sizes:
+            if size["roll"] == roll:
+                return size
+
+        return None
+
+    @staticmethod
+    def lookup_settlement_government(roll: int) -> Optional[str]:
+        """
+        Najde typ vlády podle hodu (k6 + sizeValue).
+
+        Args:
+            roll: Výsledek hodu k6 + sizeValue (2-12)
+
+        Returns:
+            String s názvem vlády nebo None
+        """
+        data = TableLoader.get_settlement_governments()
+        governments = data.get("governments", [])
+
+        for gov in governments:
+            if gov["rollMin"] <= roll <= gov["rollMax"]:
+                return gov["name"]
+
+        return None
+
+    @staticmethod
+    def lookup_settlement_detail(roll: int) -> Optional[str]:
+        """
+        Najde detail osady podle hodu k20.
+
+        Args:
+            roll: Výsledek hodu k20 (1-20)
+
+        Returns:
+            String s detailem nebo None
+        """
+        data = TableLoader.get_settlement_details()
+        items = data.get("items", [])
+
+        for item in items:
+            if item["roll"] == roll:
+                return item["text"]
+
+        return None
+
+    @staticmethod
+    def lookup_settlement_trade(roll: int) -> Optional[str]:
+        """
+        Najde řemeslo podle hodu k20.
+
+        Args:
+            roll: Výsledek hodu k20 (1-20)
+
+        Returns:
+            String s řemeslem nebo None
+        """
+        data = TableLoader.get_settlement_trades()
+        items = data.get("items", [])
+
+        for item in items:
+            if item["roll"] == roll:
+                return item["text"]
+
+        return None
+
+    @staticmethod
+    def lookup_settlement_feature(roll: int) -> Optional[str]:
+        """
+        Najde prvek osady podle hodu k20.
+
+        Args:
+            roll: Výsledek hodu k20 (1-20)
+
+        Returns:
+            String s prvkem nebo None
+        """
+        data = TableLoader.get_settlement_features()
+        items = data.get("items", [])
+
+        for item in items:
+            if item["roll"] == roll:
+                return item["text"]
+
+        return None
+
+    @staticmethod
+    def lookup_settlement_event(roll: int) -> Optional[str]:
+        """
+        Najde událost při příjezdu podle hodu k20.
+
+        Args:
+            roll: Výsledek hodu k20 (1-20)
+
+        Returns:
+            String s událostí nebo None
+        """
+        data = TableLoader.get_settlement_events()
+        items = data.get("items", [])
+
+        for item in items:
+            if item["roll"] == roll:
+                return item["text"]
+
+        return None
+
+    @staticmethod
+    def lookup_settlement_name_part(table_name: str, roll: int) -> Optional[str]:
+        """
+        Najde část názvu osady podle tabulky a hodu k12.
+
+        Args:
+            table_name: Název tabulky ("name_start_a", "name_start_b", "name_end_a", "name_end_b")
+            roll: Výsledek hodu k12 (1-12)
+
+        Returns:
+            String s částí názvu nebo None
+        """
+        data = TableLoader.get_settlement_names()
+        items = data.get(table_name, [])
+
+        for item in items:
+            if item["roll"] == roll:
+                return item["text"]
+
+        return None
+
 
 # Convenience funkce pro rychlé použití
 # === SHORTCUTS ===

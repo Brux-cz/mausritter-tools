@@ -1,0 +1,65 @@
+{
+  "metadata": {
+    "name": "Settlement Sizes",
+    "description": "Velikosti myších osad",
+    "source": "docs/knowledge_base/12_SETTLEMENTS.md (řádky 22-45)",
+    "dice": "2d6 (use lower)",
+    "category": "settlement"
+  },
+  "sizes": [
+    {
+      "roll": 1,
+      "name": "Farma/zámeček",
+      "population": "1–3 rodiny",
+      "sizeValue": 1,
+      "hasTavern": false,
+      "tradesCount": 1,
+      "featuresCount": 1
+    },
+    {
+      "roll": 2,
+      "name": "Křižovatka",
+      "population": "3–5 rodin",
+      "sizeValue": 2,
+      "hasTavern": false,
+      "tradesCount": 1,
+      "featuresCount": 1
+    },
+    {
+      "roll": 3,
+      "name": "Víska",
+      "population": "50–150 myší",
+      "sizeValue": 3,
+      "hasTavern": true,
+      "tradesCount": 1,
+      "featuresCount": 1
+    },
+    {
+      "roll": 4,
+      "name": "Vesnice",
+      "population": "150–300 myší",
+      "sizeValue": 4,
+      "hasTavern": true,
+      "tradesCount": 1,
+      "featuresCount": 1
+    },
+    {
+      "roll": 5,
+      "name": "Město",
+      "population": "300–1000 myší",
+      "sizeValue": 5,
+      "hasTavern": true,
+      "tradesCount": 2,
+      "featuresCount": 1
+    },
+    {
+      "roll": 6,
+      "name": "Velkoměsto",
+      "population": "přes 1000+",
+      "sizeValue": 6,
+      "hasTavern": true,
+      "tradesCount": 2,
+      "featuresCount": 2
+    }
+  ]
+}

@@ -185,8 +185,12 @@ Tyto generátory se používají **při přípravě kampaně** a tvorby hexcrawl
 **Popis:** Velikost, společenské zřízení, podrobnosti, živnost, výrazné prvky, události, název
 **Zdroj:** `12_SETTLEMENTS.md` (řádky 22-237)
 **Složitost:** ⭐⭐⭐ Střední
+**Stav:** ✅ **HOTOVO** - Fáze 4C (2025-11-02)
 **Tabulky:** Velikost (2k6 nižší), Zřízení (k6+velikost), Podrobnosti (k20), Živnost (k20), Prvky (k20), Události (k20), Název (4×k12)
 **Priorita:** Vysoká - klíčové pro hexcrawl
+**CLI:** `python -m src.cli generate settlement --json --name --no-tavern`
+**Testy:** 20+ unit testů (všechny prošly ✅)
+**Poznámka:** Integruje TavernGenerator pro osady velikosti 3+ (víska a větší)
 
 #### 10. ✅ Generátor hospod a hostinců
 **Název:** Tavern Generator / Generátor hospod
@@ -643,7 +647,7 @@ Nápady, které zatím nejsou v hlavním roadmap:
 | Adventure Seeds       | ✅     | 100%     |
 | **P1 Priority**       | **✅** | **100% (8/8)** |
 | Tavern Generator      | ✅     | 100%     |
-| Settlement Generator  | 🚧     | 0%       |
+| Settlement Generator  | ✅     | 100%     |
 | Hex Generator         | 💡     | 0%       |
 | Documentation         | 🚧     | 75%      |
 | Web Interface         | 💡     | 0%       |
@@ -667,6 +671,29 @@ Pokud chceš přidat novou feature:
 ---
 
 ## 📝 Changelog
+
+### 2025-11-02 - Fáze 4C dokončena - Settlement Generator 🏘️
+- ✅ Implementován Settlement Generator (generátor myších osad)
+- ✅ SettlementGenerator class v src/generators/settlement.py
+- ✅ 7 JSON datových souborů v data/core/:
+  - settlement_sizes.json - Velikosti osad (2d6 keep-lower, 6 velikostí)
+  - settlement_governments.json - Typy vlády (k6 + sizeValue, 6 typů)
+  - settlement_details.json - Charakteristické detaily (k20, 20 položek)
+  - settlement_trades.json - Řemesla a obchody (k20, 20 položek)
+  - settlement_features.json - Výrazné prvky (k20, 20 položek)
+  - settlement_events.json - Události při příjezdu (k20, 20 položek)
+  - settlement_names.json - Semínka názvů (4× k12, celkem 48 možností)
+- ✅ Settlement dataclass přidán do models.py s properties
+- ✅ TableLoader rozšířen o 14+ nových metod pro settlement tabulky
+- ✅ roll_2d6_keep_lower() přidáno do dice.py (speciální mechanika)
+- ✅ CLI příkaz `generate settlement` s --name, --no-tavern, --json, --save
+- ✅ Integrace TavernGenerator pro osady velikosti 3+ (víska a větší)
+- ✅ Dynamické počty řemesel (2× pro města) a prvků (2× pro velkoměsta)
+- ✅ Color-coded výstup s panely (🏘️ název, ⚖️ vláda, 🔍 detail, 🛠️ řemesla, 🏛️ prvky, 📅 událost, 🏠 hospoda)
+- ✅ 20+ unit testů v test_settlement_generator.py (všechny prošly ✅)
+- ✅ Dokumentace aktualizována (README.md sekce 10, ROADMAP.md)
+- ✅ **Bottom-up přístup dokončen:** Tavern (4B) → Settlement (4C)
+- ✅ **Celková dokončenost: ~36% (10/28 generátorů)**
 
 ### 2025-11-02 - Fáze 4B dokončena - Tavern Generator 🏠
 - ✅ Implementován Tavern Generator (generátor hospod a hostinců)

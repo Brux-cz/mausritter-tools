@@ -333,3 +333,64 @@ class Tavern:
             return "Semínka"
         else:
             return word
+
+
+@dataclass
+class Settlement:
+    """
+    Model pro osadu (settlement).
+
+    Osady jsou místa kde myši žijí, obchodují a odpočívají.
+    Velikost určuje dostupné služby a prvky.
+
+    Generování:
+    - Velikost: 2d6 keep-lower (1-6)
+    - Vláda: k6 + sizeValue (2-12)
+    - Detail: k20 charakteristika
+    - Řemesla: 1× k20 (2× pro města sizeValue=5)
+    - Prvky: 1× k20 (2× pro velkoměsta sizeValue=6)
+    - Událost: k20
+    - Název: kombinace semínek (volitelné)
+    - Hospoda: generována pro velikost 3+ (Víska a výše)
+    """
+    # Size info
+    size_name: str  # "Farma/zámeček", "Víska", "Město", etc.
+    population: str  # "1-3 rodiny", "50-150 myší", etc.
+    size_value: int  # 1-6
+
+    # Core attributes
+    government: str  # Typ vlády
+    detail: str  # Charakteristický detail
+    trades: List[str]  # Řemesla (1-2 podle velikosti)
+    features: List[str]  # Výrazné prvky (1-2 podle velikosti)
+    event: str  # Událost při příjezdu
+
+    # Optional elements
+    name: str = ""  # Název osady (volitelný)
+    tavern: Optional['Tavern'] = None  # Hospoda (pro size 3+)
+
+    # Rolls for reproducibility
+    roll_size_die1: int = 0  # První k6 pro velikost
+    roll_size_die2: int = 0  # Druhý k6 pro velikost
+    roll_government: int = 0  # k6 pro vládu
+    roll_detail: int = 0  # k20 pro detail
+    roll_trades: List[int] = field(default_factory=list)  # 1-2× k20
+    roll_features: List[int] = field(default_factory=list)  # 1-2× k20
+    roll_event: int = 0  # k20 pro událost
+    roll_name_start: int = 0  # k12 pro začátek názvu (volitelné)
+    roll_name_end: int = 0  # k12 pro konec názvu (volitelné)
+
+    @property
+    def has_tavern(self) -> bool:
+        """Má osada hospodu? (velikost 3+ = Víska a větší)"""
+        return self.size_value >= 3
+
+    @property
+    def trades_count(self) -> int:
+        """Počet řemesel podle velikosti"""
+        return 2 if self.size_value >= 5 else 1
+
+    @property
+    def features_count(self) -> int:
+        """Počet prvků podle velikosti"""
+        return 2 if self.size_value >= 6 else 1

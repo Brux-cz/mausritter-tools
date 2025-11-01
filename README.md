@@ -13,11 +13,12 @@ Python nástroje a generátory pro stolní hru **Mausritter** - OSR TTRPG o myš
 - ✅ **Generátor pokladů** - kompletní treasure hoard (2-6× k20, kouzelné meče, kouzla, předměty)
 - ✅ **Generátor semínek dobrodružství** - kombinace tvora, problému a komplikace (k66, 36 semínek)
 - ✅ **Generátor hospod** - názvy a speciality hospod (2× k12 + k12, pro vísky a větší osady)
+- ✅ **Generátor osad** - kompletní generování settlements (2d6 keep-lower velikost, vláda, detaily, řemesla, prvky, události, názvy, hospody)
 - ✅ **Hody kostkami** - všechny typy kostek (d4, d6, d8, d10, d12, d20, d66)
 - ✅ **Testy vlastností** - roll-under d20 mechanika
-- ✅ **JSON databáze** - původy, jména, NPC, pomocníci, počasí, kouzla, poklady, nástroje, semínka dobrodružství
+- ✅ **JSON databáze** - původy, jména, NPC, pomocníci, počasí, kouzla, poklady, nástroje, semínka dobrodružství, osady
 
-**Status:** Fáze 1, 2, 3A-F, 4A-B dokončeny (2025-11-02) - **P1 COMPLETE (100%)** + Tavern ✅
+**Status:** Fáze 1, 2, 3A-F, 4A-C dokončeny (2025-11-02) - **P1 COMPLETE (100%)** + Tavern + Settlement ✅
 
 ---
 
@@ -300,7 +301,54 @@ python -m src.cli generate tavern --save hospoda.json
 - Tavern je součást Settlement Generatoru
 - Používá se pro vísky a větší osady
 
-### 🎲 10. Hody kostkami
+### 🏘️ 10. Generování osad (Settlement)
+```bash
+# Základní osada
+python -m src.cli generate settlement
+
+# S názvem osady
+python -m src.cli generate settlement --name
+
+# Bez hospody (i pro větší osady)
+python -m src.cli generate settlement --no-tavern
+
+# JSON výstup
+python -m src.cli generate settlement --json
+
+# Uložit do souboru
+python -m src.cli generate settlement --save osada.json
+```
+
+**Co je osada:**
+- **Velikost** (2d6 keep-lower) - Farma → Křižovatka → Víska → Vesnice → Město → Velkoměsto
+- **Vláda** (k6 + velikost) - Typ správy osady
+- **Detail** (k20) - Charakteristický rys
+- **Řemesla** (k20) - 1× pro malé osady, 2× pro města
+- **Prvky** (k20) - 1× pro osady, 2× pro velkoměsta
+- **Událost** (k20) - Co se děje při příjezdu
+- **Hospoda** - Automaticky generována pro vísku (3) a větší
+
+**Velikosti osad:**
+| Velikost | Název | Populace | Hospoda? | Řemesla | Prvky |
+|----------|-------|----------|----------|---------|-------|
+| 1 | Farma/zámeček | 1-3 rodiny | Ne | 1 | 1 |
+| 2 | Křižovatka | 3-5 rodin | Ne | 1 | 1 |
+| 3 | Víska | 50-150 myší | Ano | 1 | 1 |
+| 4 | Vesnice | 150-300 myší | Ano | 1 | 1 |
+| 5 | Město | 300-1000 myší | Ano | 2 | 1 |
+| 6 | Velkoměsto | přes 1000+ | Ano | 2 | 2 |
+
+**Příklady:**
+- Víska / 50-150 myší / Rada starších / Postavená kolem jediného velkého stromu / Léčitel / Chrám nebo svatyně / Svatba nebo pohřeb
+- Město / 300-1000 myší / Šlechtic / Proslulá okolními trhy / Pekař + Kovář / Rozsáhlý trh na náměstí / Dnes je tržní den
+- Křižovatka / 3-5 rodin / Starosta / Pod vodou nebo pod zemí / Průvodce / Tajemná studna / Záhada nebo zmizení
+
+**Mechanika:**
+- Velikost určena hodem 2d6, vzít nižší hodnotu
+- Větší osady mají více služeb a možností
+- Hospoda se automaticky generuje pro velikost 3+
+
+### 🎲 11. Hody kostkami
 ```bash
 python -m src.cli roll-dice d6
 python -m src.cli roll-dice d20
@@ -308,19 +356,19 @@ python -m src.cli roll-dice 2d6
 python -m src.cli roll-dice d66
 ```
 
-### 🎯 11. Test vlastnosti
+### 🎯 12. Test vlastnosti
 ```bash
 python -m src.cli test 12
 python -m src.cli test 10 --modifier 2
 ```
 
-### ❓ 12. Zobrazit help
+### ❓ 13. Zobrazit help
 ```bash
 python -m src.cli --help
 python -m src.cli generate --help
 ```
 
-### 🧪 13. Spustit testy
+### 🧪 14. Spustit testy
 ```bash
 python test_character_simple.py
 python test_tableloader.py
@@ -330,6 +378,7 @@ python -m tests.test_spell_generator
 python -m tests.test_treasure_generator
 python -m tests.test_adventure_generator
 python -m tests.test_tavern_generator
+python -m tests.test_settlement_generator
 ```
 
 ---

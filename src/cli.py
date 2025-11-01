@@ -8,7 +8,7 @@ from rich.table import Table
 from rich.panel import Panel
 from rich.text import Text
 from src.core.dice import roll, roll_with_details, attribute_test
-from src.core.models import Character, NPC, Hireling, Weather, Reaction, Spell, TreasureHoard, TreasureItem, MagicSword, AdventureSeed, Tavern
+from src.core.models import Character, NPC, Hireling, Weather, Reaction, Spell, TreasureHoard, TreasureItem, MagicSword, AdventureSeed, Tavern, Settlement
 from src.generators.character import CharacterGenerator
 from src.generators.npc import NPCGenerator
 from src.generators.hireling import HirelingGenerator
@@ -18,6 +18,7 @@ from src.generators.spell import SpellGenerator
 from src.generators.treasure import TreasureGenerator
 from src.generators.adventure import AdventureSeedGenerator
 from src.generators.tavern import TavernGenerator
+from src.generators.settlement import SettlementGenerator
 
 # Fix Windows console encoding for Czech characters
 if sys.platform == 'win32':
@@ -1059,6 +1060,130 @@ def display_tavern(tavern: Tavern):
     rolls_text.append("(název), ", style="dim")
     rolls_text.append(f"{tavern.roll_specialty} ", style="dim cyan")
     rolls_text.append("(specialita)", style="dim")
+
+    console.print(rolls_text)
+    console.print("\n")
+
+
+@generate.command()
+@click.option("--json", "output_json", is_flag=True, help="Výstup v JSON formátu")
+@click.option("--save", type=str, help="Ulož do souboru")
+@click.option("--name", "generate_name", is_flag=True, help="Vygeneruj název osady")
+@click.option("--no-tavern", "no_tavern", is_flag=True, help="Negeneruj hospodu (i pro větší osady)")
+def settlement(output_json: bool, save: str, generate_name: bool, no_tavern: bool):
+    """
+    Vygeneruj osadu (settlement).
+
+    Osady jsou místa kde myši žijí, obchodují a odpočívají.
+    Velikost osady určuje dostupné služby a prvky.
+
+    Generuje:
+    - Velikost (2d6 keep-lower): 1-6 (Farma → Velkoměsto)
+    - Vláda (k6 + velikost): Typ správy osady
+    - Detail (k20): Charakteristický rys
+    - Řemesla (k20): 1× pro malé osady, 2× pro města
+    - Prvky (k20): 1× pro osady, 2× pro velkoměsta
+    - Událost (k20): Co se děje při příjezdu
+    - Hospoda: Pro vísku a větší osady (použij --no-tavern pro vypnutí)
+    - Název (--name): Volitelný název z tabulky semínek
+    """
+    settlement_obj = SettlementGenerator.create(
+        generate_name=generate_name,
+        generate_tavern=not no_tavern
+    )
+
+    if output_json:
+        json_output = SettlementGenerator.to_json(settlement_obj)
+        console.print(json_output)
+        if save:
+            with open(save, 'w', encoding='utf-8') as f:
+                f.write(json_output)
+            console.print(f"\n[green]Uloženo do {save}[/green]")
+        return
+
+    display_settlement(settlement_obj)
+
+    if save:
+        json_output = SettlementGenerator.to_json(settlement_obj)
+        with open(save, 'w', encoding='utf-8') as f:
+            f.write(json_output)
+        console.print(f"\n[green]Uloženo do {save}[/green]")
+
+
+def display_settlement(settlement: Settlement):
+    """Zobraz osadu v terminálu s barevným formátováním."""
+
+    # Hlavní nadpis
+    title_text = "🏘️  OSADA"
+    if settlement.name:
+        title_text += f": {settlement.name}"
+
+    main_panel = Panel(
+        f"[bold cyan]{settlement.size_name}[/bold cyan]\n[white]{settlement.population}[/white]",
+        title=title_text,
+        title_align="left",
+        border_style="cyan",
+        padding=(1, 2)
+    )
+
+    console.print("\n")
+    console.print(main_panel)
+
+    # Vláda a detail
+    gov_text = Text()
+    gov_text.append("⚖️  Vláda: ", style="bold magenta")
+    gov_text.append(settlement.government, style="white")
+    console.print(gov_text)
+
+    detail_text = Text()
+    detail_text.append("🔍 Detail: ", style="bold blue")
+    detail_text.append(settlement.detail, style="white")
+    console.print(detail_text)
+    console.print()
+
+    # Řemesla
+    if settlement.trades:
+        console.print("[bold yellow]🛠️  Řemesla:[/bold yellow]")
+        for trade in settlement.trades:
+            console.print(f"   • {trade}", style="white")
+        console.print()
+
+    # Prvky
+    if settlement.features:
+        console.print("[bold green]🏛️  Prvky:[/bold green]")
+        for feature in settlement.features:
+            console.print(f"   • {feature}", style="white")
+        console.print()
+
+    # Událost
+    event_text = Text()
+    event_text.append("📅 Událost: ", style="bold red")
+    event_text.append(settlement.event, style="white")
+    console.print(event_text)
+
+    # Hospoda
+    if settlement.tavern:
+        console.print()
+        tavern_panel = Panel(
+            f"[bold yellow]{settlement.tavern.full_name}[/bold yellow]\n🍲 [cyan]{settlement.tavern.specialty}[/cyan]",
+            title="🏠 Hospoda",
+            title_align="left",
+            border_style="yellow",
+            padding=(0, 2)
+        )
+        console.print(tavern_panel)
+
+    # Hody
+    console.print()
+    rolls_text = Text()
+    rolls_text.append("🎲 Hody: ", style="dim")
+    size_roll = f"{settlement.roll_size_die1},{settlement.roll_size_die2}→{min(settlement.roll_size_die1, settlement.roll_size_die2)}"
+    rolls_text.append(size_roll, style="dim cyan")
+    rolls_text.append(" (velikost), ", style="dim")
+    rolls_text.append(f"{settlement.roll_government}", style="dim cyan")
+    rolls_text.append(" (vláda), ", style="dim")
+    rolls_text.append(f"{settlement.roll_detail}", style="dim cyan")
+    rolls_text.append(" (detail)", style="dim")
 
     console.print(rolls_text)
     console.print("\n")

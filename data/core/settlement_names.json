@@ -1,0 +1,66 @@
+{
+  "metadata": {
+    "name": "Settlement Names",
+    "description": "Semínka názvů osad (kombinace začátek + konec)",
+    "source": "docs/knowledge_base/12_SETTLEMENTS.md (řádky 166-236)",
+    "dice": "2× d12 (začátek + konec)",
+    "category": "settlement",
+    "note": "Hoď pro začátek (A nebo B) a konec (A nebo B). Mixuj je, než to bude znít fajn."
+  },
+  "name_start_a": [
+    { "roll": 1, "text": "Dub" },
+    { "roll": 2, "text": "Bob" },
+    { "roll": 3, "text": "Vrba" },
+    { "roll": 4, "text": "Pařez" },
+    { "roll": 5, "text": "Smrk" },
+    { "roll": 6, "text": "Měsíc" },
+    { "roll": 7, "text": "Zelená" },
+    { "roll": 8, "text": "Černá" },
+    { "roll": 9, "text": "Kámen" },
+    { "roll": 10, "text": "Vysoký" },
+    { "roll": 11, "text": "Buk" },
+    { "roll": 12, "text": "Jablko" }
+  ],
+  "name_start_b": [
+    { "roll": 1, "text": "Bláto" },
+    { "roll": 2, "text": "Sova" },
+    { "roll": 3, "text": "Liška" },
+    { "roll": 4, "text": "Žalud" },
+    { "roll": 5, "text": "Měď" },
+    { "roll": 6, "text": "Lup" },
+    { "roll": 7, "text": "Sýr" },
+    { "roll": 8, "text": "Mokro" },
+    { "roll": 9, "text": "Růže" },
+    { "roll": 10, "text": "Cín" },
+    { "roll": 11, "text": "Dobro" },
+    { "roll": 12, "text": "Kmen" }
+  ],
+  "name_end_a": [
+    { "roll": 1, "text": "-ov" },
+    { "roll": 2, "text": "-ovec" },
+    { "roll": 3, "text": "-ová" },
+    { "roll": 4, "text": "-ice" },
+    { "roll": 5, "text": "-iny" },
+    { "roll": 6, "text": "-ín" },
+    { "roll": 7, "text": "-ec" },
+    { "roll": 8, "text": "-ník" },
+    { "roll": 9, "text": "-any" },
+    { "roll": 10, "text": "-ves" },
+    { "roll": 11, "text": "Hradec" },
+    { "roll": 12, "text": "Městec" }
+  ],
+  "name_end_b": [
+    { "roll": 1, "text": "Luh" },
+    { "roll": 2, "text": "Háj" },
+    { "roll": 3, "text": "Věž" },
+    { "roll": 4, "text": "Újezd" },
+    { "roll": 5, "text": "Most" },
+    { "roll": 6, "text": "Brod" },
+    { "roll": 7, "text": "Voda" },
+    { "roll": 8, "text": "Hora" },
+    { "roll": 9, "text": "Nora" },
+    { "roll": 10, "text": "Lhota" },
+    { "roll": 11, "text": "Hrob" },
+    { "roll": 12, "text": "Žďár" }
+  ]
+}
