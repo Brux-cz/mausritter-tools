@@ -89,13 +89,16 @@ Tyto generátory jsou **nejdůležitější** pro vedení hry. Používají se p
 **Stav:** ✅ **HOTOVO** - Fáze 2 + 2A + 2B
 **Tabulky:** origins, names, birthsigns, coat_colors/patterns, distinctive_traits, weapons
 
-#### 2. 📝 Generátor NPC myší
+#### 2. ✅ Generátor NPC myší
 **Název:** NPC Generator / Generátor nehráčských myší
 **Popis:** Rychlé vytváření NPC - společenské postavení, vzhled, zvláštnosti, touhy, vztahy
 **Zdroj:** `16_RANDOM_TABLES.md` (řádky 15-140)
 **Složitost:** ⭐⭐ Jednoduchá
-**Tabulky:** Společenské postavení (k6), Rodné znamení (k6), Vzhled (k20), Zvláštnost (k20), Po čem touží (k20), Vztah (k20)
+**Stav:** ✅ **HOTOVO** - Fáze 3A (2025-10-31)
+**Tabulky:** Společenské postavení (k6), Rodné znamení (k6), Vzhled (k20), Zvláštnost (k20), Po čem touží (k20), Vztah (k20), Reakce (2k6)
 **Priorita:** Vysoká - podobné Character Generatoru, ale rychlejší
+**CLI:** `python -m src.cli generate npc`
+**Testy:** 19 unit testů (všechny prošly ✅)
 
 #### 3. 📝 Generátor počasí
 **Název:** Weather Generator / Generátor počasí a sezónních událostí
@@ -233,16 +236,16 @@ Tyto generátory **přidávají rozmanitost** do setkání s tvory. Jsou volitel
 
 | Priorita | Počet | Hotovo | Zbývá | Popis |
 |----------|-------|--------|-------|-------|
-| **P1 🔴** | 8 | 1 ✅ | 7 📝 | Základní PJ nástroje - nutné pro hru |
+| **P1 🔴** | 8 | 2 ✅ | 6 📝 | Základní PJ nástroje - nutné pro hru |
 | **P2 🟡** | 6 | 0 ✅ | 6 📝 | Nástroje pro tvorbu světa - důležité pro kampaň |
 | **P3 🟢** | 14 | 0 ✅ | 14 💡 | Varianty tvorů - volitelné, ale atmosférické |
-| **CELKEM** | **28** | **1** | **27** | |
+| **CELKEM** | **28** | **2** | **26** | |
 
 ### 🎯 Doporučené pořadí implementace (podle priorit z pravidel)
 
 **Fáze 3 - Základní PJ nástroje (P1):**
 1. ✅ Character Generator (HOTOVO)
-2. 📝 NPC Generator - podobný Character Gen, rychlá implementace
+2. ✅ NPC Generator (HOTOVO)
 3. 📝 Treasure Generator - důležité pro odměny
 4. 📝 Weather Generator - velmi jednoduché, denní použití
 5. 📝 Reaction Roll - velmi jednoduché, časté použití
@@ -389,36 +392,61 @@ Generátor náhodného počasí pro herní sezení.
 
 ---
 
-### E: NPC Quick Generator (Rychlý NPC generátor)
+### E: NPC Generator (Generátor NPC)
 
 **Priorita:** 🔴 Vysoká
-**Čas:** ~3 hodiny
-**Stav:** 💡 Nápad
+**Čas:** ~9 hodin
+**Stav:** ✅ HOTOVO
 
 **Popis:**
-Rychlý generátor NPC myší (non-player characters) pro DM.
+Generátor NPC myší (non-player characters) pro DM. Implementovány DVĚ verze podle oficiálních pravidel Mausritter.
 
-**Co implementovat:**
-1. **Data** (1 hod)
-   - `data/npcs/npc_traits.json` - Povahové rysy (k66 tabulka)
-   - `data/npcs/npc_quirks.json` - Zvláštnosti (k20 tabulka)
-   - `data/npcs/npc_goals.json` - Cíle NPC (k20 tabulka)
-   - `data/npcs/npc_occupations.json` - Povolání (k100 tabulka?)
+**Co bylo implementováno:**
 
-2. **Generátor** (1.5 hod)
+#### FÁZE 1: Základní NPC Generator (✅ HOTOVO)
+1. **Data** (6 JSON souborů v `data/core/`)
+   - `npc_social_status.json` - Společenské postavení (k6)
+   - `npc_appearance.json` - Vzhled (k20)
+   - `npc_quirk.json` - Zvláštnost (k20)
+   - `npc_desire.json` - Po čem touží (k20)
+   - `npc_relationship.json` - Vztah k jiné myši (k20)
+   - `npc_reaction.json` - Reakce při setkání (2k6)
+
+2. **Generátor**
    - `src/generators/npc.py` - NPCGenerator
-   - **Rychlý režim:** Jen jméno + 1 rys + 1 cíl (pro náhodná setkání)
-   - **Detailní režim:** Jméno + vlastnosti + rys + cíl + povolání + majetek
-   - Model: `src/core/models.py` - NPC dataclass
+   - Model: `src/core/models.py` - NPC dataclass (9 polí)
+   - Používá existující tabulky jmen z Character Generatoru
+   - Generuje: jméno, status, rodné znamení, vzhled, zvláštnost, tužbu, vztah, reakci
 
-3. **CLI** (30 min)
-   - `python -m src.cli generate npc` - rychlý režim
-   - `python -m src.cli generate npc --detailed` - detailní
-   - `python -m src.cli generate npc --count 5` - 5 NPC najednou (pro DM prep)
+3. **CLI**
+   - `python -m src.cli generate npc` - vygeneruje náhodné NPC
+   - `python -m src.cli generate npc --name "Pepřík"` - s vlastním jménem
+   - `python -m src.cli generate npc --gender female` - ženské
+   - `python -m src.cli generate npc --json` - JSON výstup
+   - `python -m src.cli generate npc --save npc.json` - uložit do souboru
+
+4. **Testy**
+   - `tests/test_npc_generator.py` - 19 unit testů
+   - Testuje všechny generační metody + export do JSON
+
+#### FÁZE 2: Data pro rozšířený generátor (✅ PŘIPRAVENO)
+5. **Rozšířená data** (7 dalších JSON souborů v `data/core/`)
+   - `hireling_types.json` - 9 typů pronajímatelných pomocníků + statistiky
+   - `competitive_mice.json` - 6 konkurenčních myších dobrodruhů
+   - `cat_lords.json` - 6 kočičích pánů a paní
+   - `rat_gangs.json` - 6 krysích gangů
+   - `owl_wizards.json` - 6 sovích čarodějů
+   - `frog_knights.json` - 6 žabích rytířů
+   - `adventure_seeds.json` - 36 semínek dobrodružství (k66 tabulka)
+
+6. **Rozšířené modely**
+   - `src/core/models.py` - Hireling dataclass (statistiky, inventář, level, zkušenosti)
+   - `src/core/tables.py` - 14 nových TableLoader metod pro všechny tabulky
 
 **Rozdíl oproti Character Generator:**
-- Character Generator = hráčské postavy (full stats, HP, inventář)
-- NPC Generator = rychlé NPC pro DM (jen potřebné info)
+- Character Generator = hráčské postavy (full stats, HP, inventář, původ, výbava)
+- NPC Generator = rychlé NPC pro DM (osobnost, motivace, reakce, status)
+- Hireling = pronajímatelné NPC se statistikami (BO, vlastnosti, mzda)
 
 ---
 
@@ -576,10 +604,10 @@ Nápady, které zatím nejsou v hlavním roadmap:
 |-----------------------|--------|----------|
 | Data Extraction       | ✅     | 100%     |
 | Character Generator   | ✅     | 100%     |
+| NPC Generator         | ✅     | 100%     |
 | Settlement Generator  | 💡     | 0%       |
 | Hex Generator         | 💡     | 0%       |
 | Weather Generator     | 💡     | 0%       |
-| NPC Generator         | 💡     | 0%       |
 | Documentation         | 🚧     | 60%      |
 | Web Interface         | 💡     | 0%       |
 
@@ -602,6 +630,27 @@ Pokud chceš přidat novou feature:
 ---
 
 ## 📝 Changelog
+
+### 2025-11-01 - Fáze 3B dokončena
+- ✅ Implementován Hireling Generator (generátor pomocníků)
+- ✅ HirelingGenerator class v src/generators/hireling.py
+- ✅ CLI příkaz `generate hireling` s --type, --name, --gender, --json, --save
+- ✅ 15 unit testů (manuálně otestováno, všechny fungují)
+- ✅ Display funkce s yellow panelem (odlišení od character/npc)
+- ✅ Plné bojové statistiky (k6 HP, 2k6 STR/DEX/WIL)
+- ✅ 9 typů pomocníků (Světlonoš, Dělník, Zbrojmyš, Rytíř, atd.)
+- ✅ Výpočet dostupnosti podle typu (k6/k4/k3/k2)
+- ✅ Dokumentace aktualizována (README.md, MANUAL.md nová sekce 2.3)
+
+### 2025-10-31 - Fáze 3A dokončena
+- ✅ Implementován NPC Generator (základní)
+- ✅ 6 JSON tabulek (social_status, appearance, quirk, desire, relationship, reaction)
+- ✅ CLI příkaz `generate npc` s --name, --gender, --json, --save
+- ✅ 19 unit testů (všechny prošly)
+- ✅ Rozšířená data pro kompletní generátor (7 dalších JSON souborů)
+- ✅ NPCGenerator a Hireling dataclass v models.py
+- ✅ 20+ nových TableLoader metod
+- ✅ Dokumentace aktualizována (README.md, MANUAL.md, ROADMAP.md)
 
 ### 2025-01-XX - Fáze 2A dokončena
 - ✅ Přidána rodná znamení (birthsigns)

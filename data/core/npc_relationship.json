@@ -1,0 +1,90 @@
+{
+  "metadata": {
+    "source": "docs/knowledge_base/16_RANDOM_TABLES.md",
+    "description": "Vztah NPC k jiné myši",
+    "dice": "d20",
+    "lookup_method": "roll"
+  },
+  "relationships": [
+    {
+      "roll": 1,
+      "text": "Rodič"
+    },
+    {
+      "roll": 2,
+      "text": "Sourozenec"
+    },
+    {
+      "roll": 3,
+      "text": "Bratránek/sestřenka"
+    },
+    {
+      "roll": 4,
+      "text": "Vzdálený bratránek/sestřenka"
+    },
+    {
+      "roll": 5,
+      "text": "Prarodič"
+    },
+    {
+      "roll": 6,
+      "text": "Příbuzný, ale neví o tom"
+    },
+    {
+      "roll": 7,
+      "text": "Manželé"
+    },
+    {
+      "roll": 8,
+      "text": "Bývalí milenci"
+    },
+    {
+      "roll": 9,
+      "text": "Neopětovaná láska"
+    },
+    {
+      "roll": 10,
+      "text": "Kamarád z hospody"
+    },
+    {
+      "roll": 11,
+      "text": "Dlužník nebo věřitel"
+    },
+    {
+      "roll": 12,
+      "text": "Dlouhý a bouřlivý"
+    },
+    {
+      "roll": 13,
+      "text": "Zapřísáhlí nepřátelé"
+    },
+    {
+      "roll": 14,
+      "text": "Bratři nebo sestry z cechu"
+    },
+    {
+      "roll": 15,
+      "text": "Přátelé z dětství"
+    },
+    {
+      "roll": 16,
+      "text": "Jedna okradla druhou"
+    },
+    {
+      "roll": 17,
+      "text": "Spolupracovník"
+    },
+    {
+      "roll": 18,
+      "text": "Vyrůstaly spolu"
+    },
+    {
+      "roll": 19,
+      "text": "Slouží stejnému pánovi"
+    },
+    {
+      "roll": 20,
+      "text": "Nikdy dřív se nepotkaly"
+    }
+  ]
+}

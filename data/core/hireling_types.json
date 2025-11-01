@@ -1,0 +1,80 @@
+{
+  "metadata": {
+    "source": "docs/knowledge_base/10_HIRELINGS.md",
+    "description": "Typy pronajímatelných pomocníků",
+    "dice": "manual",
+    "lookup_method": "id"
+  },
+  "hirelings": [
+    {
+      "id": 1,
+      "name": "Světlonoš",
+      "available": "k6",
+      "daily_wage": 1,
+      "description": "Nosič pochodni a světla"
+    },
+    {
+      "id": 2,
+      "name": "Dělník",
+      "available": "k6",
+      "daily_wage": 2,
+      "description": "Běžný pracovní pomocník"
+    },
+    {
+      "id": 3,
+      "name": "Kopáč chodeb",
+      "available": "k4",
+      "daily_wage": 5,
+      "description": "Specialista na hloubení a kopání"
+    },
+    {
+      "id": 4,
+      "name": "Zbrojíř nebo kovář",
+      "available": "k2",
+      "daily_wage": 8,
+      "description": "Opravy a výroba kovového zboží"
+    },
+    {
+      "id": 5,
+      "name": "Místní průvodce",
+      "available": "k4",
+      "daily_wage": 10,
+      "description": "Zná lokální okolí"
+    },
+    {
+      "id": 6,
+      "name": "Zbrojmyš",
+      "available": "k6",
+      "daily_wage": 10,
+      "description": "Bojovník na ochranu"
+    },
+    {
+      "id": 7,
+      "name": "Učenec",
+      "available": "k2",
+      "daily_wage": 20,
+      "description": "Vzdělaný expert na historii a texty"
+    },
+    {
+      "id": 8,
+      "name": "Rytíř",
+      "available": "k3",
+      "daily_wage": 25,
+      "description": "Šlechtický válečník"
+    },
+    {
+      "id": 9,
+      "name": "Tlumočník",
+      "available": "k2",
+      "daily_wage": 30,
+      "description": "Překládá cizí jazyky"
+    }
+  ],
+  "stats": {
+    "hp": "k6",
+    "strength": "2k6",
+    "dexterity": "2k6",
+    "willpower": "2k6",
+    "inventory_slots": 6
+  }
+}

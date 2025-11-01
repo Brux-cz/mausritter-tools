@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "source": "docs/knowledge_base/16_RANDOM_TABLES.md",
+    "description": "Společenské postavení NPC myši",
+    "dice": "d6",
+    "lookup_method": "roll"
+  },
+  "social_statuses": [
+    {
+      "roll": 1,
+      "status": "Chuďas",
+      "payment": "k6 ď"
+    },
+    {
+      "roll": 2,
+      "status": "Prostá myš",
+      "payment": "k6 x 10 ď"
+    },
+    {
+      "roll": 3,
+      "status": "Prostá myš",
+      "payment": "k6 x 10 ď"
+    },
+    {
+      "roll": 4,
+      "status": "Měšťan",
+      "payment": "k6 x 50 ď"
+    },
+    {
+      "roll": 5,
+      "status": "Člen cechu",
+      "payment": "k4 x 100 ď"
+    },
+    {
+      "roll": 6,
+      "status": "Myší šlechtic",
+      "payment": "k4 x 1 000 ď"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "source": "docs/knowledge_base/09_CREATURES.md",
+    "description": "Kočičí pánové a paní - mocní kočičí vládci",
+    "dice": "d6",
+    "lookup_method": "roll"
+  },
+  "cats": [
+    {
+      "roll": 1,
+      "name": "Baltazar",
+      "description": "Rád se cpe vybranými pochoutkami"
+    },
+    {
+      "roll": 2,
+      "name": "Melchior",
+      "description": "Zbožňuje zlato, šperky a bohatství"
+    },
+    {
+      "roll": 3,
+      "name": "Šalamoun",
+      "description": "Hraje kruté hry se zajatci"
+    },
+    {
+      "roll": 4,
+      "name": "Chammurapi",
+      "description": "Vládne přísně a neoblomně"
+    },
+    {
+      "roll": 5,
+      "name": "Nefertiti",
+      "description": "Miluje umění, poezii a krásné věci"
+    },
+    {
+      "roll": 6,
+      "name": "Zenobie",
+      "description": "Buduje armádu, chce dobývat a vládnout"
+    }
+  ]
+}

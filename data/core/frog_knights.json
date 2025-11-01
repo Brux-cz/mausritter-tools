@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "source": "docs/knowledge_base/09_CREATURES.md",
+    "description": "Potulní žabí rytíři",
+    "dice": "d6",
+    "lookup_method": "roll"
+  },
+  "knights": [
+    {
+      "roll": 1,
+      "name": "Gval",
+      "description": "Silný, laskavý a prostomyslný"
+    },
+    {
+      "roll": 2,
+      "name": "Filip",
+      "description": "Zakletý člověk hledající lék"
+    },
+    {
+      "roll": 3,
+      "name": "Lurf",
+      "description": "Nemístný smysl pro humor, popudlivost"
+    },
+    {
+      "roll": 4,
+      "name": "Slup",
+      "description": "Chce za jakoukoli cenu ulovit velkou šelmu"
+    },
+    {
+      "roll": 5,
+      "name": "Uuu",
+      "description": "Zoufale prokazuje svou zdatnost v turnajích"
+    },
+    {
+      "roll": 6,
+      "name": "Puk",
+      "description": "Hledá legendární Hrnek pravdy"
+    }
+  ]
+}

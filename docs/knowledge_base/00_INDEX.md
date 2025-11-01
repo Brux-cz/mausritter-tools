@@ -14,7 +14,7 @@ Tato databáze obsahuje kompletní pravidla hry **Mausritter** (český překlad
 - **[02_CHARACTER_CREATION.md](02_CHARACTER_CREATION.md)** - Tvorba postavy
 - **[03_INVENTORY.md](03_INVENTORY.md)** - Systém inventáře a stavy
 - **[04_EQUIPMENT.md](04_EQUIPMENT.md)** - Vybavení a ceny
-- **[05_COMBAT.md](05_COMBAT.md)** - Bojový systém
+- **[05_COMBAT.md](05_CO MBAT.md)** - Bojový systém
 - **[06_MAGIC.md](06_MAGIC.md)** - Systém magie a kouzla
 - **[07_ADVANCEMENT.md](07_ADVANCEMENT.md)** - Odpočinek a zlepšování
 

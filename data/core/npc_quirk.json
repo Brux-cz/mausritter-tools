@@ -1,0 +1,90 @@
+{
+  "metadata": {
+    "source": "docs/knowledge_base/16_RANDOM_TABLES.md",
+    "description": "Zvláštnost NPC myši",
+    "dice": "d20",
+    "lookup_method": "roll"
+  },
+  "quirks": [
+    {
+      "roll": 1,
+      "text": "Neustále se upravuje"
+    },
+    {
+      "roll": 2,
+      "text": "Vyvádí kvůli počasí"
+    },
+    {
+      "roll": 3,
+      "text": "Silně nabuzená"
+    },
+    {
+      "roll": 4,
+      "text": "Zcestovalá, světaznalá"
+    },
+    {
+      "roll": 5,
+      "text": "Prokletá čarodějem"
+    },
+    {
+      "roll": 6,
+      "text": "Snadno se vyleká"
+    },
+    {
+      "roll": 7,
+      "text": "Stydí se za dřívější zločiny"
+    },
+    {
+      "roll": 8,
+      "text": "Velice soutěživá"
+    },
+    {
+      "roll": 9,
+      "text": "Hýřivý opilec"
+    },
+    {
+      "roll": 10,
+      "text": "Extrémně zdvořilá"
+    },
+    {
+      "roll": 11,
+      "text": "Bezelstně upřímná"
+    },
+    {
+      "roll": 12,
+      "text": "Mluví pomalu a rozvážně"
+    },
+    {
+      "roll": 13,
+      "text": "Mluví rychle a zbrkle"
+    },
+    {
+      "roll": 14,
+      "text": "Utajený služebník kočky"
+    },
+    {
+      "roll": 15,
+      "text": "Vychována krysami"
+    },
+    {
+      "roll": 16,
+      "text": "Vyhnanec z domova"
+    },
+    {
+      "roll": 17,
+      "text": "Spousta hmyzích mazlíčků"
+    },
+    {
+      "roll": 18,
+      "text": "Nesnáší být venku"
+    },
+    {
+      "roll": 19,
+      "text": "Místní hrdina"
+    },
+    {
+      "roll": 20,
+      "text": "Velice neklidné fousky"
+    }
+  ]
+}

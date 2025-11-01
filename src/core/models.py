@@ -90,9 +90,45 @@ class Location:
 
 @dataclass
 class NPC:
-    """Model pro NPC"""
+    """
+    Model pro NPC (nehráčskou postavu).
+    Používá se pro rychlé generování NPC podle oficiálních pravidel Mausritter.
+    """
     name: str
-    species: str  # např. "myš", "krysa", "žába"
-    disposition: str
-    wants: str
-    description: Optional[str] = None
+    social_status: str  # Společenské postavení (Chuďas, Prostá myš, Měšťan, atd.)
+    birthsign: str  # Rodné znamení s povahou
+    appearance: str  # Vzhled
+    quirk: str  # Zvláštnost
+    desire: str  # Po čem touží
+    relationship: str  # Vztah k jiné myši
+    reaction: str  # Reakce při setkání
+    payment: Optional[str] = None  # Platba za služby (podle společenského postavení)
+    notes: str = ""
+
+
+@dataclass
+class Hireling:
+    """
+    Model pro pronajímatelnou myš (pomocníka).
+    Používá se pro generování pomocníků podle pravidel z kapitoly Hirelings.
+    """
+    name: str
+    type: str  # Typ pomocníka (Světlonoš, Dělník, Učenec, atd.)
+    daily_wage: int  # Denní mzda v ďobcích
+
+    # Vlastnosti
+    hp: int
+    strength: int
+    dexterity: int
+    willpower: int
+
+    # Inventář - 6 políček (2 v packách, 2 na těle, 2 v batohu)
+    inventory: List[Optional[str]] = field(default_factory=lambda: [None] * 6)
+
+    # Level a XP
+    level: int = 1
+    experience: int = 0
+
+    # Morálka a stav
+    morale: str = "neutrální"  # neutrální, loajální, nespokojený
+    notes: str = ""

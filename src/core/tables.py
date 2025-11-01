@@ -261,6 +261,339 @@ class TableLoader:
 
         return None
 
+    # === NPC TABULKY ===
+
+    @staticmethod
+    def get_npc_social_statuses() -> Dict[str, Any]:
+        """Načte tabulku společenského postavení NPC."""
+        return TableLoader.load_table("core/npc_social_status.json")
+
+    @staticmethod
+    def lookup_npc_social_status(roll: int) -> Optional[Dict[str, Any]]:
+        """
+        Najde společenské postavení podle hodu k6.
+
+        Args:
+            roll: Výsledek hodu k6 (1-6)
+
+        Returns:
+            Dict s postavením a platbou nebo None pokud nenalezeno
+        """
+        statuses_data = TableLoader.get_npc_social_statuses()
+        statuses_list = statuses_data.get("social_statuses", [])
+
+        for status in statuses_list:
+            if status["roll"] == roll:
+                return status
+
+        return None
+
+    @staticmethod
+    def get_npc_appearances() -> Dict[str, Any]:
+        """Načte tabulku vzhledu NPC."""
+        return TableLoader.load_table("core/npc_appearance.json")
+
+    @staticmethod
+    def lookup_npc_appearance(roll: int) -> Optional[str]:
+        """
+        Najde vzhled NPC podle hodu k20.
+
+        Args:
+            roll: Výsledek hodu k20 (1-20)
+
+        Returns:
+            Text popisu vzhledu nebo None pokud nenalezen
+        """
+        appearances_data = TableLoader.get_npc_appearances()
+        appearances_list = appearances_data.get("appearances", [])
+
+        for appearance in appearances_list:
+            if appearance["roll"] == roll:
+                return appearance["text"]
+
+        return None
+
+    @staticmethod
+    def get_npc_quirks() -> Dict[str, Any]:
+        """Načte tabulku zvláštností NPC."""
+        return TableLoader.load_table("core/npc_quirk.json")
+
+    @staticmethod
+    def lookup_npc_quirk(roll: int) -> Optional[str]:
+        """
+        Najde zvláštnost NPC podle hodu k20.
+
+        Args:
+            roll: Výsledek hodu k20 (1-20)
+
+        Returns:
+            Text zvláštnosti nebo None pokud nenalezena
+        """
+        quirks_data = TableLoader.get_npc_quirks()
+        quirks_list = quirks_data.get("quirks", [])
+
+        for quirk in quirks_list:
+            if quirk["roll"] == roll:
+                return quirk["text"]
+
+        return None
+
+    @staticmethod
+    def get_npc_desires() -> Dict[str, Any]:
+        """Načte tabulku tužeb NPC."""
+        return TableLoader.load_table("core/npc_desire.json")
+
+    @staticmethod
+    def lookup_npc_desire(roll: int) -> Optional[str]:
+        """
+        Najde tužbu NPC podle hodu k20.
+
+        Args:
+            roll: Výsledek hodu k20 (1-20)
+
+        Returns:
+            Text tužby nebo None pokud nenalezena
+        """
+        desires_data = TableLoader.get_npc_desires()
+        desires_list = desires_data.get("desires", [])
+
+        for desire in desires_list:
+            if desire["roll"] == roll:
+                return desire["text"]
+
+        return None
+
+    @staticmethod
+    def get_npc_relationships() -> Dict[str, Any]:
+        """Načte tabulku vztahů NPC."""
+        return TableLoader.load_table("core/npc_relationship.json")
+
+    @staticmethod
+    def lookup_npc_relationship(roll: int) -> Optional[str]:
+        """
+        Najde vztah NPC podle hodu k20.
+
+        Args:
+            roll: Výsledek hodu k20 (1-20)
+
+        Returns:
+            Text vztahu nebo None pokud nenalezen
+        """
+        relationships_data = TableLoader.get_npc_relationships()
+        relationships_list = relationships_data.get("relationships", [])
+
+        for relationship in relationships_list:
+            if relationship["roll"] == roll:
+                return relationship["text"]
+
+        return None
+
+    @staticmethod
+    def get_npc_reactions() -> Dict[str, Any]:
+        """Načte tabulku reakcí NPC."""
+        return TableLoader.load_table("core/npc_reaction.json")
+
+    @staticmethod
+    def lookup_npc_reaction(roll: int) -> Optional[Dict[str, Any]]:
+        """
+        Najde reakci NPC podle hodu 2k6.
+
+        Args:
+            roll: Výsledek hodu 2k6 (2-12)
+
+        Returns:
+            Dict s reakcí a otázkou nebo None pokud nenalezena
+        """
+        reactions_data = TableLoader.get_npc_reactions()
+        reactions_list = reactions_data.get("reactions", [])
+
+        for reaction in reactions_list:
+            # Některé reakce mají přesný roll, některé rozsah
+            if "roll" in reaction and reaction["roll"] == roll:
+                return reaction
+            elif "roll_min" in reaction and "roll_max" in reaction:
+                if reaction["roll_min"] <= roll <= reaction["roll_max"]:
+                    return reaction
+
+        return None
+
+    # === KOMPLETNÍ NPC TABULKY ===
+
+    @staticmethod
+    def get_hireling_types() -> Dict[str, Any]:
+        """Načte tabulku typů pomocníků."""
+        return TableLoader.load_table("core/hireling_types.json")
+
+    @staticmethod
+    def lookup_hireling_type(type_id: int) -> Optional[Dict[str, Any]]:
+        """
+        Najde typ pomocníka podle ID.
+
+        Args:
+            type_id: ID typu pomocníka (1-9)
+
+        Returns:
+            Dict s informacemi o pomocníkovi nebo None pokud nenalezen
+        """
+        hirelings_data = TableLoader.get_hireling_types()
+        hirelings_list = hirelings_data.get("hirelings", [])
+
+        for hireling in hirelings_list:
+            if hireling["id"] == type_id:
+                return hireling
+
+        return None
+
+    @staticmethod
+    def get_competitive_mice() -> Dict[str, Any]:
+        """Načte tabulku konkurenčních myších dobrodruhů."""
+        return TableLoader.load_table("core/competitive_mice.json")
+
+    @staticmethod
+    def lookup_competitive_mouse(roll: int) -> Optional[Dict[str, Any]]:
+        """
+        Najde konkurenčního dobrodruha podle hodu k6.
+
+        Args:
+            roll: Výsledek hodu k6 (1-6)
+
+        Returns:
+            Dict s informacemi o dobrodruhovi nebo None pokud nenalezen
+        """
+        mice_data = TableLoader.get_competitive_mice()
+        mice_list = mice_data.get("mice", [])
+
+        for mouse in mice_list:
+            if mouse["roll"] == roll:
+                return mouse
+
+        return None
+
+    @staticmethod
+    def get_cat_lords() -> Dict[str, Any]:
+        """Načte tabulku kočičích pánů."""
+        return TableLoader.load_table("core/cat_lords.json")
+
+    @staticmethod
+    def lookup_cat_lord(roll: int) -> Optional[Dict[str, Any]]:
+        """
+        Najde kočičího pána podle hodu k6.
+
+        Args:
+            roll: Výsledek hodu k6 (1-6)
+
+        Returns:
+            Dict s informacemi o kočičím pánovi nebo None pokud nenalezen
+        """
+        cats_data = TableLoader.get_cat_lords()
+        cats_list = cats_data.get("cats", [])
+
+        for cat in cats_list:
+            if cat["roll"] == roll:
+                return cat
+
+        return None
+
+    @staticmethod
+    def get_rat_gangs() -> Dict[str, Any]:
+        """Načte tabulku krysích gangů."""
+        return TableLoader.load_table("core/rat_gangs.json")
+
+    @staticmethod
+    def lookup_rat_gang(roll: int) -> Optional[Dict[str, Any]]:
+        """
+        Najde krysí gang podle hodu k6.
+
+        Args:
+            roll: Výsledek hodu k6 (1-6)
+
+        Returns:
+            Dict s informacemi o gangu nebo None pokud nenalezen
+        """
+        gangs_data = TableLoader.get_rat_gangs()
+        gangs_list = gangs_data.get("gangs", [])
+
+        for gang in gangs_list:
+            if gang["roll"] == roll:
+                return gang
+
+        return None
+
+    @staticmethod
+    def get_owl_wizards() -> Dict[str, Any]:
+        """Načte tabulku sovích čarodějů."""
+        return TableLoader.load_table("core/owl_wizards.json")
+
+    @staticmethod
+    def lookup_owl_wizard(roll: int) -> Optional[Dict[str, Any]]:
+        """
+        Najde sovího čaroděje podle hodu k6.
+
+        Args:
+            roll: Výsledek hodu k6 (1-6)
+
+        Returns:
+            Dict s informacemi o čarodějovi nebo None pokud nenalezen
+        """
+        wizards_data = TableLoader.get_owl_wizards()
+        wizards_list = wizards_data.get("wizards", [])
+
+        for wizard in wizards_list:
+            if wizard["roll"] == roll:
+                return wizard
+
+        return None
+
+    @staticmethod
+    def get_frog_knights() -> Dict[str, Any]:
+        """Načte tabulku žabích rytířů."""
+        return TableLoader.load_table("core/frog_knights.json")
+
+    @staticmethod
+    def lookup_frog_knight(roll: int) -> Optional[Dict[str, Any]]:
+        """
+        Najde žabího rytíře podle hodu k6.
+
+        Args:
+            roll: Výsledek hodu k6 (1-6)
+
+        Returns:
+            Dict s informacemi o rytíři nebo None pokud nenalezen
+        """
+        knights_data = TableLoader.get_frog_knights()
+        knights_list = knights_data.get("knights", [])
+
+        for knight in knights_list:
+            if knight["roll"] == roll:
+                return knight
+
+        return None
+
+    @staticmethod
+    def get_adventure_seeds() -> Dict[str, Any]:
+        """Načte tabulku semínek dobrodružství."""
+        return TableLoader.load_table("core/adventure_seeds.json")
+
+    @staticmethod
+    def lookup_adventure_seed(roll: int) -> Optional[Dict[str, Any]]:
+        """
+        Najde semínko dobrodružství podle hodu k66.
+
+        Args:
+            roll: Výsledek hodu k66 (11-66, např. 11, 12, 13, 21, 22, ...)
+
+        Returns:
+            Dict s tabulkou dobrodružství nebo None pokud nenalezeno
+        """
+        seeds_data = TableLoader.get_adventure_seeds()
+        seeds_list = seeds_data.get("seeds", [])
+
+        for seed in seeds_list:
+            if seed["roll"] == roll:
+                return seed
+
+        return None
+
     @staticmethod
     def clear_cache():
         """Vyčistí cache načtených tabulek. Užitečné pro testy."""

@@ -173,7 +173,274 @@ python -m src.cli generate character
 
 ---
 
-### 2.2 Hody kostkami
+### 2.2 Generování NPC
+
+**Hlavní příkaz:**
+```bash
+python -m src.cli generate npc
+```
+
+**Co to dělá:**
+Vygeneruje náhodné NPC (nehráčskou myš) pro DM použití podle tabulek z 16_RANDOM_TABLES.md:
+- Hoď k100 + k20 pro jméno
+- Hoď k6 pro společenské postavení a platbu za služby
+- Hoď k6 pro rodné znamení s povahovým rysem
+- Hoď k20 pro vzhled
+- Hoď k20 pro zvláštnost
+- Hoď k20 pro tužbu/motivaci
+- Hoď k20 pro vztah k jiné myši
+- Hoď 2k6 pro reakci při setkání
+
+#### 2.2.1 Možnosti příkazu
+
+**`--name` / `-n` - Vlastní jméno**
+```bash
+python -m src.cli generate npc --name "Strážný"
+python -m src.cli generate npc -n "Kupec"
+```
+Použije zadané jméno místo náhodného.
+
+**`--gender` / `-g` - Pohlaví**
+```bash
+python -m src.cli generate npc --gender female
+python -m src.cli generate npc -g male
+```
+Možnosti: `male` (výchozí), `female`
+Určuje tvar příjmení (Hrabal vs. Hrabalová)
+
+**`--json` / `-j` - JSON výstup**
+```bash
+python -m src.cli generate npc --json
+```
+Zobrazí NPC jako JSON místo pěkného formátování.
+
+**`--save` / `-s` - Uložit do souboru**
+```bash
+python -m src.cli generate npc --save npc.json
+python -m src.cli generate npc -s npcs/strazny.json
+```
+Uloží NPC do JSON souboru.
+
+#### 2.2.2 Příklady použití
+
+**Náhodné mužské NPC:**
+```bash
+python -m src.cli generate npc
+```
+
+**Náhodné ženské NPC:**
+```bash
+python -m src.cli generate npc --gender female
+```
+
+**NPC s vlastním jménem:**
+```bash
+python -m src.cli generate npc --name "Strážný u brány"
+```
+
+**Kombinace možností:**
+```bash
+python -m src.cli generate npc --name "Žermína" --gender female --save zermina.json
+```
+
+**5 NPC za sebou pro přípravu session:**
+```bash
+python -m src.cli generate npc
+python -m src.cli generate npc
+python -m src.cli generate npc
+python -m src.cli generate npc --gender female
+python -m src.cli generate npc --gender female
+```
+
+#### 2.2.3 Ukázka výstupu
+
+```
+┌────────────────────── Šafrán Hrabal ──────────────────────┐
+│                                                            │
+│  Rodné znamení:                                            │
+│    Matka (Pečující/ustaraná)                               │
+│                                                            │
+│  Vzhled:                                                   │
+│    Zaplétaná srst                                          │
+│                                                            │
+│  Zvláštnost:                                               │
+│    Mluví pomalu a rozvážně                                 │
+│                                                            │
+│  Po čem touží:                                             │
+│    Ochrana                                                 │
+│                                                            │
+│  Vztah k jiné myši:                                        │
+│    Bývalí milenci                                          │
+│                                                            │
+│  Reakce při setkání:                                       │
+│    Nepřátelská: Jak se dá uchlácholit?                     │
+│                                                            │
+│  Platba za služby:                                         │
+│    k4 x 1 000 ď                                            │
+│                                                            │
+└────────────────────── 🎭 Myší šlechtic ────────────────────┘
+```
+
+#### 2.2.4 Rozdíl oproti Character Generator
+
+**Character Generator** (`generate character`):
+- Pro hráčské postavy
+- Plné statistiky (Síla, Mrštnost, Vůle)
+- Body ochrany (HP)
+- Kompletní inventář a výbava
+- Původ postavy s příběhem
+- Použití: Tvorba PC na začátku kampaně
+
+**NPC Generator** (`generate npc`):
+- Pro nehráčské postavy (DM tool)
+- Osobnost a motivace (ne mechaniky)
+- Rychlé vytvoření pro session
+- Společenské postavení
+- Použití: Rychlá příprava NPC během hry
+
+---
+
+### 2.3 Generování pomocníků (Hirelings)
+
+**Hlavní příkaz:**
+```bash
+python -m src.cli generate hireling
+```
+
+**Co to dělá:**
+Vygeneruje náhodného pomocníka (hireling) - pronajímatelnou myš s plnými bojovými statistikami podle pravidel z 10_HIRELINGS.md:
+- Vygeneruje jméno (k100 + k20)
+- Vybere náhodný typ z 9 možností (nebo konkrétní --type)
+- Hoď k6 pro HP (Body ochrany)
+- Hoď 2k6 pro Sílu, Mrštnost a Vůli
+- Vytvoří prázdný inventář (6 slotů)
+- Nastaví level 1, XP 0, morálka neutrální
+- Vypočítá dostupnost (kolik je jich k najímání)
+
+#### 2.3.1 Možnosti příkazu
+
+**`--type` / `-t` - ID typu pomocníka (1-9)**
+```bash
+python -m src.cli generate hireling --type 6    # Zbrojmyš
+python -m src.cli generate hireling -t 8        # Rytíř
+```
+Vybere konkrétní typ pomocníka místo náhodného.
+
+**Typy pomocníků:**
+1. Světlonoš (1 ď/den)
+2. Dělník (2 ď/den)
+3. Kopáč chodeb (5 ď/den)
+4. Zbrojíř/kovář (8 ď/den)
+5. Místní průvodce (10 ď/den)
+6. Zbrojmyš (10 ď/den)
+7. Učenec (20 ď/den)
+8. Rytíř (25 ď/den)
+9. Tlumočník (30 ď/den)
+
+**`--name` / `-n` - Vlastní jméno**
+```bash
+python -m src.cli generate hireling --name "Sir Pepřík"
+python -m src.cli generate hireling -n "Válečník"
+```
+Použije zadané jméno místo náhodného.
+
+**`--gender` / `-g` - Pohlaví**
+```bash
+python -m src.cli generate hireling --gender female
+python -m src.cli generate hireling -g male
+```
+Možnosti: `male` (výchozí), `female`
+Určuje tvar příjmení (Hrabal vs. Hrabalová)
+
+**`--json` / `-j` - JSON výstup**
+```bash
+python -m src.cli generate hireling --json
+```
+Zobrazí pomocníka jako JSON místo pěkného formátování.
+
+**`--save` / `-s` - Uložit do souboru**
+```bash
+python -m src.cli generate hireling --save pomocnik.json
+python -m src.cli generate hireling -s hirelings/zbrojmys.json
+```
+Uloží pomocníka do JSON souboru.
+
+#### 2.3.2 Příklady použití
+
+**Náhodný pomocník:**
+```bash
+python -m src.cli generate hireling
+```
+
+**Konkrétní typ - Zbrojmyš:**
+```bash
+python -m src.cli generate hireling --type 6
+```
+
+**Rytíř s vlastním jménem:**
+```bash
+python -m src.cli generate hireling --type 8 --name "Sir Bedřich"
+```
+
+**Kombinace všech možností:**
+```bash
+python -m src.cli generate hireling --type 6 --name "Válečnice Jana" --gender female --save jana.json
+```
+
+#### 2.3.3 Ukázka výstupu
+
+```
+┌──────────────────────────────── Sir Pepřík ─────────────────────────────────┐
+│                                                                             │
+│  Denní mzda: 25 ď                                                           │
+│                                                                             │
+│  ⚔️ Vlastnosti:                                                              │
+│    Síla:       6                                                            │
+│    Mrštnost:   6                                                            │
+│    Vůle:       5                                                            │
+│    BO:        1/1                                                           │
+│                                                                             │
+│  🎒 Inventář:                                                               │
+│    [   ] [   ] [   ]    (packy + tělo)                                      │
+│    [   ] [   ] [   ]    (batoh)                                             │
+│                                                                             │
+│  📊 Postup:                                                                 │
+│    Level: 1  |  XP: 0/1000                                                  │
+│    Morálka: neutrální                                                       │
+│                                                                             │
+│  📍 Dostupnost:                                                             │
+│    3 pomocníci tohoto typu jsou k dispozici                                 │
+│                                                                             │
+│  Poznámky:                                                                  │
+│    Šlechtický válečník                                                      │
+│                                                                             │
+└────────────────────────────────── ⚔️ Rytíř ──────────────────────────────────┘
+```
+
+#### 2.3.4 Rozdíly mezi generátory
+
+**Character Generator** (`generate character`):
+- Pro hráčské postavy
+- Plné statistiky + inventář s výbavou podle původu
+- Rodné znamení, barva a vzor srsti
+- Použití: Tvorba PC na začátku kampaně
+
+**NPC Generator** (`generate npc`):
+- Pro nehráčské postavy (DM tool)
+- ŽÁDNÉ bojové statistiky
+- Osobnost, motivace, společenské postavení
+- Použití: Rychlá příprava roleplay NPC během hry
+
+**Hireling Generator** (`generate hireling`):
+- Pro pronajímatelné pomocníky
+- PLNÉ bojové statistiky (HP, STR/DEX/WIL)
+- Prázdný inventář (6 slotů)
+- Denní mzda, level, XP, morálka
+- Použití: Najímání pomocníků pro party
+
+---
+
+### 2.4 Hody kostkami
 
 **Hlavní příkaz:**
 ```bash
@@ -183,7 +450,7 @@ python -m src.cli roll-dice <kostka>
 **Co to dělá:**
 Hodí zadanou kostkou a zobrazí výsledek.
 
-#### 2.2.1 Podporované kostky
+#### 2.3.1 Podporované kostky
 
 **Základní kostky:**
 ```bash
@@ -207,7 +474,7 @@ python -m src.cli roll-dice 4d4   # 4× k4
 python -m src.cli roll-dice d66   # k66 (11-66, pro tabulky)
 ```
 
-#### 2.2.2 Ukázka výstupu
+#### 2.3.2 Ukázka výstupu
 
 ```
 Hod d20:
@@ -222,7 +489,7 @@ Výsledek: 10
 
 ---
 
-### 2.3 Testy vlastností
+### 2.5 Testy vlastností
 
 **Hlavní příkaz:**
 ```bash
@@ -232,7 +499,7 @@ python -m src.cli test <hodnota>
 **Co to dělá:**
 Roll-under test - hodí k20, úspěch pokud je výsledek ≤ hodnota vlastnosti.
 
-#### 2.3.1 Možnosti příkazu
+#### 2.4.1 Možnosti příkazu
 
 **Základní test:**
 ```bash
@@ -248,7 +515,7 @@ python -m src.cli test 8 -m -3
 Cílové číslo = vlastnost + modifikátor
 `test 10 --modifier 2` → cíl 12
 
-#### 2.3.2 Ukázka výstupu
+#### 2.4.2 Ukázka výstupu
 
 ```
 Test vlastnosti:
@@ -266,7 +533,7 @@ NEÚSPĚCH (15 > 10)
 
 ---
 
-### 2.4 Help a nápověda
+### 2.6 Help a nápověda
 
 **Zobrazit všechny příkazy:**
 ```bash
@@ -457,6 +724,67 @@ json_str = CharacterGenerator.to_json(char)
 
 ---
 
+#### 📄 `src/generators/npc.py` - Generátor NPC
+
+**Co to je:**
+Generátor náhodných NPC (nehráčských myší) pro rychlé použití během hry.
+
+**Hlavní třída: `NPCGenerator`**
+
+**Statické metody:**
+- `generate_name(gender="male")` → vygeneruj náhodné jméno
+- `generate_social_status()` → určí společenské postavení a platbu
+- `generate_birthsign()` → rodné znamení s povahovým rysem
+- `generate_appearance()` → vzhled (k20)
+- `generate_quirk()` → zvláštnost (k20)
+- `generate_desire()` → tužba/motivace (k20)
+- `generate_relationship()` → vztah k jiné myši (k20)
+- `generate_reaction()` → reakce při setkání (2k6)
+- `create(name=None, gender="male")` → **hlavní metoda** - vytvoř celé NPC
+  - Vrací: NPC instance
+- `to_dict(npc)` → konvertuj NPC do dictionary
+- `to_json(npc)` → konvertuj NPC do JSON stringu
+
+**Status:** ✅ HOTOVO (Fáze 3A)
+
+**Příklad použití v kódu:**
+```python
+from src.generators.npc import NPCGenerator
+
+# Vygeneruj náhodné NPC
+npc = NPCGenerator.create()
+
+# S vlastním jménem
+npc = NPCGenerator.create(name="Strážný")
+
+# Ženské NPC
+npc = NPCGenerator.create(gender="female")
+
+# Export do JSON
+json_str = NPCGenerator.to_json(npc)
+```
+
+**Postup generování:**
+1. Generuj/použij jméno (k100 + k20)
+2. Hoď k6 pro společenské postavení
+3. Hoď k6 pro rodné znamení
+4. Hoď k20 pro vzhled
+5. Hoď k20 pro zvláštnost
+6. Hoď k20 pro tužbu
+7. Hoď k20 pro vztah
+8. Hoď 2k6 pro reakci
+9. Vrať NPC objekt
+
+**Datové zdroje:**
+- `data/core/npc_social_status.json` - 6 úrovní postavení (k6)
+- `data/core/npc_appearance.json` - 20 vzhledů (k20)
+- `data/core/npc_quirk.json` - 20 zvláštností (k20)
+- `data/core/npc_desire.json` - 20 tužeb (k20)
+- `data/core/npc_relationship.json` - 20 vztahů (k20)
+- `data/core/npc_reaction.json` - 5 reakcí (2k6)
+
+---
+
 ### 3.3 CLI - Příkazový řádek (`src/`)
 
 #### 📄 `src/cli.py` - CLI rozhraní
@@ -563,6 +891,58 @@ JSON soubory s herními daty.
 
 ---
 
+#### 📄 `data/core/npc_*.json` - 6 NPC tabulek
+
+**Status:** ✅ HOTOVO (Fáze 3A)
+
+**Soubory:**
+1. **npc_social_status.json** - Společenské postavení (k6)
+2. **npc_appearance.json** - Vzhled (k20)
+3. **npc_quirk.json** - Zvláštnost (k20)
+4. **npc_desire.json** - Po čem touží (k20)
+5. **npc_relationship.json** - Vztah k jiné myši (k20)
+6. **npc_reaction.json** - Reakce při setkání (2k6)
+
+**Struktura příkladu (npc_social_status.json):**
+```json
+{
+  "metadata": {
+    "source": "docs/knowledge_base/16_RANDOM_TABLES.md",
+    "description": "Společenské postavení NPC myší",
+    "dice": "d6"
+  },
+  "social_statuses": [
+    {
+      "roll": 1,
+      "status": "Chuďas",
+      "payment": "k6 ď"
+    },
+    ...
+  ]
+}
+```
+
+**Lookup:** Podle hodu kostky (k6, k20, nebo 2k6)
+
+---
+
+#### 📄 Rozšířené NPC tabulky - 7 souborů
+
+**Status:** ✅ HOTOVO (Fáze 3A)
+
+**Soubory:**
+1. **hireling_types.json** - 9 typů pronajímatelných pomocníků + statistiky
+2. **competitive_mice.json** - 6 konkurenčních myších dobrodruhů
+3. **cat_lords.json** - 6 kočičích pánů a paní
+4. **rat_gangs.json** - 6 krysích gangů
+5. **owl_wizards.json** - 6 sovích čarodějů
+6. **frog_knights.json** - 6 žabích rytířů
+7. **adventure_seeds.json** - 36 semínek dobrodružství (k66 tabulka)
+
+**Použití:** Připraveno pro budoucí rozšíření NPC generátoru (hirelings, předpřipravené NPC, adventure hooks)
+
+---
+
 ## 4. Příklady použití
 
 ### Scénář 1: Vytvořit 3 postavy pro novou kampaň
@@ -626,26 +1006,30 @@ python -m src.cli generate character --json > export.json
 | Komponenta | Soubor | Popis | Status |
 |------------|--------|-------|--------|
 | **Dice roller** | `src/core/dice.py` | Všechny typy kostek, testy | ✅ HOTOVO |
-| **Data models** | `src/core/models.py` | Character, Item, NPC... | ✅ HOTOVO |
+| **Data models** | `src/core/models.py` | Character, NPC, Hireling | ✅ HOTOVO |
 | **Table loader** | `src/core/tables.py` | Načítání JSON dat | ✅ HOTOVO |
 | **Character gen** | `src/generators/character.py` | Generátor postav | ✅ HOTOVO |
+| **NPC gen** | `src/generators/npc.py` | Generátor NPC | ✅ HOTOVO |
 | **CLI** | `src/cli.py` | Příkazový řádek | ✅ HOTOVO |
 | **Origins data** | `data/core/origins.json` | 36 původů | ✅ HOTOVO |
 | **Names data** | `data/core/names_first.json` | 100 jmen | ✅ HOTOVO |
 | **Family names** | `data/core/names_family.json` | 20 příjmení | ✅ HOTOVO |
-| **Tests** | `tests/` | 7 testů | ✅ HOTOVO |
+| **NPC data** | `data/core/npc_*.json` | 6 NPC tabulek | ✅ HOTOVO |
+| **Extended NPC** | `data/core/hireling_types.json` atd. | 7 rozšířených tabulek | ✅ HOTOVO |
+| **Tests** | `tests/` | 26 testů (7 char + 19 npc) | ✅ HOTOVO |
 
 **Dokončené fáze:**
 - ✅ **Fáze 1:** Data extraction (2025-10-29)
 - ✅ **Fáze 2:** Character Generator (2025-10-29)
+- ✅ **Fáze 3A:** NPC Generator (2025-10-31)
 
 ### ❌ Co ještě chybí
 
-**Fáze 3:** Další generátory
+**Fáze 3B:** Další generátory
 - ❌ Settlement Generator (generátor sídel)
 - ❌ Hex Generator (generátor hexů pro hexcrawl)
 - ❌ Weather Generator (generátor počasí)
-- ❌ NPC Generator (rozšířený)
+- ❌ Treasure Generator (generátor pokladů)
 - ❌ Dungeon Generator
 
 **Fáze 4:** Web interface

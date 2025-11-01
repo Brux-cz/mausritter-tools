@@ -8,8 +8,10 @@ from rich.table import Table
 from rich.panel import Panel
 from rich.text import Text
 from src.core.dice import roll, roll_with_details, attribute_test
-from src.core.models import Character
+from src.core.models import Character, NPC, Hireling
 from src.generators.character import CharacterGenerator
+from src.generators.npc import NPCGenerator
+from src.generators.hireling import HirelingGenerator
 
 # Fix Windows console encoding for Czech characters
 if sys.platform == 'win32':
@@ -176,6 +178,189 @@ def display_character(char: Character):
         title=title,
         subtitle=subtitle,
         border_style="cyan",
+        padding=(1, 2)
+    )
+
+    console.print("\n")
+    console.print(panel)
+    console.print("\n")
+
+
+@generate.command()
+@click.option("--name", "-n", help="Vlastní jméno NPC")
+@click.option("--gender", "-g", type=click.Choice(["male", "female"]), default="male", help="Pohlaví (pro správný tvar příjmení)")
+@click.option("--json", "-j", "output_json", is_flag=True, help="Výstup jako JSON")
+@click.option("--save", "-s", type=click.Path(), help="Uložit do souboru")
+def npc(name: str, gender: str, output_json: bool, save: str):
+    """
+    Vygeneruj náhodné NPC (nehráčskou postavu)
+
+    Příklady:
+        mausritter generate npc
+        mausritter generate npc --name "Pepřík"
+        mausritter generate npc --gender female
+        mausritter generate npc --json
+        mausritter generate npc --save npc.json
+    """
+    try:
+        # Generuj NPC
+        npc_obj = NPCGenerator.create(name=name, gender=gender)
+
+        if output_json:
+            # JSON výstup
+            output = NPCGenerator.to_json(npc_obj)
+            console.print(output)
+        else:
+            # Pěkný formátovaný výstup
+            display_npc(npc_obj)
+
+        # Uložení do souboru
+        if save:
+            with open(save, 'w', encoding='utf-8') as f:
+                f.write(NPCGenerator.to_json(npc_obj))
+            console.print(f"\n[green]✓[/green] Uloženo do {save}")
+
+    except Exception as e:
+        console.print(f"[bold red]Chyba:[/bold red] {e}", style="red")
+        import traceback
+        traceback.print_exc()
+
+
+def display_npc(npc_obj: NPC):
+    """
+    Zobraz NPC v pěkném formátu s Rich formátováním.
+
+    Args:
+        npc_obj: NPC instance k zobrazení
+    """
+    # Header - jméno
+    title = Text(npc_obj.name, style="bold magenta", justify="center")
+    subtitle = Text(f"🎭 {npc_obj.social_status}", style="dim italic", justify="center")
+
+    # Sestavení textu
+    npc_text = f"""[bold]Rodné znamení:[/bold]
+  {npc_obj.birthsign}
+
+[bold]Vzhled:[/bold]
+  {npc_obj.appearance}
+
+[bold]Zvláštnost:[/bold]
+  {npc_obj.quirk}
+
+[bold]Po čem touží:[/bold]
+  {npc_obj.desire}
+
+[bold]Vztah k jiné myši:[/bold]
+  {npc_obj.relationship}
+
+[bold]Reakce při setkání:[/bold]
+  {npc_obj.reaction}"""
+
+    # Platba za služby
+    if npc_obj.payment:
+        npc_text += f"\n\n[bold]Platba za služby:[/bold]\n  {npc_obj.payment}"
+
+    # Poznámky
+    if npc_obj.notes:
+        npc_text += f"\n\n[bold]Poznámky:[/bold]\n  {npc_obj.notes}"
+
+    # Vytvoř panel
+    panel = Panel(
+        npc_text,
+        title=title,
+        subtitle=subtitle,
+        border_style="magenta",
+        padding=(1, 2)
+    )
+
+    console.print("\n")
+    console.print(panel)
+    console.print("\n")
+
+
+@generate.command()
+@click.option("--type", "-t", "hireling_type", type=click.IntRange(1, 9), help="ID typu pomocníka (1-9)")
+@click.option("--name", "-n", help="Vlastní jméno pomocníka")
+@click.option("--gender", "-g", type=click.Choice(["male", "female"]), default="male", help="Pohlaví (pro správný tvar příjmení)")
+@click.option("--json", "-j", "output_json", is_flag=True, help="Výstup jako JSON")
+@click.option("--save", "-s", type=click.Path(), help="Uložit do souboru")
+def hireling(hireling_type: int, name: str, gender: str, output_json: bool, save: str):
+    """
+    Vygeneruj náhodného pomocníka (hireling)
+
+    Příklady:
+        python -m src.cli generate hireling
+        python -m src.cli generate hireling --type 6
+        python -m src.cli generate hireling --name "Válečník"
+        python -m src.cli generate hireling --gender female
+        python -m src.cli generate hireling --json
+        python -m src.cli generate hireling --save pomocnik.json
+    """
+    try:
+        # Generuj pomocníka
+        hireling_obj, availability = HirelingGenerator.create(
+            type_id=hireling_type,
+            name=name,
+            gender=gender
+        )
+
+        if output_json:
+            # JSON výstup
+            output = HirelingGenerator.to_json(hireling_obj)
+            console.print(output)
+        else:
+            # Pěkný formátovaný výstup
+            display_hireling(hireling_obj, availability)
+
+        # Uložení do souboru
+        if save:
+            with open(save, 'w', encoding='utf-8') as f:
+                f.write(HirelingGenerator.to_json(hireling_obj))
+            console.print(f"\n[green]✓[/green] Uloženo do {save}")
+
+    except Exception as e:
+        console.print(f"[bold red]Chyba:[/bold red] {e}", style="red")
+        import traceback
+        traceback.print_exc()
+
+
+def display_hireling(hireling_obj: Hireling, availability: int):
+    """Zobraz pomocníka v pěkném formátu"""
+
+    # Header - jméno
+    title = Text(hireling_obj.name, style="bold yellow", justify="center")
+    subtitle = Text(f"⚔️ {hireling_obj.type}", style="dim", justify="center")
+
+    # Vlastnosti a inventář
+    hireling_text = f"""[bold]Denní mzda:[/bold] {hireling_obj.daily_wage} ď
+
+[bold]⚔️ Vlastnosti:[/bold]
+  Síla:      {hireling_obj.strength:2d}
+  Mrštnost:  {hireling_obj.dexterity:2d}
+  Vůle:      {hireling_obj.willpower:2d}
+  BO:        {hireling_obj.hp}/{hireling_obj.hp}
+
+[bold]🎒 Inventář:[/bold]
+  [   ] [   ] [   ]    (packy + tělo)
+  [   ] [   ] [   ]    (batoh)
+
+[bold]📊 Postup:[/bold]
+  Level: {hireling_obj.level}  |  XP: {hireling_obj.experience}/1000
+  Morálka: {hireling_obj.morale}
+
+[bold]📍 Dostupnost:[/bold]
+  {availability} {'pomocník' if availability == 1 else 'pomocníci' if availability < 5 else 'pomocníků'} tohoto typu {'je' if availability == 1 else 'jsou'} k dispozici"""
+
+    # Poznámky (popis typu)
+    if hireling_obj.notes:
+        hireling_text += f"\n\n[bold]Poznámky:[/bold]\n  {hireling_obj.notes}"
+
+    # Vytvoř panel
+    panel = Panel(
+        hireling_text,
+        title=title,
+        subtitle=subtitle,
+        border_style="yellow",
         padding=(1, 2)
     )
 

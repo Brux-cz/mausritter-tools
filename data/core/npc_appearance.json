@@ -1,0 +1,90 @@
+{
+  "metadata": {
+    "source": "docs/knowledge_base/16_RANDOM_TABLES.md",
+    "description": "Vzhled NPC myši",
+    "dice": "d20",
+    "lookup_method": "roll"
+  },
+  "appearances": [
+    {
+      "roll": 1,
+      "text": "Zkroušený pohled"
+    },
+    {
+      "roll": 2,
+      "text": "Záplatované oblečení"
+    },
+    {
+      "roll": 3,
+      "text": "Věnec ze sedmikrásek"
+    },
+    {
+      "roll": 4,
+      "text": "Upatlané oblečení"
+    },
+    {
+      "roll": 5,
+      "text": "Velký plandající klobouk"
+    },
+    {
+      "roll": 6,
+      "text": "Kapsy plné semínek"
+    },
+    {
+      "roll": 7,
+      "text": "Hůlka z ohnuté větvičky"
+    },
+    {
+      "roll": 8,
+      "text": "Má rezavý špendlomeč"
+    },
+    {
+      "roll": 9,
+      "text": "Dlouhá zacuchaná srst"
+    },
+    {
+      "roll": 10,
+      "text": "Hodně, hodně stará"
+    },
+    {
+      "roll": 11,
+      "text": "Zafačovaný ocásek"
+    },
+    {
+      "roll": 12,
+      "text": "Ocásek omotaný pentlí"
+    },
+    {
+      "roll": 13,
+      "text": "Nemá ucho"
+    },
+    {
+      "roll": 14,
+      "text": "Dlouhé fousky"
+    },
+    {
+      "roll": 15,
+      "text": "Třpytivé oči"
+    },
+    {
+      "roll": 16,
+      "text": "Obrovský černý plášť"
+    },
+    {
+      "roll": 17,
+      "text": "Staré jizvy z boje"
+    },
+    {
+      "roll": 18,
+      "text": "Velmi mladá"
+    },
+    {
+      "roll": 19,
+      "text": "Oholená srst"
+    },
+    {
+      "roll": 20,
+      "text": "Zaplétaná srst"
+    }
+  ]
+}

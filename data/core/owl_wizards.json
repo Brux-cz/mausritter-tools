@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "source": "docs/knowledge_base/09_CREATURES.md",
+    "description": "Soví čarodějové - mocní ptačí mágové",
+    "dice": "d6",
+    "lookup_method": "roll"
+  },
+  "wizards": [
+    {
+      "roll": 1,
+      "name": "Bezalel",
+      "specialty": "Vyrábí mechanické služebníky"
+    },
+    {
+      "roll": 2,
+      "name": "Morgana",
+      "specialty": "Spolčená s vílím královstvím"
+    },
+    {
+      "roll": 3,
+      "name": "Prospero",
+      "specialty": "Vytváří služebníky kombinováním zvířat"
+    },
+    {
+      "roll": 4,
+      "name": "Krahujka",
+      "specialty": "Umí se změnit v jakéhokoli jiného ptáka"
+    },
+    {
+      "roll": 5,
+      "name": "Raistlin",
+      "specialty": "Poutá duchy do kouzel"
+    },
+    {
+      "roll": 6,
+      "name": "Saxana",
+      "specialty": "Lidská čarodějnice uvězněná v těle sovy"
+    }
+  ]
+}

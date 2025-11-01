@@ -1,0 +1,90 @@
+{
+  "metadata": {
+    "source": "docs/knowledge_base/16_RANDOM_TABLES.md",
+    "description": "Po čem NPC touží",
+    "dice": "d20",
+    "lookup_method": "roll"
+  },
+  "desires": [
+    {
+      "roll": 1,
+      "text": "Svoboda"
+    },
+    {
+      "roll": 2,
+      "text": "Bezpečí"
+    },
+    {
+      "roll": 3,
+      "text": "Útěk"
+    },
+    {
+      "roll": 4,
+      "text": "Vzrušení"
+    },
+    {
+      "roll": 5,
+      "text": "Moc"
+    },
+    {
+      "roll": 6,
+      "text": "Smysl"
+    },
+    {
+      "roll": 7,
+      "text": "Zdraví"
+    },
+    {
+      "roll": 8,
+      "text": "Bohatství"
+    },
+    {
+      "roll": 9,
+      "text": "Ochrana"
+    },
+    {
+      "roll": 10,
+      "text": "Láska"
+    },
+    {
+      "roll": 11,
+      "text": "Někoho chránit"
+    },
+    {
+      "roll": 12,
+      "text": "Jídlo"
+    },
+    {
+      "roll": 13,
+      "text": "Přátelství"
+    },
+    {
+      "roll": 14,
+      "text": "Odpočinek"
+    },
+    {
+      "roll": 15,
+      "text": "Vědomosti"
+    },
+    {
+      "roll": 16,
+      "text": "Krutost"
+    },
+    {
+      "roll": 17,
+      "text": "Krása"
+    },
+    {
+      "roll": 18,
+      "text": "Pomsta"
+    },
+    {
+      "roll": 19,
+      "text": "Sloužit"
+    },
+    {
+      "roll": 20,
+      "text": "Zábava"
+    }
+  ]
+}

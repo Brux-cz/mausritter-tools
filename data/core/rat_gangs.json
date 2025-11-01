@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "source": "docs/knowledge_base/09_CREATURES.md",
+    "description": "Krysí gangy - různé typy krysích band",
+    "dice": "d6",
+    "lookup_method": "roll"
+  },
+  "gangs": [
+    {
+      "roll": 1,
+      "name": "Tuhoši",
+      "description": "Líčí důmyslné zbastlené pasti"
+    },
+    {
+      "roll": 2,
+      "name": "Vodní krysy",
+      "description": "Zkušení řekoplavci"
+    },
+    {
+      "roll": 3,
+      "name": "Labáci",
+      "description": "Bizarní vzhled, kouzelné schopnosti"
+    },
+    {
+      "roll": 4,
+      "name": "Plechovkáři",
+      "description": "Kyrysy a přilbice z plechovek, zbroj 1"
+    },
+    {
+      "roll": 5,
+      "name": "Kryspáni",
+      "description": "Cylindry a zmuchlaná saka"
+    },
+    {
+      "roll": 6,
+      "name": "Králové",
+      "description": "Ocásky spletené do gordického uzlu"
+    }
+  ]
+}

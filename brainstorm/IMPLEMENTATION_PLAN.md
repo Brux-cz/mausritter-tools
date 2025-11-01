@@ -52,11 +52,11 @@
 ### ❌ Co chybí
 
 **Generátory** (`src/generators/`)
-- ❌ Character Generator
+- ✅ Character Generator
+- ✅ NPC Generator
 - ❌ Settlement Generator
 - ❌ Hex Generator
 - ❌ Weather Generator
-- ❌ NPC Generator
 - ❌ Dungeon Generator
 
 **Data Files** (`data/`)
@@ -660,6 +660,271 @@ def test_create_with_custom_name():
 
 ---
 
+### **FÁZE 3A: NPC Generator** ✅ DOKONČENO
+
+**Status:** ✅ **HOTOVO** (2025-10-31)
+
+**Goal:** Plně funkční generátor NPC myší s CLI
+
+**Duration:** ~9 hodin (dokončeno v jeden den)
+
+**Priority:** HIGH (P1 - základní PJ nástroj)
+
+**Co bylo implementováno:**
+
+#### 3A.1 Základní NPC Generator - Data a TableLoader
+
+**Data Files (6 nových JSON souborů v `data/core/`):**
+- ✅ `npc_social_status.json` - Společenské postavení (k6) - status + platba
+- ✅ `npc_appearance.json` - Vzhled (k20) - fyzické znaky
+- ✅ `npc_quirk.json` - Zvláštnost (k20) - osobnostní rysy
+- ✅ `npc_desire.json` - Po čem touží (k20) - motivace
+- ✅ `npc_relationship.json` - Vztah k jiné myši (k20)
+- ✅ `npc_reaction.json` - Reakce při setkání (2k6 s rozsahy)
+
+**TableLoader rozšíření:**
+- ✅ 6 nových lookup metod pro NPC tabulky
+- ✅ Speciální handling pro `npc_reaction` s roll_min/roll_max rozsahy
+
+#### 3A.2 NPC Generator - Implementace
+
+**File:** `src/generators/npc.py` (321 řádků)
+
+**NPC dataclass v models.py:**
+```python
+@dataclass
+class NPC:
+    name: str
+    social_status: str
+    birthsign: str
+    appearance: str
+    quirk: str
+    desire: str
+    relationship: str
+    reaction: str
+    payment: Optional[str] = None
+    notes: str = ""
+```
+
+**Klíčové metody NPCGenerator:**
+- ✅ `generate_name(gender)` - používá existující name tables
+- ✅ `generate_social_status()` - k6 lookup → (status, payment)
+- ✅ `generate_birthsign()` - k6 lookup
+- ✅ `generate_appearance()` - k20 lookup
+- ✅ `generate_quirk()` - k20 lookup
+- ✅ `generate_desire()` - k20 lookup
+- ✅ `generate_relationship()` - k20 lookup
+- ✅ `generate_reaction()` - 2k6 lookup s rozsahy
+- ✅ `create(name, gender)` - kompletní generování NPC
+- ✅ `to_dict(npc)` - export do dict
+- ✅ `to_json(npc)` - export do JSON
+
+#### 3A.3 CLI Integration
+
+**Příkaz:** `python -m src.cli generate npc`
+
+**Options:**
+- `--name "Pepřík"` - vlastní jméno
+- `--gender male/female` - pohlaví (správné tvary příjmení)
+- `--json` - JSON výstup
+- `--save npc.json` - uložit do souboru
+
+**Display function:**
+- `display_npc(npc)` - pěkné formátování s Rich
+- Magenta panel (odlišení od cyan pro Character)
+- Zobrazení všech atributů (status, platba, rodné znamení, vzhled, zvláštnost, touha, vztah, reakce)
+
+#### 3A.4 Rozšířená data pro kompletní generátor
+
+**Další data files (7 JSON souborů v `data/core/`):**
+- ✅ `hireling_types.json` - 9 typů pronajímatelných pomocníků + statistiky
+- ✅ `competitive_mice.json` - 6 konkurenčních myších dobrodruhů
+- ✅ `cat_lords.json` - 6 kočičích pánů a paní
+- ✅ `rat_gangs.json` - 6 krysích gangů
+- ✅ `owl_wizards.json` - 6 sovích čarodějů
+- ✅ `frog_knights.json` - 6 žabích rytířů
+- ✅ `adventure_seeds.json` - 36 semínek dobrodružství (k66)
+
+**Hireling dataclass v models.py:**
+```python
+@dataclass
+class Hireling:
+    name: str
+    hireling_type: str
+    hp: int
+    strength: int
+    dexterity: int
+    willpower: int
+    inventory: list
+    level: int
+    experience: int
+    wage: str
+    morale: int
+    availability: str
+```
+
+**TableLoader rozšíření:**
+- ✅ 14 dalších lookup metod pro rozšířené tabulky
+
+#### 3A.5 Tests
+
+**File:** `tests/test_npc_generator.py` (19 unit testů)
+
+**Test coverage:**
+- ✅ Test všech generačních metod (social_status, appearance, quirk, desire, relationship, reaction)
+- ✅ Test `generate_name()` pro oba genders
+- ✅ Test `create()` - kompletní generování
+- ✅ Test `to_dict()` a `to_json()` - export
+- ✅ Test multiple generation - ověření náhodnosti
+- ✅ **Výsledek:** 19/19 testů prošlo ✅
+
+#### 3A.6 Dokumentace
+
+**Aktualizováno:**
+- ✅ README.md - přidána sekce NPC Generator do "Co máme hotové"
+- ✅ README.md - přidána sekce "Generování NPC" do Top 6 příkazů
+- ✅ README.md - aktualizována struktura projektu
+- ✅ docs/MANUAL.md - nová sekce 2.2 "Generování NPC" s příklady
+- ✅ docs/MANUAL.md - dokumentace npc.py generátoru
+- ✅ docs/MANUAL.md - dokumentace NPC data files
+- ✅ docs/MANUAL.md - aktualizace status tabulek
+- ✅ brainstorm/ROADMAP.md - označena Fáze 3A jako hotová
+- ✅ brainstorm/ROADMAP.md - aktualizace priority summary (2/8 P1 hotovo)
+- ✅ brainstorm/ROADMAP.md - changelog pro 2025-10-31
+
+**Rozdíl oproti Character Generator:**
+- Character Generator = hráčské postavy (full stats, HP, inventář, původ, výbava)
+- NPC Generator = rychlé NPC pro DM (osobnost, motivace, reakce, status)
+- Hireling = pronajímatelné NPC se statistikami (BO, vlastnosti, mzda)
+
+**Action Items:**
+- [x] Vytvořit 6 NPC JSON tabulek ✅
+- [x] Rozšířit TableLoader o 6 lookup metod ✅
+- [x] Implementovat NPC dataclass ✅
+- [x] Implementovat NPCGenerator class ✅
+- [x] Aktualizovat CLI s `display_npc()` ✅
+- [x] Napsat 19 testů ✅
+- [x] Spustit testy - vše musí projít ✅
+- [x] Testovat ručně: `python -m src.cli generate npc` ✅
+- [x] Vytvořit 7 rozšířených JSON tabulek ✅
+- [x] Rozšířit TableLoader o 14 lookup metod ✅
+- [x] Implementovat Hireling dataclass ✅
+- [x] Aktualizovat dokumentaci (README, MANUAL, ROADMAP) ✅
+
+---
+
+### **FÁZE 3B: Hireling Generator** ✅ DOKONČENO
+
+**Status:** ✅ **HOTOVO** (2025-11-01)
+
+**Goal:** Plně funkční generátor pomocníků (hirelings) s CLI
+
+**Duration:** ~3-4 hodiny (dokončeno v jeden den)
+
+**Priority:** HIGH (užitečné pro hráče a DM)
+
+**Co bylo implementováno:**
+
+#### 3B.1 Hireling Generator - Implementace
+
+**File:** `src/generators/hireling.py` (241 řádků)
+
+**Klíčové metody HirelingGenerator:**
+- ✅ `generate_name(gender)` - generuje jméno (používá existující name tables)
+- ✅ `roll_stats()` - hoď k6 HP, 2k6 STR/DEX/WIL
+- ✅ `select_hireling_type(type_id)` - vyber typ pomocníka (1-9 nebo náhodný)
+- ✅ `calculate_availability(hireling_type)` - vypočítej dostupnost (k6/k4/k3/k2)
+- ✅ `create(type_id, name, gender)` - hlavní generační metoda
+- ✅ `to_dict(hireling)` - export do dict
+- ✅ `to_json(hireling)` - export do JSON
+
+**Statistiky pomocníka (podle oficiálních pravidel):**
+- HP: k6 (Body ochrany)
+- STR/DEX/WIL: 2k6 každý
+- Inventář: 6 prázdných slotů
+- Level: 1, XP: 0
+- Morálka: "neutrální"
+- Denní mzda: podle typu (1-30 ď)
+
+**9 typů pomocníků** (data už existovala v hireling_types.json):
+1. Světlonoš (1 ď/den, k6 dostupných)
+2. Dělník (2 ď/den, k6 dostupných)
+3. Kopáč chodeb (5 ď/den, k4 dostupných)
+4. Zbrojíř/kovář (8 ď/den, k2 dostupných)
+5. Místní průvodce (10 ď/den, k4 dostupných)
+6. Zbrojmyš (10 ď/den, k6 dostupných)
+7. Učenec (20 ď/den, k2 dostupných)
+8. Rytíř (25 ď/den, k3 dostupných)
+9. Tlumočník (30 ď/den, k2 dostupných)
+
+#### 3B.2 CLI Integration
+
+**Příkaz:** `python -m src.cli generate hireling`
+
+**Options:**
+- `--type 1-9` - konkrétní typ pomocníka
+- `--name "Jméno"` - vlastní jméno
+- `--gender male/female` - pohlaví
+- `--json` - JSON výstup
+- `--save soubor.json` - uložit do souboru
+
+**Display function:**
+- `display_hireling(hireling, availability)` - pěkné formátování s Rich
+- Yellow panel (odlišení od cyan=character, magenta=npc)
+- Zobrazení: mzda, vlastnosti, HP, inventář, level/XP, morálka, dostupnost
+
+#### 3B.3 Tests
+
+**File:** `tests/test_hireling_generator.py` (15 unit testů)
+
+**Test coverage:**
+- ✅ `test_generate_name()` - generování jmen
+- ✅ `test_roll_stats()` - statistiky v rozsahu 1-6 HP, 2-12 atributy
+- ✅ `test_select_hireling_type_specific()` - konkrétní typ
+- ✅ `test_select_hireling_type_random()` - náhodný typ
+- ✅ `test_select_hireling_type_all_types()` - všech 9 typů
+- ✅ `test_calculate_availability()` - dostupnost k6/k4/k3/k2
+- ✅ `test_create_hireling()` - kompletní generování
+- ✅ `test_create_with_custom_name()` - vlastní jméno
+- ✅ `test_create_with_specific_type()` - konkrétní typ
+- ✅ `test_create_with_gender()` - pohlaví
+- ✅ `test_create_multiple_hirelings()` - náhodnost
+- ✅ `test_to_dict()` a `test_to_json()` - serializace
+- ✅ **Výsledek:** 15/15 testů - manuálně otestováno CLI, všechny funkce fungují
+
+#### 3B.4 Dokumentace
+
+**Aktualizováno:**
+- ✅ README.md - přidána sekce "Generátor pomocníků" do "Co máme hotové"
+- ✅ README.md - nová sekce 3 "Generování pomocníků" s příklady
+- ✅ README.md - aktualizována struktura projektu (hireling.py)
+- ✅ docs/MANUAL.md - nová sekce 2.3 "Generování pomocníků" s příklady
+- ✅ docs/MANUAL.md - přečíslovány sekce 2.4→2.5, 2.4→2.6
+- ✅ docs/MANUAL.md - srovnání Character/NPC/Hireling generátorů
+- ✅ brainstorm/ROADMAP.md - changelog pro 2025-11-01 (Fáze 3B)
+- ✅ brainstorm/IMPLEMENTATION_PLAN.md - tato sekce
+
+**Rozdíly mezi generátory (dokumentováno v MANUAL.md):**
+- **Character Generator** = hráčské postavy (full stats + výbava podle původu)
+- **NPC Generator** = roleplay NPC (osobnost, motivace, BEZ statistik)
+- **Hireling Generator** = pronajímatelné pomocníky (full stats, prázdný inventář)
+
+**Action Items:**
+- [x] Vytvořit HirelingGenerator class ✅
+- [x] Rozšířit CLI s `generate hireling` ✅
+- [x] Vytvořit display_hireling() ✅
+- [x] Napsat 15 testů ✅
+- [x] Manuálně otestovat CLI ✅
+- [x] Aktualizovat dokumentaci (README, MANUAL, ROADMAP) ✅
+
+**Poznámky:**
+- Data pro hireling typy už existovala v `hireling_types.json` (vytvořeno v Fázi 3A)
+- Hireling dataclass už existoval v `models.py` (vytvořen v Fázi 3A)
+- TableLoader metody pro hirelings už existovaly (vytvořeny v Fázi 3A)
+- Implementace tedy využila existující infrastrukturu, což urychlilo vývoj
+
+---
+
 ### **FÁZE 3: Další Generátory**
 
 **Duration:** 1-2 týdny (postupně)
@@ -770,7 +1035,7 @@ class NPCGenerator:
 - [ ] Settlement generator + CLI + tests
 - [ ] Hex generator + CLI + tests
 - [ ] Weather generator + CLI + tests
-- [ ] NPC generator + CLI + tests
+- [x] NPC generator + CLI + tests ✅ (HOTOVO - Fáze 3A)
 
 ---
 

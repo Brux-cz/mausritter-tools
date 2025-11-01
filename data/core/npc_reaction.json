@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "source": "docs/knowledge_base/08_GM_GUIDE.md",
+    "description": "Reakce NPC při setkání",
+    "dice": "2d6",
+    "lookup_method": "range"
+  },
+  "reactions": [
+    {
+      "roll": 2,
+      "reaction": "Agresivní",
+      "question": "Jak ho myši rozzlobily?"
+    },
+    {
+      "roll_min": 3,
+      "roll_max": 5,
+      "reaction": "Nepřátelská",
+      "question": "Jak se dá uchlácholit?"
+    },
+    {
+      "roll_min": 6,
+      "roll_max": 8,
+      "reaction": "Nejistá",
+      "question": "Jak si ho můžou naklonit?"
+    },
+    {
+      "roll_min": 9,
+      "roll_max": 11,
+      "reaction": "Povídavá",
+      "question": "Nemůže mít něco na obchod nebo výměnu?"
+    },
+    {
+      "roll": 12,
+      "reaction": "Nápomocná",
+      "question": "Jak může myším pomoct?"
+    }
+  ]
+}
