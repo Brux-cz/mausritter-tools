@@ -288,3 +288,48 @@ class AdventureSeed:
     problem: str  # Co se stalo (CO)
     complication: str  # Co to zhoršuje (JAK)
     notes: str = ""  # Volitelné poznámky GM
+
+
+@dataclass
+class Tavern:
+    """
+    Model pro hospodu/hostinec.
+
+    Hospody se objevují ve vískách a větších osadách.
+    Poskytují jídlo, pití a přístřeší pro místní i pocestné.
+
+    Generování:
+    - Název: 2× k12 (přídavné jméno + podstatné jméno)
+    - Formát: "U [Část1] [Část2]" (např. "U Bílého Brouka")
+    - Specialita: 1× k12 (pokrm nebo nápoj)
+    """
+    name_part1: str  # Přídavné jméno (k12)
+    name_part2: str  # Podstatné jméno (k12)
+    specialty: str  # Specialita hostince (k12)
+    roll_part1: int = 0  # Hod k12 pro část 1
+    roll_part2: int = 0  # Hod k12 pro část 2
+    roll_specialty: int = 0  # Hod k12 pro specialitu
+
+    @property
+    def full_name(self) -> str:
+        """Vrať plný název hospody ve formátu 'U [Část1] [Část2]'"""
+        # Skloňování podle gramatiky (genitiv)
+        part1_genitive = self._to_genitive(self.name_part1)
+        part2_genitive = self._to_genitive(self.name_part2)
+        return f"U {part1_genitive} {part2_genitive}"
+
+    def _to_genitive(self, word: str) -> str:
+        """Převeď slovo do genitivu (2. pádu)"""
+        # Jednoduchá pravidla pro genitiv
+        if word.endswith("ý"):
+            return word[:-1] + "ého"
+        elif word.endswith("í"):
+            return word[:-1] + "ího"
+        elif word in ["Brouk", "Špalek", "Sýr", "Orel", "Červ", "Rytíř"]:
+            return word + "a"
+        elif word in ["Liška", "Krysa", "Včela", "Lucerna", "Růže"]:
+            return word[:-1] + "y"
+        elif word == "Semínko":
+            return "Semínka"
+        else:
+            return word

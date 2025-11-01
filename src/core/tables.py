@@ -606,6 +606,83 @@ class TableLoader:
 
         return None
 
+    # === TAVERN TABLES ===
+
+    @staticmethod
+    def get_tavern_name_part1() -> Dict[str, Any]:
+        """Načte tabulku první části názvů hospod (přídavná jména)."""
+        return TableLoader.load_table("core/tavern_name_part1.json")
+
+    @staticmethod
+    def get_tavern_name_part2() -> Dict[str, Any]:
+        """Načte tabulku druhé části názvů hospod (podstatná jména)."""
+        return TableLoader.load_table("core/tavern_name_part2.json")
+
+    @staticmethod
+    def get_tavern_specialty() -> Dict[str, Any]:
+        """Načte tabulku specialit hospod."""
+        return TableLoader.load_table("core/tavern_specialty.json")
+
+    @staticmethod
+    def lookup_tavern_name_part1(roll: int) -> Optional[str]:
+        """
+        Najde první část názvu hospody podle hodu k12.
+
+        Args:
+            roll: Výsledek hodu k12 (1-12)
+
+        Returns:
+            String s přídavným jménem nebo None pokud nenalezeno
+        """
+        data = TableLoader.get_tavern_name_part1()
+        items = data.get("items", [])
+
+        for item in items:
+            if item["roll"] == roll:
+                return item["text"]
+
+        return None
+
+    @staticmethod
+    def lookup_tavern_name_part2(roll: int) -> Optional[str]:
+        """
+        Najde druhou část názvu hospody podle hodu k12.
+
+        Args:
+            roll: Výsledek hodu k12 (1-12)
+
+        Returns:
+            String s podstatným jménem nebo None pokud nenalezeno
+        """
+        data = TableLoader.get_tavern_name_part2()
+        items = data.get("items", [])
+
+        for item in items:
+            if item["roll"] == roll:
+                return item["text"]
+
+        return None
+
+    @staticmethod
+    def lookup_tavern_specialty(roll: int) -> Optional[str]:
+        """
+        Najde specialitu hospody podle hodu k12.
+
+        Args:
+            roll: Výsledek hodu k12 (1-12)
+
+        Returns:
+            String se specialitou nebo None pokud nenalezeno
+        """
+        data = TableLoader.get_tavern_specialty()
+        items = data.get("items", [])
+
+        for item in items:
+            if item["roll"] == roll:
+                return item["text"]
+
+        return None
+
     # === WEATHER / POČASÍ ===
 
     @staticmethod
@@ -917,6 +994,8 @@ class TableLoader:
 
 
 # Convenience funkce pro rychlé použití
+# === SHORTCUTS ===
+
 def load_origins() -> Dict[str, Any]:
     """Shortcut pro načtení tabulky původů."""
     return TableLoader.get_origins()

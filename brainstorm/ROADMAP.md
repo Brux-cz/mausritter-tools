@@ -188,13 +188,17 @@ Tyto generátory se používají **při přípravě kampaně** a tvorby hexcrawl
 **Tabulky:** Velikost (2k6 nižší), Zřízení (k6+velikost), Podrobnosti (k20), Živnost (k20), Prvky (k20), Události (k20), Název (4×k12)
 **Priorita:** Vysoká - klíčové pro hexcrawl
 
-#### 10. 📝 Generátor hospod a hostinců
+#### 10. ✅ Generátor hospod a hostinců
 **Název:** Tavern Generator / Generátor hospod
 **Popis:** Název hospody (2×k12), specialita hostince (k12)
 **Zdroj:** `12_SETTLEMENTS.md` (řádky 240-296)
 **Složitost:** ⭐ Velmi jednoduchá
+**Stav:** ✅ **HOTOVO** - Fáze 4B (2025-11-02)
 **Tabulky:** Část 1 (k12), Část 2 (k12), Specialita (k12)
 **Priorita:** Nízká - doplněk Settlement Generatoru
+**CLI:** `python -m src.cli generate tavern --json`
+**Testy:** 14 unit testů (všechny prošly ✅)
+**Poznámka:** Bottom-up implementace - nejmenší komponenta Settlement Generatoru
 
 #### 11. 📝 Generátor hexů
 **Název:** Hex Generator / Generátor obsahu hexů
@@ -624,7 +628,7 @@ Nápady, které zatím nejsou v hlavním roadmap:
 
 ## 📊 Aktuální stav projektu
 
-**Celková dokončenost:** ~29% (8/28 generátorů, **100% P1** ✅) 🎯
+**Celková dokončenost:** ~32% (9/28 generátorů, **100% P1** ✅) 🎯
 
 | Feature               | Status | Progress |
 |-----------------------|--------|----------|
@@ -638,9 +642,10 @@ Nápady, které zatím nejsou v hlavním roadmap:
 | Treasure Generator    | ✅     | 100%     |
 | Adventure Seeds       | ✅     | 100%     |
 | **P1 Priority**       | **✅** | **100% (8/8)** |
-| Settlement Generator  | 💡     | 0%       |
+| Tavern Generator      | ✅     | 100%     |
+| Settlement Generator  | 🚧     | 0%       |
 | Hex Generator         | 💡     | 0%       |
-| Documentation         | 🚧     | 70%      |
+| Documentation         | 🚧     | 75%      |
 | Web Interface         | 💡     | 0%       |
 
 ---
@@ -662,6 +667,24 @@ Pokud chceš přidat novou feature:
 ---
 
 ## 📝 Changelog
+
+### 2025-11-02 - Fáze 4B dokončena - Tavern Generator 🏠
+- ✅ Implementován Tavern Generator (generátor hospod a hostinců)
+- ✅ TavernGenerator class v src/generators/tavern.py
+- ✅ 3 JSON datové soubory v data/core/:
+  - tavern_name_part1.json - Přídavná jména (k12, 12 položek)
+  - tavern_name_part2.json - Podstatná jména (k12, 12 položek)
+  - tavern_specialty.json - Speciality (k12, 12 pokrmů/nápojů)
+- ✅ Tavern dataclass přidán do models.py
+- ✅ TableLoader rozšířen o 6 nových metod pro tavern tabulky
+- ✅ CLI příkaz `generate tavern` s --json, --save
+- ✅ Automatické skloňování do genitivu ("U Bílého Brouka")
+- ✅ Color-coded výstup s panely (🏠 název, 🍲 specialita)
+- ✅ roll_d12() přidáno do dice.py
+- ✅ 14 unit testů v test_tavern_generator.py (všechny prošly ✅)
+- ✅ Dokumentace aktualizována (README.md sekce 9, ROADMAP.md)
+- ✅ **Bottom-up přístup:** Tavern jako nejmenší komponenta Settlement
+- ✅ **Celková dokončenost: ~32% (9/28 generátorů)**
 
 ### 2025-11-01 - Fáze 4A dokončena - P1 COMPLETE! 🎉
 - ✅ Implementován Adventure Seeds Generator (generátor semínek dobrodružství)

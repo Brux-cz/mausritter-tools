@@ -12,11 +12,12 @@ Python nástroje a generátory pro stolní hru **Mausritter** - OSR TTRPG o myš
 - ✅ **Generátor kouzel** - náhodná kouzla pro objevování pokladů (2d8 tabulka, 16 kouzel)
 - ✅ **Generátor pokladů** - kompletní treasure hoard (2-6× k20, kouzelné meče, kouzla, předměty)
 - ✅ **Generátor semínek dobrodružství** - kombinace tvora, problému a komplikace (k66, 36 semínek)
+- ✅ **Generátor hospod** - názvy a speciality hospod (2× k12 + k12, pro vísky a větší osady)
 - ✅ **Hody kostkami** - všechny typy kostek (d4, d6, d8, d10, d12, d20, d66)
 - ✅ **Testy vlastností** - roll-under d20 mechanika
 - ✅ **JSON databáze** - původy, jména, NPC, pomocníci, počasí, kouzla, poklady, nástroje, semínka dobrodružství
 
-**Status:** Fáze 1, 2, 3A, 3B, 3C, 3D, 3E, 3F a 4A dokončeny (2025-11-01) - **P1 COMPLETE (100%)**
+**Status:** Fáze 1, 2, 3A-F, 4A-B dokončeny (2025-11-02) - **P1 COMPLETE (100%)** + Tavern ✅
 
 ---
 
@@ -270,7 +271,36 @@ python -m src.cli generate adventure --save seed.json
 - Otázky pro rozvíjení (Kde? Proč? Jak? Co když?)
 - Nápady na motivace, vzhled, odměnu
 
-### 🎲 9. Hody kostkami
+### 🏠 9. Generování hospod
+```bash
+# Základní hospoda
+python -m src.cli generate tavern
+
+# JSON výstup
+python -m src.cli generate tavern --json
+
+# Uložit do souboru
+python -m src.cli generate tavern --save hospoda.json
+```
+
+**Co je hospoda:**
+- **Název** (2× k12) - "U [Přídavné jméno] [Podstatné jméno]"
+- **Specialita** (k12) - Pokrm nebo nápoj
+
+**Kdy se objevují:**
+- Ve vískách (50-150 myší) a větších osadách
+- Poskytují jídlo, pití a přístřeší
+
+**Příklady:**
+- U Bílého Brouka - Pečená kořeněná mrkev
+- U Černého Orela - Tlustý rybí řízek
+- U Přátelského Sýra - Semínka pražená v medu
+
+**Součást:**
+- Tavern je součást Settlement Generatoru
+- Používá se pro vísky a větší osady
+
+### 🎲 10. Hody kostkami
 ```bash
 python -m src.cli roll-dice d6
 python -m src.cli roll-dice d20
@@ -278,19 +308,19 @@ python -m src.cli roll-dice 2d6
 python -m src.cli roll-dice d66
 ```
 
-### 🎯 10. Test vlastnosti
+### 🎯 11. Test vlastnosti
 ```bash
 python -m src.cli test 12
 python -m src.cli test 10 --modifier 2
 ```
 
-### ❓ 11. Zobrazit help
+### ❓ 12. Zobrazit help
 ```bash
 python -m src.cli --help
 python -m src.cli generate --help
 ```
 
-### 🧪 12. Spustit testy
+### 🧪 13. Spustit testy
 ```bash
 python test_character_simple.py
 python test_tableloader.py
@@ -299,6 +329,7 @@ python -m tests.test_reaction_generator
 python -m tests.test_spell_generator
 python -m tests.test_treasure_generator
 python -m tests.test_adventure_generator
+python -m tests.test_tavern_generator
 ```
 
 ---

@@ -1,0 +1,24 @@
+{
+  "metadata": {
+    "name": "Tavern Name - Part 1",
+    "description": "První část názvu hostince (přídavná jména)",
+    "source": "docs/knowledge_base/12_SETTLEMENTS.md (řádky 246-262)",
+    "dice": "d12",
+    "category": "settlement",
+    "subcategory": "tavern"
+  },
+  "items": [
+    { "roll": 1, "text": "Bílý" },
+    { "roll": 2, "text": "Zelený" },
+    { "roll": 3, "text": "Černý" },
+    { "roll": 4, "text": "Červený" },
+    { "roll": 5, "text": "Stříbrný" },
+    { "roll": 6, "text": "Křivý" },
+    { "roll": 7, "text": "Přátelský" },
+    { "roll": 8, "text": "Schovaný" },
+    { "roll": 9, "text": "Lstivý" },
+    { "roll": 10, "text": "Skleněný" },
+    { "roll": 11, "text": "Trnitý" },
+    { "roll": 12, "text": "Rozbitý" }
+  ]
+}

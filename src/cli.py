@@ -8,7 +8,7 @@ from rich.table import Table
 from rich.panel import Panel
 from rich.text import Text
 from src.core.dice import roll, roll_with_details, attribute_test
-from src.core.models import Character, NPC, Hireling, Weather, Reaction, Spell, TreasureHoard, TreasureItem, MagicSword, AdventureSeed
+from src.core.models import Character, NPC, Hireling, Weather, Reaction, Spell, TreasureHoard, TreasureItem, MagicSword, AdventureSeed, Tavern
 from src.generators.character import CharacterGenerator
 from src.generators.npc import NPCGenerator
 from src.generators.hireling import HirelingGenerator
@@ -17,6 +17,7 @@ from src.generators.reaction import ReactionGenerator
 from src.generators.spell import SpellGenerator
 from src.generators.treasure import TreasureGenerator
 from src.generators.adventure import AdventureSeedGenerator
+from src.generators.tavern import TavernGenerator
 
 # Fix Windows console encoding for Czech characters
 if sys.platform == 'win32':
@@ -992,6 +993,75 @@ def display_adventure_seed(seed: AdventureSeed, show_inspiration: bool = False):
 
         console.print(inspiration_panel)
         console.print("\n")
+
+
+@generate.command()
+@click.option("--json", "output_json", is_flag=True, help="Výstup v JSON formátu")
+@click.option("--save", type=str, help="Ulož do souboru")
+def tavern(output_json: bool, save: str):
+    """
+    Vygeneruj hospodu/hostinec.
+
+    Hospody se objevují ve vískách a větších osadách.
+    Poskytují jídlo, pití a přístřeší pro místní i pocestné.
+
+    Generuje:
+    - Název (2× k12): "U [Přídavné jméno] [Podstatné jméno]"
+    - Specialita (k12): Pokrm nebo nápoj
+    """
+    tavern_obj = TavernGenerator.create()
+
+    if output_json:
+        json_output = TavernGenerator.to_json(tavern_obj)
+        console.print(json_output)
+        if save:
+            with open(save, 'w', encoding='utf-8') as f:
+                f.write(json_output)
+            console.print(f"\n[green]Uloženo do {save}[/green]")
+        return
+
+    display_tavern(tavern_obj)
+
+    if save:
+        json_output = TavernGenerator.to_json(tavern_obj)
+        with open(save, 'w', encoding='utf-8') as f:
+            f.write(json_output)
+        console.print(f"\n[green]Uloženo do {save}[/green]")
+
+
+def display_tavern(tavern: Tavern):
+    """Zobraz hospodu v terminálu s barevným formátováním."""
+
+    # Panel s názvem hospody
+    name_panel = Panel(
+        f"[bold yellow]{tavern.full_name}[/bold yellow]",
+        title="🏠 HOSPODA",
+        title_align="left",
+        border_style="yellow",
+        padding=(1, 2)
+    )
+
+    console.print("\n")
+    console.print(name_panel)
+
+    # Specialita
+    specialty_text = Text()
+    specialty_text.append("🍲 Specialita: ", style="bold cyan")
+    specialty_text.append(tavern.specialty, style="white")
+
+    console.print(specialty_text)
+    console.print()
+
+    # Hody
+    rolls_text = Text()
+    rolls_text.append("🎲 Hody: ", style="dim")
+    rolls_text.append(f"{tavern.roll_part1}/{tavern.roll_part2} ", style="dim cyan")
+    rolls_text.append("(název), ", style="dim")
+    rolls_text.append(f"{tavern.roll_specialty} ", style="dim cyan")
+    rolls_text.append("(specialita)", style="dim")
+
+    console.print(rolls_text)
+    console.print("\n")
 
 
 @main.group()
