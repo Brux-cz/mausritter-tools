@@ -239,10 +239,10 @@ Tyto generátory **přidávají rozmanitost** do setkání s tvory. Jsou volitel
 
 | Priorita | Počet | Hotovo | Zbývá | Popis |
 |----------|-------|--------|-------|-------|
-| **P1 🔴** | 8 | 3 ✅ | 5 📝 | Základní PJ nástroje - nutné pro hru |
+| **P1 🔴** | 8 | 4 ✅ | 4 📝 | Základní PJ nástroje - nutné pro hru |
 | **P2 🟡** | 6 | 0 ✅ | 6 📝 | Nástroje pro tvorbu světa - důležité pro kampaň |
 | **P3 🟢** | 14 | 0 ✅ | 14 💡 | Varianty tvorů - volitelné, ale atmosférické |
-| **CELKEM** | **28** | **3** | **25** | |
+| **CELKEM** | **28** | **4** | **24** | |
 
 ### 🎯 Doporučené pořadí implementace (podle priorit z pravidel)
 
@@ -250,7 +250,7 @@ Tyto generátory **přidávají rozmanitost** do setkání s tvory. Jsou volitel
 1. ✅ Character Generator (HOTOVO)
 2. ✅ NPC Generator (HOTOVO)
 3. ✅ Weather Generator (HOTOVO) - velmi jednoduché, denní použití
-4. 📝 Reaction Roll - velmi jednoduché, časté použití
+4. ✅ Reaction Roll (HOTOVO) - velmi jednoduché, časté použití
 5. 📝 Treasure Generator - důležité pro odměny
 6. 📝 Magic Sword Generator - součást Treasure Gen
 7. 📝 Adventure Seeds - inspirace pro PJ
@@ -601,7 +601,7 @@ Nápady, které zatím nejsou v hlavním roadmap:
 
 ## 📊 Aktuální stav projektu
 
-**Celková dokončenost:** ~25%
+**Celková dokončenost:** ~28% (4/28 generátorů, 50% P1)
 
 | Feature               | Status | Progress |
 |-----------------------|--------|----------|
@@ -610,6 +610,7 @@ Nápady, které zatím nejsou v hlavním roadmap:
 | NPC Generator         | ✅     | 100%     |
 | Hireling Generator    | ✅     | 100%     |
 | Weather Generator     | ✅     | 100%     |
+| Reaction Roll         | ✅     | 100%     |
 | Settlement Generator  | 💡     | 0%       |
 | Hex Generator         | 💡     | 0%       |
 | Documentation         | 🚧     | 70%      |
@@ -634,6 +635,19 @@ Pokud chceš přidat novou feature:
 ---
 
 ## 📝 Changelog
+
+### 2025-11-01 - Fáze 3D dokončena
+- ✅ Implementován Reaction Roll Generator (generátor reakcí NPC/tvorů)
+- ✅ ReactionGenerator class v src/generators/reaction.py
+- ✅ Využívá existující data/core/npc_reaction.json (5 typů reakcí)
+- ✅ CLI příkaz `generate reaction` s --modifier, --json, --save
+- ✅ Podporuje modifikátory (+1 za dárek, -1 za agresi, atd.)
+- ✅ Color-coded výstup podle reakce (červená=Agresivní, zelená=Povídavá, atd.)
+- ✅ GM otázky pro každou reakci (inspirace k roleplayi)
+- ✅ Reaction dataclass přidán do models.py
+- ✅ 14 unit testů (všechny prošly ✅)
+- ✅ Dokumentace aktualizována (README.md, MANUAL.md sekce 2.5, ROADMAP.md)
+- ✅ P1 generátory: 50% hotovo (4/8) 🎯
 
 ### 2025-11-01 - Fáze 3C dokončena
 - ✅ Implementován Weather Generator (generátor počasí a sezónních událostí)

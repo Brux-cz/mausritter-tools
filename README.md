@@ -8,11 +8,12 @@ Python nástroje a generátory pro stolní hru **Mausritter** - OSR TTRPG o myš
 - ✅ **Generátor NPC** - rychlé vytváření nehráčských myší
 - ✅ **Generátor pomocníků** - generování hirelingů s plnými statistikami
 - ✅ **Generátor počasí** - generování počasí a sezónních událostí pro všechny čtyři roční období
+- ✅ **Generátor reakcí** - reakce NPC/tvorů při setkání (2k6 tabulka)
 - ✅ **Hody kostkami** - všechny typy kostek (d4, d6, d8, d10, d12, d20, d66)
 - ✅ **Testy vlastností** - roll-under d20 mechanika
 - ✅ **JSON databáze** - původy postav, jména, příjmení, NPC tabulky, hireling typy, počasí
 
-**Status:** Fáze 1, 2, 3A, 3B a 3C dokončeny (2025-11-01)
+**Status:** Fáze 1, 2, 3A, 3B, 3C a 3D dokončeny (2025-11-01)
 
 ---
 
@@ -145,6 +146,29 @@ python -m src.cli generate weather --save weather.json
 - **Podzim** - Silný vítr (2.78% nepříznivé)
 - **Zima** - Vánice, mráz (72% nepříznivé!)
 
+### 🎭 5. Generování reakcí
+```bash
+# Náhodná reakce NPC/tvora
+python -m src.cli generate reaction
+
+# S modifikátorem
+python -m src.cli generate reaction --modifier 1    # +1 za dárek
+python -m src.cli generate reaction -m -2           # -2 za agresi
+
+# JSON výstup
+python -m src.cli generate reaction --json
+
+# Uložit do souboru
+python -m src.cli generate reaction --save reaction.json
+```
+
+**Typy reakcí (2k6):**
+- **2** - Agresivní ⚔️
+- **3-5** - Nepřátelská 😠
+- **6-8** - Nejistá 🤔
+- **9-11** - Povídavá 😊
+- **12** - Nápomocná 💚
+
 ### 🎲 6. Hody kostkami
 ```bash
 python -m src.cli roll-dice d6
@@ -170,6 +194,7 @@ python -m src.cli generate --help
 python test_character_simple.py
 python test_tableloader.py
 python test_weather_generator.py
+python -m tests.test_reaction_generator
 ```
 
 ---
@@ -195,7 +220,8 @@ Obsahuje:
 | **Fáze 3A** | ✅ HOTOVO | NPC Generator (2025-10-31) |
 | **Fáze 3B** | ✅ HOTOVO | Hireling Generator (2025-11-01) |
 | **Fáze 3C** | ✅ HOTOVO | Weather Generator (2025-11-01) |
-| **Fáze 3D+** | 🚧 DALŠÍ | Další generátory (Settlement, Hex, Treasure, Maze) |
+| **Fáze 3D** | ✅ HOTOVO | Reaction Roll Generator (2025-11-01) |
+| **Fáze 3E+** | 🚧 DALŠÍ | Další generátory (Spell, Treasure, Adventure Seeds, Maze) |
 | **Fáze 4** | ❌ TODO | Web interface |
 
 ---

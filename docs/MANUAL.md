@@ -2,9 +2,9 @@
 
 Kompletní česká příručka pro práci s Mausritter Tools.
 
-**Verze:** 1.3
+**Verze:** 1.4
 **Datum:** 2025-11-01
-**Status:** Fáze 1, 2, 3A, 3B a 3C dokončeny
+**Status:** Fáze 1, 2, 3A, 3B, 3C a 3D dokončeny
 
 ---
 
@@ -564,7 +564,144 @@ python -m src.cli generate weather --season summer --with-event --save leto.json
 
 ---
 
-### 2.5 Hody kostkami
+### 2.5 Generování reakcí
+
+**Hlavní příkaz:**
+```bash
+python -m src.cli generate reaction
+```
+
+**Co to dělá:**
+Vygeneruje reakci NPC nebo tvora při setkání podle pravidel z 08_GM_GUIDE.md:
+- Hoď 2k6 pro určení počáteční dispozice
+- Poskytne GM otázku pro inspiraci k roleplayi
+- Umožňuje modifikátory podle kontextu
+
+**Kdy použít:**
+- Při setkání s tvorem, když není jasné jak bude reagovat
+- Pro určení počáteční nálady NPC vůči hráčům
+- Kdykoliv potřebuješ rychlé rozhodnutí o chování NPC
+
+#### 2.5.1 Možnosti příkazu
+
+**`--modifier` / `-m` - Modifikátor k hodu**
+```bash
+python -m src.cli generate reaction --modifier 1    # +1 pro příznivé okolnosti
+python -m src.cli generate reaction -m -2            # -2 pro nepříznivé okolnosti
+```
+
+**Běžné modifikátory:**
+- **+1** - Myši přinesly dárek nebo nabídly pomoc
+- **-1** - Myši jsou agresivní nebo rušivé
+- **-2** - Tvor byl nedávno napaden
+- **+2** - Tvor je ve výrazně dobré náladě
+
+**`--json` / `-j` - JSON výstup**
+```bash
+python -m src.cli generate reaction --json
+```
+Zobrazí reakci jako JSON místo pěkného formátování.
+
+**`--save` - Uložit do souboru**
+```bash
+python -m src.cli generate reaction --save reaction.json
+python -m src.cli generate reaction -m 1 --save friendly.json
+```
+Uloží reakci do JSON souboru.
+
+#### 2.5.2 Příklady použití
+
+**Základní reakce:**
+```bash
+python -m src.cli generate reaction
+```
+
+**Reakce s pozitivním modifikátorem:**
+```bash
+python -m src.cli generate reaction --modifier 1
+```
+
+**Reakce s negativním modifikátorem:**
+```bash
+python -m src.cli generate reaction -m -2
+```
+
+**Kombinace s uložením:**
+```bash
+python -m src.cli generate reaction --modifier 1 --save npc_reaction.json
+```
+
+#### 2.5.3 Typy reakcí (2k6)
+
+| Hod | Reakce | Pravděpodobnost | Popis |
+|-----|--------|-----------------|-------|
+| **2** | Agresivní ⚔️ | 2.78% | Tvor útočí nebo je extrémně nepřátelský |
+| **3-5** | Nepřátelská 😠 | 25.00% | Tvor je nedůvěřivý a nepřátelský |
+| **6-8** | Nejistá 🤔 | 41.67% | Tvor je opatrný, ale otevřený dialogu |
+| **9-11** | Povídavá 😊 | 25.00% | Tvor je přátelský a komunikativní |
+| **12** | Nápomocná 💚 | 2.78% | Tvor je velmi vstřícný a ochotný pomoci |
+
+#### 2.5.4 Ukázka výstupu
+
+**Nejistá reakce:**
+```
+┌─────────────────────────────── 🤔 Reakce NPC ───────────────────────────────┐
+│                                                                             │
+│  Hod: 7 (2k6)                                                               │
+│  Reakce: Nejistá                                                            │
+│                                                                             │
+│  GM otázka:                                                                 │
+│  Jak si ho můžou naklonit?                                                  │
+│                                                                             │
+│  💡 Tip: Toto je počáteční dispozice, může se změnit podle chování hráčů.   │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+**Povídavá reakce s modifikátorem:**
+```
+┌─────────────────────────────── 😊 Reakce NPC ───────────────────────────────┐
+│                                                                             │
+│  Hod: 10 (2k6)                                                              │
+│  Reakce: Povídavá                                                           │
+│                                                                             │
+│  GM otázka:                                                                 │
+│  Nemůže mít něco na obchod nebo výměnu?                                     │
+│                                                                             │
+│  Modifikátor: +1                                                            │
+│                                                                             │
+│  💡 Tip: Toto je počáteční dispozice, může se změnit podle chování hráčů.   │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+**JSON výstup:**
+```json
+{
+  "roll": 7,
+  "reaction": "Nejistá",
+  "question": "Jak si ho můžou naklonit?",
+  "notes": ""
+}
+```
+
+#### 2.5.5 GM tipy
+
+**Interpretace reakcí:**
+- **Agresivní:** Okamžité nebezpečí, vyžaduje rychlou akci hráčů
+- **Nepřátelská:** Vyjednávání je možné, ale obtížné
+- **Nejistá:** Ideální pro roleplay a diplomacii
+- **Povídavá:** Otevřená k obchodu, informacím, nebo spojenectví
+- **Nápomocná:** Může nabídnout quest hook nebo významnou pomoc
+
+**Změna reakce během hry:**
+- Počáteční reakce není konečná
+- Chování hráčů může posunout reakci nahoru i dolů
+- Použij další hod 2k6 pokud se situace dramaticky změní
+
+---
+
+### 2.6 Hody kostkami
 
 **Hlavní příkaz:**
 ```bash
@@ -574,7 +711,7 @@ python -m src.cli roll-dice <kostka>
 **Co to dělá:**
 Hodí zadanou kostkou a zobrazí výsledek.
 
-#### 2.5.1 Podporované kostky
+#### 2.6.1 Podporované kostky
 
 **Základní kostky:**
 ```bash
@@ -639,7 +776,7 @@ python -m src.cli test 8 -m -3
 Cílové číslo = vlastnost + modifikátor
 `test 10 --modifier 2` → cíl 12
 
-#### 2.6.2 Ukázka výstupu
+#### 2.7.2 Ukázka výstupu
 
 ```
 Test vlastnosti:
@@ -657,7 +794,7 @@ NEÚSPĚCH (15 > 10)
 
 ---
 
-### 2.7 Help a nápověda
+### 2.8 Help a nápověda
 
 **Zobrazit všechny příkazy:**
 ```bash
@@ -672,6 +809,10 @@ python -m src.cli generate --help
 **Help pro konkrétní příkaz:**
 ```bash
 python -m src.cli generate character --help
+python -m src.cli generate npc --help
+python -m src.cli generate hireling --help
+python -m src.cli generate weather --help
+python -m src.cli generate reaction --help
 python -m src.cli roll-dice --help
 python -m src.cli test --help
 ```

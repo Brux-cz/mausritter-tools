@@ -145,3 +145,15 @@ class Weather:
     unfavorable: bool  # True pokud nepřeje cestování (vyžaduje STR save)
     event: Optional[str] = None  # Volitelná sezónní událost
     notes: str = ""
+
+
+@dataclass
+class Reaction:
+    """
+    Model pro reakci NPC/tvora při setkání.
+    Používá se pro určení počáteční dispozice tvora k hráčským postavám.
+    """
+    roll: int  # Výsledek hodu 2k6 (2-12)
+    reaction: str  # Typ reakce (Agresivní, Nepřátelská, Nejistá, Povídavá, Nápomocná)
+    question: str  # GM otázka pro inspiraci
+    notes: str = ""

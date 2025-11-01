@@ -8,11 +8,12 @@ from rich.table import Table
 from rich.panel import Panel
 from rich.text import Text
 from src.core.dice import roll, roll_with_details, attribute_test
-from src.core.models import Character, NPC, Hireling, Weather
+from src.core.models import Character, NPC, Hireling, Weather, Reaction
 from src.generators.character import CharacterGenerator
 from src.generators.npc import NPCGenerator
 from src.generators.hireling import HirelingGenerator
 from src.generators.weather import WeatherGenerator
+from src.generators.reaction import ReactionGenerator
 
 # Fix Windows console encoding for Czech characters
 if sys.platform == 'win32':
@@ -446,6 +447,98 @@ def display_weather(weather_obj: Weather):
         weather_text,
         title=title,
         border_style="green" if not weather_obj.unfavorable else "red",
+        padding=(1, 2)
+    )
+
+    console.print("\n")
+    console.print(panel)
+    console.print("\n")
+
+
+@generate.command()
+@click.option("--modifier", "-m", type=int, default=0, help="Modifikátor k hodu (např. +1 za dárek, -1 za agresi)")
+@click.option("--json", "-j", "output_json", is_flag=True, help="Výstup jako JSON")
+@click.option("--save", type=click.Path(), help="Uložit do souboru")
+def reaction(modifier: int, output_json: bool, save: str):
+    """
+    Vygeneruj reakci NPC/tvora při setkání
+
+    Hoď 2k6 a urči počáteční dispozici tvora k hráčským postavám.
+    Použij modifikátory podle kontextu:
+      +1 pokud myši přinesly dárek
+      -1 pokud jsou agresivní nebo rušivé
+      -2 pokud tvor byl nedávno napaden
+
+    Příklady:
+        python -m src.cli generate reaction
+        python -m src.cli generate reaction --modifier 1
+        python -m src.cli generate reaction -m -2
+        python -m src.cli generate reaction --json
+        python -m src.cli generate reaction --save reaction.json
+    """
+    import traceback
+    try:
+        # Generuj reakci
+        reaction_obj = ReactionGenerator.create(modifier=modifier)
+
+        if output_json:
+            # JSON výstup
+            output = ReactionGenerator.to_json(reaction_obj)
+            console.print(output)
+        else:
+            # Pěkný formátovaný výstup
+            display_reaction(reaction_obj)
+
+        # Uložení do souboru
+        if save:
+            with open(save, 'w', encoding='utf-8') as f:
+                f.write(ReactionGenerator.to_json(reaction_obj))
+            console.print(f"\n[green]✓[/green] Uloženo do {save}")
+
+    except Exception as e:
+        console.print(f"[red]Chyba při generování reakce: {e}[/red]")
+        traceback.print_exc()
+
+
+def display_reaction(reaction_obj: Reaction):
+    """Zobraz reakci v pěkném formátu"""
+
+    # Barvy pro různé reakce
+    color = ReactionGenerator.get_reaction_color(reaction_obj.reaction)
+
+    # Emoji podle reakce
+    reaction_emoji = {
+        "Agresivní": "⚔️",
+        "Nepřátelská": "😠",
+        "Nejistá": "🤔",
+        "Povídavá": "😊",
+        "Nápomocná": "💚"
+    }
+    emoji = reaction_emoji.get(reaction_obj.reaction, "❓")
+
+    # Header
+    title = Text(f"{emoji} Reakce NPC", style=f"bold {color}", justify="center")
+
+    # Obsah
+    content_parts = []
+    content_parts.append(f"[bold]Hod:[/bold] {reaction_obj.roll} (2k6)")
+    content_parts.append(f"\n[bold]Reakce:[/bold] [{color}]{reaction_obj.reaction}[/{color}]")
+    content_parts.append(f"\n\n[bold]GM otázka:[/bold]\n[italic]{reaction_obj.question}[/italic]")
+
+    # Poznámky (pokud jsou)
+    if reaction_obj.notes:
+        content_parts.append(f"\n\n[dim]{reaction_obj.notes}[/dim]")
+
+    # Tip pro GM
+    content_parts.append("\n\n[dim]💡 Tip: Toto je počáteční dispozice, může se změnit podle chování hráčů.[/dim]")
+
+    reaction_text = "".join(content_parts)
+
+    # Vytvoř panel
+    panel = Panel(
+        reaction_text,
+        title=title,
+        border_style=color,
         padding=(1, 2)
     )
 
