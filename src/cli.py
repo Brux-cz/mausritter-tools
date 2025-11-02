@@ -8,7 +8,7 @@ from rich.table import Table
 from rich.panel import Panel
 from rich.text import Text
 from src.core.dice import roll, roll_with_details, attribute_test
-from src.core.models import Character, NPC, Hireling, Weather, Reaction, Spell, TreasureHoard, TreasureItem, MagicSword, AdventureSeed, Tavern, Settlement, AdventureHook
+from src.core.models import Character, NPC, Hireling, Weather, Reaction, Spell, TreasureHoard, TreasureItem, MagicSword, AdventureSeed, Tavern, Settlement, AdventureHook, CreatureVariant
 from src.generators.character import CharacterGenerator
 from src.generators.npc import NPCGenerator
 from src.generators.hireling import HirelingGenerator
@@ -20,6 +20,7 @@ from src.generators.adventure import AdventureSeedGenerator
 from src.generators.tavern import TavernGenerator
 from src.generators.settlement import SettlementGenerator
 from src.generators.adventure_hook import AdventureHookGenerator
+from src.generators.creature_variant import CreatureVariantGenerator
 
 # Fix Windows console encoding for Czech characters
 if sys.platform == 'win32':
@@ -1265,6 +1266,100 @@ def display_adventure_hook(hook: AdventureHook):
     rolls_text = Text()
     rolls_text.append("🎲 Hod: ", style="dim")
     rolls_text.append(f"{hook.roll}", style="dim cyan")
+    rolls_text.append(" (k6)", style="dim")
+
+    console.print(rolls_text)
+    console.print("\n")
+
+
+@generate.command()
+@click.argument("creature_type", type=click.Choice([
+    "ghost", "snake", "cat", "rat", "mouse", "spider",
+    "owl", "centipede", "fairy", "crow", "frog"
+], case_sensitive=False))
+@click.option("--json", "output_json", is_flag=True, help="Výstup v JSON formátu")
+@click.option("--save", type=str, help="Ulož do souboru")
+def creature(creature_type: str, output_json: bool, save: str):
+    """
+    Vygeneruj variantu stvoření.
+
+    Generuje specifické varianty různých stvoření podle oficiálních pravidel.
+    Každý typ stvoření má 6 unikátních variant (k6).
+
+    CREATURE_TYPE: Typ stvoření k vygenerování
+
+    Dostupné typy:
+    - ghost: Přízračné schopnosti
+    - snake: Zvláštní hadi
+    - cat: Kočičí pánové a paní
+    - rat: Krysí gangy
+    - mouse: Konkurenční myší dobrodruzi
+    - spider: Druhy pavouků
+    - owl: Soví čarodějové
+    - centipede: Zevlující stonožky
+    - fairy: Vílí plány
+    - crow: Vraní písně
+    - frog: Potulní žabí rytíři
+
+    Příklady:
+        mausritter generate creature ghost
+        mausritter generate creature snake --json
+        mausritter generate creature owl --save owl_wizard.json
+    """
+    creature_type_lower = creature_type.lower()
+    variant_obj = CreatureVariantGenerator.create(creature_type_lower)
+
+    if output_json:
+        json_output = CreatureVariantGenerator.to_json(variant_obj)
+        console.print(json_output)
+        if save:
+            with open(save, 'w', encoding='utf-8') as f:
+                f.write(json_output)
+            console.print(f"\n[green]Uloženo do {save}[/green]")
+        return
+
+    display_creature_variant(variant_obj)
+
+    if save:
+        json_output = CreatureVariantGenerator.to_json(variant_obj)
+        with open(save, 'w', encoding='utf-8') as f:
+            f.write(json_output)
+        console.print(f"\n[green]Uloženo do {save}[/green]")
+
+
+def display_creature_variant(variant: CreatureVariant):
+    """Zobraz variantu stvoření v terminálu s barevným formátováním."""
+
+    # Hlavní panel s variantou
+    title_text = f"{variant.creature_emoji}  {variant.variant_table_name_cz.upper()}"
+
+    main_panel = Panel(
+        f"[bold cyan]{variant.name}[/bold cyan]",
+        title=title_text,
+        title_align="left",
+        border_style="cyan",
+        padding=(1, 2)
+    )
+
+    console.print("\n")
+    console.print(main_panel)
+
+    # Typ stvoření
+    type_text = Text()
+    type_text.append("📋 Typ: ", style="bold magenta")
+    type_text.append(variant.creature_name_cz, style="white")
+    console.print(type_text)
+    console.print()
+
+    # Popis varianty
+    console.print("[bold yellow]📝 Popis:[/bold yellow]")
+    console.print(f"   {variant.description}", style="white")
+    console.print()
+
+    # Hod
+    rolls_text = Text()
+    rolls_text.append("🎲 Hod: ", style="dim")
+    rolls_text.append(f"{variant.roll}", style="dim cyan")
     rolls_text.append(" (k6)", style="dim")
 
     console.print(rolls_text)

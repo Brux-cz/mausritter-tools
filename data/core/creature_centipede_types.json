@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "name": "Centipede Types",
+    "name_cz": "Zevlující stonožky",
+    "description": "Typy stonožek",
+    "source": "docs/knowledge_base/09_CREATURES.md (řádek 208)",
+    "dice": "d6",
+    "category": "creature_variant",
+    "creature": "centipede"
+  },
+  "variants": [
+    {
+      "roll": 1,
+      "name": "Obří",
+      "description": "Velká jako had. 12 BO, síla 15, zbroj 2"
+    },
+    {
+      "roll": 2,
+      "name": "Vodní",
+      "description": "Stáhne oběť pod hladinu"
+    },
+    {
+      "roll": 3,
+      "name": "Tygří",
+      "description": "Žluté a černé pruhy, kousnutí se zraněním k8"
+    },
+    {
+      "roll": 4,
+      "name": "Žravá",
+      "description": "Neustále hladová, nikdy nepřestává růst"
+    },
+    {
+      "roll": 5,
+      "name": "Závodní",
+      "description": "Lahůdka, ale musíš ji chytit"
+    },
+    {
+      "roll": 6,
+      "name": "Opeřená",
+      "description": "Dokáže plachtit na krátké vzdálenosti"
+    }
+  ]
+}

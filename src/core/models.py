@@ -447,3 +447,67 @@ class AdventureHook:
             "survival": "Přežití",
         }
         return names.get(self.category, "Jiné")
+
+
+@dataclass
+class CreatureVariant:
+    """Varianta stvoření (Ghost Ability, Snake Type, atd.)"""
+
+    name: str
+    description: str
+    creature_type: str
+    roll: int = 0
+
+    @property
+    def creature_emoji(self) -> str:
+        """Vrať emoji pro typ stvoření"""
+        emoji_map = {
+            "ghost": "👻",
+            "snake": "🐍",
+            "cat": "🐱",
+            "rat": "🐀",
+            "mouse": "🐭",
+            "spider": "🕷️",
+            "owl": "🦉",
+            "centipede": "🐛",
+            "fairy": "🧚",
+            "crow": "🦅",
+            "frog": "🐸",
+        }
+        return emoji_map.get(self.creature_type, "🦎")
+
+    @property
+    def creature_name_cz(self) -> str:
+        """Vrať český název typu stvoření"""
+        names = {
+            "ghost": "Přízrak",
+            "snake": "Had",
+            "cat": "Kočka",
+            "rat": "Krysa",
+            "mouse": "Myš",
+            "spider": "Pavouk",
+            "owl": "Sova",
+            "centipede": "Stonožka",
+            "fairy": "Víla",
+            "crow": "Vrána",
+            "frog": "Žába",
+        }
+        return names.get(self.creature_type, "Stvoření")
+
+    @property
+    def variant_table_name_cz(self) -> str:
+        """Vrať český název tabulky variant"""
+        names = {
+            "ghost": "Přízračné schopnosti",
+            "snake": "Zvláštní hadi",
+            "cat": "Kočičí pánové a paní",
+            "rat": "Krysí gangy",
+            "mouse": "Konkurenční myší dobrodruzi",
+            "spider": "Druhy pavouků",
+            "owl": "Soví čarodějové",
+            "centipede": "Zevlující stonožky",
+            "fairy": "Vílí plány",
+            "crow": "Vraní písně",
+            "frog": "Potulní žabí rytíři",
+        }
+        return names.get(self.creature_type, "Varianty stvoření")

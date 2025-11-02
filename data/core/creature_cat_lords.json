@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "name": "Cat Lords",
+    "name_cz": "Kočičí pánové a paní",
+    "description": "Jména a povahy kočičích pánů",
+    "source": "docs/knowledge_base/09_CREATURES.md (řádek 97)",
+    "dice": "d6",
+    "category": "creature_variant",
+    "creature": "cat"
+  },
+  "variants": [
+    {
+      "roll": 1,
+      "name": "Baltazar",
+      "description": "Rád se cpe vybranými pochoutkami"
+    },
+    {
+      "roll": 2,
+      "name": "Melchior",
+      "description": "Zbožňuje zlato, šperky a bohatství"
+    },
+    {
+      "roll": 3,
+      "name": "Šalamoun",
+      "description": "Hraje kruté hry se zajatci"
+    },
+    {
+      "roll": 4,
+      "name": "Chammurapi",
+      "description": "Vládne přísně a neoblomně"
+    },
+    {
+      "roll": 5,
+      "name": "Nefertiti",
+      "description": "Miluje umění, poezii a krásné věci"
+    },
+    {
+      "roll": 6,
+      "name": "Zenobie",
+      "description": "Buduje armádu, chce dobývat a vládnout"
+    }
+  ]
+}

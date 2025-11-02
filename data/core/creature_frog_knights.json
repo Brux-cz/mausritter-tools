@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "name": "Frog Knights",
+    "name_cz": "Potulní žabí rytíři",
+    "description": "Jména a povahy žabích rytířů",
+    "source": "docs/knowledge_base/09_CREATURES.md (řádek 279)",
+    "dice": "d6",
+    "category": "creature_variant",
+    "creature": "frog"
+  },
+  "variants": [
+    {
+      "roll": 1,
+      "name": "Gval",
+      "description": "Silný, laskavý a prostomyslný"
+    },
+    {
+      "roll": 2,
+      "name": "Filip",
+      "description": "Zakletý člověk hledající lék"
+    },
+    {
+      "roll": 3,
+      "name": "Lurf",
+      "description": "Nemístný smysl pro humor, popudlivost"
+    },
+    {
+      "roll": 4,
+      "name": "Slup",
+      "description": "Chce za jakoukoli cenu ulovit velkou šelmu"
+    },
+    {
+      "roll": 5,
+      "name": "Uuu",
+      "description": "Zoufale prokazuje svou zdatnost v turnajích"
+    },
+    {
+      "roll": 6,
+      "name": "Puk",
+      "description": "Hledá legendární Hrnek pravdy"
+    }
+  ]
+}

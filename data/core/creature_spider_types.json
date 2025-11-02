@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "name": "Spider Types",
+    "name_cz": "Druhy pavouků",
+    "description": "Typy pavouků",
+    "source": "docs/knowledge_base/09_CREATURES.md (řádek 162)",
+    "dice": "d6",
+    "category": "creature_variant",
+    "creature": "spider"
+  },
+  "variants": [
+    {
+      "roll": 1,
+      "name": "Vdova",
+      "description": "Jasně červené značky, jedovaté kousnutí k10"
+    },
+    {
+      "roll": 2,
+      "name": "Vlčí",
+      "description": "Chlupatý, loví ve smečkách o k6 pavoucích"
+    },
+    {
+      "roll": 3,
+      "name": "Dlouhonohý",
+      "description": "Převážně mírumilovný, chodí po vodě"
+    },
+    {
+      "roll": 4,
+      "name": "Architekt",
+      "description": "Tká matoucí tunely z pavučin"
+    },
+    {
+      "roll": 5,
+      "name": "Mihotavý",
+      "description": "Za akci se teleportuje o k6 x 15 cm"
+    },
+    {
+      "roll": 6,
+      "name": "Přízračný",
+      "description": "Dá se zranit jen stříbrnými nebo kouzelnými zbraněmi"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "name": "Fairy Schemes",
+    "name_cz": "Vílí plány",
+    "description": "Plány a úmysly víl",
+    "source": "docs/knowledge_base/09_CREATURES.md (řádek 231)",
+    "dice": "d6",
+    "category": "creature_variant",
+    "creature": "fairy"
+  },
+  "variants": [
+    {
+      "roll": 1,
+      "name": "Únosy dětí",
+      "description": "Unášet myší děti a vychovávat je jako vlastní"
+    },
+    {
+      "roll": 2,
+      "name": "Dary žárlivosti",
+      "description": "Rozdávat dary, které vyvolávají násilnou žárlivost"
+    },
+    {
+      "roll": 3,
+      "name": "Kouzelná hudba",
+      "description": "Hrát hudbu, co kouzlem vábí myši do vílích služeb"
+    },
+    {
+      "roll": 4,
+      "name": "Klamné převleky",
+      "description": "Kouzly se přestrojovat za myši v nesnázích"
+    },
+    {
+      "roll": 5,
+      "name": "Plísňové sabotáže",
+      "description": "Plísní zničit zásoby v zimních zásobárnách"
+    },
+    {
+      "roll": 6,
+      "name": "Právní pasti",
+      "description": "Obelstít osadu v právních záležitostech"
+    }
+  ]
+}

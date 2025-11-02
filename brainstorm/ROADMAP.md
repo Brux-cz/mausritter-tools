@@ -352,34 +352,50 @@ Generátor háčků pro začátek dobrodružství - důvod, proč se myši vydaj
 
 ---
 
-### 🎯 FÁZE 5: Creature Variants (14× generátorů)
+### 🎯 FÁZE 5: Creature Variants ✅ HOTOVO
 
 **Priorita:** 🟢 Nízká (ale rychlé zvýšení dokončenosti)
-**Čas:** ~2-4 hodiny (všech 14)
-**Stav:** 📝 Připraveno k implementaci
-**Složitost:** ⭐ Velmi jednoduchá (každý)
+**Čas:** ~2 hodiny (implementace)
+**Stav:** ✅ HOTOVO (2025-11-02)
+**Složitost:** ⭐ Velmi jednoduchá
 **Závislosti:** ❌ Žádné
 
 **Popis:**
-14 variant tvorů - každý má k6 tabulku s flavor texty.
+11 variant tvorů - každý má k6 tabulku s unikátními vlastnostmi.
+*Poznámka: Zjištěno 11 variant místo původně odhadovaných 14*
 
-**Zdroj:** `09_CREATURES.md` (různé sekce)
+**Zdroj:** `docs/knowledge_base/09_CREATURES.md`
 
-**Seznam:**
-- 5A: Ghost Abilities (k6) - Přízračné schopnosti duchů
-- 5B: Snake Types (k6) - Zvláštní hadi
-- 5C: Cat Lords (k6) - Kočičí pánové
-- 5D: Rat Gangs (k6) - Krysí gangy
-- 5E: Rival Mice (k6) - Konkurenční myši
-- 5F: Spider Types (k6) - Druhy pavouků
-- 5G: Owl Wizards (k6) - Soví čarodějové
-- 5H: Centipede Types (k6) - Zevlující stonožky
-- 5I: Fairy Schemes (k6) - Vílí plány
-- 5J: Crow Songs (k6) - Vraní písně
-- 5K: Frog Knights (k6) - Žabí rytíři
-- 5L-N: +3 další varianty
+**Implementované varianty:**
+- ✅ Ghost Abilities (k6) - Přízračné schopnosti
+- ✅ Snake Types (k6) - Zvláštní hadi
+- ✅ Cat Lords (k6) - Kočičí pánové a paní
+- ✅ Rat Gangs (k6) - Krysí gangy
+- ✅ Rival Mice (k6) - Konkurenční myší dobrodruzi
+- ✅ Spider Types (k6) - Druhy pavouků
+- ✅ Owl Wizards (k6) - Soví čarodějové
+- ✅ Centipede Types (k6) - Zevlující stonožky
+- ✅ Fairy Schemes (k6) - Vílí plány
+- ✅ Crow Songs (k6) - Vraní písně
+- ✅ Frog Knights (k6) - Potulní žabí rytíři
 
-**Proč druhé:** Rychle zvýší dokončenost na ~86% (24/28), jednoduché implementace
+**Co bylo vytvořeno:**
+1. **Data** - 11 JSON souborů v `data/core/creature_*.json`
+2. **Model** - `CreatureVariant` dataclass v `models.py` s emoji a českými názvy
+3. **Generátor** - `CreatureVariantGenerator` s unified přístupem pro všechny typy
+4. **TableLoader** - 13 nových metod (unified + 11 specifických)
+5. **CLI** - `mausritter generate creature <type>` s podporou všech 11 typů
+6. **Testy** - 27 unit testů (všechny prošly ✅)
+7. **Dokumentace** - README.md sekce 12 s kompletní tabulkou typů
+
+**Použití:**
+```bash
+mausritter generate creature ghost      # Přízračné schopnosti
+mausritter generate creature owl        # Soví čarodějové
+mausritter generate creature frog       # Žabí rytíři
+```
+
+**Proč druhé:** Rychlé zvýšení dokončenosti, jednoduché implementace, žádné závislosti
 
 ---
 
@@ -789,6 +805,46 @@ Pokud chceš přidat novou feature:
 ---
 
 ## 📝 Changelog
+
+### 2025-11-02 - Fáze 5 dokončena - Creature Variants 🐉
+- ✅ Implementovány varianty stvoření (11 typů, každý s 6× k6 variantami)
+- ✅ CreatureVariantGenerator class v src/generators/creature_variant.py
+- ✅ 11 JSON datových souborů v data/core/:
+  - creature_ghost_abilities.json - Přízračné schopnosti (6 variant)
+  - creature_snake_types.json - Zvláštní hadi (6 typů)
+  - creature_cat_lords.json - Kočičí pánové a paní (6 lordů)
+  - creature_rat_gangs.json - Krysí gangy (6 gangů)
+  - creature_rival_mice.json - Konkurenční myší dobrodruzi (6 soupeřů)
+  - creature_spider_types.json - Druhy pavouků (6 druhů)
+  - creature_owl_wizards.json - Soví čarodějové (6 čarodějů)
+  - creature_centipede_types.json - Zevlující stonožky (6 typů)
+  - creature_fairy_schemes.json - Vílí plány (6 plánů)
+  - creature_crow_songs.json - Vraní písně (6 písní)
+  - creature_frog_knights.json - Potulní žabí rytíři (6 rytířů)
+- ✅ CreatureVariant dataclass přidán do models.py s emoji a českými názvy
+- ✅ TableLoader rozšířen o 13 nových metod (unified + 11 specifických)
+- ✅ CLI příkaz `generate creature <type>` s podporou všech 11 typů
+- ✅ Click.Choice validace pro typy stvoření
+- ✅ Color-coded výstup s panely (emoji + název tabulky, typ, popis)
+- ✅ 27 unit testů v test_creature_variant_generator.py (všechny prošly ✅)
+- ✅ Dokumentace aktualizována (README.md sekce 12, ROADMAP.md)
+- ✅ **Zjištěno:** 11 variant v oficiálních pravidlech (ne 14 jak původně odhadnuto)
+- ✅ **Celková dokončenost: 43% (12/28 generátorů)**
+
+### 2025-11-02 - Fáze 4D dokončena - Adventure Hooks 🎣
+- ✅ Implementován Adventure Hook Generator (generátor háčků dobrodružství)
+- ✅ AdventureHookGenerator class v src/generators/adventure_hook.py
+- ✅ data/core/adventure_hooks.json - 6 háčků s kategoriemi a otázkami
+- ✅ Každý háček obsahuje: háček, kategorie, 4 inspirační otázky
+- ✅ CLI příkaz `generate hook` s --json, --save
+- ✅ AdventureHook dataclass přidán do models.py s emoji a kategoriemi
+- ✅ TableLoader rozšířen o 2 nové metody pro adventure hooks
+- ✅ 6 kategorií: personal, duty, quest, threat, treasure, survival
+- ✅ Unikátní emoji pro každou kategorii (👨‍👩‍👧‍👦, ⚔️, 🔮, ⚠️, 💰, 🌪️)
+- ✅ Color-coded výstup s panely (emoji kategorie + háček, otázky)
+- ✅ 16 unit testů v test_adventure_hook_generator.py (všechny prošly ✅)
+- ✅ Dokumentace aktualizována (README.md sekce 11, ROADMAP.md)
+- ✅ **Celková dokončenost: 39% (11/28 generátorů)**
 
 ### 2025-11-02 - Fáze 4C dokončena - Settlement Generator 🏘️
 - ✅ Implementován Settlement Generator (generátor myších osad)

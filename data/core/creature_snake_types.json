@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "name": "Snake Types",
+    "name_cz": "Zvláštní hadi",
+    "description": "Typy hadů",
+    "source": "docs/knowledge_base/09_CREATURES.md (řádek 74)",
+    "dice": "d6",
+    "category": "creature_variant",
+    "creature": "snake"
+  },
+  "variants": [
+    {
+      "roll": 1,
+      "name": "Dřevěný",
+      "description": "Vyřezávaný klacek oživený kouzlem"
+    },
+    {
+      "roll": 2,
+      "name": "Stínový",
+      "description": "Vždycky se plazí těsně za hranicí dohledu"
+    },
+    {
+      "roll": 3,
+      "name": "Kostlivý",
+      "description": "Kostra hada vzkříšená z mrtvých"
+    },
+    {
+      "roll": 4,
+      "name": "Úhoří",
+      "description": "Žije pod vodou. Vychovává ukradená hadí vejce"
+    },
+    {
+      "roll": 5,
+      "name": "Svitkový",
+      "description": "Narodil se s kouzlem vepsaným do šupin"
+    },
+    {
+      "roll": 6,
+      "name": "Drakohad",
+      "description": "Má křidýlka a plive plamínky"
+    }
+  ]
+}

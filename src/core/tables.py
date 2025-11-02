@@ -1197,6 +1197,117 @@ class TableLoader:
 
         return None
 
+    # === CREATURE VARIANTS ===
+
+    @staticmethod
+    def get_creature_variant_table(creature_type: str) -> Dict[str, Any]:
+        """
+        Načte tabulku variant pro daný typ stvoření.
+
+        Args:
+            creature_type: Typ stvoření (ghost, snake, cat, atd.)
+
+        Returns:
+            Dict s metadata a variantami stvoření
+        """
+        file_map = {
+            "ghost": "core/creature_ghost_abilities.json",
+            "snake": "core/creature_snake_types.json",
+            "cat": "core/creature_cat_lords.json",
+            "rat": "core/creature_rat_gangs.json",
+            "mouse": "core/creature_rival_mice.json",
+            "spider": "core/creature_spider_types.json",
+            "owl": "core/creature_owl_wizards.json",
+            "centipede": "core/creature_centipede_types.json",
+            "fairy": "core/creature_fairy_schemes.json",
+            "crow": "core/creature_crow_songs.json",
+            "frog": "core/creature_frog_knights.json",
+        }
+
+        filename = file_map.get(creature_type)
+        if filename is None:
+            raise ValueError(f"Neznámý typ stvoření: {creature_type}")
+
+        return TableLoader.load_table(filename)
+
+    @staticmethod
+    def lookup_creature_variant(creature_type: str, roll: int) -> Optional[Dict[str, Any]]:
+        """
+        Najde variantu stvoření podle typu a hodu k6.
+
+        Args:
+            creature_type: Typ stvoření (ghost, snake, cat, atd.)
+            roll: Výsledek hodu k6 (1-6)
+
+        Returns:
+            Dict s informacemi o variantě (name, description) nebo None
+        """
+        data = TableLoader.get_creature_variant_table(creature_type)
+        variants = data.get("variants", [])
+
+        for variant in variants:
+            if variant["roll"] == roll:
+                return variant
+
+        return None
+
+    # Jednotlivé metody pro každý typ stvoření (pro pohodlí)
+
+    @staticmethod
+    def get_ghost_abilities() -> Dict[str, Any]:
+        """Načte tabulku přízračných schopností."""
+        return TableLoader.load_table("core/creature_ghost_abilities.json")
+
+    @staticmethod
+    def get_snake_types() -> Dict[str, Any]:
+        """Načte tabulku zvláštních hadů."""
+        return TableLoader.load_table("core/creature_snake_types.json")
+
+    @staticmethod
+    def get_cat_lords() -> Dict[str, Any]:
+        """Načte tabulku kočičích pánů."""
+        return TableLoader.load_table("core/creature_cat_lords.json")
+
+    @staticmethod
+    def get_rat_gangs() -> Dict[str, Any]:
+        """Načte tabulku krysích gangů."""
+        return TableLoader.load_table("core/creature_rat_gangs.json")
+
+    @staticmethod
+    def get_rival_mice() -> Dict[str, Any]:
+        """Načte tabulku konkurenčních myší dobrodruhů."""
+        return TableLoader.load_table("core/creature_rival_mice.json")
+
+    @staticmethod
+    def get_spider_types() -> Dict[str, Any]:
+        """Načte tabulku druhů pavouků."""
+        return TableLoader.load_table("core/creature_spider_types.json")
+
+    @staticmethod
+    def get_owl_wizards() -> Dict[str, Any]:
+        """Načte tabulku sovích čarodějů."""
+        return TableLoader.load_table("core/creature_owl_wizards.json")
+
+    @staticmethod
+    def get_centipede_types() -> Dict[str, Any]:
+        """Načte tabulku zevlujících stonožek."""
+        return TableLoader.load_table("core/creature_centipede_types.json")
+
+    @staticmethod
+    def get_fairy_schemes() -> Dict[str, Any]:
+        """Načte tabulku vílích plánů."""
+        return TableLoader.load_table("core/creature_fairy_schemes.json")
+
+    @staticmethod
+    def get_crow_songs() -> Dict[str, Any]:
+        """Načte tabulku vraních písní."""
+        return TableLoader.load_table("core/creature_crow_songs.json")
+
+    @staticmethod
+    def get_frog_knights() -> Dict[str, Any]:
+        """Načte tabulku potulných žabích rytířů."""
+        return TableLoader.load_table("core/creature_frog_knights.json")
+
 
 # Convenience funkce pro rychlé použití
 # === SHORTCUTS ===

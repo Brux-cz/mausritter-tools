@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "name": "Rat Gangs",
+    "name_cz": "Krysí gangy",
+    "description": "Typy krysích gangů",
+    "source": "docs/knowledge_base/09_CREATURES.md (řádek 118)",
+    "dice": "d6",
+    "category": "creature_variant",
+    "creature": "rat"
+  },
+  "variants": [
+    {
+      "roll": 1,
+      "name": "Tuhoši",
+      "description": "Líčí důmyslné zbastlené pasti"
+    },
+    {
+      "roll": 2,
+      "name": "Vodní krysy",
+      "description": "Zkušení řekoplavci"
+    },
+    {
+      "roll": 3,
+      "name": "Labáci",
+      "description": "Bizarní vzhled, kouzelné schopnosti"
+    },
+    {
+      "roll": 4,
+      "name": "Plechovkáři",
+      "description": "Kyrysy a přilbice z plechovek, zbroj 1"
+    },
+    {
+      "roll": 5,
+      "name": "Kryspáni",
+      "description": "Cylindry a zmuchlaná saka"
+    },
+    {
+      "roll": 6,
+      "name": "Králové",
+      "description": "Ocásky spletené do gordického uzlu"
+    }
+  ]
+}

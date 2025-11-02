@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "name": "Ghost Abilities",
+    "name_cz": "Přízračné schopnosti",
+    "description": "Speciální schopnosti duchů",
+    "source": "docs/knowledge_base/09_CREATURES.md (řádek 51)",
+    "dice": "d6",
+    "category": "creature_variant",
+    "creature": "ghost"
+  },
+  "variants": [
+    {
+      "roll": 1,
+      "name": "Mihotání",
+      "description": "Vytvoří k3 iluzí sebe sama"
+    },
+    {
+      "roll": 2,
+      "name": "Poltergeist",
+      "description": "Odhodí tvora nebo předmět na k6 x 15 cm"
+    },
+    {
+      "roll": 3,
+      "name": "Uvěznění",
+      "description": "Na kolo vtáhne tvora do přízračné říše"
+    },
+    {
+      "roll": 4,
+      "name": "Zhouba",
+      "description": "Dá tvorovi stav Vystrašení"
+    },
+    {
+      "roll": 5,
+      "name": "Hniloba",
+      "description": "Zničí všechny zásoby, které u sebe tvor má"
+    },
+    {
+      "roll": 6,
+      "name": "Nehmotný",
+      "description": "Zmizí do zdi nebo podlahy a vynoří se jinde"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "name": "Owl Wizards",
+    "name_cz": "Soví čarodějové",
+    "description": "Jména a speciality sovích čarodějů",
+    "source": "docs/knowledge_base/09_CREATURES.md (řádek 185)",
+    "dice": "d6",
+    "category": "creature_variant",
+    "creature": "owl"
+  },
+  "variants": [
+    {
+      "roll": 1,
+      "name": "Bezalel",
+      "description": "Vyrábí mechanické služebníky"
+    },
+    {
+      "roll": 2,
+      "name": "Morgana",
+      "description": "Spolčená s vílím královstvím"
+    },
+    {
+      "roll": 3,
+      "name": "Prospero",
+      "description": "Vytváří služebníky kombinováním zvířat"
+    },
+    {
+      "roll": 4,
+      "name": "Krahujka",
+      "description": "Umí se změnit v jakéhokoli jiného ptáka"
+    },
+    {
+      "roll": 5,
+      "name": "Raistlin",
+      "description": "Poutá duchy do kouzel"
+    },
+    {
+      "roll": 6,
+      "name": "Saxana",
+      "description": "Lidská čarodějnice uvězněná v těle sovy"
+    }
+  ]
+}

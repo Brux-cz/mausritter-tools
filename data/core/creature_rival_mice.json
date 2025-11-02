@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "name": "Rival Mice",
+    "name_cz": "Konkurenční myší dobrodruzi",
+    "description": "Jména a povahy konkurenčních myších dobrodruhů",
+    "source": "docs/knowledge_base/09_CREATURES.md (řádek 139)",
+    "dice": "d6",
+    "category": "creature_variant",
+    "creature": "mouse"
+  },
+  "variants": [
+    {
+      "roll": 1,
+      "name": "Bodlák",
+      "description": "Zneuctěný rytíř, pořád ještě pyšný"
+    },
+    {
+      "roll": 2,
+      "name": "Konvalinka",
+      "description": "Vyšinutá čarodějka, hledá kouzla"
+    },
+    {
+      "roll": 3,
+      "name": "Slaměna",
+      "description": "Chce si nakrást a koupit zpátky svoji farmu"
+    },
+    {
+      "roll": 4,
+      "name": "Mandragora",
+      "description": "Šejdířka. Vypadá neškodně"
+    },
+    {
+      "roll": 5,
+      "name": "Plamenka",
+      "description": "Miluje oheň. Bez ohně se bojí"
+    },
+    {
+      "roll": 6,
+      "name": "Leif",
+      "description": "Mohutný myšák vyhnaný z daleké země"
+    }
+  ]
+}

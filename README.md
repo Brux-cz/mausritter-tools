@@ -19,14 +19,15 @@ Python nástroje a generátory pro stolní hru **Mausritter** - OSR TTRPG o myš
 - ✅ **Testy vlastností** - roll-under d20 mechanika
 - ✅ **JSON databáze** - původy, jména, NPC, pomocníci, počasí, kouzla, poklady, nástroje, semínka dobrodružství, osady
 
-**Status:** Fáze 1, 2, 3A-F, 4A-D dokončeny (2025-11-02)
+**Status:** Fáze 1, 2, 3A-F, 4A-D, 5 dokončeny (2025-11-02)
 - ✅ **P1 COMPLETE (100%)** - všech 8 základních PJ nástrojů
 - ✅ **Tavern Generator** (Fáze 4B)
 - ✅ **Settlement Generator** (Fáze 4C)
 - ✅ **Adventure Hooks** (Fáze 4D)
-- 📝 **DALŠÍ:** Creature Variants (Fáze 5) nebo Hex Generator (Fáze 6A)
+- ✅ **Creature Variants** (Fáze 5) - 11 typů stvoření, každý s 6 variantami
+- 📝 **DALŠÍ:** Hex Generator (Fáze 6A) nebo Dungeon Generator (Fáze 6B)
 
-**Dokončenost:** 39% (11/28 generátorů) | **Roadmap:** [brainstorm/ROADMAP.md](brainstorm/ROADMAP.md)
+**Dokončenost:** 43% (12/28 generátorů) | **Roadmap:** [brainstorm/ROADMAP.md](brainstorm/ROADMAP.md)
 
 ---
 
@@ -402,7 +403,64 @@ Vyšetřování na příkaz myšího šlechtice
 - Motivace hráčů - důvod proč se vydat na výpravu
 - Improvizace - když potřebuješ rychle háček
 
-### 🎲 12. Hody kostkami
+### 🐉 12. Generování variant stvoření
+```bash
+# Přízračné schopnosti
+python -m src.cli generate creature ghost
+
+# Soví čarodějové
+python -m src.cli generate creature owl
+
+# Potulní žabí rytíři
+python -m src.cli generate creature frog
+
+# JSON výstup
+python -m src.cli generate creature snake --json
+
+# Uložit do souboru
+python -m src.cli generate creature cat --save cat_lord.json
+```
+
+**Co je varianta stvoření:**
+- **Typ stvoření** - 11 různých typů (přízrak, had, kočka, krysa, myš, pavouk, sova, stonožka, víla, vrána, žába)
+- **Varianta** (k6) - Specifická varianta s unikátními vlastnostmi
+- **Popis** - Detailní popis varianty a jejích schopností
+
+**11 dostupných typů:**
+| Typ | Příkaz | Tabulka | Emoji |
+|-----|--------|---------|-------|
+| Přízrak | `ghost` | Přízračné schopnosti | 👻 |
+| Had | `snake` | Zvláštní hadi | 🐍 |
+| Kočka | `cat` | Kočičí pánové a paní | 🐱 |
+| Krysa | `rat` | Krysí gangy | 🐀 |
+| Myš | `mouse` | Konkurenční myší dobrodruzi | 🐭 |
+| Pavouk | `spider` | Druhy pavouků | 🕷️ |
+| Sova | `owl` | Soví čarodějové | 🦉 |
+| Stonožka | `centipede` | Zevlující stonožky | 🐛 |
+| Víla | `fairy` | Vílí plány | 🧚 |
+| Vrána | `crow` | Vraní písně | 🦅 |
+| Žába | `frog` | Potulní žabí rytíři | 🐸 |
+
+**Příklad výstupu (Soví čarodějové):**
+```
+🦉 SOVÍ ČARODĚJOVÉ
+Bezalel
+
+📋 Typ: Sova
+
+📝 Popis:
+   Vyrábí mechanické služebníky
+
+🎲 Hod: 1 (k6)
+```
+
+**Použití:**
+- Zpestření encounter - unikátní varianta běžného stvoření
+- Random encounters - náhodné setkání s variantou
+- Boss fights - mocný jedinec s unikátními schopnostmi
+- NPC tvorové - zajímavé charaktery pro interakci
+
+### 🎲 13. Hody kostkami
 ```bash
 python -m src.cli roll-dice d6
 python -m src.cli roll-dice d20
@@ -410,19 +468,19 @@ python -m src.cli roll-dice 2d6
 python -m src.cli roll-dice d66
 ```
 
-### 🎯 13. Test vlastnosti
+### 🎯 14. Test vlastnosti
 ```bash
 python -m src.cli test 12
 python -m src.cli test 10 --modifier 2
 ```
 
-### ❓ 14. Zobrazit help
+### ❓ 15. Zobrazit help
 ```bash
 python -m src.cli --help
 python -m src.cli generate --help
 ```
 
-### 🧪 15. Spustit testy
+### 🧪 16. Spustit testy
 ```bash
 python test_character_simple.py
 python test_tableloader.py
@@ -434,6 +492,7 @@ python -m tests.test_adventure_generator
 python -m tests.test_tavern_generator
 python -m tests.test_settlement_generator
 python -m tests.test_adventure_hook_generator
+python -m tests.test_creature_variant_generator
 ```
 
 ---

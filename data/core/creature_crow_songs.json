@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "name": "Crow Songs",
+    "name_cz": "Vraní písně",
+    "description": "Magické písně vran",
+    "source": "docs/knowledge_base/09_CREATURES.md (řádek 254)",
+    "dice": "d6",
+    "category": "creature_variant",
+    "creature": "crow"
+  },
+  "variants": [
+    {
+      "roll": 1,
+      "name": "Píseň úsvitu",
+      "description": "Přivolá oslepující záblesk světla"
+    },
+    {
+      "roll": 2,
+      "name": "Píseň žalu",
+      "description": "Kdo ji uslyší: záchrana na vůli, jinak Vystrašení"
+    },
+    {
+      "roll": 3,
+      "name": "Píseň zraku",
+      "description": "Mnohoznačně předpovídá budoucí událost"
+    },
+    {
+      "roll": 4,
+      "name": "Píseň větru",
+      "description": "Fučí. Záchrana na sílu, jinak tě srazí na zem"
+    },
+    {
+      "roll": 5,
+      "name": "Píseň minulosti",
+      "description": "Spatříš minulou věc související s dneškem"
+    },
+    {
+      "roll": 6,
+      "name": "Píseň pravdy",
+      "description": "Kdo ji slyší, nemůže během písně lhát"
+    }
+  ]
+}
