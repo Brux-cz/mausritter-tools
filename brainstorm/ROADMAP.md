@@ -399,30 +399,61 @@ mausritter generate creature frog       # Žabí rytíři
 
 ---
 
-### 🎯 FÁZE 6A: Hex Generator
+### 🎯 FÁZE 6A: Hex Generator ✅ HOTOVO
 
 **Priorita:** 🟡 Vysoká (pro hexcrawl)
-**Čas:** ~2-3 hodiny
-**Stav:** 📝 Připraveno k implementaci
+**Čas:** ~2.5 hodiny (implementace)
+**Stav:** ✅ HOTOVO (2025-11-02)
 **Složitost:** ⭐⭐⭐ Střední
 **Závislosti:** ✅ Settlement Generator (HOTOVO)
 
 **Popis:**
-Generátor obsahu hexů pro hexcrawl kampaně.
+Generátor obsahu hexů pro hexcrawl kampaně podle oficiálních pravidel.
 
-**Zdroj:** `11_HEXCRAWL_SETUP.md` (řádky 93-160)
+**Zdroj:** `docs/knowledge_base/11_HEXCRAWL_SETUP.md` (řádky 93-160)
 
-**Co implementovat:**
-1. **Data** (1 hod)
-   - `data/core/hex_types.json` - 4 typy hexů (k6)
-   - `data/core/hex_details.json` - 48 detailů (k6×k8)
-   - ❗ **Používá Settlement Generator** (detail k6=1: "Myší osada...")
+**Co bylo vytvořeno:**
+1. **Data** - 2 JSON soubory
+   - `data/core/hex_types.json` - 4 typy hexů (k6: Otevřená krajina, Les, Řeka, Lidské město)
+   - `data/core/hex_details.json` - 48 detailů (k6×k8) v 6 kategoriích
 
-2. **Generátor** (1 hod)
-   - `src/generators/hex.py` - HexGenerator
-   - Integrace s SettlementGenerator
+2. **Model** - `Hex` dataclass v `models.py`
+   - Properties: type_emoji, is_settlement, category_name_cz
+   - Settlement integrace pro kategorii 1
 
-**Proč třetí:** Klíčové pro hexcrawl, používá Settlement který už máme ✅
+3. **Generátor** - `HexGenerator` v `hex.py`
+   - create() - náhodný hex
+   - create_with_type(type_roll) - s konkrétním typem
+   - create_with_settlement() - force settlement
+   - Plná integrace s SettlementGenerator
+
+4. **TableLoader** - 5 nových metod
+   - get_hex_types(), lookup_hex_type()
+   - get_hex_details(), lookup_hex_detail(), get_hex_details_by_category()
+
+5. **CLI** - příkaz `generate hex`
+   - --json, --save, --with-settlement
+   - Barevný výstup s panely a emoji
+
+6. **Testy** - 23 unit testů (všechny prošly ✅)
+   - Všechny 4 typy hexů
+   - Všech 6 kategorií detailů
+   - Settlement integrace
+   - Properties, JSON konverze
+
+7. **Dokumentace** - README.md sekce 13, ROADMAP.md aktualizace
+
+**Použití:**
+```bash
+mausritter generate hex                    # Náhodný hex
+mausritter generate hex --with-settlement  # Hex s osadou
+```
+
+**Klíčové vlastnosti:**
+- 4 typy hexů × 6 kategorií × 8 detailů = 48 možností
+- Settlement integrace (kategorie 1)
+- Každý detail má háček pro rozvíjení příběhu
+- Bottom-up: Settlement (4C) → Hex (6A) ✅
 
 ---
 
@@ -776,7 +807,7 @@ Nápady, které zatím nejsou v hlavním roadmap:
 | **P1 Priority**       | **✅** | **100% (8/8)** |
 | Tavern Generator      | ✅     | 100%     |
 | Settlement Generator  | ✅     | 100%     |
-| Hex Generator         | 💡     | 0%       |
+| Hex Generator         | ✅     | 100%     |
 | Documentation         | 🚧     | 75%      |
 | Web Interface         | 💡     | 0%       |
 
@@ -805,6 +836,22 @@ Pokud chceš přidat novou feature:
 ---
 
 ## 📝 Changelog
+
+### 2025-11-02 - Fáze 6A dokončena - Hex Generator 🗺️
+- ✅ Implementován Hex Generator (generátor hexů pro hexcrawl kampaně)
+- ✅ HexGenerator class v src/generators/hex.py
+- ✅ 2 JSON datové soubory v data/core/:
+  - hex_types.json - 4 typy hexů (k6: Otevřená krajina, Les, Řeka, Lidské město)
+  - hex_details.json - 48 detailů (k6×k8) v 6 kategoriích
+- ✅ Hex dataclass přidán do models.py s properties (type_emoji, is_settlement, category_name_cz)
+- ✅ TableLoader rozšířen o 5 nových metod pro hex tabulky
+- ✅ CLI příkaz `generate hex` s --json, --save, --with-settlement
+- ✅ Settlement integrace pro kategorii 1 (Myší osada)
+- ✅ Color-coded výstup s panely (emoji typ hexu, kategorie, detail, háček)
+- ✅ 23 unit testů v test_hex_generator.py (všechny prošly ✅)
+- ✅ Dokumentace aktualizována (README.md sekce 13, ROADMAP.md)
+- ✅ **Bottom-up přístup dokončen:** Settlement (4C) → Hex (6A) ✅
+- ✅ **Celková dokončenost: 46% (13/28 generátorů)**
 
 ### 2025-11-02 - Fáze 5 dokončena - Creature Variants 🐉
 - ✅ Implementovány varianty stvoření (11 typů, každý s 6× k6 variantami)

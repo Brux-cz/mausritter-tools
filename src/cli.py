@@ -8,7 +8,7 @@ from rich.table import Table
 from rich.panel import Panel
 from rich.text import Text
 from src.core.dice import roll, roll_with_details, attribute_test
-from src.core.models import Character, NPC, Hireling, Weather, Reaction, Spell, TreasureHoard, TreasureItem, MagicSword, AdventureSeed, Tavern, Settlement, AdventureHook, CreatureVariant
+from src.core.models import Character, NPC, Hireling, Weather, Reaction, Spell, TreasureHoard, TreasureItem, MagicSword, AdventureSeed, Tavern, Settlement, AdventureHook, CreatureVariant, Hex
 from src.generators.character import CharacterGenerator
 from src.generators.npc import NPCGenerator
 from src.generators.hireling import HirelingGenerator
@@ -21,6 +21,7 @@ from src.generators.tavern import TavernGenerator
 from src.generators.settlement import SettlementGenerator
 from src.generators.adventure_hook import AdventureHookGenerator
 from src.generators.creature_variant import CreatureVariantGenerator
+from src.generators.hex import HexGenerator
 
 # Fix Windows console encoding for Czech characters
 if sys.platform == 'win32':
@@ -1361,6 +1362,111 @@ def display_creature_variant(variant: CreatureVariant):
     rolls_text.append("🎲 Hod: ", style="dim")
     rolls_text.append(f"{variant.roll}", style="dim cyan")
     rolls_text.append(" (k6)", style="dim")
+
+    console.print(rolls_text)
+    console.print("\n")
+
+
+@generate.command()
+@click.option("--json", "output_json", is_flag=True, help="Výstup v JSON formátu")
+@click.option("--save", type=str, help="Ulož do souboru")
+@click.option("--with-settlement", is_flag=True, help="Vygeneruj hex s myší osadou")
+def hex(output_json: bool, save: str, with_settlement: bool):
+    """
+    Vygeneruj hex pro hexcrawl kampaň.
+
+    Generuje náhodný hex s typem a výrazným prvkem podle oficiálních pravidel.
+    Každý hex má typ (Otevřená krajina, Les, Řeka, Lidské město) a detail
+    s háčkem pro rozvíjení příběhu.
+
+    Speciální: Hexy s kategorií "Myší osada" automaticky generují celou osadu
+    pomocí Settlement Generatoru.
+
+    Příklady:
+        mausritter generate hex
+        mausritter generate hex --with-settlement
+        mausritter generate hex --json
+        mausritter generate hex --save muj_hex.json
+    """
+    # Vygeneruj hex
+    if with_settlement:
+        hex_obj = HexGenerator.create_with_settlement()
+    else:
+        hex_obj = HexGenerator.create()
+
+    if output_json:
+        json_output = HexGenerator.to_json(hex_obj)
+        console.print(json_output)
+        if save:
+            with open(save, 'w', encoding='utf-8') as f:
+                f.write(json_output)
+            console.print(f"\n[green]Uloženo do {save}[/green]")
+        return
+
+    display_hex(hex_obj)
+
+    if save:
+        json_output = HexGenerator.to_json(hex_obj)
+        with open(save, 'w', encoding='utf-8') as f:
+            f.write(json_output)
+        console.print(f"\n[green]Uloženo do {save}[/green]")
+
+
+def display_hex(hex_obj: Hex):
+    """Zobraz hex v terminálu s barevným formátováním."""
+
+    # Hlavní panel s typem hexu
+    title_text = f"{hex_obj.type_emoji}  HEX PRO HEXCRAWL"
+
+    main_panel = Panel(
+        f"[bold cyan]{hex_obj.type}[/bold cyan]",
+        title=title_text,
+        title_align="left",
+        border_style="cyan",
+        padding=(1, 2)
+    )
+
+    console.print("\n")
+    console.print(main_panel)
+
+    # Kategorie detailu
+    category_text = Text()
+    category_text.append("📋 Kategorie: ", style="bold magenta")
+    category_text.append(hex_obj.category_name_cz, style="white")
+    console.print(category_text)
+    console.print()
+
+    # Detail
+    console.print("[bold yellow]🔍 Detail:[/bold yellow]")
+    console.print(f"   {hex_obj.detail_name}", style="white")
+    console.print()
+
+    # Háček
+    console.print("[bold yellow]❓ Háček:[/bold yellow]")
+    console.print(f"   {hex_obj.detail_hook}", style="dim white")
+    console.print()
+
+    # Pokud obsahuje settlement, zobraz settlement info
+    if hex_obj.is_settlement and hex_obj.settlement:
+        settlement_panel = Panel(
+            f"[bold green]{hex_obj.settlement.name}[/bold green]\n"
+            f"[dim]Velikost: {hex_obj.settlement.size_name}[/dim]\n"
+            f"[dim]Vláda: {hex_obj.settlement.government}[/dim]",
+            title="🏘️  MYŠÍ OSADA",
+            title_align="left",
+            border_style="green",
+            padding=(1, 2)
+        )
+        console.print(settlement_panel)
+        console.print()
+
+    # Hody
+    rolls_text = Text()
+    rolls_text.append("🎲 Hody: ", style="dim")
+    rolls_text.append(f"Typ k6={hex_obj.type_roll}", style="dim cyan")
+    rolls_text.append(f", Kategorie k6={hex_obj.detail_category}", style="dim cyan")
+    if hex_obj.detail_subtype:
+        rolls_text.append(f", Detail k8={hex_obj.detail_subtype}", style="dim cyan")
 
     console.print(rolls_text)
     console.print("\n")

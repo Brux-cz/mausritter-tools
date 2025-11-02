@@ -511,3 +511,46 @@ class CreatureVariant:
             "frog": "Potulní žabí rytíři",
         }
         return names.get(self.creature_type, "Varianty stvoření")
+
+
+@dataclass
+class Hex:
+    """Hex pro hexcrawl kampaň"""
+
+    type: str
+    type_roll: int
+    detail_category: int
+    detail_subtype: Optional[int]
+    detail_name: str
+    detail_hook: str
+    settlement: Optional['Settlement'] = None
+    description: str = ""
+
+    @property
+    def type_emoji(self) -> str:
+        """Vrať emoji pro typ hexu"""
+        emoji_map = {
+            "Otevřená krajina": "🌾",
+            "Les": "🌲",
+            "Řeka": "🌊",
+            "Lidské město": "🏛️",
+        }
+        return emoji_map.get(self.type, "🗺️")
+
+    @property
+    def is_settlement(self) -> bool:
+        """True pokud hex obsahuje myší osadu"""
+        return self.detail_category == 1 and self.settlement is not None
+
+    @property
+    def category_name_cz(self) -> str:
+        """Vrať český název kategorie detailu"""
+        names = {
+            1: "Myší osada",
+            2: "Civilizační prvky",
+            3: "Zvířecí a přírodní prvky",
+            4: "Přírodní a opuštěné prvky",
+            5: "Mystické prvky",
+            6: "Pradávné a lidské prvky",
+        }
+        return names.get(self.detail_category, "Neznámá kategorie")

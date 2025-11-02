@@ -1,0 +1,300 @@
+{
+  "metadata": {
+    "name": "Hex Details",
+    "name_cz": "Detaily hexů",
+    "description": "Výrazné prvky a detaily hexů pro hexcrawl kampaně (k6 × k8)",
+    "source": "docs/knowledge_base/11_HEXCRAWL_SETUP.md (řádky 117-159)",
+    "dice": "d6 × d8",
+    "category": "hexcrawl"
+  },
+  "details": [
+    {
+      "category": 1,
+      "category_name": "Myší osada",
+      "subtype": null,
+      "name": "Myší osada",
+      "hook": "Generuje se pomocí Settlement Generatoru (12_SETTLEMENTS.md)",
+      "uses_settlement": true
+    },
+    {
+      "category": 2,
+      "category_name": "Civilizační prvky",
+      "subtype": 1,
+      "name": "Menší myší farma",
+      "hook": "Co se stalo s úrodou?"
+    },
+    {
+      "category": 2,
+      "category_name": "Civilizační prvky",
+      "subtype": 2,
+      "name": "Hrad myšího šlechtice",
+      "hook": "Před čím chrání?"
+    },
+    {
+      "category": 2,
+      "category_name": "Civilizační prvky",
+      "subtype": 3,
+      "name": "Vlídný myší zájezdní hostinec",
+      "hook": "Co je ve sklepě?"
+    },
+    {
+      "category": 2,
+      "category_name": "Civilizační prvky",
+      "subtype": 4,
+      "name": "Myší lovecký srub",
+      "hook": "Co zdejší myši loví?"
+    },
+    {
+      "category": 2,
+      "category_name": "Civilizační prvky",
+      "subtype": 5,
+      "name": "Hornická osada",
+      "hook": "Co vykopali?"
+    },
+    {
+      "category": 2,
+      "category_name": "Civilizační prvky",
+      "subtype": 6,
+      "name": "Bouda myšího poustevníka",
+      "hook": "Proč se straní společnosti?"
+    },
+    {
+      "category": 2,
+      "category_name": "Civilizační prvky",
+      "subtype": 7,
+      "name": "Přírodní jeskyně",
+      "hook": "Co v ní žije?"
+    },
+    {
+      "category": 2,
+      "category_name": "Civilizační prvky",
+      "subtype": 8,
+      "name": "Věž potulného rytíře",
+      "hook": "Co je jeho posláním?"
+    },
+    {
+      "category": 3,
+      "category_name": "Zvířecí a přírodní prvky",
+      "subtype": 1,
+      "name": "Hnízdo zpěvného ptáka",
+      "hook": "Jaké smutné příběhy pěje?"
+    },
+    {
+      "category": 3,
+      "category_name": "Zvířecí a přírodní prvky",
+      "subtype": 2,
+      "name": "Kmen obřích, mírumilovných zvířat",
+      "hook": "Čeho se bojí?"
+    },
+    {
+      "category": 3,
+      "category_name": "Zvířecí a přírodní prvky",
+      "subtype": 3,
+      "name": "Skrýš krysích loupežníků",
+      "hook": "Koho okrádají?"
+    },
+    {
+      "category": 3,
+      "category_name": "Zvířecí a přírodní prvky",
+      "subtype": 4,
+      "name": "Věž vraních čarodějnic",
+      "hook": "Jaká kouzla krákají?"
+    },
+    {
+      "category": 3,
+      "category_name": "Zvířecí a přírodní prvky",
+      "subtype": 5,
+      "name": "Hmyzí hnízdo",
+      "hook": "Na co mají chuť?"
+    },
+    {
+      "category": 3,
+      "category_name": "Zvířecí a přírodní prvky",
+      "subtype": 6,
+      "name": "Doupě velké šelmy",
+      "hook": "Jaké poklady střeží?"
+    },
+    {
+      "category": 3,
+      "category_name": "Zvířecí a přírodní prvky",
+      "subtype": 7,
+      "name": "Žabí pevnost",
+      "hook": "Co se skrývá v kobkách?"
+    },
+    {
+      "category": 3,
+      "category_name": "Zvířecí a přírodní prvky",
+      "subtype": 8,
+      "name": "Věž myšího čaroděje",
+      "hook": "Jaké kouzlo má skoro připravené?"
+    },
+    {
+      "category": 4,
+      "category_name": "Přírodní a opuštěné prvky",
+      "subtype": 1,
+      "name": "Nebezpečný přírodní prvek",
+      "hook": "Jak se mu vyhnout?"
+    },
+    {
+      "category": 4,
+      "category_name": "Přírodní a opuštěné prvky",
+      "subtype": 2,
+      "name": "Osamělá svatyně",
+      "hook": "Kdo o ni pečuje? Koho uctívá?"
+    },
+    {
+      "category": 4,
+      "category_name": "Přírodní a opuštěné prvky",
+      "subtype": 3,
+      "name": "Sídlo myšího šlechtice",
+      "hook": "Proč je opuštěné?"
+    },
+    {
+      "category": 4,
+      "category_name": "Přírodní a opuštěné prvky",
+      "subtype": 4,
+      "name": "Opuštěná osada",
+      "hook": "Jaké po nich zůstaly stopy?"
+    },
+    {
+      "category": 4,
+      "category_name": "Přírodní a opuštěné prvky",
+      "subtype": 5,
+      "name": "Pobořená strážní věž",
+      "hook": "Před čím chránila?"
+    },
+    {
+      "category": 4,
+      "category_name": "Přírodní a opuštěné prvky",
+      "subtype": 6,
+      "name": "Přírodní prvek, klidný a bezpečný",
+      "hook": "Kdo se tu potkává?"
+    },
+    {
+      "category": 4,
+      "category_name": "Přírodní a opuštěné prvky",
+      "subtype": 7,
+      "name": "Přírodní prvek, nepatřičný",
+      "hook": "Jak se utvořil?"
+    },
+    {
+      "category": 4,
+      "category_name": "Přírodní a opuštěné prvky",
+      "subtype": 8,
+      "name": "Vachrlatý most",
+      "hook": "Přes co se klene?"
+    },
+    {
+      "category": 5,
+      "category_name": "Mystické prvky",
+      "subtype": 1,
+      "name": "Starý chrám netopýřího kultu",
+      "hook": "Co tu vyvolali?"
+    },
+    {
+      "category": 5,
+      "category_name": "Mystické prvky",
+      "subtype": 2,
+      "name": "Vílí kruh",
+      "hook": "O co se tu víly pokoušejí?"
+    },
+    {
+      "category": 5,
+      "category_name": "Mystické prvky",
+      "subtype": 3,
+      "name": "Broučí hřbitov",
+      "hook": "Co duchové chtějí?"
+    },
+    {
+      "category": 5,
+      "category_name": "Mystické prvky",
+      "subtype": 4,
+      "name": "Chýše myší čarodějnice",
+      "hook": "Co zrovna vaří?"
+    },
+    {
+      "category": 5,
+      "category_name": "Mystické prvky",
+      "subtype": 5,
+      "name": "Malé, ale hluboké jezírko",
+      "hook": "Co leží na dně?"
+    },
+    {
+      "category": 5,
+      "category_name": "Mystické prvky",
+      "subtype": 6,
+      "name": "Rostliny z jiného ročního období",
+      "hook": "Proč tu rostou?"
+    },
+    {
+      "category": 5,
+      "category_name": "Mystické prvky",
+      "subtype": 7,
+      "name": "Hnízdo soví čarodějky",
+      "hook": "Po čem pátrá?"
+    },
+    {
+      "category": 5,
+      "category_name": "Mystické prvky",
+      "subtype": 8,
+      "name": "Zvláštní magická anomálie",
+      "hook": "Proč se šíří?"
+    },
+    {
+      "category": 6,
+      "category_name": "Pradávné a lidské prvky",
+      "subtype": 1,
+      "name": "Zřícená vzducholoď liliputů",
+      "hook": "Jak se dá opravit?"
+    },
+    {
+      "category": 6,
+      "category_name": "Pradávné a lidské prvky",
+      "subtype": 2,
+      "name": "Hučící kámen",
+      "hook": "Co se stane, když se ho někdo dotkne?"
+    },
+    {
+      "category": 6,
+      "category_name": "Pradávné a lidské prvky",
+      "subtype": 3,
+      "name": "Naprosté mrtvo",
+      "hook": "Jaká katastrofa se tu odehrála?"
+    },
+    {
+      "category": 6,
+      "category_name": "Pradávné a lidské prvky",
+      "subtype": 4,
+      "name": "Pravidelně používáno lidmi",
+      "hook": "Co tu dělají?"
+    },
+    {
+      "category": 6,
+      "category_name": "Pradávné a lidské prvky",
+      "subtype": 5,
+      "name": "Poškozeno lidmi",
+      "hook": "Co provedli?"
+    },
+    {
+      "category": 6,
+      "category_name": "Pradávné a lidské prvky",
+      "subtype": 6,
+      "name": "Starodávné trosky zaniklé civilizace",
+      "hook": "Kdo je postavil?"
+    },
+    {
+      "category": 6,
+      "category_name": "Pradávné a lidské prvky",
+      "subtype": 7,
+      "name": "Loviště kočičího pána",
+      "hook": "Jaké trofeje tu zůstávají?"
+    },
+    {
+      "category": 6,
+      "category_name": "Pradávné a lidské prvky",
+      "subtype": 8,
+      "name": "Přestavěná lidská stavba",
+      "hook": "K čemu slouží teď?"
+    }
+  ]
+}

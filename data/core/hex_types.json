@@ -1,0 +1,36 @@
+{
+  "metadata": {
+    "name": "Hex Types",
+    "name_cz": "Typy hexů",
+    "description": "Typy hexů pro hexcrawl kampaně",
+    "source": "docs/knowledge_base/11_HEXCRAWL_SETUP.md (řádky 104-109)",
+    "dice": "d6",
+    "category": "hexcrawl"
+  },
+  "types": [
+    {
+      "roll_min": 1,
+      "roll_max": 2,
+      "name": "Otevřená krajina",
+      "name_en": "Open land"
+    },
+    {
+      "roll_min": 3,
+      "roll_max": 4,
+      "name": "Les",
+      "name_en": "Forest"
+    },
+    {
+      "roll_min": 5,
+      "roll_max": 5,
+      "name": "Řeka",
+      "name_en": "River"
+    },
+    {
+      "roll_min": 6,
+      "roll_max": 6,
+      "name": "Lidské město",
+      "name_en": "Human city"
+    }
+  ]
+}

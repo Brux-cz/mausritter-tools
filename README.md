@@ -19,15 +19,16 @@ Python nástroje a generátory pro stolní hru **Mausritter** - OSR TTRPG o myš
 - ✅ **Testy vlastností** - roll-under d20 mechanika
 - ✅ **JSON databáze** - původy, jména, NPC, pomocníci, počasí, kouzla, poklady, nástroje, semínka dobrodružství, osady
 
-**Status:** Fáze 1, 2, 3A-F, 4A-D, 5 dokončeny (2025-11-02)
+**Status:** Fáze 1, 2, 3A-F, 4A-D, 5, 6A dokončeny (2025-11-02)
 - ✅ **P1 COMPLETE (100%)** - všech 8 základních PJ nástrojů
 - ✅ **Tavern Generator** (Fáze 4B)
 - ✅ **Settlement Generator** (Fáze 4C)
 - ✅ **Adventure Hooks** (Fáze 4D)
 - ✅ **Creature Variants** (Fáze 5) - 11 typů stvoření, každý s 6 variantami
-- 📝 **DALŠÍ:** Hex Generator (Fáze 6A) nebo Dungeon Generator (Fáze 6B)
+- ✅ **Hex Generator** (Fáze 6A) - 4 typy hexů, 48 detailů, Settlement integrace
+- 📝 **DALŠÍ:** Dungeon Generator (Fáze 6B)
 
-**Dokončenost:** 43% (12/28 generátorů) | **Roadmap:** [brainstorm/ROADMAP.md](brainstorm/ROADMAP.md)
+**Dokončenost:** 46% (13/28 generátorů) | **Roadmap:** [brainstorm/ROADMAP.md](brainstorm/ROADMAP.md)
 
 ---
 
@@ -460,7 +461,81 @@ Bezalel
 - Boss fights - mocný jedinec s unikátními schopnostmi
 - NPC tvorové - zajímavé charaktery pro interakci
 
-### 🎲 13. Hody kostkami
+### 🗺️ 13. Generování hexů pro hexcrawl
+```bash
+# Náhodný hex
+python -m src.cli generate hex
+
+# Hex s myší osadou
+python -m src.cli generate hex --with-settlement
+
+# JSON výstup
+python -m src.cli generate hex --json
+
+# Uložit do souboru
+python -m src.cli generate hex --save muj_hex.json
+```
+
+**Co je hex:**
+- **Typ hexu** (k6) - Otevřená krajina, Les, Řeka, Lidské město
+- **Kategorie detailu** (k6) - 6 kategorií (Osada, Civilizace, Zvířata, Opuštěné, Mystické, Lidské)
+- **Detail** (k8) - 48 konkrétních detailů s háčky pro rozvíjení příběhu
+- **Settlement integrace** - Hexy s kategorií "Myší osada" automaticky generují celou osadu
+
+**4 typy hexů:**
+| Typ | k6 | Emoji |
+|-----|-----|-------|
+| Otevřená krajina | 1-2 | 🌾 |
+| Les | 3-4 | 🌲 |
+| Řeka | 5 | 🌊 |
+| Lidské město | 6 | 🏛️ |
+
+**6 kategorií detailů:**
+| # | Kategorie | Počet detailů |
+|---|-----------|---------------|
+| 1 | Myší osada | (generuje Settlement) |
+| 2 | Civilizační prvky | 8 |
+| 3 | Zvířecí a přírodní prvky | 8 |
+| 4 | Přírodní a opuštěné prvky | 8 |
+| 5 | Mystické prvky | 8 |
+| 6 | Pradávné a lidské prvky | 8 |
+
+**Příklad výstupu:**
+```
+🌲 HEX PRO HEXCRAWL
+Les
+
+📋 Kategorie: Zvířecí a přírodní prvky
+
+🔍 Detail:
+   Hnízdo zpěvného ptáka
+
+❓ Háček:
+   Jaké smutné příběhy pěje?
+
+🎲 Hody: Typ k6=3, Kategorie k6=3, Detail k8=1
+```
+
+**Příklad s osadou:**
+```
+🌾 HEX PRO HEXCRAWL
+Otevřená krajina
+
+📋 Kategorie: Myší osada
+
+🏘️ MYŠÍ OSADA:
+Křižovatka
+Velikost: Křižovatka
+Vláda: Rada starších
+```
+
+**Použití:**
+- Hexcrawl kampaně - generování obsahu hexů na mapě
+- Sandbox průzkum - náhodné objevy při cestování
+- Příprava světa - rychlé naplnění mapy zajímavostmi
+- Improvizace - když hráči jdou neočekávaným směrem
+
+### 🎲 14. Hody kostkami
 ```bash
 python -m src.cli roll-dice d6
 python -m src.cli roll-dice d20
@@ -468,19 +543,19 @@ python -m src.cli roll-dice 2d6
 python -m src.cli roll-dice d66
 ```
 
-### 🎯 14. Test vlastnosti
+### 🎯 15. Test vlastnosti
 ```bash
 python -m src.cli test 12
 python -m src.cli test 10 --modifier 2
 ```
 
-### ❓ 15. Zobrazit help
+### ❓ 16. Zobrazit help
 ```bash
 python -m src.cli --help
 python -m src.cli generate --help
 ```
 
-### 🧪 16. Spustit testy
+### 🧪 17. Spustit testy
 ```bash
 python test_character_simple.py
 python test_tableloader.py
@@ -493,6 +568,7 @@ python -m tests.test_tavern_generator
 python -m tests.test_settlement_generator
 python -m tests.test_adventure_hook_generator
 python -m tests.test_creature_variant_generator
+python -m tests.test_hex_generator
 ```
 
 ---

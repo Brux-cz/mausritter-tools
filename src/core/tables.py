@@ -1308,6 +1308,80 @@ class TableLoader:
         """Načte tabulku potulných žabích rytířů."""
         return TableLoader.load_table("core/creature_frog_knights.json")
 
+    # === HEXCRAWL - HEXY ===
+
+    @staticmethod
+    def get_hex_types() -> Dict[str, Any]:
+        """Načte tabulku typů hexů pro hexcrawl."""
+        return TableLoader.load_table("core/hex_types.json")
+
+    @staticmethod
+    def lookup_hex_type(roll: int) -> Optional[Dict[str, Any]]:
+        """
+        Najde typ hexu podle hodu k6.
+
+        Args:
+            roll: Výsledek hodu k6 (1-6)
+
+        Returns:
+            Dict s informacemi o typu hexu (roll_min, roll_max, name) nebo None
+        """
+        data = TableLoader.get_hex_types()
+        types = data.get("types", [])
+
+        for hex_type in types:
+            if hex_type["roll_min"] <= roll <= hex_type["roll_max"]:
+                return hex_type
+
+        return None
+
+    @staticmethod
+    def get_hex_details() -> Dict[str, Any]:
+        """Načte tabulku detailů hexů (k6 × k8)."""
+        return TableLoader.load_table("core/hex_details.json")
+
+    @staticmethod
+    def lookup_hex_detail(category: int, subtype: Optional[int]) -> Optional[Dict[str, Any]]:
+        """
+        Najde detail hexu podle kategorie (k6) a subtypu (k8).
+
+        Args:
+            category: Kategorie detailu (1-6)
+            subtype: Subtyp detailu (1-8, může být None pro settlement)
+
+        Returns:
+            Dict s informacemi o detailu (name, hook) nebo None
+        """
+        data = TableLoader.get_hex_details()
+        details = data.get("details", [])
+
+        for detail in details:
+            if detail["category"] == category:
+                # Speciální případ: Settlement (category=1, subtype=None)
+                if category == 1 and detail.get("subtype") is None:
+                    return detail
+                # Normální případ: Match subtype
+                elif detail.get("subtype") == subtype:
+                    return detail
+
+        return None
+
+    @staticmethod
+    def get_hex_details_by_category(category: int) -> list:
+        """
+        Vrať všechny detaily pro danou kategorii.
+
+        Args:
+            category: Kategorie detailu (1-6)
+
+        Returns:
+            Seznam detailů pro danou kategorii
+        """
+        data = TableLoader.get_hex_details()
+        details = data.get("details", [])
+
+        return [d for d in details if d["category"] == category]
+
 
 # Convenience funkce pro rychlé použití
 # === SHORTCUTS ===
