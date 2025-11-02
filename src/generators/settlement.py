@@ -23,7 +23,7 @@ class SettlementGenerator:
     - Velikost: 2d6 keep-lower (1-6)
     - Vláda: k6 + sizeValue (2-12)
     - Detail: k20
-    - Řemesla: 1× k20 (2× pro města sizeValue=5)
+    - Řemesla: 1× k20 (2× pro města A velkoměsta sizeValue 5-6)
     - Prvky: 1× k20 (2× pro velkoměsta sizeValue=6)
     - Událost: k20
     - Název: volitelný, kombinace semínek (k12 + k12)

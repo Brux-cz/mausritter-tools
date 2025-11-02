@@ -24,8 +24,12 @@ class DungeonGenerator:
     - Room generation: 3×k6 systém (type, creature chance, treasure chance)
     - Settlement integrace: past=20 generuje Settlement
 
+    POZNÁMKA: Default počet místností (rooms=6) NENÍ v oficiálních pravidlech.
+    Pravidla říkají "Nakresli mapku a vyplň místnosti" (GM si určuje sám).
+    6 je rozumný default pro generátor, ale lze libovolně změnit.
+
     Použití:
-        # Náhodný dungeon s 6 místnostmi
+        # Náhodný dungeon s 6 místnostmi (default)
         dungeon = DungeonGenerator.create()
 
         # Dungeon s konkrétním počtem místností

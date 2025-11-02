@@ -165,25 +165,25 @@ def test_government_calculation():
     settlement = SettlementGenerator.create(
         roll_size_die1=1,
         roll_size_die2=1,  # size = 1
-        roll_government=1   # 1 + 1 = 2 → "Žádná"
+        roll_government=1   # 1 + 1 = 2 → "Vedená vesnickými stařešiny"
     )
 
-    assert settlement.government == "Žádná"
+    assert settlement.government == "Vedená vesnickými stařešiny"
 
     settlement2 = SettlementGenerator.create(
         roll_size_die1=6,
         roll_size_die2=6,  # size = 6
-        roll_government=6   # 6 + 6 = 12 → "Demokratické volby"
+        roll_government=6   # 6 + 6 = 12 → "Hlavní sídlo šlechtické moci"
     )
 
-    assert settlement2.government == "Demokratické volby"
+    assert settlement2.government == "Hlavní sídlo šlechtické moci"
 
 
 def test_specific_detail():
     """Test konkrétního detailu"""
     settlement = SettlementGenerator.create(roll_detail=1)
 
-    assert settlement.detail == "Obehnaná zdí/plotem"
+    assert settlement.detail == "Holí si v srsti složité vzory"
     assert settlement.roll_detail == 1
 
 
@@ -191,7 +191,7 @@ def test_specific_trade():
     """Test konkrétního řemesla"""
     settlement = SettlementGenerator.create(roll_trades=[1])
 
-    assert "Výroba nástrojů" in settlement.trades
+    assert "Zemědělci pečující o tyčící se plodiny" in settlement.trades
     assert settlement.roll_trades == [1]
 
 
@@ -199,7 +199,7 @@ def test_specific_feature():
     """Test konkrétního prvku"""
     settlement = SettlementGenerator.create(roll_features=[1])
 
-    assert "Velká socha nebo památník" in settlement.features
+    assert "Bludiště obranných chodeb plných pastí" in settlement.features
     assert settlement.roll_features == [1]
 
 
@@ -207,7 +207,7 @@ def test_specific_event():
     """Test konkrétní události"""
     settlement = SettlementGenerator.create(roll_event=1)
 
-    assert settlement.event == "Dnes je tržní den"
+    assert settlement.event == "Katastrofa, všichni se balí a odcházejí"
     assert settlement.roll_event == 1
 
 

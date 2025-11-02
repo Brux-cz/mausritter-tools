@@ -1,0 +1,279 @@
+{
+  "metadata": {
+    "name": "Rumor Templates",
+    "name_cz": "Šablony zvěstí",
+    "description": "Template patterns pro generování zvěstí (Variant B)",
+    "category": "rumor",
+    "official": false,
+    "variant": "B",
+    "note": "Community-inspired extension - NOT in core Mausritter rules"
+  },
+  "templates": {
+    "threat_settlement_problem": {
+      "category": "threat",
+      "pattern": "V [settlement_name] mají problém s [problem]",
+      "requires": ["settlement_name", "problem"],
+      "source_type": "settlement",
+      "truthfulness_modifiers": {
+        "true": "V [settlement_name] mají problém s [problem]",
+        "partial": "V [settlement_name] prý mají potíže s [problem_vague]",
+        "false": "V [settlement_name] prý je [false_threat]"
+      },
+      "partial_modifiers": {
+        "problem_vague": [
+          "nějakými tvory",
+          "podivnými návštěvníky",
+          "neznámou hrozbou"
+        ]
+      },
+      "false_modifiers": {
+        "false_threat": [
+          "drak",
+          "armáda kočičích pánů",
+          "mor",
+          "invaze krys",
+          "obří pavouk"
+        ]
+      }
+    },
+    "threat_dungeon_inhabitants": {
+      "category": "threat",
+      "pattern": "[dungeon_past] je plné [inhabitants]",
+      "requires": ["dungeon_past", "inhabitants"],
+      "source_type": "dungeon",
+      "truthfulness_modifiers": {
+        "true": "[dungeon_past] je plné [inhabitants]",
+        "partial": "[dungeon_past] prý obývají [inhabitants_vague]",
+        "false": "[dungeon_past] prý chrání [false_guardian]"
+      },
+      "partial_modifiers": {
+        "inhabitants_vague": [
+          "nebezpečná stvoření",
+          "podivné bytosti",
+          "nepřátelé"
+        ]
+      },
+      "false_modifiers": {
+        "false_guardian": [
+          "čaroděj",
+          "duch",
+          "nemrtvý rytíř",
+          "prokletý strážce"
+        ]
+      }
+    },
+    "npc_quest": {
+      "category": "npc",
+      "pattern": "[npc_name] z [settlement_name] hledá dobrodruhy",
+      "requires": ["npc_name", "settlement_name"],
+      "source_type": "settlement",
+      "truthfulness_modifiers": {
+        "true": "[npc_name] z [settlement_name] hledá dobrodruhy",
+        "partial": "[npc_name] z [settlement_name] prý nabízí zajímavou práci",
+        "false": "[npc_name] z [settlement_name] prý rozdává [false_reward] zadarmo"
+      },
+      "false_modifiers": {
+        "false_reward": [
+          "zlato",
+          "kouzelné předměty",
+          "mapy k pokladům",
+          "vzácné sýry"
+        ]
+      }
+    },
+    "npc_item": {
+      "category": "npc",
+      "pattern": "[npc_name] z [settlement_name] vlastní [item]",
+      "requires": ["npc_name", "settlement_name"],
+      "source_type": "settlement",
+      "truthfulness_modifiers": {
+        "true": "[npc_name] z [settlement_name] vlastní [item]",
+        "partial": "[npc_name] z [settlement_name] prý vlastní [fake_magic_item]",
+        "false": "[npc_name] z [settlement_name] prý má [legendary_item]"
+      },
+      "partial_modifiers": {
+        "fake_magic_item": [
+          "magickou hůl",
+          "kouzelný prsten",
+          "mapu k pokladu"
+        ]
+      },
+      "false_modifiers": {
+        "legendary_item": [
+          "meč nesmrtelnosti",
+          "korunu starých králů",
+          "kámen mudrců",
+          "plášť neviditelnosti"
+        ]
+      }
+    },
+    "location_hex_detail": {
+      "category": "location",
+      "pattern": "V [terrain] je [detail]",
+      "requires": ["terrain", "detail"],
+      "source_type": "hex",
+      "truthfulness_modifiers": {
+        "true": "V [terrain] je [detail]",
+        "partial": "V [terrain] prý je [detail_vague]",
+        "false": "V [terrain] prý je [detail] plný pokladů"
+      },
+      "partial_modifiers": {
+        "detail_vague": [
+          "zajímavé místo",
+          "něco zvláštního",
+          "opuštěná budova"
+        ]
+      }
+    },
+    "location_settlement_feature": {
+      "category": "location",
+      "pattern": "V [settlement_name] je [feature]",
+      "requires": ["settlement_name", "feature"],
+      "source_type": "settlement",
+      "truthfulness_modifiers": {
+        "true": "V [settlement_name] je [feature]",
+        "partial": "V [settlement_name] prý je něco zajímavého",
+        "false": "V [settlement_name] prý je [false_feature]"
+      },
+      "false_modifiers": {
+        "false_feature": [
+          "čarodějova věž",
+          "portál do jiného světa",
+          "skrytá knihovna",
+          "dračí doupě"
+        ]
+      }
+    },
+    "treasure_dungeon_secret": {
+      "category": "treasure",
+      "pattern": "Ve [dungeon_past] je [secret]",
+      "requires": ["dungeon_past", "secret"],
+      "source_type": "dungeon",
+      "truthfulness_modifiers": {
+        "true": "Ve [dungeon_past] je [secret]",
+        "partial": "Ve [dungeon_past] je [secret_exaggerated]",
+        "false": "Ve [dungeon_past] je [secret] a [false_treasure]"
+      },
+      "partial_modifiers": {
+        "secret_exaggerated": [
+          "mocný artefakt",
+          "starověký poklad",
+          "kouzelný předmět"
+        ]
+      },
+      "false_modifiers": {
+        "false_treasure": [
+          "truhla plná zlata",
+          "hromady drahokamů",
+          "nekonečný zdroj bohatství",
+          "legendární meč"
+        ]
+      }
+    },
+    "treasure_hex_location": {
+      "category": "treasure",
+      "pattern": "V [terrain] u [detail] je ukrytý poklad",
+      "requires": ["terrain", "detail"],
+      "source_type": "hex",
+      "truthfulness_modifiers": {
+        "true": "V [terrain] u [detail] je ukrytý poklad",
+        "partial": "V [terrain] u [detail] prý je něco cenného",
+        "false": "V [terrain] u [detail] je [legendary_treasure]"
+      },
+      "false_modifiers": {
+        "legendary_treasure": [
+          "studánka zlatých mincí",
+          "dračí poklad",
+          "zakletý diamant",
+          "truhla plná sýrů"
+        ]
+      }
+    },
+    "mystery_dungeon_secret": {
+      "category": "mystery",
+      "pattern": "Ve [dungeon_past] se děje něco zvláštního",
+      "requires": ["dungeon_past"],
+      "source_type": "dungeon",
+      "truthfulness_modifiers": {
+        "true": "Ve [dungeon_past] je [secret]",
+        "partial": "Ve [dungeon_past] prý je [mystery_partial]",
+        "false": "Ve [dungeon_past] prý je [supernatural_false]"
+      },
+      "partial_modifiers": {
+        "mystery_partial": [
+          "podivný zvuk",
+          "záhadné světlo",
+          "zvláštní energie",
+          "tajemný artefakt"
+        ]
+      },
+      "false_modifiers": {
+        "supernatural_false": [
+          "portál do jiného světa",
+          "časová smyčka",
+          "živý chrám",
+          "vědomý obelisk"
+        ]
+      }
+    },
+    "mystery_hex_phenomenon": {
+      "category": "mystery",
+      "pattern": "V [terrain] se děje něco podivného",
+      "requires": ["terrain"],
+      "source_type": "hex",
+      "truthfulness_modifiers": {
+        "true": "V [terrain] je [detail]",
+        "partial": "V [terrain] prý se objevují [phenomenon_partial]",
+        "false": "V [terrain] prý je [supernatural_false]"
+      },
+      "partial_modifiers": {
+        "phenomenon_partial": [
+          "podivná světla",
+          "neznámé zvuky",
+          "záhadné stopy",
+          "zvláštní mlha"
+        ]
+      },
+      "false_modifiers": {
+        "supernatural_false": [
+          "duch mrtvého krále",
+          "vílí brána",
+          "prokletý kruh",
+          "časový vír"
+        ]
+      }
+    }
+  },
+  "fallback_templates": {
+    "threat": [
+      "Krysí loupežníci napadají cestující na staré cestě",
+      "V okolí se objevuje nebezpečný tvor",
+      "Lasice plundrují farmy",
+      "V noci se ozývá podivné vytí"
+    ],
+    "npc": [
+      "Starý poutník hledá pomocníky pro výpravu",
+      "Místní šlechtic nabízí odměnu za vyřešení problému",
+      "Čaroděj shání vzácnou přísadu",
+      "Obchodník hledá ochranu na cestě"
+    ],
+    "location": [
+      "V lese je opuštěný mlýn",
+      "Za močálem je stará věž",
+      "Pod kořeny dubu je tajná chodba",
+      "V jeskyni někdo viděl světlo"
+    ],
+    "treasure": [
+      "Pod starým dubem je zakopaný poklad",
+      "V jeskyni leží zlatý klíč",
+      "Starý brouk nabízí mapu k pokladu",
+      "V ruinách je ukrytý artefakt"
+    ],
+    "mystery": [
+      "Každou noc někdo zhasíná světla v osadě",
+      "Z lesa se ozývají podivné zvuky",
+      "Místní tvrdí, že viděli ducha",
+      "Voda v potoce změnila barvu"
+    ]
+  }
+}

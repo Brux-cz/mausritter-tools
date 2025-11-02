@@ -1,0 +1,199 @@
+{
+  "metadata": {
+    "name": "Gossip NPCs",
+    "name_cz": "NPC pro gossip chain",
+    "description": "Pool postav pro simulaci šíření zvěstí (Variant E)",
+    "category": "rumor",
+    "official": false,
+    "variant": "E",
+    "note": "Community-inspired extension - NOT in core Mausritter rules"
+  },
+  "npcs": [
+    {
+      "name": "Starý křeček u baru",
+      "reliability": "low",
+      "distortion_type": "exaggeration",
+      "description": "Rád přikrášluje příběhy"
+    },
+    {
+      "name": "Hlídač u brány",
+      "reliability": "high",
+      "distortion_type": "neutral",
+      "description": "Pozorný, ale nezná detaily"
+    },
+    {
+      "name": "Cestující obchodník",
+      "reliability": "medium",
+      "distortion_type": "confusion",
+      "description": "Možná si plete místa"
+    },
+    {
+      "name": "Barmanka v hospodě",
+      "reliability": "medium",
+      "distortion_type": "rumor_mixing",
+      "description": "Kombinuje různé příběhy"
+    },
+    {
+      "name": "Místní kovář",
+      "reliability": "high",
+      "distortion_type": "practical",
+      "description": "Praktický, ale skeptický"
+    },
+    {
+      "name": "Opilý dobrodruh",
+      "reliability": "low",
+      "distortion_type": "exaggeration",
+      "description": "Velmi nespolehlivý zdroj"
+    },
+    {
+      "name": "Starší kněz",
+      "reliability": "high",
+      "distortion_type": "moralization",
+      "description": "Přidává morální výklad"
+    },
+    {
+      "name": "Dítě myš",
+      "reliability": "low",
+      "distortion_type": "misunderstanding",
+      "description": "Nepochopilo správně"
+    },
+    {
+      "name": "Pouliční hlasatel",
+      "reliability": "medium",
+      "distortion_type": "dramatization",
+      "description": "Přidává drama"
+    },
+    {
+      "name": "Starosta osady",
+      "reliability": "high",
+      "distortion_type": "official",
+      "description": "Oficiální, ale neúplné info"
+    },
+    {
+      "name": "Poutník",
+      "reliability": "medium",
+      "distortion_type": "distance",
+      "description": "Viděl z dálky"
+    },
+    {
+      "name": "Místní šaman",
+      "reliability": "medium",
+      "distortion_type": "mystification",
+      "description": "Přidává mystický význam"
+    }
+  ],
+  "distortion_patterns": {
+    "exaggeration": {
+      "name": "Přehánění",
+      "modifiers": [
+        "obrovský",
+        "strašlivý",
+        "nesmírný",
+        "hrozný"
+      ],
+      "phrases": [
+        "prý",
+        "údajně",
+        "říká se že"
+      ]
+    },
+    "confusion": {
+      "name": "Zmatení",
+      "modifiers": [
+        "možná",
+        "asi",
+        "nejspíš"
+      ],
+      "phrases": [
+        "myslím že to bylo",
+        "nebo to bylo jinak",
+        "nejsem si jistý ale"
+      ]
+    },
+    "rumor_mixing": {
+      "name": "Míchání fám",
+      "modifiers": [],
+      "phrases": [
+        "a navíc",
+        "a taky",
+        "dokonce"
+      ]
+    },
+    "practical": {
+      "name": "Praktičnost",
+      "modifiers": [
+        "pravděpodobně",
+        "zřejmě"
+      ],
+      "phrases": [
+        "to nedává smysl ale",
+        "nevěřím tomu ale slyšel jsem"
+      ]
+    },
+    "moralization": {
+      "name": "Moralizování",
+      "modifiers": [],
+      "phrases": [
+        "to je trest za",
+        "to je znamení",
+        "bohové varují"
+      ]
+    },
+    "misunderstanding": {
+      "name": "Nepochopení",
+      "modifiers": [
+        "divný",
+        "zvláštní",
+        "strašidelný"
+      ],
+      "phrases": [
+        "viděl jsem jak",
+        "bylo to děsivé"
+      ]
+    },
+    "dramatization": {
+      "name": "Dramatizace",
+      "modifiers": [
+        "neskutečný",
+        "neuvěřitelný",
+        "fantastický"
+      ],
+      "phrases": [
+        "všichni o tom mluví!",
+        "musíte to slyšet!",
+        "nestačíte zírat!"
+      ]
+    },
+    "official": {
+      "name": "Oficiálnost",
+      "modifiers": [],
+      "phrases": [
+        "podle hlášení",
+        "oficiálně",
+        "byla zpráva o"
+      ]
+    },
+    "distance": {
+      "name": "Vzdálenost",
+      "modifiers": [],
+      "phrases": [
+        "z dálky jsem viděl",
+        "někde tam",
+        "za horizontem"
+      ]
+    },
+    "mystification": {
+      "name": "Mystifikace",
+      "modifiers": [
+        "magický",
+        "prokletý",
+        "začarovaný"
+      ],
+      "phrases": [
+        "je to znamení",
+        "duchy to způsobili",
+        "magie je v tom"
+      ]
+    }
+  }
+}

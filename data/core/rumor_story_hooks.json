@@ -1,0 +1,143 @@
+{
+  "metadata": {
+    "name": "Rumor Story Hooks",
+    "name_cz": "Story Hooks pro zvěsti",
+    "description": "k6×k6 tabulky pro komplexní zápletky (Variant C)",
+    "category": "rumor",
+    "official": false,
+    "variant": "C",
+    "note": "Community-inspired extension - NOT in core Mausritter rules"
+  },
+  "story_hooks": {
+    "npc_quest_type": {
+      "name": "NPC Quest Type",
+      "name_cz": "Typ úkolu",
+      "description": "Co NPC potřebuje",
+      "entries": [
+        {"roll": 1, "name": "Hledá ztracenou osobu"},
+        {"roll": 2, "name": "Potřebuje ochranu"},
+        {"roll": 3, "name": "Shání vzácný předmět"},
+        {"roll": 4, "name": "Hledá starověkou mapu"},
+        {"roll": 5, "name": "Vyšetřuje záhadu"},
+        {"roll": 6, "name": "Nabízí průvodcovství"}
+      ]
+    },
+    "npc_reward": {
+      "name": "NPC Reward",
+      "name_cz": "Odměna",
+      "description": "Co NPC nabízí",
+      "entries": [
+        {"roll": 1, "name": "Ďobky"},
+        {"roll": 2, "name": "Informace"},
+        {"roll": 3, "name": "Magický předmět"},
+        {"roll": 4, "name": "Přístřeší a jídlo"},
+        {"roll": 5, "name": "Přátelství mocné frakce"},
+        {"roll": 6, "name": "Vzácný nástroj"}
+      ]
+    },
+    "treasure_type": {
+      "name": "Treasure Type",
+      "name_cz": "Typ pokladu",
+      "description": "Co je ukryté",
+      "entries": [
+        {"roll": 1, "name": "Starověké mince"},
+        {"roll": 2, "name": "Kouzelný artefakt"},
+        {"roll": 3, "name": "Hromada zlatých mincí"},
+        {"roll": 4, "name": "Vzácný sýr"},
+        {"roll": 5, "name": "Magická kniha"},
+        {"roll": 6, "name": "Legendární zbraň"}
+      ]
+    },
+    "treasure_guardian": {
+      "name": "Treasure Guardian",
+      "name_cz": "Strážce pokladu",
+      "description": "Co poklad chrání",
+      "entries": [
+        {"roll": 1, "name": "Nebezpečný tvor"},
+        {"roll": 2, "name": "Kletba"},
+        {"roll": 3, "name": "Složitý hlavolam"},
+        {"roll": 4, "name": "Past"},
+        {"roll": 5, "name": "Konkurenční dobrodruzi"},
+        {"roll": 6, "name": "Nic - je to fáma"}
+      ]
+    },
+    "mystery_type": {
+      "name": "Mystery Type",
+      "name_cz": "Typ záhady",
+      "description": "Co se děje",
+      "entries": [
+        {"roll": 1, "name": "Podivné zvuky"},
+        {"roll": 2, "name": "Zmizení místních"},
+        {"roll": 3, "name": "Nadpřirozené jevy"},
+        {"roll": 4, "name": "Změna prostředí"},
+        {"roll": 5, "name": "Magická aura"},
+        {"roll": 6, "name": "Časové anomálie"}
+      ]
+    },
+    "mystery_cause": {
+      "name": "Mystery Cause",
+      "name_cz": "Příčina záhady",
+      "description": "Co je za tím",
+      "entries": [
+        {"roll": 1, "name": "Starověký rituál"},
+        {"roll": 2, "name": "Probuzený artefakt"},
+        {"roll": 3, "name": "Vílí magie"},
+        {"roll": 4, "name": "Duch minulosti"},
+        {"roll": 5, "name": "Přírodní fenomén"},
+        {"roll": 6, "name": "Experiment čaroděje"}
+      ]
+    },
+    "threat_origin": {
+      "name": "Threat Origin",
+      "name_cz": "Původ hrozby",
+      "description": "Odkud hrozba přišla",
+      "entries": [
+        {"roll": 1, "name": "Z hlubokých lesů"},
+        {"roll": 2, "name": "Ze starých ruin"},
+        {"roll": 3, "name": "Od lidí"},
+        {"roll": 4, "name": "Z podzemí"},
+        {"roll": 5, "name": "Z vílího království"},
+        {"roll": 6, "name": "Odnikud - objevila se náhle"}
+      ]
+    },
+    "threat_motivation": {
+      "name": "Threat Motivation",
+      "name_cz": "Motivace hrozby",
+      "description": "Proč hrozba útočí",
+      "entries": [
+        {"roll": 1, "name": "Hledá potravu"},
+        {"roll": 2, "name": "Chrání teritorium"},
+        {"roll": 3, "name": "Pod kontrolou něčeho většího"},
+        {"roll": 4, "name": "Touží po pokladu"},
+        {"roll": 5, "name": "Mstí se za minulost"},
+        {"roll": 6, "name": "Neznámý důvod"}
+      ]
+    },
+    "location_history": {
+      "name": "Location History",
+      "name_cz": "Historie místa",
+      "description": "Co se tam stalo",
+      "entries": [
+        {"roll": 1, "name": "Kdysi to bylo myší město"},
+        {"roll": 2, "name": "Místo bitvy"},
+        {"roll": 3, "name": "Opuštěný chrám"},
+        {"roll": 4, "name": "Vílí svatyně"},
+        {"roll": 5, "name": "Čarodějova laboratoř"},
+        {"roll": 6, "name": "Pohřebiště starých králů"}
+      ]
+    },
+    "location_current_state": {
+      "name": "Location Current State",
+      "name_cz": "Současný stav",
+      "description": "Co tam je teď",
+      "entries": [
+        {"roll": 1, "name": "Ruiny porostlé mechem"},
+        {"roll": 2, "name": "Domov nebezpečných tvorů"},
+        {"roll": 3, "name": "Částečně obydlené"},
+        {"roll": 4, "name": "Magicky zachovalé"},
+        {"roll": 5, "name": "Prokleté a opuštěné"},
+        {"roll": 6, "name": "Živé a vyvíjející se"}
+      ]
+    }
+  }
+}

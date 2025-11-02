@@ -1,0 +1,58 @@
+{
+  "metadata": {
+    "name": "Rumor Categories",
+    "name_cz": "Kategorie zvěstí",
+    "description": "Definice kategorií pro organizaci zvěstí (Variant D)",
+    "category": "rumor",
+    "official": false,
+    "variant": "D",
+    "note": "Community-inspired extension - NOT in core Mausritter rules"
+  },
+  "categories": {
+    "threat": {
+      "name": "Threat",
+      "name_cz": "Hrozba",
+      "emoji": "🗡️",
+      "description": "Nebezpečí, nepřátelé, konflikty",
+      "source_types": ["settlement", "hex", "dungeon"],
+      "source_aspects": ["problem", "inhabitants", "decay"],
+      "weight": 2
+    },
+    "npc": {
+      "name": "NPC",
+      "name_cz": "Postava",
+      "emoji": "👤",
+      "description": "Významné postavy, jejich touhy a plány",
+      "source_types": ["settlement"],
+      "source_aspects": ["notable_npc", "government"],
+      "weight": 2
+    },
+    "location": {
+      "name": "Location",
+      "name_cz": "Lokace",
+      "emoji": "📍",
+      "description": "Zajímavá místa, budovy, přírodní útvary",
+      "source_types": ["hex", "settlement"],
+      "source_aspects": ["detail", "feature", "landmark"],
+      "weight": 2
+    },
+    "treasure": {
+      "name": "Treasure",
+      "name_cz": "Poklad",
+      "emoji": "💎",
+      "description": "Cennosti, artefakty, bohatství",
+      "source_types": ["hex", "dungeon"],
+      "source_aspects": ["detail", "secret"],
+      "weight": 1
+    },
+    "mystery": {
+      "name": "Mystery",
+      "name_cz": "Tajemství",
+      "emoji": "🔮",
+      "description": "Záhady, nadpřirozené jevy, tajemství",
+      "source_types": ["dungeon", "hex"],
+      "source_aspects": ["secret", "past", "goal"],
+      "weight": 1
+    }
+  }
+}
