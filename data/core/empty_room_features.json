@@ -1,0 +1,92 @@
+{
+  "metadata": {
+    "name": "Empty Room Features",
+    "name_cz": "Prvky v prázdných místnostech",
+    "description": "Atmosférické prvky v prázdných místnostech (k20)",
+    "source": "docs/knowledge_base/14_DUNGEON_CREATION.md (řádky 180-201)",
+    "dice": "d20",
+    "category": "dungeon"
+  },
+  "entries": [
+    {
+      "roll": 1,
+      "name": "Opuštěné hmyzí hnízdo"
+    },
+    {
+      "roll": 2,
+      "name": "Trs hub"
+    },
+    {
+      "roll": 3,
+      "name": "Zřícená stěna nebo strop"
+    },
+    {
+      "roll": 4,
+      "name": "Vysušené broučí krunýře na stěnách"
+    },
+    {
+      "roll": 5,
+      "name": "Nábytek vyrobený z odpadu"
+    },
+    {
+      "roll": 6,
+      "name": "Obrovská nástěnná malba netopýřího obličeje"
+    },
+    {
+      "roll": 7,
+      "name": "Změť stolů a židlí"
+    },
+    {
+      "roll": 8,
+      "name": "Novinové výstřižky na stěnách"
+    },
+    {
+      "roll": 9,
+      "name": "Všude roste mech"
+    },
+    {
+      "roll": 10,
+      "name": "Freska na zdi, dávno zašlá"
+    },
+    {
+      "roll": 11,
+      "name": "Plošiny zavěšené nad zběsilým potůčkem"
+    },
+    {
+      "roll": 12,
+      "name": "Kořeny prorůstající stěnami, podlahou nebo stropem"
+    },
+    {
+      "roll": 13,
+      "name": "Hromada hnijících žaludů"
+    },
+    {
+      "roll": 14,
+      "name": "Rozsypané zvířecí zuby"
+    },
+    {
+      "roll": 15,
+      "name": "Prapory ze třpytivých obalů od bonbonů"
+    },
+    {
+      "roll": 16,
+      "name": "Průchod hadí lebkou"
+    },
+    {
+      "roll": 17,
+      "name": "Neustálé kapání vody ze stropu"
+    },
+    {
+      "roll": 18,
+      "name": "Přísná socha dávno zemřelé myši"
+    },
+    {
+      "roll": 19,
+      "name": "Nerovná podlaha plná hlubokých trhlin"
+    },
+    {
+      "roll": 20,
+      "name": "Oltář z bílého křemene"
+    }
+  ]
+}

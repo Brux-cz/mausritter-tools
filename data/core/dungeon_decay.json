@@ -1,0 +1,60 @@
+{
+  "metadata": {
+    "name": "Dungeon Decay",
+    "name_cz": "Projevy chátrání",
+    "description": "Co způsobilo úpadek tohoto místa (k12)",
+    "source": "docs/knowledge_base/14_DUNGEON_CREATION.md (řádky 96-109)",
+    "dice": "d12",
+    "category": "dungeon"
+  },
+  "entries": [
+    {
+      "roll": 1,
+      "name": "Zatopení"
+    },
+    {
+      "roll": 2,
+      "name": "Magická nehoda"
+    },
+    {
+      "roll": 3,
+      "name": "Stáří a hniloba"
+    },
+    {
+      "roll": 4,
+      "name": "Poničení lidmi"
+    },
+    {
+      "roll": 5,
+      "name": "Všudypřítomné plísně"
+    },
+    {
+      "roll": 6,
+      "name": "Prolínání mezi říšemi existence"
+    },
+    {
+      "roll": 7,
+      "name": "Útok obrovského zvířete"
+    },
+    {
+      "roll": 8,
+      "name": "Katastrofální bouřka"
+    },
+    {
+      "roll": 9,
+      "name": "Strašící duchové"
+    },
+    {
+      "roll": 10,
+      "name": "Nevysvětlené opuštění"
+    },
+    {
+      "roll": 11,
+      "name": "Vnitřní rozbroje"
+    },
+    {
+      "roll": 12,
+      "name": "Nákaza"
+    }
+  ]
+}

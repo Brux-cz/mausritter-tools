@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "name": "Room Obstacles",
+    "name_cz": "Překážky v místnostech",
+    "description": "Překážky, které myši musejí obejít nebo odstranit (k8)",
+    "source": "docs/knowledge_base/14_DUNGEON_CREATION.md (řádky 209-218)",
+    "dice": "d8",
+    "category": "dungeon"
+  },
+  "entries": [
+    {
+      "roll": 1,
+      "name": "Zamčené dveře. Klíč se nachází v jiné místnosti. Vyražení dveří nějakou dobu potrvá a ztropí randál."
+    },
+    {
+      "roll": 2,
+      "name": "Strmé lezení. Bez zvláštní výbavy riskují myši vyčerpání nebo pád."
+    },
+    {
+      "roll": 3,
+      "name": "Východ z místnosti je uprostřed stropu, 15 cm daleko ode všech stěn."
+    },
+    {
+      "roll": 4,
+      "name": "Nepříjemně pištící zařízení. Dává stav Vystrašení za každou směnu strávenou tady nebo v přilehlých místnostech."
+    },
+    {
+      "roll": 5,
+      "name": "Zřícená část chodby. Zůstala mezera tak úzká, že se jí nedá prolézt."
+    },
+    {
+      "roll": 6,
+      "name": "Chodba úplně zaplavená vodou."
+    },
+    {
+      "roll": 7,
+      "name": "Cesta pokračuje širokou a hlubokou kaluží bláta. Dává jeden stav Vyčerpání za každých 15 cm cesty."
+    },
+    {
+      "roll": 8,
+      "name": "Dlouhá, hladká a prudce stoupající kovová nebo umělohmotná trubka."
+    }
+  ]
+}

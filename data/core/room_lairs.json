@@ -1,0 +1,36 @@
+{
+  "metadata": {
+    "name": "Room Lairs",
+    "name_cz": "Doupata",
+    "description": "Typy doupat tvorů (k6)",
+    "source": "docs/knowledge_base/14_DUNGEON_CREATION.md (řádky 260-267)",
+    "dice": "d6",
+    "category": "dungeon"
+  },
+  "entries": [
+    {
+      "roll": 1,
+      "name": "Dočasný tábor"
+    },
+    {
+      "roll": 2,
+      "name": "Nedávno zabrané jinému tvorovi"
+    },
+    {
+      "roll": 3,
+      "name": "Vybudované myšmi jako obydlí pro tvora"
+    },
+    {
+      "roll": 4,
+      "name": "Tvor chrání mladé"
+    },
+    {
+      "roll": 5,
+      "name": "Trvalý domov, nově zabydlený"
+    },
+    {
+      "roll": 6,
+      "name": "Trvalý domov, pohodlně zařízený"
+    }
+  ]
+}

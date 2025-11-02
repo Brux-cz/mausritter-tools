@@ -1,0 +1,52 @@
+{
+  "metadata": {
+    "name": "Dungeon Inhabitants",
+    "name_cz": "Bytosti",
+    "description": "Kdo teď obývá toto místo (k10)",
+    "source": "docs/knowledge_base/14_DUNGEON_CREATION.md (řádky 115-126)",
+    "dice": "d10",
+    "category": "dungeon"
+  },
+  "entries": [
+    {
+      "roll": 1,
+      "name": "Myši, poblázněné nebo zoufalé"
+    },
+    {
+      "roll": 2,
+      "name": "Myši, magicky pozměněné"
+    },
+    {
+      "roll": 3,
+      "name": "Krysí loupežníci"
+    },
+    {
+      "roll": 4,
+      "name": "Bytosti ze vzdálené země"
+    },
+    {
+      "roll": 5,
+      "name": "Původní obyvatelé, podivně pokřivení"
+    },
+    {
+      "roll": 6,
+      "name": "Přízrační duchové"
+    },
+    {
+      "roll": 7,
+      "name": "Vílí předvoj"
+    },
+    {
+      "roll": 8,
+      "name": "Nevrlý had"
+    },
+    {
+      "roll": 9,
+      "name": "Zamořeno hmyzem"
+    },
+    {
+      "roll": 10,
+      "name": "Kočičí pán a jeho služebníci"
+    }
+  ]
+}

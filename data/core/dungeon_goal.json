@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "name": "Dungeon Goal",
+    "name_cz": "Cíl",
+    "description": "Co bytosti hledají nebo chrání (k8)",
+    "source": "docs/knowledge_base/14_DUNGEON_CREATION.md (řádky 128-137)",
+    "dice": "d8",
+    "category": "dungeon"
+  },
+  "entries": [
+    {
+      "roll": 1,
+      "name": "Bezpečný úkryt nebo místo k životu"
+    },
+    {
+      "roll": 2,
+      "name": "Zásobu vybrané potravy"
+    },
+    {
+      "roll": 3,
+      "name": "Ztracené přátele nebo příbuzné"
+    },
+    {
+      "roll": 4,
+      "name": "Staré drahocenné dílo"
+    },
+    {
+      "roll": 5,
+      "name": "Poslední zbytky ve vybrakované ruině"
+    },
+    {
+      "roll": 6,
+      "name": "Vzácné alchymistické houby"
+    },
+    {
+      "roll": 7,
+      "name": "Zvláštní a mocné kouzlo"
+    },
+    {
+      "roll": 8,
+      "name": "Ohromné množství ďobků"
+    }
+  ]
+}

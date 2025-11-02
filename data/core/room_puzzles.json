@@ -1,0 +1,36 @@
+{
+  "metadata": {
+    "name": "Room Puzzles",
+    "name_cz": "Hlavolamy v místnostech",
+    "description": "Hlavolamy odměňující bystré uvažování (k6)",
+    "source": "docs/knowledge_base/14_DUNGEON_CREATION.md (řádky 245-252)",
+    "dice": "d6",
+    "category": "dungeon"
+  },
+  "entries": [
+    {
+      "roll": 1,
+      "name": "Místnost s podlahou z elektrifikovaných měděných desek. Uprostřed je drahocenný poklad."
+    },
+    {
+      "roll": 2,
+      "name": "Tři dětské lahvičky s barevnými tekutinami. Samostatně neškodné, ale po smíchání mocné nebo nebezpečné."
+    },
+    {
+      "roll": 3,
+      "name": "Krystal a v něm zapuštěný kouzelný meč. Krystal je extrémně tvrdý, ale rozpustí ho žaludeční kyselina."
+    },
+    {
+      "roll": 4,
+      "name": "Poklad na dně hluboké studny."
+    },
+    {
+      "roll": 5,
+      "name": "Velká hladká ocelová mísa, dnem vzhůru. Zevnitř je ke dnu izolepou přilepený poklad."
+    },
+    {
+      "roll": 6,
+      "name": "Nalíčená pastička na myši. Páka je přidělaná ke kamenu ve zdi, a když se spustí, strhne zeď a zavalí chodbu."
+    }
+  ]
+}

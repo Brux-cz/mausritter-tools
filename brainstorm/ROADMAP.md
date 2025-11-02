@@ -457,11 +457,11 @@ mausritter generate hex --with-settlement  # Hex s osadou
 
 ---
 
-### 🎯 FÁZE 6B: Dungeon Generator
+### 🎯 FÁZE 6B: Dungeon Generator ✅ HOTOVO
 
 **Priorita:** 🟡 Vysoká (pro dungeon crawl)
 **Čas:** ~6-8 hodin
-**Stav:** 📝 Připraveno k implementaci
+**Stav:** ✅ HOTOVO (2025-11-02)
 **Složitost:** ⭐⭐⭐⭐ Složitá (nejvyšší!)
 **Závislosti:** ✅ Settlement Generator (HOTOVO)
 
@@ -836,6 +836,34 @@ Pokud chceš přidat novou feature:
 ---
 
 ## 📝 Changelog
+
+### 2025-11-02 - Fáze 6B dokončena - Dungeon Generator 🏛️
+- ✅ Implementován Dungeon Generator (generátor dobrodružných míst)
+- ✅ DungeonGenerator class v src/generators/dungeon.py
+- ✅ 11 JSON datových souborů v data/core/:
+  - dungeon_past.json - k20 Minulost (20 položek, #20 = Settlement integrace)
+  - dungeon_decay.json - k12 Projevy chátrání (12 položek)
+  - dungeon_inhabitants.json - k10 Bytosti (10 položek)
+  - dungeon_goal.json - k8 Cíl (8 položek)
+  - dungeon_secret.json - k6 Tajemství (6 položek)
+  - room_types.json - k6 Typy místností s creature/treasure šancemi
+  - empty_room_features.json - k20 Prvky prázdných místností
+  - room_obstacles.json - k8 Překážky
+  - room_traps.json - k8 Pasti
+  - room_puzzles.json - k6 Hlavolamy
+  - room_lairs.json - k6 Doupata
+- ✅ Dungeon + Room dataclasses přidány do models.py
+- ✅ TableLoader rozšířen o 22 nových metod (11× get + 11× lookup)
+- ✅ CLI příkaz `generate dungeon` s --rooms N, --json, --save, --with-settlement
+- ✅ 3×k6 systém pro generování místností (typ, tvor, poklad)
+- ✅ Settlement integrace pro past=20 (Myší osada)
+- ✅ Boolean flagy has_creature/has_treasure podle oficiálních pravidel
+- ✅ Přidán roll_d10() do dice.py (chyběl pro inhabitants k10)
+- ✅ Color-coded výstup s panely (minulost, chátrání, obyvatelé, cíl, tajemství, místnosti)
+- ✅ 29 unit testů v test_dungeon_generator.py (všechny prošly ✅)
+- ✅ Dokumentace aktualizována (README.md sekce 14, renumbering 15-18, ROADMAP.md)
+- ✅ **Bottom-up dokončen:** Settlement (4C) → Hex (6A) + Dungeon (6B) ✅
+- ✅ **Celková dokončenost: 50% (14/28 generátorů)** 🎉
 
 ### 2025-11-02 - Fáze 6A dokončena - Hex Generator 🗺️
 - ✅ Implementován Hex Generator (generátor hexů pro hexcrawl kampaně)

@@ -1,0 +1,93 @@
+{
+  "metadata": {
+    "name": "Dungeon Past",
+    "name_cz": "Minulost dobrodružného místa",
+    "description": "Jaká byla původní funkce tohoto místa (k20)",
+    "source": "docs/knowledge_base/14_DUNGEON_CREATION.md (řádky 73-94)",
+    "dice": "d20",
+    "category": "dungeon"
+  },
+  "entries": [
+    {
+      "roll": 1,
+      "name": "Starodávný chrám netopýřího kultu"
+    },
+    {
+      "roll": 2,
+      "name": "Dávno opuštěná strážní věž"
+    },
+    {
+      "roll": 3,
+      "name": "Letohrádek myšího šlechtice"
+    },
+    {
+      "roll": 4,
+      "name": "Skrytá zásobárna na zimu"
+    },
+    {
+      "roll": 5,
+      "name": "Pohřebiště myších předků"
+    },
+    {
+      "roll": 6,
+      "name": "Nora vyhrabaná králíky nebo liškami"
+    },
+    {
+      "roll": 7,
+      "name": "Lidský dům nebo jiná budova"
+    },
+    {
+      "roll": 8,
+      "name": "Stoka nebo odtokové potrubí"
+    },
+    {
+      "roll": 9,
+      "name": "Klaustrofobní mravenčí chodbičky"
+    },
+    {
+      "roll": 10,
+      "name": "Ohromný strom vyhlodaný myšmi"
+    },
+    {
+      "roll": 11,
+      "name": "Čarodějova věž"
+    },
+    {
+      "roll": 12,
+      "name": "Mlýn patřící k osadě"
+    },
+    {
+      "roll": 13,
+      "name": "Hnízdo krysího krále"
+    },
+    {
+      "roll": 14,
+      "name": "Kostra obrovského zvířete"
+    },
+    {
+      "roll": 15,
+      "name": "Akademie čarodějnic"
+    },
+    {
+      "roll": 16,
+      "name": "Brána do vílí říše"
+    },
+    {
+      "roll": 17,
+      "name": "Hluboký důl"
+    },
+    {
+      "roll": 18,
+      "name": "Skrýš loupežníků"
+    },
+    {
+      "roll": 19,
+      "name": "Přírodní jeskyně"
+    },
+    {
+      "roll": 20,
+      "name": "Myší osada",
+      "uses_settlement": true
+    }
+  ]
+}

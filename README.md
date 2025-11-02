@@ -19,16 +19,17 @@ Python nástroje a generátory pro stolní hru **Mausritter** - OSR TTRPG o myš
 - ✅ **Testy vlastností** - roll-under d20 mechanika
 - ✅ **JSON databáze** - původy, jména, NPC, pomocníci, počasí, kouzla, poklady, nástroje, semínka dobrodružství, osady
 
-**Status:** Fáze 1, 2, 3A-F, 4A-D, 5, 6A dokončeny (2025-11-02)
+**Status:** Fáze 1, 2, 3A-F, 4A-D, 5, 6A-B dokončeny (2025-11-02)
 - ✅ **P1 COMPLETE (100%)** - všech 8 základních PJ nástrojů
 - ✅ **Tavern Generator** (Fáze 4B)
 - ✅ **Settlement Generator** (Fáze 4C)
 - ✅ **Adventure Hooks** (Fáze 4D)
 - ✅ **Creature Variants** (Fáze 5) - 11 typů stvoření, každý s 6 variantami
 - ✅ **Hex Generator** (Fáze 6A) - 4 typy hexů, 48 detailů, Settlement integrace
-- 📝 **DALŠÍ:** Dungeon Generator (Fáze 6B)
+- ✅ **Dungeon Generator** (Fáze 6B) - 5 dungeon attributů, 3×k6 room system, 11 JSON tabulek, Settlement integrace
+- 📝 **DALŠÍ:** Location/NPC Generator (Fáze 6C)
 
-**Dokončenost:** 46% (13/28 generátorů) | **Roadmap:** [brainstorm/ROADMAP.md](brainstorm/ROADMAP.md)
+**Dokončenost:** 50% (14/28 generátorů) | **Roadmap:** [brainstorm/ROADMAP.md](brainstorm/ROADMAP.md)
 
 ---
 
@@ -535,7 +536,108 @@ Vláda: Rada starších
 - Příprava světa - rychlé naplnění mapy zajímavostmi
 - Improvizace - když hráči jdou neočekávaným směrem
 
-### 🎲 14. Hody kostkami
+### 🏛️ 14. Generování dungeonů (dobrodružných míst)
+```bash
+# Náhodný dungeon (6 místností)
+python -m src.cli generate dungeon
+
+# S vlastním počtem místností
+python -m src.cli generate dungeon --rooms 10
+
+# Dungeon s myší osadou
+python -m src.cli generate dungeon --with-settlement
+
+# JSON výstup
+python -m src.cli generate dungeon --json
+
+# Uložit do souboru
+python -m src.cli generate dungeon --save muj_dungeon.json
+```
+
+**Co je dungeon:**
+- **Minulost** (k20) - Původní účel místa (chrám, věž, nora, osada...)
+- **Chátrání** (k12) - Co způsobilo úpadek (zatopení, magie, plísně...)
+- **Obyvatelé** (k10) - Kdo tu teď žije (myši, krysy, duchové, vílí...)
+- **Cíl** (k8) - Co obyvatelé hledají nebo chrání
+- **Tajemství** (k6) - Skrytá mystéria místa
+- **Místnosti** (parametr) - Každá s typem, tvory a poklady
+- **Settlement integrace** - Minulost "Myší osada" (k20=20) generuje celou osadu
+
+**5 typů místností:**
+| Typ | k6 | Emoji | Feature |
+|-----|-----|-------|---------|
+| Prázdná | 1-2 | ⬜ | k20 atmosférických prvků |
+| Překážka | 3 | 🚧 | k8 překážek k obejití |
+| Past | 4 | ⚠️ | k8 zjevných a smrtících pastí |
+| Hlavolam | 5 | 🧩 | k6 hlavolamů |
+| Doupě | 6 | 🏰 | k6 typů doupat |
+
+**3×k6 systém generování místností:**
+- **1. hod k6** - Typ místnosti (prázdná, překážka, past, hlavolam, doupě)
+- **2. hod k6** - Šance na tvora (závisí na typu místnosti)
+- **3. hod k6** - Šance na poklad (závisí na typu místnosti)
+
+**Příklad výstupu:**
+```
+🏛️ DOBRODRUŽNÉ MÍSTO (DUNGEON)
+
+Minulost: Starodávný chrám netopýřího kultu
+Chátrání: Magická nehoda
+
+👥 Obyvatelé: Přízrační duchové
+🎯 Cíl: Zvláštní a mocné kouzlo
+🔮 Tajemství: Obelisk hučící mystickou energií
+
+🚪 MÍSTNOSTI (6):
+
+#1 ⬜ Prázdná | 💎 Poklad
+   📋 Trs hub
+
+#2 🚧 Překážka | 👹 Tvor
+   📋 Zamčené dveře. Klíč se nachází v jiné místnosti.
+
+#3 ⚠️ Past | 👹 Tvor | 💎 Poklad
+   📋 Temná chodba naplněná výbušným plynem.
+
+#4 🧩 Hlavolam | 👹 Tvor | 💎 Poklad
+   📋 Krystal a v něm zapuštěný kouzelný meč.
+
+#5 🏰 Doupě | 👹 Tvor | 💎 Poklad
+   📋 Tvor chrání mladé
+
+#6 ⬜ Prázdná
+   📋 Neustálé kapání vody ze stropu
+
+🎲 Hody: Minulost k20=1, Chátrání k12=2, Obyvatelé k10=6, Cíl k8=7, Tajemství k6=1
+```
+
+**Příklad s osadou:**
+```
+🏛️ DOBRODRUŽNÉ MÍSTO (DUNGEON)
+
+Minulost: Myší osada
+Chátrání: Stáří a hniloba
+
+🏘️ MYŠÍ OSADA:
+Křižovatka
+Velikost: Křižovatka
+Vláda: Rada starších
+```
+
+**Použití:**
+- Dungeon crawl - kompletní dobrodružné místo připravené za pár sekund
+- One-shot hry - rychlá příprava místa pro jednorázovou hru
+- Hexcrawl - když hráči objeví zajímavé místo na mapě
+- Improvizace - když potřebuješ dungeon TEĎ
+- Inspirace - základní kostra pro vlastní rozšíření
+
+**Design filozofie:**
+- **Tvorové = Obyvatelé dungeonu** - Všichni tvorové patří k jedné frakci (inhabitants)
+- **Boolean flagy** - `has_creature` a `has_treasure` podle oficiálních pravidel
+- **GM kreativita** - Konkrétní tvory a poklady si volí GM podle tématu dungeonu
+- **3×k6 systém** - Podmíněné pravděpodobnosti pro různé typy místností
+
+### 🎲 15. Hody kostkami
 ```bash
 python -m src.cli roll-dice d6
 python -m src.cli roll-dice d20
@@ -543,19 +645,19 @@ python -m src.cli roll-dice 2d6
 python -m src.cli roll-dice d66
 ```
 
-### 🎯 15. Test vlastnosti
+### 🎯 16. Test vlastnosti
 ```bash
 python -m src.cli test 12
 python -m src.cli test 10 --modifier 2
 ```
 
-### ❓ 16. Zobrazit help
+### ❓ 17. Zobrazit help
 ```bash
 python -m src.cli --help
 python -m src.cli generate --help
 ```
 
-### 🧪 17. Spustit testy
+### 🧪 18. Spustit testy
 ```bash
 python test_character_simple.py
 python test_tableloader.py

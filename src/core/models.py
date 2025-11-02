@@ -554,3 +554,57 @@ class Hex:
             6: "Pradávné a lidské prvky",
         }
         return names.get(self.detail_category, "Neznámá kategorie")
+
+
+@dataclass
+class Room:
+    """Místnost v dobrodružném místě (dungeonu)"""
+
+    room_number: int
+    room_type: str
+    room_type_roll: int
+    has_creature: bool
+    has_treasure: bool
+    feature: Optional[str] = None
+    feature_roll: Optional[int] = None
+
+    @property
+    def type_emoji(self) -> str:
+        """Vrať emoji pro typ místnosti"""
+        emoji_map = {
+            "Prázdná": "⬜",
+            "Překážka": "🚧",
+            "Past": "⚠️",
+            "Hlavolam": "🧩",
+            "Doupě": "🏰",
+        }
+        return emoji_map.get(self.room_type, "❓")
+
+
+@dataclass
+class Dungeon:
+    """Dobrodružné místo (dungeon) pro kampaň"""
+
+    past: str
+    past_roll: int
+    decay: str
+    decay_roll: int
+    inhabitants: str
+    inhabitants_roll: int
+    goal: str
+    goal_roll: int
+    secret: str
+    secret_roll: int
+    rooms: List['Room']
+    settlement: Optional['Settlement'] = None
+    description: str = ""
+
+    @property
+    def has_settlement(self) -> bool:
+        """True pokud dungeon obsahuje myší osadu"""
+        return self.past_roll == 20 and self.settlement is not None
+
+    @property
+    def room_count(self) -> int:
+        """Počet místností v dungeonu"""
+        return len(self.rooms)

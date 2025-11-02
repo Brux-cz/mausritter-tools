@@ -1382,6 +1382,184 @@ class TableLoader:
 
         return [d for d in details if d["category"] == category]
 
+    # === DUNGEON METHODS ===
+
+    @staticmethod
+    @lru_cache(maxsize=16)
+    def get_dungeon_past() -> Dict[str, Any]:
+        """Načti tabulku minulosti dungeonů (k20)."""
+        return TableLoader.load_table("core/dungeon_past.json")
+
+    @staticmethod
+    def lookup_dungeon_past(roll: int) -> Optional[Dict[str, Any]]:
+        """Najdi konkrétní minulost podle hodu k20."""
+        data = TableLoader.get_dungeon_past()
+        entries = data.get("entries", [])
+        for entry in entries:
+            if entry["roll"] == roll:
+                return entry
+        return None
+
+    @staticmethod
+    @lru_cache(maxsize=16)
+    def get_dungeon_decay() -> Dict[str, Any]:
+        """Načti tabulku chátrání dungeonů (k12)."""
+        return TableLoader.load_table("core/dungeon_decay.json")
+
+    @staticmethod
+    def lookup_dungeon_decay(roll: int) -> Optional[Dict[str, Any]]:
+        """Najdi konkrétní chátrání podle hodu k12."""
+        data = TableLoader.get_dungeon_decay()
+        entries = data.get("entries", [])
+        for entry in entries:
+            if entry["roll"] == roll:
+                return entry
+        return None
+
+    @staticmethod
+    @lru_cache(maxsize=16)
+    def get_dungeon_inhabitants() -> Dict[str, Any]:
+        """Načti tabulku obyvatel dungeonů (k10)."""
+        return TableLoader.load_table("core/dungeon_inhabitants.json")
+
+    @staticmethod
+    def lookup_dungeon_inhabitants(roll: int) -> Optional[Dict[str, Any]]:
+        """Najdi konkrétní obyvatele podle hodu k10."""
+        data = TableLoader.get_dungeon_inhabitants()
+        entries = data.get("entries", [])
+        for entry in entries:
+            if entry["roll"] == roll:
+                return entry
+        return None
+
+    @staticmethod
+    @lru_cache(maxsize=16)
+    def get_dungeon_goal() -> Dict[str, Any]:
+        """Načti tabulku cílů dungeonů (k8)."""
+        return TableLoader.load_table("core/dungeon_goal.json")
+
+    @staticmethod
+    def lookup_dungeon_goal(roll: int) -> Optional[Dict[str, Any]]:
+        """Najdi konkrétní cíl podle hodu k8."""
+        data = TableLoader.get_dungeon_goal()
+        entries = data.get("entries", [])
+        for entry in entries:
+            if entry["roll"] == roll:
+                return entry
+        return None
+
+    @staticmethod
+    @lru_cache(maxsize=16)
+    def get_dungeon_secret() -> Dict[str, Any]:
+        """Načti tabulku tajemství dungeonů (k6)."""
+        return TableLoader.load_table("core/dungeon_secret.json")
+
+    @staticmethod
+    def lookup_dungeon_secret(roll: int) -> Optional[Dict[str, Any]]:
+        """Najdi konkrétní tajemství podle hodu k6."""
+        data = TableLoader.get_dungeon_secret()
+        entries = data.get("entries", [])
+        for entry in entries:
+            if entry["roll"] == roll:
+                return entry
+        return None
+
+    @staticmethod
+    @lru_cache(maxsize=16)
+    def get_room_types() -> Dict[str, Any]:
+        """Načti tabulku typů místností (k6)."""
+        return TableLoader.load_table("core/room_types.json")
+
+    @staticmethod
+    def lookup_room_type(roll: int) -> Optional[Dict[str, Any]]:
+        """Najdi konkrétní typ místnosti podle hodu k6."""
+        data = TableLoader.get_room_types()
+        types = data.get("types", [])
+        for room_type in types:
+            if room_type["roll_min"] <= roll <= room_type["roll_max"]:
+                return room_type
+        return None
+
+    @staticmethod
+    @lru_cache(maxsize=16)
+    def get_empty_room_features() -> Dict[str, Any]:
+        """Načti tabulku prvků v prázdných místnostech (k20)."""
+        return TableLoader.load_table("core/empty_room_features.json")
+
+    @staticmethod
+    def lookup_empty_room_feature(roll: int) -> Optional[Dict[str, Any]]:
+        """Najdi konkrétní prvek prázdné místnosti podle hodu k20."""
+        data = TableLoader.get_empty_room_features()
+        entries = data.get("entries", [])
+        for entry in entries:
+            if entry["roll"] == roll:
+                return entry
+        return None
+
+    @staticmethod
+    @lru_cache(maxsize=16)
+    def get_room_obstacles() -> Dict[str, Any]:
+        """Načti tabulku překážek v místnostech (k8)."""
+        return TableLoader.load_table("core/room_obstacles.json")
+
+    @staticmethod
+    def lookup_room_obstacle(roll: int) -> Optional[Dict[str, Any]]:
+        """Najdi konkrétní překážku podle hodu k8."""
+        data = TableLoader.get_room_obstacles()
+        entries = data.get("entries", [])
+        for entry in entries:
+            if entry["roll"] == roll:
+                return entry
+        return None
+
+    @staticmethod
+    @lru_cache(maxsize=16)
+    def get_room_traps() -> Dict[str, Any]:
+        """Načti tabulku pastí v místnostech (k8)."""
+        return TableLoader.load_table("core/room_traps.json")
+
+    @staticmethod
+    def lookup_room_trap(roll: int) -> Optional[Dict[str, Any]]:
+        """Najdi konkrétní past podle hodu k8."""
+        data = TableLoader.get_room_traps()
+        entries = data.get("entries", [])
+        for entry in entries:
+            if entry["roll"] == roll:
+                return entry
+        return None
+
+    @staticmethod
+    @lru_cache(maxsize=16)
+    def get_room_puzzles() -> Dict[str, Any]:
+        """Načti tabulku hlavolamů v místnostech (k6)."""
+        return TableLoader.load_table("core/room_puzzles.json")
+
+    @staticmethod
+    def lookup_room_puzzle(roll: int) -> Optional[Dict[str, Any]]:
+        """Najdi konkrétní hlavolam podle hodu k6."""
+        data = TableLoader.get_room_puzzles()
+        entries = data.get("entries", [])
+        for entry in entries:
+            if entry["roll"] == roll:
+                return entry
+        return None
+
+    @staticmethod
+    @lru_cache(maxsize=16)
+    def get_room_lairs() -> Dict[str, Any]:
+        """Načti tabulku doupat v místnostech (k6)."""
+        return TableLoader.load_table("core/room_lairs.json")
+
+    @staticmethod
+    def lookup_room_lair(roll: int) -> Optional[Dict[str, Any]]:
+        """Najdi konkrétní doupě podle hodu k6."""
+        data = TableLoader.get_room_lairs()
+        entries = data.get("entries", [])
+        for entry in entries:
+            if entry["roll"] == roll:
+                return entry
+        return None
+
 
 # Convenience funkce pro rychlé použití
 # === SHORTCUTS ===

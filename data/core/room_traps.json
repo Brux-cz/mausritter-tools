@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "name": "Room Traps",
+    "name_cz": "Pasti v místnostech",
+    "description": "Zjevné a smrtící pasti (k8)",
+    "source": "docs/knowledge_base/14_DUNGEON_CREATION.md (řádky 228-237)",
+    "dice": "d8",
+    "category": "dungeon"
+  },
+  "entries": [
+    {
+      "roll": 1,
+      "name": "Velké kamenné dveře nedoléhající k futrům. Když někdo sáhne na kliku, zařízení za dveřmi je povalí dopředu."
+    },
+    {
+      "roll": 2,
+      "name": "Dlouhá chodba zaplavená vodou, kterou elektrifikuje velká baterie ve výklenku."
+    },
+    {
+      "roll": 3,
+      "name": "Temná chodba naplněná výbušným plynem. Páchne jako zkažená vejce. Při zapálení způsobí k20 zranění."
+    },
+    {
+      "roll": 4,
+      "name": "Dvě tenké nitě natažené přes smrtící propast. Přelezení je bezpečné, když myši lezou pomalu a po jedné."
+    },
+    {
+      "roll": 5,
+      "name": "V další cestě brání jáma. Na jejím dně spí had."
+    },
+    {
+      "roll": 6,
+      "name": "Dveře se třemi klikami ve tvaru hub, jedna je bezpečná, zbylé dvě otrávené. Způsobují k12 magického zranění."
+    },
+    {
+      "roll": 7,
+      "name": "Kruh čarovných hub, uprostřed je mladá myš. Kdokoli je v kruhu, zoufale se snaží dostat dovnitř i ostatní."
+    },
+    {
+      "roll": 8,
+      "name": "Podlaha potřená mazlavým lepidlem. Uvolnění chodidla vyžaduje záchranu na sílu."
+    }
+  ]
+}

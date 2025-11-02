@@ -8,7 +8,7 @@ from rich.table import Table
 from rich.panel import Panel
 from rich.text import Text
 from src.core.dice import roll, roll_with_details, attribute_test
-from src.core.models import Character, NPC, Hireling, Weather, Reaction, Spell, TreasureHoard, TreasureItem, MagicSword, AdventureSeed, Tavern, Settlement, AdventureHook, CreatureVariant, Hex
+from src.core.models import Character, NPC, Hireling, Weather, Reaction, Spell, TreasureHoard, TreasureItem, MagicSword, AdventureSeed, Tavern, Settlement, AdventureHook, CreatureVariant, Hex, Dungeon, Room
 from src.generators.character import CharacterGenerator
 from src.generators.npc import NPCGenerator
 from src.generators.hireling import HirelingGenerator
@@ -22,6 +22,7 @@ from src.generators.settlement import SettlementGenerator
 from src.generators.adventure_hook import AdventureHookGenerator
 from src.generators.creature_variant import CreatureVariantGenerator
 from src.generators.hex import HexGenerator
+from src.generators.dungeon import DungeonGenerator
 
 # Fix Windows console encoding for Czech characters
 if sys.platform == 'win32':
@@ -1467,6 +1468,146 @@ def display_hex(hex_obj: Hex):
     rolls_text.append(f", Kategorie k6={hex_obj.detail_category}", style="dim cyan")
     if hex_obj.detail_subtype:
         rolls_text.append(f", Detail k8={hex_obj.detail_subtype}", style="dim cyan")
+
+    console.print(rolls_text)
+    console.print("\n")
+
+
+@generate.command()
+@click.option("--json", "output_json", is_flag=True, help="Výstup v JSON formátu")
+@click.option("--save", type=str, help="Ulož do souboru")
+@click.option("--rooms", type=int, default=6, help="Počet místností (default: 6)")
+@click.option("--with-settlement", is_flag=True, help="Vygeneruj dungeon s myší osadou")
+def dungeon(output_json: bool, save: str, rooms: int, with_settlement: bool):
+    """
+    Vygeneruj dobrodružné místo (dungeon).
+
+    Generuje náhodný dungeon s minulostí, obyvateli, tajemstvím a místnostmi
+    podle oficiálních pravidel. Každé dobrodružné místo má unikátní téma,
+    cíl a system místností s tvory a poklady.
+
+    Speciální: Dungeony s minulostí "Myší osada" (k20=20) automaticky
+    generují celou osadu pomocí Settlement Generatoru.
+
+    Příklady:
+        mausritter generate dungeon
+        mausritter generate dungeon --rooms 10
+        mausritter generate dungeon --with-settlement
+        mausritter generate dungeon --json
+        mausritter generate dungeon --save muj_dungeon.json
+    """
+    # Vygeneruj dungeon
+    if with_settlement:
+        dungeon_obj = DungeonGenerator.create_with_settlement(rooms=rooms)
+    else:
+        dungeon_obj = DungeonGenerator.create(rooms=rooms)
+
+    if output_json:
+        json_output = DungeonGenerator.to_json(dungeon_obj)
+        console.print(json_output)
+        if save:
+            with open(save, 'w', encoding='utf-8') as f:
+                f.write(json_output)
+            console.print(f"\n[green]Uloženo do {save}[/green]")
+        return
+
+    display_dungeon(dungeon_obj)
+
+    if save:
+        json_output = DungeonGenerator.to_json(dungeon_obj)
+        with open(save, 'w', encoding='utf-8') as f:
+            f.write(json_output)
+        console.print(f"\n[green]Uloženo do {save}[/green]")
+
+
+def display_dungeon(dungeon_obj: Dungeon):
+    """Zobraz dungeon v terminálu s barevným formátováním."""
+
+    # Hlavní panel s názvem
+    title_text = "🏛️  DOBRODRUŽNÉ MÍSTO (DUNGEON)"
+
+    main_content = f"[bold cyan]Minulost:[/bold cyan] {dungeon_obj.past}\n"
+    main_content += f"[bold magenta]Chátrání:[/bold magenta] {dungeon_obj.decay}"
+
+    main_panel = Panel(
+        main_content,
+        title=title_text,
+        title_align="left",
+        border_style="cyan",
+        padding=(1, 2)
+    )
+
+    console.print("\n")
+    console.print(main_panel)
+
+    # Obyvatelé a cíl
+    console.print()
+    console.print("[bold yellow]👥 Obyvatelé:[/bold yellow]")
+    console.print(f"   {dungeon_obj.inhabitants}", style="white")
+    console.print()
+    console.print("[bold yellow]🎯 Cíl:[/bold yellow]")
+    console.print(f"   {dungeon_obj.goal}", style="white")
+    console.print()
+
+    # Tajemství
+    console.print("[bold yellow]🔮 Tajemství:[/bold yellow]")
+    console.print(f"   {dungeon_obj.secret}", style="dim white")
+    console.print()
+
+    # Pokud obsahuje settlement, zobraz settlement info
+    if dungeon_obj.has_settlement and dungeon_obj.settlement:
+        settlement_panel = Panel(
+            f"[bold green]{dungeon_obj.settlement.name}[/bold green]\n"
+            f"[dim]Velikost: {dungeon_obj.settlement.size_name}[/dim]\n"
+            f"[dim]Vláda: {dungeon_obj.settlement.government}[/dim]",
+            title="🏘️  MYŠÍ OSADA",
+            title_align="left",
+            border_style="green",
+            padding=(1, 2)
+        )
+        console.print(settlement_panel)
+        console.print()
+
+    # Místnosti
+    rooms_panel_content = ""
+    for room in dungeon_obj.rooms:
+        room_line = f"#{room.room_number} {room.type_emoji} [bold]{room.room_type}[/bold]"
+
+        # Tvor a poklad
+        status_parts = []
+        if room.has_creature:
+            status_parts.append("[red]👹 Tvor[/red]")
+        if room.has_treasure:
+            status_parts.append("[yellow]💎 Poklad[/yellow]")
+        if status_parts:
+            room_line += f" | {' | '.join(status_parts)}"
+
+        rooms_panel_content += room_line + "\n"
+
+        # Feature
+        if room.feature:
+            rooms_panel_content += f"   [dim]📋 {room.feature}[/dim]\n"
+
+        rooms_panel_content += "\n"
+
+    rooms_panel = Panel(
+        rooms_panel_content.rstrip(),
+        title=f"🚪  MÍSTNOSTI ({dungeon_obj.room_count})",
+        title_align="left",
+        border_style="blue",
+        padding=(1, 2)
+    )
+    console.print(rooms_panel)
+    console.print()
+
+    # Hody
+    rolls_text = Text()
+    rolls_text.append("🎲 Hody: ", style="dim")
+    rolls_text.append(f"Minulost k20={dungeon_obj.past_roll}", style="dim cyan")
+    rolls_text.append(f", Chátrání k12={dungeon_obj.decay_roll}", style="dim cyan")
+    rolls_text.append(f", Obyvatelé k10={dungeon_obj.inhabitants_roll}", style="dim cyan")
+    rolls_text.append(f", Cíl k8={dungeon_obj.goal_roll}", style="dim cyan")
+    rolls_text.append(f", Tajemství k6={dungeon_obj.secret_roll}", style="dim cyan")
 
     console.print(rolls_text)
     console.print("\n")
