@@ -4,23 +4,25 @@ Tento dokument obsahuje plán budoucího vývoje projektu Mausritter Tools.
 
 ---
 
-## 🎉 FAKTICKÝ STAV PROJEKTU (2025-11-02)
+## 🎉 FAKTICKÝ STAV PROJEKTU (2025-11-03)
 
-**🎊 PROJEKT JE 100% DOKONČEN! 🎊** Všechny generátory z oficiálních Mausritter pravidel jsou implementovány!
+**🎊 OFICIÁLNÍ PRAVIDLA: 100% DOKONČENO! 🎊**
+Všechny generátory z oficiálních Mausritter pravidel jsou implementovány!
 
-### ✅ DOKONČENOST: 100% (24/24 funkcí)
+### ✅ DOKONČENOST: 100% OFICIÁLNÍCH + COMMUNITY ROZŠÍŘENÍ
 
 **Implementováno:**
 - **15 .py generátorů** v `src/generators/`
 - **65 JSON datových souborů** v `data/core/`
-- **16 test souborů** s ~270 unit testy
+- **16 test souborů** s ~321 unit testy
 - **100% test coverage** všech generátorů
 
 ### 📊 Faktický stav podle priorit:
 
-- **P1 (základní):** 8/8 = 100% ✅
-- **P2 (tvorba světa):** 6/6 = 100% ✅ (včetně Rumor Generator!)
-- **P3 (creature variants):** 11/11 = 100% ✅
+- **P1 (základní nástroje):** 8/8 = 100% ✅ OFFICIAL
+- **P2 (tvorba světa):** 6/6 = 100% ✅ OFFICIAL (Rumor CORE)
+- **P3 (creature variants):** 11/11 = 100% ✅ OFFICIAL
+- **Community Extensions:** 5 rozšíření 🎨
 
 ### ⚠️ Vysvětlení discrepance "28 generátorů"
 
@@ -37,28 +39,30 @@ Původní ROADMAP odhadoval 28 generátorů, ale tento odhad **nebyl přesný**:
 3. **Rumor Framework** - není to generátor, jen koncept/návod pro GM
    - **Rozdíl: Volitelné, ne kritické**
 
-### ✅ CO JE IMPLEMENTOVÁNO (23 funkcí):
+### ✅ CO JE IMPLEMENTOVÁNO - OFICIÁLNÍ (23 funkcí):
 
 **P1 - Základní PJ nástroje (8):**
-1. Character Generator
-2. NPC Generator
-3. Hireling Generator
-4. Weather Generator
-5. Reaction Roll
-6. Spell Generator
-7. Treasure Generator (včetně Magic Sword)
-8. Adventure Seeds
+1. Character Generator ✅ OFFICIAL
+2. NPC Generator ✅ OFFICIAL
+3. Hireling Generator ✅ OFFICIAL
+4. Weather Generator ✅ OFFICIAL
+5. Reaction Roll ✅ OFFICIAL
+6. Spell Generator ✅ OFFICIAL
+7. Treasure Generator (včetně Magic Sword) ✅ OFFICIAL
+8. Adventure Seeds ✅ OFFICIAL
 
 **P2 - Tvorba světa (6):**
-9. Tavern Generator
-10. Settlement Generator
-11. Adventure Hooks
-12. Hex Generator
-13. Dungeon Generator
-14. Rumor Generator ✨ **NOVĚ DOKONČENO!**
+9. Tavern Generator ✅ OFFICIAL
+10. Settlement Generator ✅ OFFICIAL
+11. Adventure Hooks ✅ OFFICIAL
+12. Hex Generator ✅ OFFICIAL
+13. Dungeon Generator ✅ OFFICIAL
+14. **Rumor Generator (CORE)** ✅ OFFICIAL
+    - k6 tabulka zvěstí
+    - Pravdivost: 1-3 true, 4-5 partial, 6 false
 
 **P3 - Creature Variants (11 typů v 1 generátoru):**
-15. Creature Variant Generator:
+15. Creature Variant Generator ✅ OFFICIAL:
     - Ghost Abilities
     - Snake Types
     - Cat Lords
@@ -71,18 +75,27 @@ Původní ROADMAP odhadoval 28 generátorů, ale tento odhad **nebyl přesný**:
     - Crow Songs
     - Frog Knights
 
-### 🎊 PROJEKT KOMPLETNÍ!
+### 🎨 COMMUNITY ROZŠÍŘENÍ (5):
 
-**Všechny funkce jsou implementovány!** Mausritter Tools je nyní plně funkční sada nástrojů pokrývající:
-- ✅ Všech 8 základních PJ nástrojů
-- ✅ Všech 6 generátorů pro tvorbu světa (včetně pokročilého Rumor Generatoru)
-- ✅ Všech 11 typů creature variant
-
-**Rumor Generator** byl implementován jako **plná kombinace 4 variant** (B+D+C+E):
-- **Variant B (World-Connected)**: Zvěsti o reálných místech z hexcrawlu
+**Rumor Generator Extended** 🎨:
+- **Variant B (World-Connected)**: Zvěsti o reálných místech z world_state
 - **Variant D (Categories)**: Organizace do 5 kategorií (Threat/NPC/Location/Treasure/Mystery)
 - **Variant C (Story Hooks)**: k6×k6 tabulky pro komplexní zápletky
 - **Variant E (Gossip Network)**: Simulace šíření a zkreslení přes NPC (0-3 hopy)
+
+**Ostatní rozšíření** 🎨:
+- Adventure Seeds Custom Mode (mix & match sloupců)
+- Hex Settlement Integration (auto-generování osad)
+- Dungeon Settlement Integration (auto-generování osad)
+- Hexcrawl Generator (orchestrátor celého hexcrawlu)
+
+### 🎊 OFICIÁLNÍ PRAVIDLA KOMPLETNÍ!
+
+**Všechny oficiální funkce jsou implementovány!** Mausritter Tools pokrývá:
+- ✅ Všech 8 základních PJ nástrojů
+- ✅ Všech 6 generátorů pro tvorbu světa (včetně Rumor CORE)
+- ✅ Všech 11 typů creature variant
+- 🎨 Bonus: 5 užitečných community rozšíření
 
 ---
 

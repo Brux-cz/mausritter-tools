@@ -21,6 +21,8 @@ class CharacterGenerator:
     4. Najdi původ podle HP a Pips v tabulce původů
     5. Vygeneruj náhodné jméno (nebo použij zadané)
     6. Vrať Character objekt
+
+    Zdroj: docs/knowledge_base/02_CHARACTER_CREATION.md
     """
 
     @staticmethod

@@ -64,7 +64,8 @@ class HexcrawlGenerator:
         preset: str = "standard",
         settlements: Optional[int] = None,
         dungeons: Optional[int] = None,
-        factions: Optional[int] = None
+        factions: Optional[int] = None,
+        core_only: bool = False
     ) -> Hexcrawl:
         """
         Vygeneruj kompletní hexcrawl podle oficiálních pravidel.
@@ -76,6 +77,7 @@ class HexcrawlGenerator:
             settlements: Override počtu settlements (1-3)
             dungeons: Override počtu dungeonů (2-4)
             factions: Override počtu frakcí (0-4)
+            core_only: True = zvěsti POUZE s oficiální k6 pravdivostí, False = extended [default]
 
         Returns:
             Hexcrawl objekt s 25 hexy a všemi komponentami
@@ -144,6 +146,7 @@ class HexcrawlGenerator:
         # 7. Vygeneruj zvěsti s napojením na world state
         generated_rumors = RumorGenerator.create(
             world_state=world_state,
+            core_only=core_only,
             advanced=True
         )
 

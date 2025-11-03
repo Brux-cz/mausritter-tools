@@ -13,7 +13,6 @@ from src.core.tables import TableLoader
 class SpellGenerator:
     """
     Generátor náhodných kouzel podle pravidel Mausritter.
-    Používá tabulku z 06_MAGIC.md pro určení náhodného kouzla.
 
     Mechanika:
     - Při objevení kouzla hoď 2d8 (výsledek 2-16)
@@ -21,6 +20,8 @@ class SpellGenerator:
     - Kouzla mají [POČET] a [SOUČET] placeholdery pro sesílání (casting)
 
     Note: Tento generátor slouží pro NALEZENÍ kouzla, ne pro jeho sesílání.
+
+    Zdroj: docs/knowledge_base/06_MAGIC.md
     """
 
     # Všechna kouzla s jejich roll hodnotami

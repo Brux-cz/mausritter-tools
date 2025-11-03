@@ -53,6 +53,7 @@ class RumorGenerator:
     def create(
         cls,
         world_state: Optional[Dict[str, Any]] = None,
+        core_only: bool = False,
         advanced: bool = True
     ) -> List[Rumor]:
         """
@@ -60,7 +61,13 @@ class RumorGenerator:
 
         Args:
             world_state: Volitelný stav světa (settlements, hexes, dungeons)
+            core_only: True = POUZE oficiální mechanika (k6 pravdivost), False = extended
             advanced: True = použij všechny varianty (B+D+C+E), False = jen B+D
+
+        Modes:
+            - core_only=True: OFFICIAL k6 truthfulness table (1-3 true, 4-5 partial, 6 false)
+            - core_only=False, advanced=False: Basic world-connected (B+D)
+            - core_only=False, advanced=True: Full extended (B+D+C+E)
 
         Returns:
             Seznam 6 Rumor objektů (k6 tabulka)
@@ -68,7 +75,12 @@ class RumorGenerator:
         rumors = []
 
         for roll in range(1, 7):
-            rumor = cls.create_single(roll=roll, world_state=world_state, advanced=advanced)
+            rumor = cls.create_single(
+                roll=roll,
+                world_state=world_state,
+                core_only=core_only,
+                advanced=advanced
+            )
             rumors.append(rumor)
 
         return rumors
@@ -78,6 +90,7 @@ class RumorGenerator:
         cls,
         roll: int,
         world_state: Optional[Dict[str, Any]] = None,
+        core_only: bool = False,
         advanced: bool = True
     ) -> Rumor:
         """
@@ -86,12 +99,13 @@ class RumorGenerator:
         Args:
             roll: Hod k6 (1-6)
             world_state: Volitelný stav světa
+            core_only: True = pouze oficiální k6 pravdivost
             advanced: True = použij C+E varianty
 
         Returns:
             Rumor objekt
         """
-        # 1. Zjisti truthfulness podle hodu
+        # 1. Zjisti truthfulness podle hodu (CORE mechanika)
         if roll in [1, 2, 3]:
             truthfulness = "true"
         elif roll in [4, 5]:
@@ -99,7 +113,11 @@ class RumorGenerator:
         else:  # roll == 6
             truthfulness = "false"
 
-        # 2. Zkus world-connected přístup (Variant B)
+        # 2. Core-only mode (POUZE oficiální k6 pravdivost)
+        if core_only:
+            return cls._create_core_only(roll=roll, truthfulness=truthfulness)
+
+        # 3. Zkus world-connected přístup (Variant B)
         if world_state and cls._has_locations(world_state):
             return cls._create_world_connected(
                 roll=roll,
@@ -472,6 +490,39 @@ class RumorGenerator:
             return "FÁMA! Lokace může existovat, ale hlavní tvrzení je lež. Může být past nebo zklamání."
 
     # === FALLBACK: TEMPLATE-ONLY ===
+
+    @classmethod
+    def _create_core_only(cls, roll: int, truthfulness: str) -> Rumor:
+        """
+        Vytvoř zvěst POUZE podle oficiálních pravidel (k6 pravdivost).
+
+        OFFICIAL MODE - žádná rozšíření (B+D+C+E).
+        Vytvoří generickou zvěst s POUZE pravdivostním označením.
+        """
+        # Oficiální pravidla: GM si vymýšlí zvěsti sám
+        # Poskytneme placeholder text podle pravdivosti
+        truthfulness_label = {
+            "true": "PRAVDA",
+            "partial": "ČÁSTEČNĚ PRAVDA",
+            "false": "FÁMA"
+        }[truthfulness]
+
+        # Generický placeholder pro GM
+        rumor_text = f"[{truthfulness_label}] Zvěst #{roll} - GM doplní obsah podle hexcrawlu"
+
+        return Rumor(
+            roll=roll,
+            rumor_text=rumor_text,
+            category="",  # Žádné kategorie v core
+            truthfulness=truthfulness,
+            source_location=None,
+            gossip_hops=0,
+            gossip_chain=[],
+            story_hook_detail=None,
+            truth_part=None,
+            false_part=None,
+            gm_notes=f"CORE MODE: Oficiální k6 pravdivost. GM doplní obsah podle hexcrawlu."
+        )
 
     @classmethod
     def _create_template_only(cls, roll: int, truthfulness: str) -> Rumor:

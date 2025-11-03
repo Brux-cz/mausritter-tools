@@ -4,35 +4,54 @@ Python nástroje a generátory pro stolní hru **Mausritter** - OSR TTRPG o myš
 
 ## ✅ Co máme hotové
 
-- ✅ **Generátor postav** - kompletní generování myších postav podle pravidel
-- ✅ **Generátor NPC** - rychlé vytváření nehráčských myší
-- ✅ **Generátor pomocníků** - generování hirelingů s plnými statistikami
-- ✅ **Generátor počasí** - generování počasí a sezónních událostí pro všechny čtyři roční období
+### 📖 OFICIÁLNÍ GENERÁTORY (100% kompletní)
+
+Všechny generátory z oficiálních Mausritter pravidel:
+
+**P1 - Základní nástroje pro hráče:**
+- ✅ **Generátor postav** - kompletní generování myších postav (3k6 keep 2, HP, Pips, původy, jména)
+- ✅ **Generátor NPC** - rychlé vytváření nehráčských myší (jméno, status, vzhled, quirk, touha)
+- ✅ **Generátor pomocníků** - generování hirelingů s plnými statistikami (k6, 6 typů)
+- ✅ **Generátor počasí** - počasí a sezónní události pro všechny čtyři roční období
 - ✅ **Generátor reakcí** - reakce NPC/tvorů při setkání (2k6 tabulka)
 - ✅ **Generátor kouzel** - náhodná kouzla pro objevování pokladů (2d8 tabulka, 16 kouzel)
 - ✅ **Generátor pokladů** - kompletní treasure hoard (2-6× k20, kouzelné meče, kouzla, předměty)
 - ✅ **Generátor semínek dobrodružství** - kombinace tvora, problému a komplikace (k66, 36 semínek)
+
+**P2 - Tvorba světa:**
 - ✅ **Generátor hospod** - názvy a speciality hospod (2× k12 + k12, pro vísky a větší osady)
-- ✅ **Generátor osad** - kompletní generování settlements (2d6 keep-lower velikost, vláda, detaily, řemesla, prvky, události, názvy, hospody)
+- ✅ **Generátor osad** - kompletní settlements (2d6 keep-lower velikost, vláda, detaily, řemesla, prvky, události)
 - ✅ **Generátor háčků dobrodružství** - motivace pro hráče (k6, 6 typů háčků s otázkami)
-- ✅ **Generátor zvěstí** - k6 tabulka zvěstí s pravdivostním systémem (1-3 pravda, 4-5 částečně, 6 fáma), world-connected, gossip chains
+- ✅ **Generátor hexů** - 4 typy terénu, 48 detailů, 6 kategorií pro hexcrawl mapy
+- ✅ **Generátor dungeonů** - dobrodružná místa (past/decay/inhabitants/goal/secret, 3×k6 místnosti)
+- ✅ **Generátor zvěstí (CORE)** - k6 tabulka s pravdivostním systémem (1-3 pravda, 4-5 částečně, 6 fáma)
+
+**P3 - Creature Variants:**
+- ✅ **Generátor variant stvoření** - 11 typů (Ghost, Snake, Cat, Rat, Mouse, Spider, Owl, Centipede, Fairy, Crow, Frog), každý s 6 variantami
+
+**Základní nástroje:**
 - ✅ **Hody kostkami** - všechny typy kostek (d4, d6, d8, d10, d12, d20, d66)
 - ✅ **Testy vlastností** - roll-under d20 mechanika
-- ✅ **JSON databáze** - původy, jména, NPC, pomocníci, počasí, kouzla, poklady, nástroje, semínka dobrodružství, osady, zvěsti
+- ✅ **JSON databáze** - 60+ datových souborů podle oficiálních pravidel
 
-**Status:** Fáze 1, 2, 3A-F, 4A-D, 5, 6A-B dokončeny (2025-11-02)
-- ✅ **P1 COMPLETE (100%)** - všech 8 základních PJ nástrojů
-- ✅ **Tavern Generator** (Fáze 4B)
-- ✅ **Settlement Generator** (Fáze 4C)
-- ✅ **Adventure Hooks** (Fáze 4D)
-- ✅ **Creature Variants** (Fáze 5) - 11 typů stvoření, každý s 6 variantami
-- ✅ **Hex Generator** (Fáze 6A) - 4 typy hexů, 48 detailů, Settlement integrace
-- ✅ **Dungeon Generator** (Fáze 6B) - 5 dungeon attributů, 3×k6 room system, 11 JSON tabulek, Settlement integrace
-- ✅ **Rumor Generator** (Fáze 7) - k6 tabulka zvěstí, kombinace 4 variant (World-Connected + Categories + Story Hooks + Gossip Network), truthfulness system
+### 🎨 COMMUNITY ROZŠÍŘENÍ (volitelná)
 
-**Dokončenost:** 🎉 **100% (24/24 funkcí) - KOMPLETNÍ IMPLEMENTACE!** 🎉
+Užitečná rozšíření nad rámec oficiálních pravidel:
 
-**Poznámka:** Původní odhad "28 generátorů" počítal každou creature variantu jako samostatný generátor (14×). Ve skutečnosti máme 15 .py generátorů pokrývajících 24 funkcí z oficiálních pravidel. Všechny základní nástroje pro GM i hráče jsou hotové!
+- 🎨 **Rumor Generator Extended** - Propojené zvěsti s world state, kategorie (threat/NPC/location/treasure/mystery), story hooks (k6×k6), gossip chains (simulace šíření fám)
+- 🎨 **Adventure Seeds Custom Mode** - Mix & match creature/problem/complication ze sloupců (oficiálně se hází celý řádek najednou)
+- 🎨 **Hex Settlement Integration** - Automatické generování osad v hexech s kategorií "Myší osada" (convenience feature)
+- 🎨 **Dungeon Settlement Integration** - Automatické generování osad pro dungeony s past=20 "Myší osada"
+- 🎨 **Hexcrawl Generator** - Orchestrátor generující celý hexcrawl najednou (25 hexů + osady + dungeony + zvěsti)
+
+**Status:** 🎉 **100% OFICIÁLNÍCH PRAVIDEL + 5 ROZŠÍŘENÍ** 🎉
+
+- ✅ **P1 (8/8)** - všechny základní nástroje pro hráče
+- ✅ **P2 (6/6)** - všechny generátory pro tvorbu světa
+- ✅ **P3 (11/11)** - všechny creature variants
+- 🎨 **Extensions** - 5 community rozšíření pro větší pohodlí
+
+**Poznámka:** Původní odhad "28 generátorů" počítal každou creature variantu jako samostatný generátor (14×). Ve skutečnosti máme 15 .py generátorů pokrývajících 23 oficiální funkce + 5 rozšíření. Všechny nástroje z rulebooku jsou hotové!
 
 **Roadmap:** [brainstorm/ROADMAP.md](brainstorm/ROADMAP.md)
 

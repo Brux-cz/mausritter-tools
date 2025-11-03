@@ -1528,12 +1528,18 @@ def dungeon(output_json: bool, save: str, rooms: int, with_settlement: bool):
 @click.option("--world-state", type=str, help="Načti world state ze souboru JSON")
 @click.option("--advanced", is_flag=True, default=True, help="Použij pokročilý režim (gossip chains + story hooks)")
 @click.option("--basic", is_flag=True, help="Základní režim (bez gossip chains)")
-def rumor(output_json: bool, save: str, world_state: str, advanced: bool, basic: bool):
+@click.option("--core-only", is_flag=True, help="POUZE oficiální k6 pravdivost (žádná rozšíření)")
+def rumor(output_json: bool, save: str, world_state: str, advanced: bool, basic: bool, core_only: bool):
     """
     Vygeneruj tabulku k6 zvěstí (Rumor Framework).
 
     Generuje k6 tabulku zvěstí podle oficiálních Mausritter pravidel.
     Kombinuje 4 přístupy: World-Connected, Categories, Story Hooks a Gossip Network.
+
+    Režimy:
+    - --core-only: POUZE oficiální k6 pravdivost (1-3 true, 4-5 partial, 6 false)
+    - --basic: Základní rozšíření (World-Connected + Categories)
+    - --advanced: Plná rozšíření (+ Story Hooks + Gossip Network) [default]
 
     Pravdivost:
     - Hody 1-3 (50%): Pravdivé zvěsti
@@ -1541,6 +1547,7 @@ def rumor(output_json: bool, save: str, world_state: str, advanced: bool, basic:
     - Hod 6 (17%): Fámy
 
     Příklady:
+        mausritter generate rumor --core-only
         mausritter generate rumor
         mausritter generate rumor --world-state moje_dobrodruzstvi.json
         mausritter generate rumor --basic
@@ -1561,11 +1568,14 @@ def rumor(output_json: bool, save: str, world_state: str, advanced: bool, basic:
         except json.JSONDecodeError:
             console.print(f"[yellow]⚠[/yellow]  Soubor {world_state} není validní JSON. Používám fallback mode.\n")
 
-    # Zjisti režim (basic má přednost před advanced)
-    use_advanced = advanced and not basic
-
-    # Vygeneruj zvěsti
-    rumors = RumorGenerator.create(world_state=world_state_data, advanced=use_advanced)
+    # Zjisti režim (core-only má nejvyšší prioritu)
+    if core_only:
+        # CORE MODE: Pouze oficiální k6 pravdivost
+        rumors = RumorGenerator.create(world_state=world_state_data, core_only=True)
+    else:
+        # EXTENDED MODE: basic má přednost před advanced
+        use_advanced = advanced and not basic
+        rumors = RumorGenerator.create(world_state=world_state_data, core_only=False, advanced=use_advanced)
 
     if output_json:
         json_output = RumorGenerator.to_json(rumors)
