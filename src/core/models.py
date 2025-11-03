@@ -1,9 +1,10 @@
 """
 Datové modely pro Mausritter
 """
-from dataclasses import dataclass, field
-from typing import Optional, List, Dict
+from dataclasses import dataclass, field, asdict
+from typing import Optional, List, Dict, Any
 from enum import Enum
+from datetime import datetime
 
 
 class Attribute(Enum):
@@ -368,6 +369,8 @@ class Settlement:
     # Optional elements
     name: str = ""  # Název osady (volitelný)
     tavern: Optional['Tavern'] = None  # Hospoda (pro size 3+)
+    is_friendly: bool = False  # Spřátelená osada (default pro středovou v hexcrawlu)
+    hex_location: Optional[str] = None  # Pozice na mapě (např. "C3")
 
     # Rolls for reproducibility
     roll_size_die1: int = 0  # První k6 pro velikost
@@ -608,3 +611,152 @@ class Dungeon:
     def room_count(self) -> int:
         """Počet místností v dungeonu"""
         return len(self.rooms)
+
+
+@dataclass
+class Rumor:
+    """
+    Model pro zvěst/fámu v hexcrawl kampani.
+
+    Kombinuje 4 přístupy:
+    - B (World-Connected): Zvěsti o reálných místech z hexcrawlu
+    - D (Categories): Organizace do kategorií
+    - C (Story Hooks): k6×k6 tabulky pro komplexní zápletky
+    - E (Gossip Network): Simulace šíření a zkreslení přes NPC
+
+    Pravdivost (podle k6 hodu):
+    - 1-3: true (50% šance) - pravdivá zvěst
+    - 4-5: partial (33% šance) - částečně pravdivá
+    - 6: false (17% šance) - fáma
+    """
+
+    roll: int  # Hod k6 (1-6)
+    rumor_text: str  # Finální text zvěsti
+    category: str  # Kategorie: "threat", "npc", "location", "treasure", "mystery"
+    truthfulness: str  # "true", "partial", "false"
+
+    # World-Connected data (Variant B)
+    source_location: Optional[Dict] = None  # Data o zdrojové lokaci (settlement/hex/dungeon)
+
+    # Gossip Network data (Variant E)
+    gossip_hops: int = 0  # Počet "telefonních hopů" (0-3)
+    gossip_chain: List[str] = field(default_factory=list)  # Řetězec: [pravda, hop1, hop2, ...]
+
+    # Story Hook data (Variant C)
+    story_hook_detail: Optional[str] = None  # Detail z k6×k6 tabulky
+
+    # GM notes
+    truth_part: Optional[str] = None  # Co je pravda (pro partial/false)
+    false_part: Optional[str] = None  # Co je lež (pro partial/false)
+    gm_notes: str = ""  # Poznámky pro GM
+
+    @property
+    def category_emoji(self) -> str:
+        """Vrať emoji podle kategorie zvěsti"""
+        emoji_map = {
+            "threat": "🗡️",
+            "npc": "👤",
+            "location": "📍",
+            "treasure": "💎",
+            "mystery": "🔮",
+        }
+        return emoji_map.get(self.category, "❓")
+
+    @property
+    def truthfulness_symbol(self) -> str:
+        """Vrať symbol pravdivosti"""
+        symbols = {
+            "true": "✓",
+            "partial": "~",
+            "false": "✗",
+        }
+        return symbols.get(self.truthfulness, "?")
+
+    @property
+    def truthfulness_name_cz(self) -> str:
+        """Vrať český název pravdivosti"""
+        names = {
+            "true": "PRAVDA",
+            "partial": "ČÁSTEČNĚ",
+            "false": "FÁMA",
+        }
+        return names.get(self.truthfulness, "NEZNÁMÉ")
+
+    @property
+    def category_name_cz(self) -> str:
+        """Vrať český název kategorie"""
+        names = {
+            "threat": "Hrozba",
+            "npc": "NPC",
+            "location": "Lokace",
+            "treasure": "Poklad",
+            "mystery": "Tajemství",
+        }
+        return names.get(self.category, "Jiné")
+
+
+@dataclass
+class Hexcrawl:
+    """
+    Kompletní hexcrawl podle oficiálních pravidel Mausritter.
+
+    VŽDY obsahuje 5×5 mapu (25 hexů) jak doporučuje rulebook (str. 21).
+
+    Komponenty:
+    - 25 hexů (jednomílových)
+    - 1-3 settlements (osady)
+    - 2-4 dungeons (adventure sites)
+    - 6 rumors (k6 tabulka zvěstí)
+    - 0-4 frakce (volitelné, zatím neimplementováno)
+
+    Zdroj: docs/knowledge_base/11_HEXCRAWL_SETUP.md
+    """
+    hexes: List['Hex']
+    settlements: List[Settlement]
+    dungeons: List['Dungeon']
+    rumors: List[Rumor]
+    world_state: Dict[str, Any]
+    factions: List[Any] = field(default_factory=list)  # Placeholder pro FactionGenerator
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+    def __post_init__(self):
+        """Validace a inicializace metadata při vytvoření."""
+        # KRITICKÁ VALIDACE: Hexcrawl MUSÍ mít přesně 25 hexů!
+        if len(self.hexes) != 25:
+            raise ValueError(
+                f"Hexcrawl musí mít přesně 25 hexů (5×5 podle oficiálních pravidel), "
+                f"ale má {len(self.hexes)}. "
+                f"Zdroj: Mausritter Rulebook str. 21"
+            )
+
+        # Inicializuj metadata
+        self.metadata = {
+            "generated_at": datetime.now().isoformat(),
+            "generator_version": "1.0.0",
+            "map_dimensions": "5x5",
+            "official_rules_compliant": True,
+            "counts": {
+                "hexes": 25,
+                "settlements": len(self.settlements),
+                "dungeons": len(self.dungeons),
+                "rumors": len(self.rumors),
+                "factions": len(self.factions)
+            }
+        }
+
+    @property
+    def map_dimensions(self) -> tuple:
+        """Vrať rozměry mapy (vždy 5×5 podle oficiálních pravidel)."""
+        return (5, 5)
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Konvertuj na dictionary pro export."""
+        return {
+            "metadata": self.metadata,
+            "world_state": self.world_state,
+            "hexes": [asdict(h) for h in self.hexes],
+            "settlements": [asdict(s) for s in self.settlements],
+            "dungeons": [asdict(d) for d in self.dungeons],
+            "rumors": [asdict(r) for r in self.rumors],
+            "factions": self.factions  # Prázdné pro teď
+        }

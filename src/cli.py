@@ -8,7 +8,7 @@ from rich.table import Table
 from rich.panel import Panel
 from rich.text import Text
 from src.core.dice import roll, roll_with_details, attribute_test
-from src.core.models import Character, NPC, Hireling, Weather, Reaction, Spell, TreasureHoard, TreasureItem, MagicSword, AdventureSeed, Tavern, Settlement, AdventureHook, CreatureVariant, Hex, Dungeon, Room
+from src.core.models import Character, NPC, Hireling, Weather, Reaction, Spell, TreasureHoard, TreasureItem, MagicSword, AdventureSeed, Tavern, Settlement, AdventureHook, CreatureVariant, Hex, Dungeon, Room, Hexcrawl, Rumor
 from src.generators.character import CharacterGenerator
 from src.generators.npc import NPCGenerator
 from src.generators.hireling import HirelingGenerator
@@ -23,6 +23,8 @@ from src.generators.adventure_hook import AdventureHookGenerator
 from src.generators.creature_variant import CreatureVariantGenerator
 from src.generators.hex import HexGenerator
 from src.generators.dungeon import DungeonGenerator
+from src.generators.rumor import RumorGenerator
+from src.generators.hexcrawl import HexcrawlGenerator
 
 # Fix Windows console encoding for Czech characters
 if sys.platform == 'win32':
@@ -1520,6 +1522,160 @@ def dungeon(output_json: bool, save: str, rooms: int, with_settlement: bool):
         console.print(f"\n[green]Uloženo do {save}[/green]")
 
 
+@generate.command()
+@click.option("--json", "output_json", is_flag=True, help="Výstup v JSON formátu")
+@click.option("--save", type=str, help="Ulož do souboru")
+@click.option("--world-state", type=str, help="Načti world state ze souboru JSON")
+@click.option("--advanced", is_flag=True, default=True, help="Použij pokročilý režim (gossip chains + story hooks)")
+@click.option("--basic", is_flag=True, help="Základní režim (bez gossip chains)")
+def rumor(output_json: bool, save: str, world_state: str, advanced: bool, basic: bool):
+    """
+    Vygeneruj tabulku k6 zvěstí (Rumor Framework).
+
+    Generuje k6 tabulku zvěstí podle oficiálních Mausritter pravidel.
+    Kombinuje 4 přístupy: World-Connected, Categories, Story Hooks a Gossip Network.
+
+    Pravdivost:
+    - Hody 1-3 (50%): Pravdivé zvěsti
+    - Hody 4-5 (33%): Částečně pravdivé
+    - Hod 6 (17%): Fámy
+
+    Příklady:
+        mausritter generate rumor
+        mausritter generate rumor --world-state moje_dobrodruzstvi.json
+        mausritter generate rumor --basic
+        mausritter generate rumor --json
+        mausritter generate rumor --save rumors.json
+    """
+    import json
+
+    # Načti world state pokud zadán
+    world_state_data = None
+    if world_state:
+        try:
+            with open(world_state, 'r', encoding='utf-8') as f:
+                world_state_data = json.load(f)
+            console.print(f"[green]✓[/green] Načten world state z {world_state}\n")
+        except FileNotFoundError:
+            console.print(f"[yellow]⚠[/yellow]  Soubor {world_state} nenalezen. Používám fallback mode.\n")
+        except json.JSONDecodeError:
+            console.print(f"[yellow]⚠[/yellow]  Soubor {world_state} není validní JSON. Používám fallback mode.\n")
+
+    # Zjisti režim (basic má přednost před advanced)
+    use_advanced = advanced and not basic
+
+    # Vygeneruj zvěsti
+    rumors = RumorGenerator.create(world_state=world_state_data, advanced=use_advanced)
+
+    if output_json:
+        json_output = RumorGenerator.to_json(rumors)
+        console.print(json_output)
+        if save:
+            with open(save, 'w', encoding='utf-8') as f:
+                f.write(json_output)
+            console.print(f"\n[green]Uloženo do {save}[/green]")
+        return
+
+    display_rumors(rumors, world_state_data)
+
+    if save:
+        json_output = RumorGenerator.to_json(rumors)
+        with open(save, 'w', encoding='utf-8') as f:
+            f.write(json_output)
+        console.print(f"\n[green]Uloženo do {save}[/green]")
+
+
+def display_rumors(rumors: list, world_state: dict = None):
+    """Zobraz tabulku zvěstí v terminálu s barevným formátováním."""
+    console.print()
+    console.print(Panel.fit(
+        "[bold yellow]🎲 TABULKA ZVĚSTÍ (RUMOR TABLE) 🎲[/bold yellow]\n"
+        "Kombinace B+D+C+E (World-Connected + Categories + Story Hooks + Gossip)",
+        border_style="yellow"
+    ))
+    console.print()
+
+    # Info panel
+    info_text = Text()
+    if world_state:
+        hexcrawl = world_state.get("hexcrawl", {})
+        settlements = len(hexcrawl.get("settlements", []))
+        hexes = len(hexcrawl.get("hexes", []))
+        dungeons = len(hexcrawl.get("dungeons", []))
+        total = settlements + hexes + dungeons
+        info_text.append("🌍 World State: ", style="bold")
+        info_text.append(f"{total} lokací ({settlements} settlements, {hexes} hexů, {dungeons} dungeonů)\n", style="cyan")
+    else:
+        info_text.append("🌍 World State: ", style="bold")
+        info_text.append("Žádný (fallback mode)\n", style="dim")
+
+    info_text.append("📋 Pravdivost: ", style="bold")
+    info_text.append("1-3=Pravda (50%), 4-5=Částečně (33%), 6=Fáma (17%)", style="dim")
+
+    info_panel = Panel(info_text, title="ℹ️  INFO", border_style="blue", padding=(1, 2))
+    console.print(info_panel)
+    console.print()
+
+    # Tabulka zvěstí
+    table = Table(show_header=True, header_style="bold magenta", box=None)
+    table.add_column("K6", justify="center", style="cyan", width=4)
+    table.add_column("TYPE", justify="left", width=10)
+    table.add_column("ZVĚST", justify="left", width=50)
+    table.add_column("PRAVDA", justify="center", width=10)
+    table.add_column("HOPY", justify="center", width=5)
+
+    for rumor in rumors:
+        # Barevné označení podle truthfulness
+        if rumor.truthfulness == "true":
+            truth_style = "green"
+            truth_text = f"✓ PRAVDA"
+        elif rumor.truthfulness == "partial":
+            truth_style = "yellow"
+            truth_text = f"~ ČÁST."
+        else:  # false
+            truth_style = "red"
+            truth_text = f"✗ FÁMA"
+
+        # Zkrácení dlouhého textu
+        text = rumor.rumor_text
+        if len(text) > 47:
+            text = text[:47] + "..."
+
+        table.add_row(
+            f"{rumor.roll}",
+            f"{rumor.category_emoji} {rumor.category_name_cz}",
+            text,
+            Text(truth_text, style=truth_style),
+            f"{rumor.gossip_hops}"
+        )
+
+        # Pokud má truth/false parts, přidej je jako sub-řádek
+        if rumor.truth_part or rumor.false_part:
+            detail_text = ""
+            if rumor.truth_part:
+                detail_text += f"├─ ✓ {rumor.truth_part}\n"
+            if rumor.false_part:
+                detail_text += f"└─ ✗ {rumor.false_part}"
+
+            if detail_text:
+                table.add_row("", "", Text(detail_text, style="dim"), "", "")
+
+    console.print(table)
+    console.print()
+
+    # GM Notes
+    gm_notes_text = Text()
+    gm_notes_text.append("💡 TIP PRO GM:\n", style="bold yellow")
+    gm_notes_text.append("   • HOPY = Počet 'telefonních hopů' ve gossip chain (0 = přímá pravda, 3 = max zkreslení)\n", style="dim")
+    gm_notes_text.append("   • Hráči mohou tyto zvěsti slyšet v tavernách, od cestujících nebo v osadách\n", style="dim")
+    gm_notes_text.append("   • Pravdivé zvěsti (1-3) odměňují průzkum, fámy (6) mohou být past!\n", style="dim")
+    gm_notes_text.append("   • Hráči můžou vysledovat zdroj fámy zpátky přes gossip chain\n", style="dim")
+
+    gm_panel = Panel(gm_notes_text, title="📝 GM NOTES", border_style="yellow", padding=(1, 2))
+    console.print(gm_panel)
+    console.print()
+
+
 def display_dungeon(dungeon_obj: Dungeon):
     """Zobraz dungeon v terminálu s barevným formátováním."""
 
@@ -1611,6 +1767,217 @@ def display_dungeon(dungeon_obj: Dungeon):
 
     console.print(rolls_text)
     console.print("\n")
+
+
+@generate.command()
+@click.option("--preset", type=click.Choice(['starter', 'standard', 'advanced']), default='standard', help="Preset konfigurace (starter/standard/advanced)")
+@click.option("--json", "output_json", is_flag=True, help="Výstup v JSON formátu")
+@click.option("--save", type=str, help="Ulož do souboru")
+@click.option("--show", is_flag=True, default=True, help="Zobraz v terminálu")
+def hexcrawl(preset: str, output_json: bool, save: str, show: bool):
+    """
+    Vygeneruj kompletní hexcrawl kampaň.
+
+    Hexcrawl je průzkumná kampaň na 5×5 mapě hexů (25 hexů celkem).
+    Generuje podle oficiálních pravidel Mausritter:
+    - 25 hexů (vždy 5×5 podle rulebooku str. 21)
+    - 1-3 settlements (myší osady)
+    - 2-4 dungeons (dobrodružná místa)
+    - 6 zvěstí (k6 tabulka)
+    - World state pro propojené zvěsti
+
+    Presety:
+    - starter: Zjednodušený (1 settlement, 2 dungeons)
+    - standard: Podle oficiálních pravidel (3 settlements, 3 dungeons)
+    - advanced: Plně vybavený (3 settlements, 4 dungeons)
+
+    První settlement je vždy spřátelená a umístěná na C3 (střed mapy).
+
+    Příklady:
+        mausritter generate hexcrawl
+        mausritter generate hexcrawl --preset starter
+        mausritter generate hexcrawl --preset advanced --save muj_hexcrawl.json
+        mausritter generate hexcrawl --json
+    """
+    import os
+    from datetime import datetime
+
+    hexcrawl_obj = HexcrawlGenerator.create(preset=preset)
+
+    # Auto-save pokud není specifikováno jinak
+    if not save:
+        os.makedirs("output", exist_ok=True)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        save = f"output/hexcrawl_{preset}_{timestamp}.json"
+
+    # JSON output
+    if output_json:
+        json_output = HexcrawlGenerator.to_json(hexcrawl_obj)
+        console.print(json_output)
+
+    # Zobraz v terminálu
+    if show and not output_json:
+        display_hexcrawl(hexcrawl_obj, preset)
+
+    # Ulož do souboru
+    if save:
+        json_output = HexcrawlGenerator.to_json(hexcrawl_obj)
+        with open(save, 'w', encoding='utf-8') as f:
+            f.write(json_output)
+        console.print(f"\n[green]✓ Hexcrawl uložen do {save}[/green]")
+
+
+def display_hexcrawl(hexcrawl_obj: Hexcrawl, preset: str):
+    """Zobraz hexcrawl v terminálu s barevným formátováním."""
+
+    # Hlavní nadpis
+    title_text = "🗺️  HEXCRAWL KAMPAŇ"
+
+    main_content = f"[bold cyan]Preset:[/bold cyan] {preset.upper()}\n"
+    main_content += f"[bold magenta]Mapa:[/bold magenta] 5×5 (25 hexů)\n"
+    main_content += f"[bold green]Generováno:[/bold green] {hexcrawl_obj.metadata['generated_at'][:19].replace('T', ' ')}"
+
+    main_panel = Panel(
+        main_content,
+        title=title_text,
+        title_align="left",
+        border_style="cyan",
+        padding=(1, 2)
+    )
+
+    console.print("\n")
+    console.print(main_panel)
+
+    # Statistiky
+    console.print()
+    stats_table = Table(title="📊 STATISTIKY HEXCRAWLU", show_header=True, header_style="bold cyan")
+    stats_table.add_column("Komponenta", style="yellow")
+    stats_table.add_column("Počet", justify="right", style="green")
+    stats_table.add_column("Detail", style="dim")
+
+    counts = hexcrawl_obj.metadata['counts']
+    stats_table.add_row("🗺️  Hexy", str(counts['hexes']), "Vždy 5×5 podle pravidel")
+    stats_table.add_row("🏘️  Osady", str(counts['settlements']), "První je spřátelená (C3)")
+    stats_table.add_row("🏛️  Dungeony", str(counts['dungeons']), "Dobrodružná místa")
+    stats_table.add_row("💬 Zvěsti", str(counts['rumors']), "k6 tabulka (50% pravda)")
+    stats_table.add_row("⚔️  Frakce", str(counts['factions']), "Zatím neimplementováno")
+
+    console.print(stats_table)
+    console.print()
+
+    # Settlements
+    if hexcrawl_obj.settlements:
+        settlements_panel_content = ""
+        for i, settlement in enumerate(hexcrawl_obj.settlements, 1):
+            friendly_mark = "⭐ " if settlement.is_friendly else ""
+            location = f" [{settlement.hex_location}]" if settlement.hex_location else ""
+            name = settlement.name if settlement.name else f"Osada #{i}"
+
+            settlements_panel_content += f"{friendly_mark}[bold green]{name}[/bold green]{location}\n"
+            settlements_panel_content += f"   [dim]Velikost: {settlement.size_name}[/dim]\n"
+            settlements_panel_content += f"   [dim]Vláda: {settlement.government}[/dim]\n"
+            if settlement.is_friendly:
+                settlements_panel_content += f"   [dim italic]Spřátelená osada (výchozí bod)[/dim italic]\n"
+            settlements_panel_content += "\n"
+
+        settlements_panel = Panel(
+            settlements_panel_content.rstrip(),
+            title=f"🏘️  OSADY ({len(hexcrawl_obj.settlements)})",
+            title_align="left",
+            border_style="green",
+            padding=(1, 2)
+        )
+        console.print(settlements_panel)
+        console.print()
+
+    # Dungeons
+    if hexcrawl_obj.dungeons:
+        dungeons_panel_content = ""
+        for i, dungeon in enumerate(hexcrawl_obj.dungeons, 1):
+            dungeons_panel_content += f"[bold yellow]#{i}[/bold yellow] [cyan]{dungeon.past}[/cyan]\n"
+            dungeons_panel_content += f"   [dim]Obyvatelé: {dungeon.inhabitants}[/dim]\n"
+            dungeons_panel_content += f"   [dim]Cíl: {dungeon.goal}[/dim]\n"
+            dungeons_panel_content += f"   [dim]Místností: {dungeon.room_count}[/dim]\n\n"
+
+        dungeons_panel = Panel(
+            dungeons_panel_content.rstrip(),
+            title=f"🏛️  DOBRODRUŽNÁ MÍSTA ({len(hexcrawl_obj.dungeons)})",
+            title_align="left",
+            border_style="yellow",
+            padding=(1, 2)
+        )
+        console.print(dungeons_panel)
+        console.print()
+
+    # Rumors
+    if hexcrawl_obj.rumors:
+        rumors_table = Table(title=f"💬 ZVĚSTI (k6 tabulka)", show_header=True, header_style="bold magenta")
+        rumors_table.add_column("k6", justify="center", style="cyan", width=4)
+        rumors_table.add_column("Pravdivost", style="yellow", width=12)
+        rumors_table.add_column("Zvěst", style="white")
+        rumors_table.add_column("Kategorie", style="dim", width=12)
+
+        for rumor in hexcrawl_obj.rumors:
+            # Pravdivost s barvou
+            truth_colors = {
+                "true": "green",
+                "partial": "yellow",
+                "false": "red"
+            }
+            truth_color = truth_colors.get(rumor.truthfulness, "white")
+            truth_text = f"[{truth_color}]{rumor.truthfulness_symbol} {rumor.truthfulness_name_cz}[/{truth_color}]"
+
+            # Zkrácená zvěst pokud je moc dlouhá
+            rumor_text = rumor.rumor_text
+            if len(rumor_text) > 70:
+                rumor_text = rumor_text[:67] + "..."
+
+            rumors_table.add_row(
+                str(rumor.roll),
+                truth_text,
+                rumor_text,
+                rumor.category_emoji + " " + rumor.category_name_cz
+            )
+
+        console.print(rumors_table)
+        console.print()
+
+    # Hex Preview (první 3 hexy)
+    if hexcrawl_obj.hexes:
+        hexes_preview_content = ""
+        for i, hex_obj in enumerate(hexcrawl_obj.hexes[:3], 1):
+            hexes_preview_content += f"[bold cyan]{hex_obj.type_emoji} {hex_obj.type}[/bold cyan]\n"
+            hexes_preview_content += f"   [dim]{hex_obj.detail_name}[/dim]\n\n"
+
+        hexes_preview_content += f"[dim italic]... a dalších {len(hexcrawl_obj.hexes) - 3} hexů[/dim italic]"
+
+        hexes_panel = Panel(
+            hexes_preview_content,
+            title=f"🗺️  HEXY (náhled 3/{len(hexcrawl_obj.hexes)})",
+            title_align="left",
+            border_style="blue",
+            padding=(1, 2)
+        )
+        console.print(hexes_panel)
+        console.print()
+
+    # GM Tips
+    gm_tips = Text()
+    gm_tips.append("💡 TIPY PRO GM:\n\n", style="bold yellow")
+    gm_tips.append("1. ", style="bold")
+    gm_tips.append("Začněte ve spřátelené osadě (⭐) uprostřed mapy (C3)\n", style="dim")
+    gm_tips.append("2. ", style="bold")
+    gm_tips.append("Zvěsti jsou háčky k prozkoumání - nechte hráče vybrat směr\n", style="dim")
+    gm_tips.append("3. ", style="bold")
+    gm_tips.append("Každý hex = 1 míle, cesta trvá 1 watch (4 hodiny)\n", style="dim")
+    gm_tips.append("4. ", style="bold")
+    gm_tips.append("Kompletní JSON obsahuje všechny detaily (hexy, místnosti, NPC...)\n", style="dim")
+    gm_tips.append("5. ", style="bold")
+    gm_tips.append("Frakce nejsou v této verzi - přidejte je manuálně podle potřeby\n", style="dim")
+
+    gm_panel = Panel(gm_tips, title="📝 GM NOTES", border_style="yellow", padding=(1, 2))
+    console.print(gm_panel)
+    console.print()
 
 
 @main.group()
