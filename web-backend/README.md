@@ -2,7 +2,7 @@
 
 FastAPI backend wrappující existující Python generátory pro web interface.
 
-**Status:** ✅ MVP Week 1 Complete - 5 generátorů funkčních a otestovaných
+**Status:** ✅ ALL 17 Generators Implemented - Complete REST API
 
 ---
 
@@ -33,21 +33,35 @@ Server běží na: **http://localhost:8000**
 
 ---
 
-## 📋 Implementované Endpointy (MVP)
+## 📋 Implementované Endpointy (17/17)
 
 ### Generátory
 
 **Base URL:** `/api/v1/generate/`
 
+#### MVP Generátory (5)
 - ✅ `POST /character` - Generuj postavu
 - ✅ `POST /npc` - Generuj NPC
 - ✅ `POST /hex` - Generuj hex
 - ✅ `POST /settlement` - Generuj osadu
 - ✅ `POST /weather` - Generuj počasí
 
+#### Rozšířené Generátory (12)
+- ✅ `POST /hireling` - Generuj pomocníka
+- ✅ `POST /reaction` - Generuj reakci NPC
+- ✅ `POST /spell` - Generuj kouzlo
+- ✅ `POST /treasure` - Generuj poklad
+- ✅ `POST /adventure` - Generuj adventure seed
+- ✅ `POST /hook` - Generuj adventure hook
+- ✅ `POST /creature/{type}` - Generuj creature variantu (11 typů)
+- ✅ `POST /tavern` - Generuj hospodu
+- ✅ `POST /dungeon` - Generuj dungeon
+- ✅ `POST /rumor` - Generuj zvěsti (6×)
+- ⚠️ `POST /hexcrawl` - Generuj hexcrawl (encoding issue na Windows)
+
 ### Status
 
-- ✅ `GET /api/v1/generate/status` - Seznam všech generátorů
+- ✅ `GET /api/v1/generate/status` - Seznam všech generátorů (vrací 17/17)
 
 ### Utility
 
@@ -142,13 +156,22 @@ API wrappuje generátory z `src/generators/`:
 
 **Důležité:** Backend předpokládá, že má přístup k `src/` a `data/` složkám z root projektu.
 
-### V2 Features (TODO)
+### ✅ Completed Features
 
-- [ ] Zbývajících 12 generátorů
+- ✅ Všech 17 generátorů implementováno
+- ✅ Pydantic Request models s validací
+- ✅ Swagger UI dokumentace (`/docs`)
+- ✅ Error handling pro všechny endpointy
+- ✅ CORS middleware pro frontend komunikaci
+
+### 🔜 Next Steps (V2)
+
 - [ ] Supabase integrace (databáze)
 - [ ] Authentication (JWT)
 - [ ] Campaign CRUD endpoints
 - [ ] WebSocket pro real-time dice
+- [ ] Rate limiting
+- [ ] Caching strategie
 
 ---
 
