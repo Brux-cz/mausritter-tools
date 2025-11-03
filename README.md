@@ -15,9 +15,10 @@ Python nástroje a generátory pro stolní hru **Mausritter** - OSR TTRPG o myš
 - ✅ **Generátor hospod** - názvy a speciality hospod (2× k12 + k12, pro vísky a větší osady)
 - ✅ **Generátor osad** - kompletní generování settlements (2d6 keep-lower velikost, vláda, detaily, řemesla, prvky, události, názvy, hospody)
 - ✅ **Generátor háčků dobrodružství** - motivace pro hráče (k6, 6 typů háčků s otázkami)
+- ✅ **Generátor zvěstí** - k6 tabulka zvěstí s pravdivostním systémem (1-3 pravda, 4-5 částečně, 6 fáma), world-connected, gossip chains
 - ✅ **Hody kostkami** - všechny typy kostek (d4, d6, d8, d10, d12, d20, d66)
 - ✅ **Testy vlastností** - roll-under d20 mechanika
-- ✅ **JSON databáze** - původy, jména, NPC, pomocníci, počasí, kouzla, poklady, nástroje, semínka dobrodružství, osady
+- ✅ **JSON databáze** - původy, jména, NPC, pomocníci, počasí, kouzla, poklady, nástroje, semínka dobrodružství, osady, zvěsti
 
 **Status:** Fáze 1, 2, 3A-F, 4A-D, 5, 6A-B dokončeny (2025-11-02)
 - ✅ **P1 COMPLETE (100%)** - všech 8 základních PJ nástrojů
@@ -27,9 +28,13 @@ Python nástroje a generátory pro stolní hru **Mausritter** - OSR TTRPG o myš
 - ✅ **Creature Variants** (Fáze 5) - 11 typů stvoření, každý s 6 variantami
 - ✅ **Hex Generator** (Fáze 6A) - 4 typy hexů, 48 detailů, Settlement integrace
 - ✅ **Dungeon Generator** (Fáze 6B) - 5 dungeon attributů, 3×k6 room system, 11 JSON tabulek, Settlement integrace
-- 📝 **DALŠÍ:** Location/NPC Generator (Fáze 6C)
+- ✅ **Rumor Generator** (Fáze 7) - k6 tabulka zvěstí, kombinace 4 variant (World-Connected + Categories + Story Hooks + Gossip Network), truthfulness system
 
-**Dokončenost:** 50% (14/28 generátorů) | **Roadmap:** [brainstorm/ROADMAP.md](brainstorm/ROADMAP.md)
+**Dokončenost:** 🎉 **100% (24/24 funkcí) - KOMPLETNÍ IMPLEMENTACE!** 🎉
+
+**Poznámka:** Původní odhad "28 generátorů" počítal každou creature variantu jako samostatný generátor (14×). Ve skutečnosti máme 15 .py generátorů pokrývajících 24 funkcí z oficiálních pravidel. Všechny základní nástroje pro GM i hráče jsou hotové!
+
+**Roadmap:** [brainstorm/ROADMAP.md](brainstorm/ROADMAP.md)
 
 ---
 

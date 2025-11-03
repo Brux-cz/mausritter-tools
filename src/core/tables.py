@@ -1560,6 +1560,135 @@ class TableLoader:
                 return entry
         return None
 
+    # === RUMOR TABLES ===
+
+    @staticmethod
+    @lru_cache(maxsize=16)
+    def get_rumor_categories() -> Dict[str, Any]:
+        """Načti tabulku kategorií zvěstí."""
+        return TableLoader.load_table("core/rumor_categories.json")
+
+    @staticmethod
+    @lru_cache(maxsize=16)
+    def get_rumor_templates() -> Dict[str, Any]:
+        """Načti tabulku šablon zvěstí."""
+        return TableLoader.load_table("core/rumor_templates.json")
+
+    @staticmethod
+    @lru_cache(maxsize=16)
+    def get_rumor_story_hooks() -> Dict[str, Any]:
+        """Načti tabulku story hooks pro zvěsti (k6×k6)."""
+        return TableLoader.load_table("core/rumor_story_hooks.json")
+
+    @staticmethod
+    @lru_cache(maxsize=16)
+    def get_rumor_gossip_npcs() -> Dict[str, Any]:
+        """Načti tabulku NPC pro gossip chains."""
+        return TableLoader.load_table("core/rumor_gossip_npcs.json")
+
+    @staticmethod
+    def get_rumor_category_info(category: str) -> Optional[Dict[str, Any]]:
+        """
+        Získej informace o kategorii zvěsti.
+
+        Args:
+            category: Kategorie (threat, npc, location, treasure, mystery)
+
+        Returns:
+            Dict s informacemi o kategorii nebo None
+        """
+        data = TableLoader.get_rumor_categories()
+        categories = data.get("categories", {})
+        return categories.get(category)
+
+    @staticmethod
+    def get_rumor_template(template_name: str) -> Optional[Dict[str, Any]]:
+        """
+        Získej konkrétní template zvěsti podle jména.
+
+        Args:
+            template_name: Jméno templatu (např. "threat_settlement_problem")
+
+        Returns:
+            Dict s templatem nebo None
+        """
+        data = TableLoader.get_rumor_templates()
+        templates = data.get("templates", {})
+        return templates.get(template_name)
+
+    @staticmethod
+    def get_rumor_fallback_templates(category: str) -> List[str]:
+        """
+        Získej fallback šablony pro kategorii (když není world state).
+
+        Args:
+            category: Kategorie (threat, npc, location, treasure, mystery)
+
+        Returns:
+            Seznam fallback šablon
+        """
+        data = TableLoader.get_rumor_templates()
+        fallbacks = data.get("fallback_templates", {})
+        return fallbacks.get(category, [])
+
+    @staticmethod
+    def lookup_story_hook(table_name: str, roll: int) -> Optional[Dict[str, Any]]:
+        """
+        Najdi story hook podle jména tabulky a hodu k6.
+
+        Args:
+            table_name: Jméno tabulky (např. "npc_quest_type")
+            roll: Výsledek hodu k6 (1-6)
+
+        Returns:
+            Dict s entry nebo None
+        """
+        data = TableLoader.get_rumor_story_hooks()
+        hooks = data.get("story_hooks", {})
+        table = hooks.get(table_name)
+
+        if not table:
+            return None
+
+        entries = table.get("entries", [])
+        for entry in entries:
+            if entry["roll"] == roll:
+                return entry
+
+        return None
+
+    @staticmethod
+    def get_random_gossip_npc() -> Optional[Dict[str, Any]]:
+        """
+        Vyber náhodné NPC pro gossip chain.
+
+        Returns:
+            Dict s NPC nebo None
+        """
+        import random
+        data = TableLoader.get_rumor_gossip_npcs()
+        npcs = data.get("npcs", [])
+
+        if not npcs:
+            return None
+
+        return random.choice(npcs)
+
+    @staticmethod
+    def get_distortion_pattern(distortion_type: str) -> Optional[Dict[str, Any]]:
+        """
+        Získej vzor zkreslení pro gossip.
+
+        Args:
+            distortion_type: Typ zkreslení (exaggeration, confusion, atd.)
+
+        Returns:
+            Dict se vzorem zkreslení nebo None
+        """
+        data = TableLoader.get_rumor_gossip_npcs()
+        patterns = data.get("distortion_patterns", {})
+        return patterns.get(distortion_type)
+
 
 # Convenience funkce pro rychlé použití
 # === SHORTCUTS ===
