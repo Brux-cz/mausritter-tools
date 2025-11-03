@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 HexcrawlGenerator - orchestrátor pro generování kompletního hexcrawlu
 
@@ -126,12 +127,11 @@ class HexcrawlGenerator:
         # POZNÁMKA: FactionGenerator zatím neexistuje!
         # Pro první iteraci přeskakujeme (STARTER a STANDARD fungují bez frakcí).
         # ADVANCED preset bude vyžadovat implementaci FactionGenerator později.
-        if config["factions"] > 0:
-            print(f"⚠️  FactionGenerator není implementován - přeskakuji {config['factions']} frakcí")
-        # Budoucí implementace:
-        # for _ in range(config["factions"]):
-        #     f = FactionGenerator.create()
-        #     generated_factions.append(f)
+        # if config["factions"] > 0:
+        #     Budoucí implementace:
+        #     for _ in range(config["factions"]):
+        #         f = FactionGenerator.create()
+        #         generated_factions.append(f)
 
         # 6. Sestav world state
         world_state = {
