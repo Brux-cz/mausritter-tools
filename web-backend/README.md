@@ -2,6 +2,8 @@
 
 FastAPI backend wrappující existující Python generátory pro web interface.
 
+**Status:** ✅ MVP Week 1 Complete - 5 generátorů funkčních a otestovaných
+
 ---
 
 ## 🚀 Quick Start

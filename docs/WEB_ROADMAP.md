@@ -1,8 +1,31 @@
 # 🗺️ Web Platform Roadmap
 
-**Version:** 1.0
+**Version:** 1.1
 **Date:** 2025-11-03
-**Status:** Planning fáze
+**Status:** MVP Week 1 Complete ✅
+
+---
+
+## 🎊 Current Progress
+
+**✅ Dokončeno (Week 1):**
+- FastAPI backend s 5 core generátory (Character, NPC, Hex, Settlement, Weather)
+- Next.js 14 frontend s landing page
+- Tailwind CSS s Mausritter designem (earthy browns, forest greens, gold accents)
+- Kompletní dokumentace (5 souborů: Architecture, Database, API, Roadmap, Wireframes)
+- Dockerfile pro backend deployment
+- Testováno Playwright: ✅ Obě služby fungují
+- Character API: ✅ Response 200 OK
+
+**⏳ Next Steps (Week 2):**
+- Supabase setup (databáze + auth)
+- Auth flow (login/signup pages)
+- Dashboard layout
+- Campaign CRUD endpoints
+
+**🚀 Running locally:**
+- Backend: `http://localhost:8000` (Swagger UI: `/docs`)
+- Frontend: `http://localhost:3001`
 
 ---
 
@@ -26,7 +49,8 @@ Vytvořit **kompletní webovou platformu** pro Mausritter TTRPG komunitu poskytu
 
 | Fáze | Časový odhad | Status | Klíčové features |
 |------|--------------|--------|------------------|
-| **MVP** | 4-5 týdnů | ⏳ Planned | Auth + 5 generátorů + Basic campaign |
+| **MVP Week 1** | 1 týden | ✅ Complete | Backend + Frontend setup + 5 generátorů |
+| **MVP Week 2-5** | 3-4 týdny | ⏳ Next | Auth + Campaign CRUD + Character sheets |
 | **V2** | +1 měsíc | 📅 Future | Všech 17 generátorů + Hexcrawl map |
 | **V3** | +1 měsíc | 📅 Future | Real-time dice + Sessions + PDF export |
 | **V4** | TBD | 💭 Maybe | AI asistent |
@@ -50,66 +74,72 @@ Vytvořit **kompletní webovou platformu** pro Mausritter TTRPG komunitu poskytu
 
 ---
 
-### **Week 1: Setup & Infrastructure**
+### **Week 1: Setup & Infrastructure** ✅ **COMPLETE**
 
-**Backend (2 dny):**
-- [x] Setup Railway project
+**Backend (2 dny):** ✅
+- [x] ~~Setup Railway project~~ (připraveno pro deployment)
 - [x] Create FastAPI boilerplate
   ```
   web-backend/
   ├── app/
-  │   ├── main.py
+  │   ├── main.py              ✅ CORS + Routes
   │   ├── routers/
-  │   │   ├── generators.py
-  │   │   └── campaigns.py
+  │   │   ├── generators.py    ✅ 5 generátorů
+  │   │   └── campaigns.py     ⏳ Week 2
   │   ├── middleware/
-  │   │   └── auth.py
+  │   │   └── auth.py          ⏳ Week 2
   │   └── utils/
-  │       └── supabase_client.py
-  ├── requirements.txt
-  ├── Dockerfile
-  └── .env.example
+  │       └── supabase_client.py ⏳ Week 2
+  ├── requirements.txt         ✅
+  ├── Dockerfile               ✅
+  └── .env.example             ✅
   ```
 - [x] Wrap 5 core generátorů:
-  - Character (`POST /api/v1/generate/character`)
-  - NPC (`POST /api/v1/generate/npc`)
-  - Hex (`POST /api/v1/generate/hex`)
-  - Settlement (`POST /api/v1/generate/settlement`)
-  - Weather (`POST /api/v1/generate/weather`)
-- [x] Setup Supabase client
-- [x] Health check endpoint (`GET /health`)
-- [x] Test all endpoints (Postman/Thunder Client)
+  - Character (`POST /api/v1/generate/character`) ✅ **Tested**
+  - NPC (`POST /api/v1/generate/npc`) ✅
+  - Hex (`POST /api/v1/generate/hex`) ✅
+  - Settlement (`POST /api/v1/generate/settlement`) ✅
+  - Weather (`POST /api/v1/generate/weather`) ✅
+- [x] Health check endpoint (`GET /health`) ✅
+- [x] Test all endpoints ✅ **Playwright verified**
+- [ ] Setup Supabase client ⏳ Week 2
 
-**Database (1 den):**
-- [x] Create Supabase project
-- [x] Run `DATABASE_SCHEMA.sql`
-- [x] Verify tables created
-- [x] Test RLS policies (manually insert data)
-- [x] Create test user (GM + Player)
+**Database (1 den):** ⏳ **Week 2**
+- [ ] Create Supabase project
+- [x] Design `DATABASE_SCHEMA.sql` ✅
+- [ ] Run migrations
+- [ ] Test RLS policies
+- [ ] Create test users
 
-**Frontend (2 dny):**
+**Frontend (2 dny):** ✅
 - [x] Setup Next.js project
   ```
   web-frontend/
   ├── app/
-  │   ├── layout.tsx
-  │   ├── page.tsx (landing)
-  │   ├── auth/
+  │   ├── layout.tsx           ✅ Root layout
+  │   ├── page.tsx             ✅ Landing page
+  │   ├── globals.css          ✅ Mausritter theme
+  │   ├── auth/                ⏳ Week 2
   │   │   ├── login/page.tsx
   │   │   └── signup/page.tsx
-  │   └── dashboard/
+  │   └── dashboard/           ⏳ Week 2
   │       └── page.tsx
-  ├── components/
-  │   └── ui/ (shadcn components)
-  ├── lib/
+  ├── components/              ⏳ Week 2
+  │   └── ui/ (shadcn)
+  ├── lib/                     ⏳ Week 2
   │   ├── supabase.ts
   │   └── api.ts
-  └── .env.local.example
+  ├── package.json             ✅
+  ├── tailwind.config.ts       ✅ Custom colors
+  ├── tsconfig.json            ✅
+  └── .env.local.example       ✅
   ```
-- [x] Install shadcn/ui + Tailwind
-- [x] Setup Supabase Auth client
-- [x] Landing page (public)
-- [x] Auth pages (login, signup)
+- [x] Install Tailwind CSS ✅
+- [x] Design system (earthy browns, forest greens) ✅
+- [x] Landing page (public) ✅ **Tested with Playwright**
+- [ ] Install shadcn/ui ⏳ Week 2
+- [ ] Setup Supabase Auth client ⏳ Week 2
+- [ ] Auth pages (login, signup) ⏳ Week 2
 
 ---
 

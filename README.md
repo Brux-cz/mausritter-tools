@@ -838,6 +838,45 @@ b868e82 Fáze 1: Data extraction a TableLoader implementace
 
 ---
 
+## 📰 Recent Updates
+
+### 2025-11-03: Web Platform MVP Week 1 Complete ✅
+
+**Implementováno:**
+- 🚀 **FastAPI Backend** - REST API wrappující Python generátory
+  - 5 core generátorů (Character, NPC, Hex, Settlement, Weather)
+  - Swagger UI dokumentace na `/docs`
+  - CORS konfigurace
+  - Dockerfile pro deployment
+  - Health check endpoint
+
+- 🎨 **Next.js 14 Frontend** - Modern landing page
+  - Mausritter design system (earthy browns, forest greens)
+  - Tailwind CSS + custom colors
+  - Responsive layout
+  - TypeScript + App Router
+
+- 📚 **Kompletní dokumentace**
+  - [WEB_ARCHITECTURE.md](docs/WEB_ARCHITECTURE.md) - Tech stack ($0/měsíc)
+  - [DATABASE_SCHEMA.sql](docs/DATABASE_SCHEMA.sql) - PostgreSQL schema
+  - [API_ENDPOINTS.md](docs/API_ENDPOINTS.md) - REST API specifikace
+  - [WEB_ROADMAP.md](docs/WEB_ROADMAP.md) - Implementační plán
+  - [UI_WIREFRAMES.md](docs/UI_WIREFRAMES.md) - Design všech stránek
+
+**Testováno:**
+- ✅ Backend běží na `http://localhost:8000`
+- ✅ Frontend běží na `http://localhost:3001`
+- ✅ Character API test: Response 200 OK
+- ✅ Playwright verification successful
+
+**Next Steps (Week 2):**
+- Supabase setup (databáze + auth)
+- Auth flow (login/signup)
+- Dashboard layout
+- Campaign CRUD endpoints
+
+---
+
 ## 📝 Poznámky
 
 - **Jazyk:** CLI je v češtině, včetně výstupů
