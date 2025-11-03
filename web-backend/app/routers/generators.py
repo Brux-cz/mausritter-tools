@@ -214,7 +214,7 @@ async def generate_settlement(request: SettlementRequest):
     """
     try:
         settlement = SettlementGenerator.create(
-            no_tavern=request.no_tavern
+            generate_tavern=not request.no_tavern
         )
         return SettlementGenerator.to_dict(settlement)
     except Exception as e:

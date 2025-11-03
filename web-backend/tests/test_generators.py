@@ -23,10 +23,10 @@ class TestMVPGenerators:
         assert response.status_code == 200
         data = response.json()
         assert "name" in data
-        assert "str" in data
-        assert "dex" in data
-        assert "wil" in data
-        assert "hp" in data
+        assert "strength" in data
+        assert "dexterity" in data
+        assert "willpower" in data
+        assert "max_hp" in data
 
     def test_character_generator_no_params(self, test_client, api_base_url):
         """Test generování postavy bez parametrů."""
@@ -42,7 +42,7 @@ class TestMVPGenerators:
         assert response.status_code == 200
         data = response.json()
         assert "name" in data
-        assert "status" in data
+        assert "social_status" in data
         assert "appearance" in data
 
     def test_hex_generator_success(self, test_client, api_base_url):
@@ -51,15 +51,17 @@ class TestMVPGenerators:
         assert response.status_code == 200
         data = response.json()
         assert "type" in data
-        assert "detail_category" in data
-        assert "detail_name" in data
+        assert "detail" in data
+        assert "category" in data["detail"]
+        assert "name" in data["detail"]
 
     def test_settlement_generator_success(self, test_client, api_base_url):
         """Test úspěšného generování osady."""
         response = test_client.post(f"{api_base_url}/settlement", json={})
         assert response.status_code == 200
         data = response.json()
-        assert "size_name" in data
+        assert "size" in data
+        assert "name" in data["size"]
         assert "government" in data
 
     def test_weather_generator_success(self, test_client, api_base_url):
@@ -154,8 +156,8 @@ class TestV2Generators:
         )
         assert response.status_code == 200
         data = response.json()
-        assert "type" in data
-        assert "variant" in data
+        assert "creature_type" in data
+        assert "name" in data
 
     def test_creature_generator_invalid_type(self, test_client, api_base_url):
         """Test validace - neplatný creature type."""
