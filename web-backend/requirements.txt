@@ -1,0 +1,19 @@
+# Mausritter Web Backend - Python Dependencies
+# FastAPI a dependencies
+
+# Core framework
+fastapi==0.110.0
+uvicorn[standard]==0.27.1
+pydantic==2.6.1
+
+# CORS middleware (pro cross-origin requests z frontendu)
+python-multipart==0.0.9
+
+# Budoucí dependencies (V2+)
+# supabase-py==2.3.4  # Pro Supabase databázi
+# python-jose==3.3.0  # Pro JWT tokens
+# httpx==0.26.0       # Pro HTTP requests
+
+# Development tools
+pytest==8.0.0
+pytest-asyncio==0.23.5

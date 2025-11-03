@@ -44,7 +44,29 @@ Užitečná rozšíření nad rámec oficiálních pravidel:
 - 🎨 **Dungeon Settlement Integration** - Automatické generování osad pro dungeony s past=20 "Myší osada"
 - 🎨 **Hexcrawl Generator** - Orchestrátor generující celý hexcrawl najednou (25 hexů + osady + dungeony + zvěsti)
 
-**Status:** 🎉 **100% OFICIÁLNÍCH PRAVIDEL + 5 ROZŠÍŘENÍ** 🎉
+### 🌐 WEB PLATFORM (MVP v development)
+
+**Webová platforma pro komunitu Mausritter hráčů:**
+
+- 🚧 **Backend (FastAPI)** - REST API wrappující Python generátory
+  - ✅ 5 core generátorů (Character, NPC, Hex, Settlement, Weather)
+  - 📁 Folder: `web-backend/`
+  - 📚 [Backend README](web-backend/README.md)
+
+- 🚧 **Frontend (Next.js 14)** - Modern web interface
+  - ✅ Landing page
+  - ✅ Tailwind CSS + Mausritter theme
+  - 📁 Folder: `web-frontend/`
+  - 📚 [Frontend README](web-frontend/README.md)
+
+- 📋 **Dokumentace:**
+  - [Web Architecture](docs/WEB_ARCHITECTURE.md) - Tech stack a deployment
+  - [Database Schema](docs/DATABASE_SCHEMA.sql) - Supabase PostgreSQL schema
+  - [API Endpoints](docs/API_ENDPOINTS.md) - REST API specifikace
+  - [Web Roadmap](docs/WEB_ROADMAP.md) - Implementační plán (MVP → V4)
+  - [UI Wireframes](docs/UI_WIREFRAMES.md) - Design všech stránek
+
+**Status:** 🎉 **100% OFICIÁLNÍCH PRAVIDEL + 5 ROZŠÍŘENÍ + WEB MVP V DEVELOPMENT** 🎉
 
 - ✅ **P1 (8/8)** - všechny základní nástroje pro hráče
 - ✅ **P2 (6/6)** - všechny generátory pro tvorbu světa

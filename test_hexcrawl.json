@@ -1,0 +1,1281 @@
+{
+  "metadata": {
+    "generated_at": "2025-11-03T01:55:30.532296",
+    "generator_version": "1.0.0",
+    "map_dimensions": "5x5",
+    "official_rules_compliant": true,
+    "counts": {
+      "hexes": 25,
+      "settlements": 1,
+      "dungeons": 2,
+      "rumors": 6,
+      "factions": 0
+    }
+  },
+  "world_state": {
+    "hexcrawl": {
+      "map_size": "5x5",
+      "hexes": [
+        {
+          "type": "Les",
+          "type_roll": 3,
+          "detail_category": 5,
+          "detail_subtype": 4,
+          "detail_name": "Chýše myší čarodějnice",
+          "detail_hook": "Co zrovna vaří?",
+          "settlement": null,
+          "description": ""
+        },
+        {
+          "type": "Řeka",
+          "type_roll": 5,
+          "detail_category": 2,
+          "detail_subtype": 1,
+          "detail_name": "Menší myší farma",
+          "detail_hook": "Co se stalo s úrodou?",
+          "settlement": null,
+          "description": ""
+        },
+        {
+          "type": "Otevřená krajina",
+          "type_roll": 1,
+          "detail_category": 5,
+          "detail_subtype": 1,
+          "detail_name": "Starý chrám netopýřího kultu",
+          "detail_hook": "Co tu vyvolali?",
+          "settlement": null,
+          "description": ""
+        },
+        {
+          "type": "Otevřená krajina",
+          "type_roll": 2,
+          "detail_category": 6,
+          "detail_subtype": 1,
+          "detail_name": "Zřícená vzducholoď liliputů",
+          "detail_hook": "Jak se dá opravit?",
+          "settlement": null,
+          "description": ""
+        },
+        {
+          "type": "Les",
+          "type_roll": 4,
+          "detail_category": 3,
+          "detail_subtype": 2,
+          "detail_name": "Kmen obřích, mírumilovných zvířat",
+          "detail_hook": "Čeho se bojí?",
+          "settlement": null,
+          "description": ""
+        },
+        {
+          "type": "Řeka",
+          "type_roll": 5,
+          "detail_category": 4,
+          "detail_subtype": 7,
+          "detail_name": "Přírodní prvek, nepatřičný",
+          "detail_hook": "Jak se utvořil?",
+          "settlement": null,
+          "description": ""
+        },
+        {
+          "type": "Les",
+          "type_roll": 4,
+          "detail_category": 6,
+          "detail_subtype": 4,
+          "detail_name": "Pravidelně používáno lidmi",
+          "detail_hook": "Co tu dělají?",
+          "settlement": null,
+          "description": ""
+        },
+        {
+          "type": "Lidské město",
+          "type_roll": 6,
+          "detail_category": 4,
+          "detail_subtype": 3,
+          "detail_name": "Sídlo myšího šlechtice",
+          "detail_hook": "Proč je opuštěné?",
+          "settlement": null,
+          "description": ""
+        },
+        {
+          "type": "Les",
+          "type_roll": 4,
+          "detail_category": 2,
+          "detail_subtype": 2,
+          "detail_name": "Hrad myšího šlechtice",
+          "detail_hook": "Před čím chrání?",
+          "settlement": null,
+          "description": ""
+        },
+        {
+          "type": "Les",
+          "type_roll": 4,
+          "detail_category": 4,
+          "detail_subtype": 4,
+          "detail_name": "Opuštěná osada",
+          "detail_hook": "Jaké po nich zůstaly stopy?",
+          "settlement": null,
+          "description": ""
+        },
+        {
+          "type": "Les",
+          "type_roll": 4,
+          "detail_category": 1,
+          "detail_subtype": null,
+          "detail_name": "Myší osada",
+          "detail_hook": "Generováno pomocí Settlement Generatoru",
+          "settlement": {
+            "size_name": "Vesnice",
+            "population": "150–300 myší",
+            "size_value": 4,
+            "government": "Svobodná osada pod správou rady měšťanů",
+            "detail": "Tráví dny lenošením u potoka",
+            "trades": [
+              "Vynikající škola s neukázněnými žáky"
+            ],
+            "features": [
+              "Kravská lebka sloužící jako cechovní síň"
+            ],
+            "event": "Katastrofa, všichni se balí a odcházejí",
+            "name": "",
+            "tavern": {
+              "name_part1": "Přátelský",
+              "name_part2": "Včela",
+              "specialty": "Ostružinový koláč",
+              "roll_part1": 7,
+              "roll_part2": 9,
+              "roll_specialty": 3
+            },
+            "is_friendly": false,
+            "hex_location": null,
+            "roll_size_die1": 4,
+            "roll_size_die2": 4,
+            "roll_government": 4,
+            "roll_detail": 15,
+            "roll_trades": [
+              17
+            ],
+            "roll_features": [
+              5
+            ],
+            "roll_event": 1,
+            "roll_name_start": 0,
+            "roll_name_end": 0
+          },
+          "description": " - Vesnice"
+        },
+        {
+          "type": "Les",
+          "type_roll": 3,
+          "detail_category": 4,
+          "detail_subtype": 4,
+          "detail_name": "Opuštěná osada",
+          "detail_hook": "Jaké po nich zůstaly stopy?",
+          "settlement": null,
+          "description": ""
+        },
+        {
+          "type": "Lidské město",
+          "type_roll": 6,
+          "detail_category": 6,
+          "detail_subtype": 7,
+          "detail_name": "Loviště kočičího pána",
+          "detail_hook": "Jaké trofeje tu zůstávají?",
+          "settlement": null,
+          "description": ""
+        },
+        {
+          "type": "Otevřená krajina",
+          "type_roll": 2,
+          "detail_category": 1,
+          "detail_subtype": null,
+          "detail_name": "Myší osada",
+          "detail_hook": "Generováno pomocí Settlement Generatoru",
+          "settlement": {
+            "size_name": "Křižovatka",
+            "population": "3–5 rodin",
+            "size_value": 2,
+            "government": "Spravovaná rytířem nebo nižším šlechticem",
+            "detail": "Obřadně si zastřihují ocásky",
+            "trades": [
+              "Dřevorubci s pilami a potahy"
+            ],
+            "features": [
+              "Osada se nachází za dřevěným mostem"
+            ],
+            "event": "Pohřeb, ulice plné kouře",
+            "name": "",
+            "tavern": null,
+            "is_friendly": false,
+            "hex_location": null,
+            "roll_size_die1": 2,
+            "roll_size_die2": 3,
+            "roll_government": 2,
+            "roll_detail": 10,
+            "roll_trades": [
+              2
+            ],
+            "roll_features": [
+              15
+            ],
+            "roll_event": 12,
+            "roll_name_start": 0,
+            "roll_name_end": 0
+          },
+          "description": " - Křižovatka"
+        },
+        {
+          "type": "Řeka",
+          "type_roll": 5,
+          "detail_category": 4,
+          "detail_subtype": 6,
+          "detail_name": "Přírodní prvek, klidný a bezpečný",
+          "detail_hook": "Kdo se tu potkává?",
+          "settlement": null,
+          "description": ""
+        },
+        {
+          "type": "Řeka",
+          "type_roll": 5,
+          "detail_category": 5,
+          "detail_subtype": 7,
+          "detail_name": "Hnízdo soví čarodějky",
+          "detail_hook": "Po čem pátrá?",
+          "settlement": null,
+          "description": ""
+        },
+        {
+          "type": "Lidské město",
+          "type_roll": 6,
+          "detail_category": 2,
+          "detail_subtype": 5,
+          "detail_name": "Hornická osada",
+          "detail_hook": "Co vykopali?",
+          "settlement": null,
+          "description": ""
+        },
+        {
+          "type": "Les",
+          "type_roll": 4,
+          "detail_category": 5,
+          "detail_subtype": 4,
+          "detail_name": "Chýše myší čarodějnice",
+          "detail_hook": "Co zrovna vaří?",
+          "settlement": null,
+          "description": ""
+        },
+        {
+          "type": "Řeka",
+          "type_roll": 5,
+          "detail_category": 1,
+          "detail_subtype": null,
+          "detail_name": "Myší osada",
+          "detail_hook": "Generováno pomocí Settlement Generatoru",
+          "settlement": {
+            "size_name": "Křižovatka",
+            "population": "3–5 rodin",
+            "size_value": 2,
+            "government": "Svobodná osada pod správou rady měšťanů",
+            "detail": "Všichni jsou potomci jedné matriarchy",
+            "trades": [
+              "Zemědělci pečující o tyčící se plodiny"
+            ],
+            "features": [
+              "Osada se nachází za dřevěným mostem"
+            ],
+            "event": "Katastrofa, všichni se balí a odcházejí",
+            "name": "",
+            "tavern": null,
+            "is_friendly": false,
+            "hex_location": null,
+            "roll_size_die1": 5,
+            "roll_size_die2": 2,
+            "roll_government": 6,
+            "roll_detail": 12,
+            "roll_trades": [
+              1
+            ],
+            "roll_features": [
+              15
+            ],
+            "roll_event": 1,
+            "roll_name_start": 0,
+            "roll_name_end": 0
+          },
+          "description": " - Křižovatka"
+        },
+        {
+          "type": "Otevřená krajina",
+          "type_roll": 2,
+          "detail_category": 2,
+          "detail_subtype": 4,
+          "detail_name": "Myší lovecký srub",
+          "detail_hook": "Co zdejší myši loví?",
+          "settlement": null,
+          "description": ""
+        },
+        {
+          "type": "Les",
+          "type_roll": 3,
+          "detail_category": 5,
+          "detail_subtype": 4,
+          "detail_name": "Chýše myší čarodějnice",
+          "detail_hook": "Co zrovna vaří?",
+          "settlement": null,
+          "description": ""
+        },
+        {
+          "type": "Les",
+          "type_roll": 4,
+          "detail_category": 2,
+          "detail_subtype": 2,
+          "detail_name": "Hrad myšího šlechtice",
+          "detail_hook": "Před čím chrání?",
+          "settlement": null,
+          "description": ""
+        },
+        {
+          "type": "Otevřená krajina",
+          "type_roll": 2,
+          "detail_category": 1,
+          "detail_subtype": null,
+          "detail_name": "Myší osada",
+          "detail_hook": "Generováno pomocí Settlement Generatoru",
+          "settlement": {
+            "size_name": "Víska",
+            "population": "50–150 myší",
+            "size_value": 3,
+            "government": "Svobodná osada pod správou rady měšťanů",
+            "detail": "Nosí krásně vyšívané oblečení",
+            "trades": [
+              "Aromatický sýr, několik let uleželý"
+            ],
+            "features": [
+              "Úhledné řady zavěšených dřevěných domků"
+            ],
+            "event": "V okolí se šíří zvláštní, rychle rostoucí rostlina",
+            "name": "",
+            "tavern": {
+              "name_part1": "Křivý",
+              "name_part2": "Semínko",
+              "specialty": "Houbový guláš",
+              "roll_part1": 6,
+              "roll_part2": 4,
+              "roll_specialty": 12
+            },
+            "is_friendly": false,
+            "hex_location": null,
+            "roll_size_die1": 3,
+            "roll_size_die2": 4,
+            "roll_government": 6,
+            "roll_detail": 6,
+            "roll_trades": [
+              6
+            ],
+            "roll_features": [
+              7
+            ],
+            "roll_event": 16,
+            "roll_name_start": 0,
+            "roll_name_end": 0
+          },
+          "description": " - Víska"
+        },
+        {
+          "type": "Les",
+          "type_roll": 3,
+          "detail_category": 6,
+          "detail_subtype": 4,
+          "detail_name": "Pravidelně používáno lidmi",
+          "detail_hook": "Co tu dělají?",
+          "settlement": null,
+          "description": ""
+        },
+        {
+          "type": "Řeka",
+          "type_roll": 5,
+          "detail_category": 6,
+          "detail_subtype": 2,
+          "detail_name": "Hučící kámen",
+          "detail_hook": "Co se stane, když se ho někdo dotkne?",
+          "settlement": null,
+          "description": ""
+        }
+      ],
+      "settlements": [
+        {
+          "size_name": "Křižovatka",
+          "population": "3–5 rodin",
+          "size_value": 2,
+          "government": "Vedená vesnickými stařešiny",
+          "detail": "Dávný krevní spor s jinou osadou",
+          "trades": [
+            "Kameníci pracující v nedalekém lomu"
+          ],
+          "features": [
+            "Kravská lebka sloužící jako cechovní síň"
+          ],
+          "event": "Myší šlechtic vznesl svévolný požadavek",
+          "name": "",
+          "tavern": null,
+          "is_friendly": true,
+          "hex_location": "C3",
+          "roll_size_die1": 6,
+          "roll_size_die2": 2,
+          "roll_government": 1,
+          "roll_detail": 16,
+          "roll_trades": [
+            10
+          ],
+          "roll_features": [
+            5
+          ],
+          "roll_event": 10,
+          "roll_name_start": 0,
+          "roll_name_end": 0
+        }
+      ],
+      "dungeons": [
+        {
+          "past": "Pohřebiště myších předků",
+          "past_roll": 5,
+          "decay": "Stáří a hniloba",
+          "decay_roll": 3,
+          "inhabitants": "Přízrační duchové",
+          "inhabitants_roll": 6,
+          "goal": "Ztracené přátele nebo příbuzné",
+          "goal_roll": 3,
+          "secret": "Zapomenutý hrob pradávné královny",
+          "secret_roll": 4,
+          "rooms": [
+            {
+              "room_number": 1,
+              "room_type": "Prázdná",
+              "room_type_roll": 2,
+              "has_creature": true,
+              "has_treasure": true,
+              "feature": "Trs hub",
+              "feature_roll": 2
+            },
+            {
+              "room_number": 2,
+              "room_type": "Doupě",
+              "room_type_roll": 6,
+              "has_creature": true,
+              "has_treasure": false,
+              "feature": "Trvalý domov, nově zabydlený",
+              "feature_roll": 5
+            },
+            {
+              "room_number": 3,
+              "room_type": "Prázdná",
+              "room_type_roll": 1,
+              "has_creature": true,
+              "has_treasure": true,
+              "feature": "Prapory ze třpytivých obalů od bonbonů",
+              "feature_roll": 15
+            },
+            {
+              "room_number": 4,
+              "room_type": "Prázdná",
+              "room_type_roll": 2,
+              "has_creature": true,
+              "has_treasure": true,
+              "feature": "Nerovná podlaha plná hlubokých trhlin",
+              "feature_roll": 19
+            },
+            {
+              "room_number": 5,
+              "room_type": "Prázdná",
+              "room_type_roll": 2,
+              "has_creature": false,
+              "has_treasure": true,
+              "feature": "Nábytek vyrobený z odpadu",
+              "feature_roll": 5
+            },
+            {
+              "room_number": 6,
+              "room_type": "Doupě",
+              "room_type_roll": 6,
+              "has_creature": true,
+              "has_treasure": false,
+              "feature": "Tvor chrání mladé",
+              "feature_roll": 4
+            }
+          ],
+          "settlement": null,
+          "description": ""
+        },
+        {
+          "past": "Starodávný chrám netopýřího kultu",
+          "past_roll": 1,
+          "decay": "Magická nehoda",
+          "decay_roll": 2,
+          "inhabitants": "Myši, magicky pozměněné",
+          "inhabitants_roll": 2,
+          "goal": "Poslední zbytky ve vybrakované ruině",
+          "goal_roll": 5,
+          "secret": "Zachované pravěké zvíře",
+          "secret_roll": 2,
+          "rooms": [
+            {
+              "room_number": 1,
+              "room_type": "Past",
+              "room_type_roll": 4,
+              "has_creature": true,
+              "has_treasure": true,
+              "feature": "Dlouhá chodba zaplavená vodou, kterou elektrifikuje velká baterie ve výklenku.",
+              "feature_roll": 2
+            },
+            {
+              "room_number": 2,
+              "room_type": "Past",
+              "room_type_roll": 4,
+              "has_creature": true,
+              "has_treasure": true,
+              "feature": "Temná chodba naplněná výbušným plynem. Páchne jako zkažená vejce. Při zapálení způsobí k20 zranění.",
+              "feature_roll": 3
+            },
+            {
+              "room_number": 3,
+              "room_type": "Prázdná",
+              "room_type_roll": 2,
+              "has_creature": false,
+              "has_treasure": false,
+              "feature": "Freska na zdi, dávno zašlá",
+              "feature_roll": 10
+            },
+            {
+              "room_number": 4,
+              "room_type": "Překážka",
+              "room_type_roll": 3,
+              "has_creature": true,
+              "has_treasure": true,
+              "feature": "Zřícená část chodby. Zůstala mezera tak úzká, že se jí nedá prolézt.",
+              "feature_roll": 5
+            },
+            {
+              "room_number": 5,
+              "room_type": "Prázdná",
+              "room_type_roll": 2,
+              "has_creature": false,
+              "has_treasure": true,
+              "feature": "Vysušené broučí krunýře na stěnách",
+              "feature_roll": 4
+            },
+            {
+              "room_number": 6,
+              "room_type": "Prázdná",
+              "room_type_roll": 2,
+              "has_creature": true,
+              "has_treasure": true,
+              "feature": "Hromada hnijících žaludů",
+              "feature_roll": 13
+            }
+          ],
+          "settlement": null,
+          "description": ""
+        }
+      ]
+    }
+  },
+  "hexes": [
+    {
+      "type": "Les",
+      "type_roll": 3,
+      "detail_category": 5,
+      "detail_subtype": 4,
+      "detail_name": "Chýše myší čarodějnice",
+      "detail_hook": "Co zrovna vaří?",
+      "settlement": null,
+      "description": ""
+    },
+    {
+      "type": "Řeka",
+      "type_roll": 5,
+      "detail_category": 2,
+      "detail_subtype": 1,
+      "detail_name": "Menší myší farma",
+      "detail_hook": "Co se stalo s úrodou?",
+      "settlement": null,
+      "description": ""
+    },
+    {
+      "type": "Otevřená krajina",
+      "type_roll": 1,
+      "detail_category": 5,
+      "detail_subtype": 1,
+      "detail_name": "Starý chrám netopýřího kultu",
+      "detail_hook": "Co tu vyvolali?",
+      "settlement": null,
+      "description": ""
+    },
+    {
+      "type": "Otevřená krajina",
+      "type_roll": 2,
+      "detail_category": 6,
+      "detail_subtype": 1,
+      "detail_name": "Zřícená vzducholoď liliputů",
+      "detail_hook": "Jak se dá opravit?",
+      "settlement": null,
+      "description": ""
+    },
+    {
+      "type": "Les",
+      "type_roll": 4,
+      "detail_category": 3,
+      "detail_subtype": 2,
+      "detail_name": "Kmen obřích, mírumilovných zvířat",
+      "detail_hook": "Čeho se bojí?",
+      "settlement": null,
+      "description": ""
+    },
+    {
+      "type": "Řeka",
+      "type_roll": 5,
+      "detail_category": 4,
+      "detail_subtype": 7,
+      "detail_name": "Přírodní prvek, nepatřičný",
+      "detail_hook": "Jak se utvořil?",
+      "settlement": null,
+      "description": ""
+    },
+    {
+      "type": "Les",
+      "type_roll": 4,
+      "detail_category": 6,
+      "detail_subtype": 4,
+      "detail_name": "Pravidelně používáno lidmi",
+      "detail_hook": "Co tu dělají?",
+      "settlement": null,
+      "description": ""
+    },
+    {
+      "type": "Lidské město",
+      "type_roll": 6,
+      "detail_category": 4,
+      "detail_subtype": 3,
+      "detail_name": "Sídlo myšího šlechtice",
+      "detail_hook": "Proč je opuštěné?",
+      "settlement": null,
+      "description": ""
+    },
+    {
+      "type": "Les",
+      "type_roll": 4,
+      "detail_category": 2,
+      "detail_subtype": 2,
+      "detail_name": "Hrad myšího šlechtice",
+      "detail_hook": "Před čím chrání?",
+      "settlement": null,
+      "description": ""
+    },
+    {
+      "type": "Les",
+      "type_roll": 4,
+      "detail_category": 4,
+      "detail_subtype": 4,
+      "detail_name": "Opuštěná osada",
+      "detail_hook": "Jaké po nich zůstaly stopy?",
+      "settlement": null,
+      "description": ""
+    },
+    {
+      "type": "Les",
+      "type_roll": 4,
+      "detail_category": 1,
+      "detail_subtype": null,
+      "detail_name": "Myší osada",
+      "detail_hook": "Generováno pomocí Settlement Generatoru",
+      "settlement": {
+        "size_name": "Vesnice",
+        "population": "150–300 myší",
+        "size_value": 4,
+        "government": "Svobodná osada pod správou rady měšťanů",
+        "detail": "Tráví dny lenošením u potoka",
+        "trades": [
+          "Vynikající škola s neukázněnými žáky"
+        ],
+        "features": [
+          "Kravská lebka sloužící jako cechovní síň"
+        ],
+        "event": "Katastrofa, všichni se balí a odcházejí",
+        "name": "",
+        "tavern": {
+          "name_part1": "Přátelský",
+          "name_part2": "Včela",
+          "specialty": "Ostružinový koláč",
+          "roll_part1": 7,
+          "roll_part2": 9,
+          "roll_specialty": 3
+        },
+        "is_friendly": false,
+        "hex_location": null,
+        "roll_size_die1": 4,
+        "roll_size_die2": 4,
+        "roll_government": 4,
+        "roll_detail": 15,
+        "roll_trades": [
+          17
+        ],
+        "roll_features": [
+          5
+        ],
+        "roll_event": 1,
+        "roll_name_start": 0,
+        "roll_name_end": 0
+      },
+      "description": " - Vesnice"
+    },
+    {
+      "type": "Les",
+      "type_roll": 3,
+      "detail_category": 4,
+      "detail_subtype": 4,
+      "detail_name": "Opuštěná osada",
+      "detail_hook": "Jaké po nich zůstaly stopy?",
+      "settlement": null,
+      "description": ""
+    },
+    {
+      "type": "Lidské město",
+      "type_roll": 6,
+      "detail_category": 6,
+      "detail_subtype": 7,
+      "detail_name": "Loviště kočičího pána",
+      "detail_hook": "Jaké trofeje tu zůstávají?",
+      "settlement": null,
+      "description": ""
+    },
+    {
+      "type": "Otevřená krajina",
+      "type_roll": 2,
+      "detail_category": 1,
+      "detail_subtype": null,
+      "detail_name": "Myší osada",
+      "detail_hook": "Generováno pomocí Settlement Generatoru",
+      "settlement": {
+        "size_name": "Křižovatka",
+        "population": "3–5 rodin",
+        "size_value": 2,
+        "government": "Spravovaná rytířem nebo nižším šlechticem",
+        "detail": "Obřadně si zastřihují ocásky",
+        "trades": [
+          "Dřevorubci s pilami a potahy"
+        ],
+        "features": [
+          "Osada se nachází za dřevěným mostem"
+        ],
+        "event": "Pohřeb, ulice plné kouře",
+        "name": "",
+        "tavern": null,
+        "is_friendly": false,
+        "hex_location": null,
+        "roll_size_die1": 2,
+        "roll_size_die2": 3,
+        "roll_government": 2,
+        "roll_detail": 10,
+        "roll_trades": [
+          2
+        ],
+        "roll_features": [
+          15
+        ],
+        "roll_event": 12,
+        "roll_name_start": 0,
+        "roll_name_end": 0
+      },
+      "description": " - Křižovatka"
+    },
+    {
+      "type": "Řeka",
+      "type_roll": 5,
+      "detail_category": 4,
+      "detail_subtype": 6,
+      "detail_name": "Přírodní prvek, klidný a bezpečný",
+      "detail_hook": "Kdo se tu potkává?",
+      "settlement": null,
+      "description": ""
+    },
+    {
+      "type": "Řeka",
+      "type_roll": 5,
+      "detail_category": 5,
+      "detail_subtype": 7,
+      "detail_name": "Hnízdo soví čarodějky",
+      "detail_hook": "Po čem pátrá?",
+      "settlement": null,
+      "description": ""
+    },
+    {
+      "type": "Lidské město",
+      "type_roll": 6,
+      "detail_category": 2,
+      "detail_subtype": 5,
+      "detail_name": "Hornická osada",
+      "detail_hook": "Co vykopali?",
+      "settlement": null,
+      "description": ""
+    },
+    {
+      "type": "Les",
+      "type_roll": 4,
+      "detail_category": 5,
+      "detail_subtype": 4,
+      "detail_name": "Chýše myší čarodějnice",
+      "detail_hook": "Co zrovna vaří?",
+      "settlement": null,
+      "description": ""
+    },
+    {
+      "type": "Řeka",
+      "type_roll": 5,
+      "detail_category": 1,
+      "detail_subtype": null,
+      "detail_name": "Myší osada",
+      "detail_hook": "Generováno pomocí Settlement Generatoru",
+      "settlement": {
+        "size_name": "Křižovatka",
+        "population": "3–5 rodin",
+        "size_value": 2,
+        "government": "Svobodná osada pod správou rady měšťanů",
+        "detail": "Všichni jsou potomci jedné matriarchy",
+        "trades": [
+          "Zemědělci pečující o tyčící se plodiny"
+        ],
+        "features": [
+          "Osada se nachází za dřevěným mostem"
+        ],
+        "event": "Katastrofa, všichni se balí a odcházejí",
+        "name": "",
+        "tavern": null,
+        "is_friendly": false,
+        "hex_location": null,
+        "roll_size_die1": 5,
+        "roll_size_die2": 2,
+        "roll_government": 6,
+        "roll_detail": 12,
+        "roll_trades": [
+          1
+        ],
+        "roll_features": [
+          15
+        ],
+        "roll_event": 1,
+        "roll_name_start": 0,
+        "roll_name_end": 0
+      },
+      "description": " - Křižovatka"
+    },
+    {
+      "type": "Otevřená krajina",
+      "type_roll": 2,
+      "detail_category": 2,
+      "detail_subtype": 4,
+      "detail_name": "Myší lovecký srub",
+      "detail_hook": "Co zdejší myši loví?",
+      "settlement": null,
+      "description": ""
+    },
+    {
+      "type": "Les",
+      "type_roll": 3,
+      "detail_category": 5,
+      "detail_subtype": 4,
+      "detail_name": "Chýše myší čarodějnice",
+      "detail_hook": "Co zrovna vaří?",
+      "settlement": null,
+      "description": ""
+    },
+    {
+      "type": "Les",
+      "type_roll": 4,
+      "detail_category": 2,
+      "detail_subtype": 2,
+      "detail_name": "Hrad myšího šlechtice",
+      "detail_hook": "Před čím chrání?",
+      "settlement": null,
+      "description": ""
+    },
+    {
+      "type": "Otevřená krajina",
+      "type_roll": 2,
+      "detail_category": 1,
+      "detail_subtype": null,
+      "detail_name": "Myší osada",
+      "detail_hook": "Generováno pomocí Settlement Generatoru",
+      "settlement": {
+        "size_name": "Víska",
+        "population": "50–150 myší",
+        "size_value": 3,
+        "government": "Svobodná osada pod správou rady měšťanů",
+        "detail": "Nosí krásně vyšívané oblečení",
+        "trades": [
+          "Aromatický sýr, několik let uleželý"
+        ],
+        "features": [
+          "Úhledné řady zavěšených dřevěných domků"
+        ],
+        "event": "V okolí se šíří zvláštní, rychle rostoucí rostlina",
+        "name": "",
+        "tavern": {
+          "name_part1": "Křivý",
+          "name_part2": "Semínko",
+          "specialty": "Houbový guláš",
+          "roll_part1": 6,
+          "roll_part2": 4,
+          "roll_specialty": 12
+        },
+        "is_friendly": false,
+        "hex_location": null,
+        "roll_size_die1": 3,
+        "roll_size_die2": 4,
+        "roll_government": 6,
+        "roll_detail": 6,
+        "roll_trades": [
+          6
+        ],
+        "roll_features": [
+          7
+        ],
+        "roll_event": 16,
+        "roll_name_start": 0,
+        "roll_name_end": 0
+      },
+      "description": " - Víska"
+    },
+    {
+      "type": "Les",
+      "type_roll": 3,
+      "detail_category": 6,
+      "detail_subtype": 4,
+      "detail_name": "Pravidelně používáno lidmi",
+      "detail_hook": "Co tu dělají?",
+      "settlement": null,
+      "description": ""
+    },
+    {
+      "type": "Řeka",
+      "type_roll": 5,
+      "detail_category": 6,
+      "detail_subtype": 2,
+      "detail_name": "Hučící kámen",
+      "detail_hook": "Co se stane, když se ho někdo dotkne?",
+      "settlement": null,
+      "description": ""
+    }
+  ],
+  "settlements": [
+    {
+      "size_name": "Křižovatka",
+      "population": "3–5 rodin",
+      "size_value": 2,
+      "government": "Vedená vesnickými stařešiny",
+      "detail": "Dávný krevní spor s jinou osadou",
+      "trades": [
+        "Kameníci pracující v nedalekém lomu"
+      ],
+      "features": [
+        "Kravská lebka sloužící jako cechovní síň"
+      ],
+      "event": "Myší šlechtic vznesl svévolný požadavek",
+      "name": "",
+      "tavern": null,
+      "is_friendly": true,
+      "hex_location": "C3",
+      "roll_size_die1": 6,
+      "roll_size_die2": 2,
+      "roll_government": 1,
+      "roll_detail": 16,
+      "roll_trades": [
+        10
+      ],
+      "roll_features": [
+        5
+      ],
+      "roll_event": 10,
+      "roll_name_start": 0,
+      "roll_name_end": 0
+    }
+  ],
+  "dungeons": [
+    {
+      "past": "Pohřebiště myších předků",
+      "past_roll": 5,
+      "decay": "Stáří a hniloba",
+      "decay_roll": 3,
+      "inhabitants": "Přízrační duchové",
+      "inhabitants_roll": 6,
+      "goal": "Ztracené přátele nebo příbuzné",
+      "goal_roll": 3,
+      "secret": "Zapomenutý hrob pradávné královny",
+      "secret_roll": 4,
+      "rooms": [
+        {
+          "room_number": 1,
+          "room_type": "Prázdná",
+          "room_type_roll": 2,
+          "has_creature": true,
+          "has_treasure": true,
+          "feature": "Trs hub",
+          "feature_roll": 2
+        },
+        {
+          "room_number": 2,
+          "room_type": "Doupě",
+          "room_type_roll": 6,
+          "has_creature": true,
+          "has_treasure": false,
+          "feature": "Trvalý domov, nově zabydlený",
+          "feature_roll": 5
+        },
+        {
+          "room_number": 3,
+          "room_type": "Prázdná",
+          "room_type_roll": 1,
+          "has_creature": true,
+          "has_treasure": true,
+          "feature": "Prapory ze třpytivých obalů od bonbonů",
+          "feature_roll": 15
+        },
+        {
+          "room_number": 4,
+          "room_type": "Prázdná",
+          "room_type_roll": 2,
+          "has_creature": true,
+          "has_treasure": true,
+          "feature": "Nerovná podlaha plná hlubokých trhlin",
+          "feature_roll": 19
+        },
+        {
+          "room_number": 5,
+          "room_type": "Prázdná",
+          "room_type_roll": 2,
+          "has_creature": false,
+          "has_treasure": true,
+          "feature": "Nábytek vyrobený z odpadu",
+          "feature_roll": 5
+        },
+        {
+          "room_number": 6,
+          "room_type": "Doupě",
+          "room_type_roll": 6,
+          "has_creature": true,
+          "has_treasure": false,
+          "feature": "Tvor chrání mladé",
+          "feature_roll": 4
+        }
+      ],
+      "settlement": null,
+      "description": ""
+    },
+    {
+      "past": "Starodávný chrám netopýřího kultu",
+      "past_roll": 1,
+      "decay": "Magická nehoda",
+      "decay_roll": 2,
+      "inhabitants": "Myši, magicky pozměněné",
+      "inhabitants_roll": 2,
+      "goal": "Poslední zbytky ve vybrakované ruině",
+      "goal_roll": 5,
+      "secret": "Zachované pravěké zvíře",
+      "secret_roll": 2,
+      "rooms": [
+        {
+          "room_number": 1,
+          "room_type": "Past",
+          "room_type_roll": 4,
+          "has_creature": true,
+          "has_treasure": true,
+          "feature": "Dlouhá chodba zaplavená vodou, kterou elektrifikuje velká baterie ve výklenku.",
+          "feature_roll": 2
+        },
+        {
+          "room_number": 2,
+          "room_type": "Past",
+          "room_type_roll": 4,
+          "has_creature": true,
+          "has_treasure": true,
+          "feature": "Temná chodba naplněná výbušným plynem. Páchne jako zkažená vejce. Při zapálení způsobí k20 zranění.",
+          "feature_roll": 3
+        },
+        {
+          "room_number": 3,
+          "room_type": "Prázdná",
+          "room_type_roll": 2,
+          "has_creature": false,
+          "has_treasure": false,
+          "feature": "Freska na zdi, dávno zašlá",
+          "feature_roll": 10
+        },
+        {
+          "room_number": 4,
+          "room_type": "Překážka",
+          "room_type_roll": 3,
+          "has_creature": true,
+          "has_treasure": true,
+          "feature": "Zřícená část chodby. Zůstala mezera tak úzká, že se jí nedá prolézt.",
+          "feature_roll": 5
+        },
+        {
+          "room_number": 5,
+          "room_type": "Prázdná",
+          "room_type_roll": 2,
+          "has_creature": false,
+          "has_treasure": true,
+          "feature": "Vysušené broučí krunýře na stěnách",
+          "feature_roll": 4
+        },
+        {
+          "room_number": 6,
+          "room_type": "Prázdná",
+          "room_type_roll": 2,
+          "has_creature": true,
+          "has_treasure": true,
+          "feature": "Hromada hnijících žaludů",
+          "feature_roll": 13
+        }
+      ],
+      "settlement": null,
+      "description": ""
+    }
+  ],
+  "rumors": [
+    {
+      "roll": 1,
+      "rumor_text": "Ve Pohřebiště myších předků je Zapomenutý hrob pradávné královny",
+      "category": "mystery",
+      "truthfulness": "true",
+      "source_location": {
+        "type": "dungeon",
+        "data": {
+          "dungeon_past": "Pohřebiště myších předků",
+          "inhabitants": "Přízrační duchové",
+          "secret": "Zapomenutý hrob pradávné královny",
+          "goal": "Ztracené přátele nebo příbuzné"
+        }
+      },
+      "gossip_hops": 0,
+      "gossip_chain": [],
+      "story_hook_detail": null,
+      "truth_part": null,
+      "false_part": null,
+      "gm_notes": "Toto je 100% pravda. Hráči najdou přesně to, co zvěst říká."
+    },
+    {
+      "roll": 2,
+      "rumor_text": "V Řeka je Hnízdo soví čarodějky",
+      "category": "location",
+      "truthfulness": "true",
+      "source_location": {
+        "type": "hex",
+        "data": {
+          "terrain": "Řeka",
+          "detail": "Hnízdo soví čarodějky",
+          "landmark": ""
+        }
+      },
+      "gossip_hops": 0,
+      "gossip_chain": [],
+      "story_hook_detail": null,
+      "truth_part": null,
+      "false_part": null,
+      "gm_notes": "Toto je 100% pravda. Hráči najdou přesně to, co zvěst říká."
+    },
+    {
+      "roll": 3,
+      "rumor_text": "V Otevřená krajina je Starý chrám netopýřího kultu",
+      "category": "location",
+      "truthfulness": "true",
+      "source_location": {
+        "type": "hex",
+        "data": {
+          "terrain": "Otevřená krajina",
+          "detail": "Starý chrám netopýřího kultu",
+          "landmark": ""
+        }
+      },
+      "gossip_hops": 0,
+      "gossip_chain": [],
+      "story_hook_detail": null,
+      "truth_part": null,
+      "false_part": null,
+      "gm_notes": "Toto je 100% pravda. Hráči najdou přesně to, co zvěst říká."
+    },
+    {
+      "roll": 4,
+      "rumor_text": "V Otevřená krajina prý je opuštěná budova, nebo to bylo jinak, říká se že",
+      "category": "location",
+      "truthfulness": "partial",
+      "source_location": {
+        "type": "hex",
+        "data": {
+          "terrain": "Otevřená krajina",
+          "detail": "Starý chrám netopýřího kultu",
+          "landmark": "",
+          "detail_vague": "opuštěná budova"
+        }
+      },
+      "gossip_hops": 2,
+      "gossip_chain": [
+        "V Otevřená krajina prý je opuštěná budova",
+        "V Otevřená krajina prý je opuštěná budova, nebo to bylo jinak",
+        "V Otevřená krajina prý je opuštěná budova, nebo to bylo jinak, říká se že"
+      ],
+      "story_hook_detail": null,
+      "truth_part": "Základní informace je správná",
+      "false_part": "Detail je zveličený nebo zkreslený",
+      "gm_notes": "Částečně pravdivé. Základní informace je správná, ale detail je zkreslený."
+    },
+    {
+      "roll": 5,
+      "rumor_text": "V Řeka prý se objevují neznámé zvuky",
+      "category": "mystery",
+      "truthfulness": "partial",
+      "source_location": {
+        "type": "hex",
+        "data": {
+          "terrain": "Řeka",
+          "detail": "Přírodní prvek, nepatřičný",
+          "landmark": "",
+          "phenomenon_partial": "neznámé zvuky"
+        }
+      },
+      "gossip_hops": 1,
+      "gossip_chain": [
+        "V Řeka prý se objevují neznámé zvuky",
+        "V Řeka prý se objevují neznámé zvuky"
+      ],
+      "story_hook_detail": "Zmizení místních / Duch minulosti",
+      "truth_part": "Základní informace je správná",
+      "false_part": "Detail je zveličený nebo zkreslený",
+      "gm_notes": "Částečně pravdivé. Základní informace je správná, ale detail je zkreslený."
+    },
+    {
+      "roll": 6,
+      "rumor_text": "V Otevřená krajina prý je prokletý kruh, myslím že to bylo, nevěřím tomu ale slyšel jsem, nevěřím tomu ale slyšel jsem",
+      "category": "mystery",
+      "truthfulness": "false",
+      "source_location": {
+        "type": "hex",
+        "data": {
+          "terrain": "Otevřená krajina",
+          "detail": "Myší osada",
+          "landmark": "",
+          "supernatural_false": "prokletý kruh"
+        }
+      },
+      "gossip_hops": 3,
+      "gossip_chain": [
+        "V Otevřená krajina prý je prokletý kruh",
+        "V Otevřená krajina prý je prokletý kruh, myslím že to bylo",
+        "V Otevřená krajina prý je prokletý kruh, myslím že to bylo, nevěřím tomu ale slyšel jsem",
+        "V Otevřená krajina prý je prokletý kruh, myslím že to bylo, nevěřím tomu ale slyšel jsem, nevěřím tomu ale slyšel jsem"
+      ],
+      "story_hook_detail": null,
+      "truth_part": "Otevřená krajina existuje",
+      "false_part": "Hlavní tvrzení je nepravdivé",
+      "gm_notes": "FÁMA! Lokace může existovat, ale hlavní tvrzení je lež. Může být past nebo zklamání."
+    }
+  ],
+  "factions": []
+}
