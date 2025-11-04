@@ -184,12 +184,20 @@
 
 ## 📝 TODO - Documentation
 
-#### 11. API Testing Documentation
-- **Status:** ⏳ Not Started
+#### 11. API Testing Documentation ✅ DONE
+- **Status:** ✅ Complete (2025-11-04)
 - **Priority:** Low
 - **Description:** Add curl examples for all 17 endpoints
-- **File:** `docs/API_ENDPOINTS.md` (needs update)
-- **Current State:** Only has 5 MVP examples
+- **File:** `docs/API_ENDPOINTS.md` (updated)
+- **Implemented:** Curl examples for all 17 generátorů + 2 utility endpointy
+- **Examples include:**
+  - Basic usage (no parameters)
+  - With parameters (all variations)
+  - Pretty-print JSON output (python -m json.tool)
+  - All creature types (11 variants)
+  - All weather seasons (4 seasons)
+  - All hexcrawl presets (standard/large/small)
+- **Commit:** [NEW]
 
 #### 12. Deployment Guide
 - **Status:** ⏳ Not Started
@@ -283,10 +291,13 @@ npm run dev -- -p 3001
 | Backend Issues | 1 | 1 | 0 | 0 |
 | Backend TODO | 3 | 3 | 0 | 0 |
 | Frontend Quick Prototype | 7 | 7 | 0 | 0 |
-| Documentation | 2 | 0 | 2 | 0 |
-| **TOTAL** | **13** | **11** | **2** | **0** |
+| Documentation | 2 | 1 | 1 | 0 |
+| **TOTAL** | **13** | **12** | **1** | **0** |
 
-**Completed Today (2025-11-03):**
+**Completed (2025-11-04):**
+- ✅ #11: API Testing Documentation (curl příklady pro 17 generátorů)
+
+**Completed (2025-11-03):**
 - ✅ #1: Hexcrawl encoding fix
 - ✅ #2: Unit tests (24/24 passing - 100%)
 - ✅ #3: Error handling (already implemented)
@@ -302,6 +313,5 @@ npm run dev -- -p 3001
 ---
 
 **Next Steps:**
-- Dokumentace API testingu (curl příklady)
-- Deployment Guide (Railway/Vercel)
-- Implementace dalších 14 generátor pages (optional)
+- Deployment Guide (Railway/Vercel) - Low priority
+- Implementace dalších 13 generátor pages (optional)

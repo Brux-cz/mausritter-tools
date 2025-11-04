@@ -99,6 +99,29 @@ Všechny generator endpointy:
 }
 ```
 
+**Testing with curl:**
+```bash
+# Basic example (random character)
+curl -X POST http://localhost:8001/api/v1/generate/character \
+  -H "Content-Type: application/json" \
+  -d '{}'
+
+# With custom name
+curl -X POST http://localhost:8001/api/v1/generate/character \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Pepřík"}'
+
+# Female character with custom name
+curl -X POST http://localhost:8001/api/v1/generate/character \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Klárka", "gender": "female"}'
+
+# Pretty-print JSON response (Windows)
+curl -X POST http://localhost:8001/api/v1/generate/character \
+  -H "Content-Type: application/json" \
+  -d '{}' | python -m json.tool
+```
+
 ---
 
 ### 2. NPC Generator
@@ -125,6 +148,24 @@ Všechny generator endpointy:
   "relationship": "Spolupracující",
   "reaction": "Nejistá"
 }
+```
+
+**Testing with curl:**
+```bash
+# Basic example (random NPC)
+curl -X POST http://localhost:8001/api/v1/generate/npc \
+  -H "Content-Type: application/json" \
+  -d '{}'
+
+# Female NPC with custom name
+curl -X POST http://localhost:8001/api/v1/generate/npc \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Klárka", "gender": "female"}'
+
+# Male NPC
+curl -X POST http://localhost:8001/api/v1/generate/npc \
+  -H "Content-Type: application/json" \
+  -d '{"gender": "male"}'
 ```
 
 ---
@@ -169,6 +210,29 @@ Všechny generator endpointy:
 }
 ```
 
+**Testing with curl:**
+```bash
+# Random hireling (any type)
+curl -X POST http://localhost:8001/api/v1/generate/hireling \
+  -H "Content-Type: application/json" \
+  -d '{}'
+
+# Specific type - Zbrojmyš (type 6)
+curl -X POST http://localhost:8001/api/v1/generate/hireling \
+  -H "Content-Type: application/json" \
+  -d '{"type": 6}'
+
+# Knight with custom name (type 8)
+curl -X POST http://localhost:8001/api/v1/generate/hireling \
+  -H "Content-Type: application/json" \
+  -d '{"type": 8, "name": "Sir Pepřík", "gender": "male"}'
+
+# Scholar (type 7)
+curl -X POST http://localhost:8001/api/v1/generate/hireling \
+  -H "Content-Type: application/json" \
+  -d '{"type": 7}'
+```
+
 ---
 
 ### 4. Weather Generator
@@ -192,6 +256,29 @@ Všechny generator endpointy:
   "event": "Hejno migračních ptáků zamíří na jih.",
   "event_type": "Sezónní událost"
 }
+```
+
+**Testing with curl:**
+```bash
+# Spring weather
+curl -X POST http://localhost:8001/api/v1/generate/weather \
+  -H "Content-Type: application/json" \
+  -d '{"season": "spring"}'
+
+# Summer weather with event
+curl -X POST http://localhost:8001/api/v1/generate/weather \
+  -H "Content-Type: application/json" \
+  -d '{"season": "summer", "with_event": true}'
+
+# Autumn weather with event
+curl -X POST http://localhost:8001/api/v1/generate/weather \
+  -H "Content-Type: application/json" \
+  -d '{"season": "autumn", "with_event": true}'
+
+# Winter weather (dangerous!)
+curl -X POST http://localhost:8001/api/v1/generate/weather \
+  -H "Content-Type: application/json" \
+  -d '{"season": "winter"}'
 ```
 
 ---
@@ -218,6 +305,24 @@ Všechny generator endpointy:
 }
 ```
 
+**Testing with curl:**
+```bash
+# Basic reaction roll
+curl -X POST http://localhost:8001/api/v1/generate/reaction \
+  -H "Content-Type: application/json" \
+  -d '{}'
+
+# With positive modifier (+2 from gift)
+curl -X POST http://localhost:8001/api/v1/generate/reaction \
+  -H "Content-Type: application/json" \
+  -d '{"modifier": 2}'
+
+# With negative modifier (-3 from aggression)
+curl -X POST http://localhost:8001/api/v1/generate/reaction \
+  -H "Content-Type: application/json" \
+  -d '{"modifier": -3}'
+```
+
 ---
 
 ### 6. Spell Generator
@@ -236,6 +341,14 @@ Všechny generator endpointy:
   "effect": "Vystřelíš ohnivou kouli, která způsobí [SOUČET] zranění...",
   "roll": [2, 5]
 }
+```
+
+**Testing with curl:**
+```bash
+# Random spell
+curl -X POST http://localhost:8001/api/v1/generate/spell \
+  -H "Content-Type: application/json" \
+  -d '{}'
 ```
 
 ---
@@ -278,6 +391,24 @@ Všechny generator endpointy:
 }
 ```
 
+**Testing with curl:**
+```bash
+# Basic treasure (2 rolls)
+curl -X POST http://localhost:8001/api/v1/generate/treasure \
+  -H "Content-Type: application/json" \
+  -d '{}'
+
+# Treasure with 2 bonus rolls
+curl -X POST http://localhost:8001/api/v1/generate/treasure \
+  -H "Content-Type: application/json" \
+  -d '{"bonus": 2}'
+
+# Maximum treasure (4 bonus rolls = 6 total)
+curl -X POST http://localhost:8001/api/v1/generate/treasure \
+  -H "Content-Type: application/json" \
+  -d '{"bonus": 4}'
+```
+
 ---
 
 ### 8. Adventure Seed Generator
@@ -305,6 +436,24 @@ Všechny generator endpointy:
 }
 ```
 
+**Testing with curl:**
+```bash
+# Standard adventure seed (one roll, whole row)
+curl -X POST http://localhost:8001/api/v1/generate/adventure \
+  -H "Content-Type: application/json" \
+  -d '{}'
+
+# Custom mode (three separate rolls, mix & match)
+curl -X POST http://localhost:8001/api/v1/generate/adventure \
+  -H "Content-Type: application/json" \
+  -d '{"custom": true}'
+
+# With inspiration text
+curl -X POST http://localhost:8001/api/v1/generate/adventure \
+  -H "Content-Type: application/json" \
+  -d '{"with_inspiration": true}'
+```
+
 ---
 
 ### 9. Adventure Hook Generator
@@ -327,6 +476,14 @@ Všechny generator endpointy:
     "Proč je důležité ho najít?"
   ]
 }
+```
+
+**Testing with curl:**
+```bash
+# Random adventure hook
+curl -X POST http://localhost:8001/api/v1/generate/hook \
+  -H "Content-Type: application/json" \
+  -d '{}'
 ```
 
 ---
@@ -353,6 +510,31 @@ Všechny generator endpointy:
 }
 ```
 
+**Testing with curl:**
+```bash
+# Ghost variant
+curl -X POST http://localhost:8001/api/v1/generate/creature/ghost \
+  -H "Content-Type: application/json" \
+  -d '{}'
+
+# Cat variant
+curl -X POST http://localhost:8001/api/v1/generate/creature/cat \
+  -H "Content-Type: application/json" \
+  -d '{}'
+
+# Owl wizard variant
+curl -X POST http://localhost:8001/api/v1/generate/creature/owl \
+  -H "Content-Type: application/json" \
+  -d '{}'
+
+# Spider variant
+curl -X POST http://localhost:8001/api/v1/generate/creature/spider \
+  -H "Content-Type: application/json" \
+  -d '{}'
+
+# All 11 types: ghost, snake, cat, rat, mouse, spider, owl, centipede, fairy, crow, frog
+```
+
 ---
 
 ### 11. Tavern Generator
@@ -370,6 +552,14 @@ Všechny generator endpointy:
   "name": "U Bílého Brouka",
   "specialty": "Pečená kořeněná mrkev"
 }
+```
+
+**Testing with curl:**
+```bash
+# Random tavern
+curl -X POST http://localhost:8001/api/v1/generate/tavern \
+  -H "Content-Type: application/json" \
+  -d '{}'
 ```
 
 ---
@@ -403,6 +593,24 @@ Všechny generator endpointy:
 }
 ```
 
+**Testing with curl:**
+```bash
+# Basic settlement
+curl -X POST http://localhost:8001/api/v1/generate/settlement \
+  -H "Content-Type: application/json" \
+  -d '{}'
+
+# Settlement with generated name
+curl -X POST http://localhost:8001/api/v1/generate/settlement \
+  -H "Content-Type: application/json" \
+  -d '{"with_name": true}'
+
+# Settlement without tavern
+curl -X POST http://localhost:8001/api/v1/generate/settlement \
+  -H "Content-Type: application/json" \
+  -d '{"no_tavern": true}'
+```
+
 ---
 
 ### 13. Hex Generator
@@ -425,6 +633,19 @@ Všechny generator endpointy:
   "hook": "Jaké smutné příběhy pěje?",
   "settlement": null       // Populated if category=1 or with_settlement=true
 }
+```
+
+**Testing with curl:**
+```bash
+# Random hex
+curl -X POST http://localhost:8001/api/v1/generate/hex \
+  -H "Content-Type: application/json" \
+  -d '{}'
+
+# Hex with forced settlement
+curl -X POST http://localhost:8001/api/v1/generate/hex \
+  -H "Content-Type: application/json" \
+  -d '{"with_settlement": true}'
 ```
 
 ---
@@ -468,6 +689,29 @@ Všechny generator endpointy:
 }
 ```
 
+**Testing with curl:**
+```bash
+# Basic dungeon (6 rooms)
+curl -X POST http://localhost:8001/api/v1/generate/dungeon \
+  -H "Content-Type: application/json" \
+  -d '{}'
+
+# Small dungeon (3 rooms)
+curl -X POST http://localhost:8001/api/v1/generate/dungeon \
+  -H "Content-Type: application/json" \
+  -d '{"rooms": 3}'
+
+# Large dungeon (15 rooms)
+curl -X POST http://localhost:8001/api/v1/generate/dungeon \
+  -H "Content-Type: application/json" \
+  -d '{"rooms": 15}'
+
+# Dungeon with mouse settlement past
+curl -X POST http://localhost:8001/api/v1/generate/dungeon \
+  -H "Content-Type: application/json" \
+  -d '{"rooms": 6, "with_settlement": true}'
+```
+
 ---
 
 ### 15. Rumor Generator
@@ -501,6 +745,24 @@ Všechny generator endpointy:
     }
   ]
 }
+```
+
+**Testing with curl:**
+```bash
+# Basic rumors (6, core only)
+curl -X POST http://localhost:8001/api/v1/generate/rumor \
+  -H "Content-Type: application/json" \
+  -d '{}'
+
+# Core only rumors
+curl -X POST http://localhost:8001/api/v1/generate/rumor \
+  -H "Content-Type: application/json" \
+  -d '{"core_only": true}'
+
+# Advanced rumors (with extended features)
+curl -X POST http://localhost:8001/api/v1/generate/rumor \
+  -H "Content-Type: application/json" \
+  -d '{"core_only": false, "advanced": true}'
 ```
 
 ---
@@ -553,6 +815,39 @@ Všechny generator endpointy:
     // ... 5 more
   ]
 }
+```
+
+**Testing with curl:**
+```bash
+# Standard hexcrawl (25 hexes, 3 settlements, 3 dungeons, 6 rumors)
+curl -X POST http://localhost:8001/api/v1/generate/hexcrawl \
+  -H "Content-Type: application/json" \
+  -d '{}'
+
+# Standard preset (explicit)
+curl -X POST http://localhost:8001/api/v1/generate/hexcrawl \
+  -H "Content-Type: application/json" \
+  -d '{"preset": "standard"}'
+
+# Large hexcrawl preset
+curl -X POST http://localhost:8001/api/v1/generate/hexcrawl \
+  -H "Content-Type: application/json" \
+  -d '{"preset": "large"}'
+
+# Small hexcrawl preset
+curl -X POST http://localhost:8001/api/v1/generate/hexcrawl \
+  -H "Content-Type: application/json" \
+  -d '{"preset": "small"}'
+
+# Custom configuration
+curl -X POST http://localhost:8001/api/v1/generate/hexcrawl \
+  -H "Content-Type: application/json" \
+  -d '{"settlements": 5, "dungeons": 4, "factions": 3}'
+
+# Core-only mode (no advanced features)
+curl -X POST http://localhost:8001/api/v1/generate/hexcrawl \
+  -H "Content-Type: application/json" \
+  -d '{"core_only": true}'
 ```
 
 ---
@@ -1140,6 +1435,43 @@ Similar structure:
 }
 ```
 
+**Testing with curl:**
+```bash
+# Check API health
+curl http://localhost:8001/health
+
+# With pretty-print
+curl http://localhost:8001/health | python -m json.tool
+```
+
+---
+
+### Generator Status
+
+**Endpoint:** `GET /api/v1/generate/status`
+
+**Auth:** Not required
+
+**Response:**
+```json
+{
+  "total_generators": 17,
+  "implemented": 17,
+  "status": "All generators operational",
+  "generators": [...],
+  "creature_types": ["ghost", "snake", "cat", "rat", "mouse", "spider", "owl", "centipede", "fairy", "crow", "frog"]
+}
+```
+
+**Testing with curl:**
+```bash
+# Get generator status
+curl http://localhost:8001/api/v1/generate/status
+
+# With pretty-print
+curl http://localhost:8001/api/v1/generate/status | python -m json.tool
+```
+
 ---
 
 ### API Documentation
@@ -1235,5 +1567,5 @@ Link: <url?page=2>; rel="next", <url?page=8>; rel="last"
 
 ---
 
-**Last updated:** 2025-11-03
+**Last updated:** 2025-11-04
 **Next review:** After MVP implementation
