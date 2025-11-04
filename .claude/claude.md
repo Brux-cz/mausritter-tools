@@ -1,5 +1,7 @@
 # Mausritter Tools
 
+mluv se mnou českým jazykem
+
 ## Tech Stack
 - Backend: FastAPI, Python 3.12, Pydantic
 - Frontend: Next.js 14 App Router, TypeScript, Tailwind CSS

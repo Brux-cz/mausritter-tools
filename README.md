@@ -44,18 +44,28 @@ Užitečná rozšíření nad rámec oficiálních pravidel:
 - 🎨 **Dungeon Settlement Integration** - Automatické generování osad pro dungeony s past=20 "Myší osada"
 - 🎨 **Hexcrawl Generator** - Orchestrátor generující celý hexcrawl najednou (25 hexů + osady + dungeony + zvěsti)
 
-### 🌐 WEB PLATFORM (MVP v development)
+### 🌐 WEB PLATFORM ✅ Quick Prototype Complete
 
 **Webová platforma pro komunitu Mausritter hráčů:**
 
 - ✅ **Backend (FastAPI)** - REST API wrappující Python generátory
   - ✅ **17/17 generátorů implementováno** (Character, NPC, Hex, Settlement, Weather, Hireling, Reaction, Spell, Treasure, Adventure, Hook, Creature Variants, Tavern, Dungeon, Rumor, Hexcrawl)
+  - ✅ **24/24 pytest testů prochází** (100% pass rate)
+  - 🌐 Backend: `http://localhost:8001`
   - 📁 Folder: `web-backend/`
   - 📚 [Backend README](web-backend/README.md)
 
-- 🚧 **Frontend (Next.js 14)** - Modern web interface
-  - ✅ Landing page
-  - ✅ Tailwind CSS + Mausritter theme
+- ✅ **Frontend (Next.js 14)** - Quick Prototype implementován
+  - ✅ Landing page s Mausritter designem
+  - ✅ Generator Hub (17 generátorů, filtrování, vyhledávání)
+  - ✅ **3 funkční generator pages:**
+    - Character Generator (stats, inventory, JSON export)
+    - NPC Generator (všechny vlastnosti)
+    - Weather Generator (seasonal events, info panel)
+  - ✅ shadcn/ui komponenty (Button, Card, Input, Select, Toast)
+  - ✅ API Client s TypeScript types (17 generátorů)
+  - ✅ **33 Playwright E2E testů** (6 test suites)
+  - 🌐 Frontend: `http://localhost:3001`
   - 📁 Folder: `web-frontend/`
   - 📚 [Frontend README](web-frontend/README.md)
 
@@ -65,7 +75,7 @@ Užitečná rozšíření nad rámec oficiálních pravidel:
   - [API Endpoints](docs/API_ENDPOINTS.md) - REST API specifikace
   - [Web Roadmap](docs/WEB_ROADMAP.md) - Implementační plán (MVP → V4)
   - [UI Wireframes](docs/UI_WIREFRAMES.md) - Design všech stránek
-  - [Known Issues & TODO](docs/KNOWN_ISSUES.md) - Sledování problémů a úkolů
+  - [Known Issues & TODO](docs/KNOWN_ISSUES.md) - Sledování problémů a úkolů (11/13 dokončeno)
 
 **Status:** 🎉 **100% OFICIÁLNÍCH PRAVIDEL + 5 ROZŠÍŘENÍ + WEB MVP V DEVELOPMENT** 🎉
 
@@ -841,32 +851,53 @@ b868e82 Fáze 1: Data extraction a TableLoader implementace
 
 ## 📰 Recent Updates
 
-### 2025-11-03: Backend API Expansion - All 17 Generators ✅
+### 2025-11-04: Hexcrawl Generator - Frontend Fix ✅
 
 **Implementováno:**
-- 🚀 **FastAPI Backend rozšířen z 5 → 17 generátorů**
-  - ✅ MVP generátory (5): Character, NPC, Hex, Settlement, Weather
-  - ✅ Rozšířené generátory (12): Hireling, Reaction, Spell, Treasure, Adventure, Hook, Creature Variants (11 typů), Tavern, Dungeon, Rumor
-  - ✅ Status endpoint ukazuje 17/17 generátorů
-  - ✅ 16/17 endpointů otestováno (Hexcrawl má Windows encoding issue)
-  - ✅ Dokumentace aktualizována (README.md, claude.md)
-  - 📚 [KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md) - Sledování problémů a TODO úkolů
+- ✅ **Hexcrawl Generator page** - Oprava zobrazování dat (z metadata → plné 4 taby)
+  - ✅ Tabs komponent (Radix UI primitives)
+  - ✅ 4 taby: Hexy (25), Osady (3), Dungeony (3), Zvěsti (6)
+  - ✅ TypeScript interface fixes - 3 nové interfaces pro flat API strukturu
+  - ✅ Playwright MCP testování (všechny taby funkční)
+
+**Opraveno:**
+- ✅ HexcrawlHex, HexcrawlSettlement, HexcrawlDungeon interfaces (flat structure)
+- ✅ Hexcrawl page zobrazovala pouze metadata a Copy JSON, nyní plná data
+
+### 2025-11-03: Frontend Quick Prototype Complete ✅
+
+**Implementováno:**
+- 🎨 **Frontend Quick Prototype (3 generator pages + testy)**
+  - ✅ shadcn/ui komponenty (6 komponent: Button, Card, Input, Label, Select, Toast)
+  - ✅ API Client s TypeScript types pro všech 17 generátorů (400+ řádků)
+  - ✅ Generator Hub page (17 generátorů, filtrování, vyhledávání)
+  - ✅ Character Generator page (plně funkční)
+  - ✅ NPC Generator page (plně funkční)
+  - ✅ Weather Generator page (plně funkční)
+  - ✅ **33 Playwright E2E testů** (6 test suites, 100% coverage prototypu)
+
+**Backend Improvements:**
+- ✅ **24/24 pytest testů prochází** (100% pass rate)
+- ✅ Všechny API error handling edge cases pokryty testy
+- ✅ Hexcrawl Windows encoding issue vyřešen
+- ✅ Settlement API bug fix (no_tavern parameter)
 
 **Testováno:**
-- ✅ Backend běží na `http://localhost:8001` (port 8001 je fixed)
-- ✅ Frontend běží na `http://localhost:3001`
-- ✅ 16/17 API endpointů funkčních
-- ⚠️ Hexcrawl má Windows encoding issue (generátor, ne API)
+- ✅ Backend: `http://localhost:8001` (17/17 generátorů)
+- ✅ Frontend: `http://localhost:3001` (landing + hub + 3 generators)
+- ✅ Playwright E2E testy připraveny k spuštění
+- ✅ Všechny dokumentační soubory aktualizovány
 
-**Known Issues:**
-- Hexcrawl encoding issue na Windows
-- Chybí unit testy pro všechny endpointy
-- Error handling edge cases
+**Dokumentace aktualizována:**
+- 📚 [KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md) - 11/13 úkolů dokončeno
+- 📚 [web-frontend/README.md](web-frontend/README.md) - Kompletní aktualizace
+- 📚 [README.md](README.md) - WEB PLATFORM sekce aktualizována
 
 **Next Steps:**
-- Fix Hexcrawl encoding issue
-- Přidat unit testy (pytest)
-- Quick Prototype (3 generator pages) NEBO Fix issues + tests
+- Implementace dalších 14 generator pages (Hex, Settlement, Hireling...)
+- Vylepšení UX (loading states, error boundaries, dark mode)
+- Deployment (Vercel + Railway)
+- Autentizace a persistence (V2)
 
 ---
 

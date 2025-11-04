@@ -2,7 +2,7 @@
 
 Next.js 14 frontend pro Mausritter Tools webovou platformu.
 
-**Status:** ✅ MVP Week 1 Complete - Landing page s Mausritter designem
+**Status:** ✅ Quick Prototype Complete - Landing page + 4 funkční generator pages + E2E testy
 
 ---
 
@@ -24,32 +24,51 @@ cp .env.local.example .env.local
 
 **Nastav:**
 ```env
-NEXT_PUBLIC_API_URL=http://localhost:8000
+NEXT_PUBLIC_API_URL=http://localhost:8001
 ```
 
 ### 3. Spuštění development serveru
 
 ```bash
-npm run dev
+npm run dev -- -p 3001
 ```
 
-Frontend běží na: **http://localhost:3000**
+Frontend běží na: **http://localhost:3001**
 
 ---
 
-## 📋 Dostupné Stránky (MVP)
+## 📋 Dostupné Stránky
 
-### Public Pages
+### Public Pages (Quick Prototype - Implementováno)
 
-- ✅ **/** - Landing page
-- 🚧 **/auth/login** - Login (placeholder)
-- 🚧 **/auth/signup** - Signup (placeholder)
+- ✅ **/** - Landing page s Mausritter designem
+- ✅ **/generators** - Generator hub (17 generátorů, filtrování, vyhledávání)
+- ✅ **/generators/character** - Character Generator (plně funkční)
+- ✅ **/generators/npc** - NPC Generator (plně funkční)
+- ✅ **/generators/weather** - Weather Generator (plně funkční)
+- ✅ **/generators/hexcrawl** - Hexcrawl Generator (plně funkční - 4 taby)
+
+### Další Generator Pages (Připraveno k implementaci)
+
+- ⏳ **/generators/hex** - Hex Generator
+- ⏳ **/generators/settlement** - Settlement Generator
+- ⏳ **/generators/hireling** - Hireling Generator
+- ⏳ **/generators/reaction** - Reaction Generator
+- ⏳ **/generators/spell** - Spell Generator
+- ⏳ **/generators/treasure** - Treasure Generator
+- ⏳ **/generators/adventure** - Adventure Generator
+- ⏳ **/generators/hook** - Hook Generator
+- ⏳ **/generators/tavern** - Tavern Generator
+- ⏳ **/generators/dungeon** - Dungeon Generator
+- ⏳ **/generators/rumor** - Rumor Generator
+- ⏳ **/generators/creature/{type}** - Creature Variant Generator
 
 ### Authenticated Pages (V2)
 
+- ⏳ **/auth/login** - Login page
+- ⏳ **/auth/signup** - Signup page
 - ⏳ **/dashboard** - Dashboard (GM/Player)
 - ⏳ **/campaigns/{id}** - Campaign detail
-- ⏳ **/generators** - Generator hub
 - ⏳ **/characters/{id}** - Character sheet
 
 ---
@@ -59,10 +78,13 @@ Frontend běží na: **http://localhost:3000**
 - **Framework:** Next.js 14 (App Router)
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS
-- **UI Components:** shadcn/ui (připraveno, ne installed)
-- **State Management:** Zustand (připraveno)
-- **Data Fetching:** TanStack Query (připraveno)
-- **Auth:** Supabase Auth (V2)
+- **UI Components:** shadcn/ui ✅ (7 komponent: Button, Card, Input, Label, Select, Tabs, Toast)
+- **API Client:** Custom fetch wrapper s TypeScript types ✅
+- **Notifications:** Sonner (toast messages) ✅
+- **Testing:** Playwright E2E ✅ (33 testů)
+- **State Management:** React hooks (useState)
+- **Data Fetching:** Native Fetch API
+- **Auth:** Supabase Auth (V2 - připraveno)
 
 ---
 
@@ -71,16 +93,38 @@ Frontend běží na: **http://localhost:3000**
 ```
 web-frontend/
 ├── app/
-│   ├── layout.tsx           # Root layout
-│   ├── page.tsx             # Landing page
-│   ├── globals.css          # Global styles + Tailwind
-│   └── auth/                # Auth pages (V2)
-├── components/              # React components
-│   └── ui/                  # shadcn/ui components
-├── lib/                     # Utility functions
-│   ├── api.ts               # API client
-│   └── supabase.ts          # Supabase client (V2)
-├── public/                  # Static assets
+│   ├── layout.tsx                      # Root layout + Toaster
+│   ├── page.tsx                        # Landing page ✅
+│   ├── globals.css                     # Global styles + Tailwind
+│   └── generators/
+│       ├── page.tsx                    # Generator hub ✅
+│       ├── character/page.tsx          # Character Generator ✅
+│       ├── npc/page.tsx                # NPC Generator ✅
+│       ├── weather/page.tsx            # Weather Generator ✅
+│       └── hexcrawl/page.tsx           # Hexcrawl Generator ✅
+├── components/
+│   └── ui/                             # shadcn/ui komponenty ✅
+│       ├── button.tsx                  # Button component
+│       ├── card.tsx                    # Card components
+│       ├── input.tsx                   # Input component
+│       ├── label.tsx                   # Label component
+│       ├── select.tsx                  # Select dropdown
+│       ├── tabs.tsx                    # Tabs component
+│       └── sonner.tsx                  # Toast notifications
+├── lib/
+│   ├── api.ts                          # API client ✅ (17 generátorů)
+│   └── utils.ts                        # cn() helper ✅
+├── tests/
+│   └── e2e/                            # Playwright E2E testy ✅
+│       ├── homepage.spec.ts            # Landing page tests (5)
+│       ├── generator-hub.spec.ts       # Hub tests (6)
+│       ├── character-generator.spec.ts # Character tests (6)
+│       ├── npc-generator.spec.ts       # NPC tests (5)
+│       ├── weather-generator.spec.ts   # Weather tests (6)
+│       └── api-health.spec.ts          # API tests (5)
+├── public/                             # Static assets
+├── playwright.config.ts                # Playwright config ✅
+├── components.json                     # shadcn/ui config ✅
 ├── package.json
 ├── tsconfig.json
 ├── tailwind.config.ts
@@ -107,41 +151,116 @@ web-frontend/
 
 ---
 
-## 🧩 shadcn/ui Setup (V2)
+## 🧩 shadcn/ui Setup ✅
 
-Pro přidání shadcn/ui komponent:
+shadcn/ui je **nainstalováno a nakonfigurováno**. Dostupné komponenty:
+
+- ✅ **Button** - Tlačítka s variantami (default, outline, ghost)
+- ✅ **Card** - Karty pro zobrazení obsahu
+- ✅ **Input** - Textové input fieldy
+- ✅ **Label** - Labely pro formuláře
+- ✅ **Select** - Dropdown selecty
+- ✅ **Tabs** - Tabové rozhraní (Radix UI primitives)
+- ✅ **Sonner** - Toast notifikace
+
+### Přidání další komponenty
 
 ```bash
-# Inicializace shadcn/ui
-npx shadcn-ui@latest init
-
-# Přidání komponent
-npx shadcn-ui@latest add button
-npx shadcn-ui@latest add card
-npx shadcn-ui@latest add dialog
-# atd.
+npx shadcn-ui@latest add [component-name]
+# Např: npx shadcn-ui@latest add dialog
 ```
-
-**Komponenty potřebné pro MVP:**
-- Button, Card, Input, Select, Dialog, Toast
 
 ---
 
-## 🔌 API Integration
+## 🔌 API Integration ✅
 
 ### API Client (lib/api.ts)
 
-Připravený client pro komunikaci s FastAPI backendem:
+Plně funkční client s TypeScript types pro všech 17 generátorů:
 
 ```typescript
-// Příklad použití (V2)
-import { api } from '@/lib/api'
+// Příklad použití
+import { generateCharacter, generateNPC, generateWeather } from '@/lib/api'
 
-const character = await api.post('/generate/character', {
+// Character Generator
+const character = await generateCharacter({
   name: 'Pepřík',
   gender: 'male'
 })
+
+// NPC Generator
+const npc = await generateNPC({ gender: 'female' })
+
+// Weather Generator
+const weather = await generateWeather({
+  season: 'winter',
+  with_event: true
+})
 ```
+
+**Dostupné generátory:**
+- `generateCharacter()` - Character Generator
+- `generateNPC()` - NPC Generator
+- `generateHex()` - Hex Generator
+- `generateSettlement()` - Settlement Generator
+- `generateWeather()` - Weather Generator
+- `generateHireling()` - Hireling Generator
+- `generateReaction()` - Reaction Generator
+- `generateSpell()` - Spell Generator
+- `generateTreasure()` - Treasure Generator
+- `generateAdventure()` - Adventure Generator
+- `generateHook()` - Hook Generator
+- `generateTavern()` - Tavern Generator
+- `generateDungeon()` - Dungeon Generator
+- `generateRumor()` - Rumor Generator
+- `generateHexcrawl()` - Hexcrawl Generator
+- `generateCreature(type)` - Creature Variant Generator
+- `getGeneratorStatus()` - Status endpoint
+- `healthCheck()` - Health check
+
+**Error Handling:**
+
+```typescript
+try {
+  const character = await generateCharacter({ name: 'Test' })
+} catch (error) {
+  if (error instanceof APIError) {
+    console.error(`API Error ${error.status}: ${error.message}`)
+  }
+}
+```
+
+---
+
+## 🧪 Testing
+
+### Playwright E2E Tests ✅
+
+Projekt obsahuje **33 E2E testů** rozdělených do 6 test suites:
+
+| Test Suite | Testy | Popis |
+|------------|-------|-------|
+| `homepage.spec.ts` | 5 | Landing page, CTA buttons, feature boxes |
+| `generator-hub.spec.ts` | 6 | 17 generátorů, filtrování, vyhledávání |
+| `character-generator.spec.ts` | 6 | Generování, custom name, inventory, JSON copy |
+| `npc-generator.spec.ts` | 5 | Generování NPC, custom name, reaction info |
+| `weather-generator.spec.ts` | 6 | Season select, event checkbox, info panel |
+| `api-health.spec.ts` | 5 | Backend health, status, API calls |
+
+### Spuštění testů
+
+```bash
+# Headless mode (CI)
+npm run test:e2e
+
+# UI mode (interaktivní)
+npm run test:e2e:ui
+
+# Headed mode (s viditelným browserem)
+npm run test:e2e:headed
+```
+
+**Konfigurace:** [playwright.config.ts](./playwright.config.ts)
 
 ---
 
@@ -221,14 +340,35 @@ npm run build
 
 ---
 
-## 🔜 Next Steps (V2)
+## 🔜 Next Steps
 
-- [ ] Setup shadcn/ui
-- [ ] Implement dashboard layout
-- [ ] Connect API client
-- [ ] Add generator pages
+### Quick Prototype ✅ COMPLETE
+
+- ✅ Setup shadcn/ui (7 komponent: Button, Card, Input, Label, Select, Tabs, Toast)
+- ✅ Connect API client (17 generátorů)
+- ✅ Add generator hub page
+- ✅ Implement 4 generator pages (Character, NPC, Weather, Hexcrawl)
+- ✅ Create Playwright E2E tests (33 testů)
+
+### Další možné kroky
+
+**Implementace dalších generator pages (13 zbývajících):**
+- [ ] Hex, Settlement, Hireling, Reaction, Spell
+- [ ] Treasure, Adventure, Hook, Tavern, Dungeon
+- [ ] Rumor, Creature Variants
+
+**Vylepšení UX:**
+- [ ] Loading states (skeletons)
+- [ ] Error boundaries
+- [ ] Responsive mobile design improvements
+- [ ] Dark mode support
+
+**Autentizace a persistence (V2):**
 - [ ] Supabase Auth integration
+- [ ] Campaign management
+- [ ] Character persistence
+- [ ] Shared campaigns
 
 ---
 
-**Last updated:** 2025-11-03
+**Last updated:** 2025-11-04

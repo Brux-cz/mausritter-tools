@@ -21,7 +21,10 @@
       "Bash(\"C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\" -m uvicorn app.main:app --port 8001)",
       "Bash(pytest:*)",
       "Bash(pip show:*)",
-      "Bash(web-backend/requirements.txt)"
+      "Bash(web-backend/requirements.txt)",
+      "Bash(\"C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\" -m pytest tests/test_generators.py -v)",
+      "Bash(npm run dev:*)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []

@@ -1,7 +1,7 @@
 # Known Issues & TODO List
 
 **Last updated:** 2025-11-03
-**Status:** Backend API complete (17/17 generators), Frontend MVP Week 1 complete
+**Status:** Backend API complete (17/17 generators), Frontend Quick Prototype complete (3 generator pages)
 
 ---
 
@@ -77,75 +77,108 @@
 
 ## 📝 TODO - Frontend
 
-### Quick Prototype (Option B - Not Started)
+### Quick Prototype ✅ **COMPLETE** (2025-11-03)
 
-#### 5. Setup shadcn/ui
-- **Status:** ⏳ Not Started
+#### 5. Setup shadcn/ui ✅ DONE
+- **Status:** ✅ Complete (2025-11-03)
 - **Priority:** Medium
 - **Description:** Initialize shadcn/ui component library
-- **Steps:**
-  ```bash
-  cd web-frontend
-  npx shadcn-ui@latest init
-  npx shadcn-ui@latest add button card input select dialog toast
-  ```
-- **Components Needed:** Button, Card, Input, Select, Dialog, Toast
-- **Estimate:** 10 minutes
+- **Implemented:**
+  - Created `components.json` config
+  - Created `lib/utils.ts` with cn() helper
+  - Installed dependencies: clsx, tailwind-merge, class-variance-authority, lucide-react, @radix-ui/*
+  - Created UI components: button, card, input, label, select, sonner (toast)
+  - Added Toaster to root layout
+- **Components:** Button, Card, Input, Label, Select, Toast ✅
+- **Time:** ~15 minutes
 
-#### 6. API Client Implementation
-- **Status:** ⏳ Not Started
+#### 6. API Client Implementation ✅ DONE
+- **Status:** ✅ Complete (2025-11-03)
 - **Priority:** Medium
 - **Description:** Create API client in `web-frontend/lib/api.ts`
-- **Requirements:**
-  - TypeScript types for all 17 generators
-  - Error handling
-  - Loading states
-  - Response validation
-- **Dependencies:** Backend must be running on port 8001
-- **Estimate:** 15 minutes
+- **Implemented:**
+  - ✅ TypeScript types for all 17 generators (Request + Response interfaces)
+  - ✅ Error handling (APIError class)
+  - ✅ Fetch wrappers for all 17 generators
+  - ✅ Health check and status endpoints
+- **File:** `web-frontend/lib/api.ts` (400+ lines)
+- **Time:** ~20 minutes
 
-#### 7. Generator Hub Page
-- **Status:** ⏳ Not Started
+#### 7. Generator Hub Page ✅ DONE
+- **Status:** ✅ Complete (2025-11-03)
 - **Priority:** Medium
 - **Description:** `/generators` page with grid of all generators
-- **Features:**
-  - Visual cards for each generator
-  - Category filtering (MVP vs Extended)
-  - Search functionality
-  - Links to individual generator pages
+- **Implemented:**
+  - ✅ Grid of all 17 generators with cards (emoji + název + popis)
+  - ✅ Category filtering (All/MVP/Extended)
+  - ✅ Search functionality
+  - ✅ Links to individual generator pages
+  - ✅ "Coming Soon" badge for not-yet-implemented generators
 - **File:** `web-frontend/app/generators/page.tsx`
-- **Estimate:** 20 minutes
+- **Time:** ~25 minutes
 
-#### 8. Character Generator Page
-- **Status:** ⏳ Not Started
+#### 8. Character Generator Page ✅ DONE
+- **Status:** ✅ Complete (2025-11-03)
 - **Priority:** High
 - **Description:** `/generators/character` page with full UI
-- **Features:**
-  - Form inputs: name (optional), gender (select)
-  - Generate button
-  - Display result with styling
-  - Copy/Save functionality
+- **Implemented:**
+  - ✅ Form inputs: name (optional), gender (select)
+  - ✅ Generate button with loading state
+  - ✅ Display result: Stats grid, HP hearts, Inventory grid, Appearance details
+  - ✅ Copy JSON functionality
+  - ✅ Reset button
+  - ✅ Toast notifications (success/error)
 - **File:** `web-frontend/app/generators/character/page.tsx`
-- **Estimate:** 30 minutes
+- **Time:** ~35 minutes
 
-#### 9. NPC Generator Page
-- **Status:** ⏳ Not Started
+#### 9. NPC Generator Page ✅ DONE
+- **Status:** ✅ Complete (2025-11-03)
 - **Priority:** High
 - **Description:** `/generators/npc` page
-- **Features:** Similar to Character Generator
+- **Implemented:**
+  - ✅ Form inputs: name (optional), gender (select)
+  - ✅ Generate button with loading state
+  - ✅ Display result: Status, Birthsign, Appearance, Quirk, Desire, Relationship, Reaction
+  - ✅ Copy JSON functionality
+  - ✅ Dice roll info
 - **File:** `web-frontend/app/generators/npc/page.tsx`
-- **Estimate:** 20 minutes
+- **Time:** ~25 minutes
 
-#### 10. Weather Generator Page
-- **Status:** ⏳ Not Started
+#### 10. Weather Generator Page ✅ DONE
+- **Status:** ✅ Complete (2025-11-03)
 - **Priority:** Medium
 - **Description:** `/generators/weather` page
-- **Features:**
-  - Season select dropdown
-  - Event checkbox
-  - Display result with weather-themed styling
+- **Implemented:**
+  - ✅ Season select dropdown (Spring/Summer/Autumn/Winter)
+  - ✅ Event checkbox
+  - ✅ Display result with weather-themed styling
+  - ✅ Season emoji icons
+  - ✅ Adverse weather warning (red border)
+  - ✅ Season info panel
 - **File:** `web-frontend/app/generators/weather/page.tsx`
-- **Estimate:** 25 minutes
+- **Time:** ~30 minutes
+
+### E2E Testing ✅ **COMPLETE** (2025-11-03)
+
+#### 11. Playwright E2E Tests ✅ DONE
+- **Status:** ✅ Tests Created (2025-11-03)
+- **Priority:** High
+- **Description:** 6 E2E test suites using Playwright
+- **Implemented:**
+  - ✅ `playwright.config.ts` - Configuration with webServer setup
+  - ✅ `tests/e2e/homepage.spec.ts` - 5 tests (landing page, headings, buttons, features)
+  - ✅ `tests/e2e/generator-hub.spec.ts` - 6 tests (17 generators, filters, search)
+  - ✅ `tests/e2e/character-generator.spec.ts` - 6 tests (form, generation, inventory, JSON copy, reset)
+  - ✅ `tests/e2e/npc-generator.spec.ts` - 5 tests (generation, custom name, reaction info)
+  - ✅ `tests/e2e/weather-generator.spec.ts` - 6 tests (seasons, events, info panel)
+  - ✅ `tests/e2e/api-health.spec.ts` - 5 tests (backend health, status, API calls)
+- **Total:** 33 E2E tests across 6 test files
+- **Commands:** `npm run test:e2e`, `npm run test:e2e:ui`, `npm run test:e2e:headed`
+- **Time:** ~45 minutes
+
+---
+
+## 📝 TODO - Frontend (Next Steps)
 
 ---
 
@@ -249,19 +282,26 @@ npm run dev -- -p 3001
 |----------|-------|------|---------|---------|
 | Backend Issues | 1 | 1 | 0 | 0 |
 | Backend TODO | 3 | 3 | 0 | 0 |
-| Frontend TODO | 6 | 0 | 6 | 0 |
+| Frontend Quick Prototype | 7 | 7 | 0 | 0 |
 | Documentation | 2 | 0 | 2 | 0 |
-| **TOTAL** | **12** | **4** | **8** | **0** |
+| **TOTAL** | **13** | **11** | **2** | **0** |
 
 **Completed Today (2025-11-03):**
 - ✅ #1: Hexcrawl encoding fix
 - ✅ #2: Unit tests (24/24 passing - 100%)
 - ✅ #3: Error handling (already implemented)
-- ✅ Settlement API bug fix (no_tavern parameter)
-- ✅ All test assertions corrected
+- ✅ #4: Settlement API bug fix (no_tavern parameter)
+- ✅ #5: shadcn/ui setup (6 komponenty)
+- ✅ #6: API Client (17 generátorů, 400+ řádků)
+- ✅ #7: Generator Hub page (filtrování, vyhledávání)
+- ✅ #8: Character Generator page
+- ✅ #9: NPC Generator page
+- ✅ #10: Weather Generator page
+- ✅ #11: Playwright E2E testy (33 testů v 6 souborech)
 
 ---
 
 **Next Steps:**
-- Quick Prototype (3 generator pages) OR Continue with MVP Week 2
-- No blocking issues remaining in backend ✅
+- Dokumentace API testingu (curl příklady)
+- Deployment Guide (Railway/Vercel)
+- Implementace dalších 14 generátor pages (optional)
