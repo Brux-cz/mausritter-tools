@@ -52,7 +52,7 @@ const generators: Generator[] = [
     description: 'Generování hexů pro hexcrawl kampaně s detaily a háčky',
     category: 'mvp',
     path: '/generators/hex',
-    implemented: false,
+    implemented: true,
   },
   {
     id: 'settlement',
@@ -61,7 +61,7 @@ const generators: Generator[] = [
     description: 'Myší osady s velikostí, vládou, řemesly a hospodami',
     category: 'mvp',
     path: '/generators/settlement',
-    implemented: false,
+    implemented: true,
   },
 
   // Extended Generators (12)
@@ -72,7 +72,7 @@ const generators: Generator[] = [
     description: 'Pronajímatelní pomocníci se statistikami a specializacemi',
     category: 'extended',
     path: '/generators/hireling',
-    implemented: false,
+    implemented: true,
   },
   {
     id: 'reaction',
@@ -81,7 +81,7 @@ const generators: Generator[] = [
     description: 'Určení reakce tvora při setkání (2k6 mechanika)',
     category: 'extended',
     path: '/generators/reaction',
-    implemented: false,
+    implemented: true,
   },
   {
     id: 'spell',
@@ -90,7 +90,7 @@ const generators: Generator[] = [
     description: 'Náhodná kouzla z tabulky (2k8 na 16 kouzel)',
     category: 'extended',
     path: '/generators/spell',
-    implemented: false,
+    implemented: true,
   },
   {
     id: 'treasure',
@@ -99,7 +99,7 @@ const generators: Generator[] = [
     description: 'Poklady s ďobky, kouzelné meče, kouzla a předměty',
     category: 'extended',
     path: '/generators/treasure',
-    implemented: false,
+    implemented: true,
   },
   {
     id: 'adventure',
@@ -108,7 +108,7 @@ const generators: Generator[] = [
     description: 'Semínka dobrodružství (Tvor + Problém + Komplikace)',
     category: 'extended',
     path: '/generators/adventure',
-    implemented: false,
+    implemented: true,
   },
   {
     id: 'hook',
@@ -117,7 +117,7 @@ const generators: Generator[] = [
     description: 'Motivace pro začátek dobrodružství (k6 háčků)',
     category: 'extended',
     path: '/generators/hook',
-    implemented: false,
+    implemented: true,
   },
   {
     id: 'creature',
@@ -126,7 +126,7 @@ const generators: Generator[] = [
     description: 'Varianty stvoření (11 typů: ghost, snake, cat, atd.)',
     category: 'extended',
     path: '/generators/creature',
-    implemented: false,
+    implemented: true,
   },
   {
     id: 'tavern',
@@ -135,7 +135,7 @@ const generators: Generator[] = [
     description: 'Názvy a speciality hospod pro osady',
     category: 'extended',
     path: '/generators/tavern',
-    implemented: false,
+    implemented: true,
   },
   {
     id: 'dungeon',
@@ -144,7 +144,7 @@ const generators: Generator[] = [
     description: 'Dobrodružná místa s místnostmi, obyvateli a tajemstvími',
     category: 'extended',
     path: '/generators/dungeon',
-    implemented: false,
+    implemented: true,
   },
   {
     id: 'rumor',
@@ -153,7 +153,7 @@ const generators: Generator[] = [
     description: 'Zvěsti s pravdivostním systémem (k6 tabulka)',
     category: 'extended',
     path: '/generators/rumor',
-    implemented: false,
+    implemented: true,
   },
   {
     id: 'hexcrawl',
@@ -162,7 +162,7 @@ const generators: Generator[] = [
     description: 'Kompletní hexcrawl kampaň (25 hexů + osady + dungeony)',
     category: 'extended',
     path: '/generators/hexcrawl',
-    implemented: false,
+    implemented: true,
   },
 ];
 

@@ -180,6 +180,44 @@
 
 ## 📝 TODO - Frontend (Next Steps)
 
+### Implementace Zbývajících Generator Pages ✅ **COMPLETE** (2025-11-04)
+
+**ZJIŠTĚNÍ:** Všech 16 generátorů bylo již implementováno, ale dokumentace byla neaktuální!
+
+#### Kompletní seznam implementovaných generátorů:
+
+**MVP Generátory (5/5):**
+1. ✅ Character Generator - [/generators/character](../web-frontend/app/generators/character/page.tsx)
+2. ✅ NPC Generator - [/generators/npc](../web-frontend/app/generators/npc/page.tsx)
+3. ✅ Weather Generator - [/generators/weather](../web-frontend/app/generators/weather/page.tsx)
+4. ✅ Hex Generator - [/generators/hex](../web-frontend/app/generators/hex/page.tsx)
+5. ✅ Settlement Generator - [/generators/settlement](../web-frontend/app/generators/settlement/page.tsx)
+
+**Extended Generátory (11/11):**
+6. ✅ Hireling Generator - [/generators/hireling](../web-frontend/app/generators/hireling/page.tsx)
+7. ✅ Reaction Roll - [/generators/reaction](../web-frontend/app/generators/reaction/page.tsx)
+8. ✅ Spell Generator - [/generators/spell](../web-frontend/app/generators/spell/page.tsx)
+9. ✅ Treasure Generator - [/generators/treasure](../web-frontend/app/generators/treasure/page.tsx)
+10. ✅ Adventure Seeds - [/generators/adventure](../web-frontend/app/generators/adventure/page.tsx)
+11. ✅ Adventure Hooks - [/generators/hook](../web-frontend/app/generators/hook/page.tsx)
+12. ✅ Creature Variants - [/generators/creature](../web-frontend/app/generators/creature/page.tsx)
+13. ✅ Tavern Generator - [/generators/tavern](../web-frontend/app/generators/tavern/page.tsx)
+14. ✅ Dungeon Generator - [/generators/dungeon](../web-frontend/app/generators/dungeon/page.tsx)
+15. ✅ Rumor Generator - [/generators/rumor](../web-frontend/app/generators/rumor/page.tsx)
+16. ✅ Hexcrawl Generator - [/generators/hexcrawl](../web-frontend/app/generators/hexcrawl/page.tsx)
+
+**Otestováno Playwright MCP (2025-11-04):**
+- ✅ Tavern Generator - vygeneroval "U Stříbrného Semínka" se specialitou
+- ✅ Spell Generator - vygeneroval "Srozumitelnost" s efektem a dobíjením
+- ✅ Dungeon Generator - vygeneroval dungeon s 5 místnostmi + meta info
+- ✅ Settlement Generator - vygeneroval "Farma/zámeček" s vládou a událostmi
+- ✅ Creature Generator - vygeneroval variantu kočky
+
+**Aktualizace Generator Hub:**
+- ✅ Odstraněny všechny "Coming Soon" badges
+- ✅ Všech 16 generátorů označeno jako "✓ Available"
+- ✅ Soubor aktualizován: [web-frontend/app/generators/page.tsx](../web-frontend/app/generators/page.tsx)
+
 ---
 
 ## 📝 TODO - Documentation
@@ -291,11 +329,13 @@ npm run dev -- -p 3001
 | Backend Issues | 1 | 1 | 0 | 0 |
 | Backend TODO | 3 | 3 | 0 | 0 |
 | Frontend Quick Prototype | 7 | 7 | 0 | 0 |
-| Documentation | 2 | 1 | 1 | 0 |
-| **TOTAL** | **13** | **12** | **1** | **0** |
+| Frontend All Generators | 16 | 16 | 0 | 0 |
+| Documentation | 2 | 2 | 0 | 0 |
+| **TOTAL** | **29** | **29** | **0** | **0** |
 
 **Completed (2025-11-04):**
 - ✅ #11: API Testing Documentation (curl příklady pro 17 generátorů)
+- ✅ #12: Všech 16 generátorů implementováno + otestováno + Generator Hub aktualizován
 
 **Completed (2025-11-03):**
 - ✅ #1: Hexcrawl encoding fix
@@ -314,4 +354,3 @@ npm run dev -- -p 3001
 
 **Next Steps:**
 - Deployment Guide (Railway/Vercel) - Low priority
-- Implementace dalších 13 generátor pages (optional)

@@ -2,7 +2,7 @@
 
 Next.js 14 frontend pro Mausritter Tools webovou platformu.
 
-**Status:** ✅ Quick Prototype Complete - Landing page + 4 funkční generator pages + E2E testy
+**Status:** ✅ **COMPLETE** - Landing page + všech 16 funkčních generator pages + E2E testy
 
 ---
 
@@ -39,29 +39,32 @@ Frontend běží na: **http://localhost:3001**
 
 ## 📋 Dostupné Stránky
 
-### Public Pages (Quick Prototype - Implementováno)
+### Public Pages ✅ **ALL IMPLEMENTED**
 
 - ✅ **/** - Landing page s Mausritter designem
-- ✅ **/generators** - Generator hub (17 generátorů, filtrování, vyhledávání)
+- ✅ **/generators** - Generator hub (16 generátorů, filtrování, vyhledávání)
+
+### MVP Generator Pages (5/5) ✅
+
 - ✅ **/generators/character** - Character Generator (plně funkční)
 - ✅ **/generators/npc** - NPC Generator (plně funkční)
 - ✅ **/generators/weather** - Weather Generator (plně funkční)
+- ✅ **/generators/hex** - Hex Generator (plně funkční)
+- ✅ **/generators/settlement** - Settlement Generator (plně funkční)
+
+### Extended Generator Pages (11/11) ✅
+
+- ✅ **/generators/hireling** - Hireling Generator (plně funkční)
+- ✅ **/generators/reaction** - Reaction Roll (plně funkční)
+- ✅ **/generators/spell** - Spell Generator (plně funkční)
+- ✅ **/generators/treasure** - Treasure Generator (plně funkční)
+- ✅ **/generators/adventure** - Adventure Seeds (plně funkční)
+- ✅ **/generators/hook** - Adventure Hooks (plně funkční)
+- ✅ **/generators/creature** - Creature Variant Generator (plně funkční)
+- ✅ **/generators/tavern** - Tavern Generator (plně funkční)
+- ✅ **/generators/dungeon** - Dungeon Generator (plně funkční)
+- ✅ **/generators/rumor** - Rumor Generator (plně funkční)
 - ✅ **/generators/hexcrawl** - Hexcrawl Generator (plně funkční - 4 taby)
-
-### Další Generator Pages (Připraveno k implementaci)
-
-- ⏳ **/generators/hex** - Hex Generator
-- ⏳ **/generators/settlement** - Settlement Generator
-- ⏳ **/generators/hireling** - Hireling Generator
-- ⏳ **/generators/reaction** - Reaction Generator
-- ⏳ **/generators/spell** - Spell Generator
-- ⏳ **/generators/treasure** - Treasure Generator
-- ⏳ **/generators/adventure** - Adventure Generator
-- ⏳ **/generators/hook** - Hook Generator
-- ⏳ **/generators/tavern** - Tavern Generator
-- ⏳ **/generators/dungeon** - Dungeon Generator
-- ⏳ **/generators/rumor** - Rumor Generator
-- ⏳ **/generators/creature/{type}** - Creature Variant Generator
 
 ### Authenticated Pages (V2)
 
@@ -342,20 +345,15 @@ npm run build
 
 ## 🔜 Next Steps
 
-### Quick Prototype ✅ COMPLETE
+### Frontend Development ✅ **COMPLETE**
 
 - ✅ Setup shadcn/ui (7 komponent: Button, Card, Input, Label, Select, Tabs, Toast)
 - ✅ Connect API client (17 generátorů)
 - ✅ Add generator hub page
-- ✅ Implement 4 generator pages (Character, NPC, Weather, Hexcrawl)
+- ✅ Implement ALL 16 generator pages (Character, NPC, Weather, Hexcrawl, Hex, Settlement, Hireling, Reaction, Spell, Treasure, Adventure, Hook, Tavern, Dungeon, Rumor, Creature)
 - ✅ Create Playwright E2E tests (33 testů)
 
 ### Další možné kroky
-
-**Implementace dalších generator pages (13 zbývajících):**
-- [ ] Hex, Settlement, Hireling, Reaction, Spell
-- [ ] Treasure, Adventure, Hook, Tavern, Dungeon
-- [ ] Rumor, Creature Variants
 
 **Vylepšení UX:**
 - [ ] Loading states (skeletons)

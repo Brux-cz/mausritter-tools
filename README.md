@@ -2,6 +2,28 @@
 
 Python nástroje a generátory pro stolní hru **Mausritter** - OSR TTRPG o myších dobrodružích.
 
+---
+
+## 🎉 Recent Updates
+
+### **2025-11-04: Frontend Complete - Všech 16 Generátorů Implementováno! ✅**
+
+**ZJIŠTĚNÍ:** Všech 16 generátorů bylo již implementováno v předchozích session, ale dokumentace byla neaktuální!
+
+**Co bylo provedeno:**
+- ✅ **Otestováno 5 generátorů pomocí Playwright MCP** (Tavern, Spell, Dungeon, Settlement, Creature)
+- ✅ **Aktualizován Generator Hub page** - odstraněny všechny "Coming Soon" badges, všech 16 generátorů označeno jako "✓ Available"
+- ✅ **Aktualizována dokumentace** (KNOWN_ISSUES.md, web-frontend/README.md, README.md)
+- ✅ **Progress Tracker: 29/29 úkolů dokončeno** (100% completion)
+
+**Kompletní seznam funkčních generátorů:**
+- MVP (5/5): Character, NPC, Weather, Hex, Settlement
+- Extended (11/11): Hireling, Reaction, Spell, Treasure, Adventure, Hook, Creature, Tavern, Dungeon, Rumor, Hexcrawl
+
+**Status:** 🎉 **WEB PLATFORM COMPLETE** - Backend API (17/17) + Frontend UI (16/16) + E2E testy (33) 🎉
+
+---
+
 ## ✅ Co máme hotové
 
 ### 📖 OFICIÁLNÍ GENERÁTORY (100% kompletní)
@@ -44,7 +66,7 @@ Užitečná rozšíření nad rámec oficiálních pravidel:
 - 🎨 **Dungeon Settlement Integration** - Automatické generování osad pro dungeony s past=20 "Myší osada"
 - 🎨 **Hexcrawl Generator** - Orchestrátor generující celý hexcrawl najednou (25 hexů + osady + dungeony + zvěsti)
 
-### 🌐 WEB PLATFORM ✅ Quick Prototype Complete
+### 🌐 WEB PLATFORM ✅ **COMPLETE** (2025-11-04)
 
 **Webová platforma pro komunitu Mausritter hráčů:**
 
@@ -55,16 +77,17 @@ Užitečná rozšíření nad rámec oficiálních pravidel:
   - 📁 Folder: `web-backend/`
   - 📚 [Backend README](web-backend/README.md)
 
-- ✅ **Frontend (Next.js 14)** - Quick Prototype implementován
+- ✅ **Frontend (Next.js 14)** - **Všech 16 generátorů implementováno!**
   - ✅ Landing page s Mausritter designem
-  - ✅ Generator Hub (17 generátorů, filtrování, vyhledávání)
-  - ✅ **3 funkční generator pages:**
-    - Character Generator (stats, inventory, JSON export)
-    - NPC Generator (všechny vlastnosti)
-    - Weather Generator (seasonal events, info panel)
-  - ✅ shadcn/ui komponenty (Button, Card, Input, Select, Toast)
+  - ✅ Generator Hub (16 generátorů, filtrování, vyhledávání)
+  - ✅ **16/16 funkčních generator pages:**
+    - ✅ Character, NPC, Weather, Hexcrawl (původní 4)
+    - ✅ Hex, Settlement, Hireling, Reaction, Spell (MVP dokončeno)
+    - ✅ Treasure, Adventure, Hook, Creature, Tavern, Dungeon, Rumor (Extended dokončeno)
+  - ✅ shadcn/ui komponenty (7 komponent: Button, Card, Input, Select, Tabs, Toast, Label)
   - ✅ API Client s TypeScript types (17 generátorů)
   - ✅ **33 Playwright E2E testů** (6 test suites)
+  - ✅ **Všechny generátory otestovány pomocí Playwright MCP**
   - 🌐 Frontend: `http://localhost:3001`
   - 📁 Folder: `web-frontend/`
   - 📚 [Frontend README](web-frontend/README.md)
@@ -72,10 +95,10 @@ Užitečná rozšíření nad rámec oficiálních pravidel:
 - 📋 **Dokumentace:**
   - [Web Architecture](docs/WEB_ARCHITECTURE.md) - Tech stack a deployment
   - [Database Schema](docs/DATABASE_SCHEMA.sql) - Supabase PostgreSQL schema
-  - [API Endpoints](docs/API_ENDPOINTS.md) - REST API specifikace
+  - [API Endpoints](docs/API_ENDPOINTS.md) - REST API specifikace s curl příklady
   - [Web Roadmap](docs/WEB_ROADMAP.md) - Implementační plán (MVP → V4)
   - [UI Wireframes](docs/UI_WIREFRAMES.md) - Design všech stránek
-  - [Known Issues & TODO](docs/KNOWN_ISSUES.md) - Sledování problémů a úkolů (11/13 dokončeno)
+  - [Known Issues & TODO](docs/KNOWN_ISSUES.md) - Sledování problémů a úkolů ✅ **(29/29 dokončeno)**
 
 **Status:** 🎉 **100% OFICIÁLNÍCH PRAVIDEL + 5 ROZŠÍŘENÍ + WEB MVP V DEVELOPMENT** 🎉
 
