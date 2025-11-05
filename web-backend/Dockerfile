@@ -7,16 +7,17 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # Install dependencies
-COPY requirements.txt .
+# Note: Build context is repo root, so we need to specify web-backend/ path
+COPY web-backend/requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
-COPY . .
+# Copy application code from web-backend directory
+COPY web-backend/ .
 
-# Copy existing generators from parent directory
-# (Railway deployment musí obsahovat i src/ folder)
-COPY ../src ./src
-COPY ../data ./data
+# Copy existing generators from repo root
+# (Build context is repo root, so src/ and data/ are directly accessible)
+COPY src ./src
+COPY data ./data
 
 # Expose port
 EXPOSE 8001
