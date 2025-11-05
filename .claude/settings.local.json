@@ -25,7 +25,8 @@
       "Bash(\"C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\" -m pytest tests/test_generators.py -v)",
       "Bash(npm run dev:*)",
       "Bash(cat:*)",
-      "Bash(timeout 30 bash:*)"
+      "Bash(timeout 30 bash:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": [],
     "ask": []

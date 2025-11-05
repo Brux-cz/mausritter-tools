@@ -1,5 +1,3 @@
-const path = require('path')
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -12,15 +10,6 @@ const nextConfig = {
   // Image optimization
   images: {
     domains: [],  // Přidat Supabase CDN později
-  },
-
-  // Webpack config pro path aliasy
-  webpack: (config) => {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      '@': path.resolve(__dirname),
-    }
-    return config
   },
 }
 
