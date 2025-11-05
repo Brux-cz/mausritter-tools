@@ -157,7 +157,7 @@ export default function WeatherGeneratorPage() {
           {/* Result Column */}
           <div>
             {weather ? (
-              <Card className={weather.is_adverse ? "border-red-500 border-2" : ""}>
+              <Card className={weather.unfavorable ? "border-red-500 border-2" : ""}>
                 <CardHeader>
                   <div className="flex items-center gap-2">
                     <div className="text-4xl">{seasonEmojis[weather.season as keyof typeof seasonEmojis]}</div>
@@ -165,7 +165,7 @@ export default function WeatherGeneratorPage() {
                       <CardTitle className="text-2xl">
                         {seasonNames[weather.season as keyof typeof seasonNames]}
                       </CardTitle>
-                      {weather.is_adverse && (
+                      {weather.unfavorable && (
                         <span className="text-sm text-red-600 font-medium">
                           ⚠️ Nepříznivé počasí
                         </span>
@@ -178,7 +178,9 @@ export default function WeatherGeneratorPage() {
                   <div className="p-4 bg-muted rounded">
                     <div className="text-xs text-muted-foreground mb-2">POČASÍ</div>
                     <div className="text-lg font-semibold mb-1">{weather.weather}</div>
-                    <div className="text-sm text-muted-foreground">{weather.effect}</div>
+                    {weather.notes && (
+                      <div className="text-sm text-muted-foreground">{weather.notes}</div>
+                    )}
                   </div>
 
                   {/* Event */}
@@ -190,7 +192,7 @@ export default function WeatherGeneratorPage() {
                   )}
 
                   {/* Warning for adverse weather */}
-                  {weather.is_adverse && (
+                  {weather.unfavorable && (
                     <div className="p-3 bg-red-50 border border-red-200 rounded text-sm text-red-800">
                       <strong>Pozor:</strong> Nepříznivé počasí může ztížit cestování nebo způsobit újmu.
                     </div>
