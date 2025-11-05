@@ -4,7 +4,7 @@ const nextConfig = {
 
   // Environment variables dostupné v browseru
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000',
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001',
   },
 
   // Image optimization
