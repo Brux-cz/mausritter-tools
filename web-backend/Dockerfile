@@ -27,4 +27,5 @@ EXPOSE 8001
 
 # Run FastAPI with uvicorn
 # Use $PORT from environment (Render sets this automatically)
-CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8001}"]
+# Must use 'python -m uvicorn' because 'uvicorn' is not in shell PATH
+CMD ["sh", "-c", "python -m uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8001}"]
