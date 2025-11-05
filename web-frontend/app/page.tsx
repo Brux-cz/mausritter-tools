@@ -1,4 +1,8 @@
+import Link from "next/link";
+
 export default function Home() {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001';
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-gradient-to-b from-background to-muted">
       <div className="max-w-5xl w-full items-center justify-between font-mono text-sm">
@@ -8,70 +12,27 @@ export default function Home() {
             🐭 Mausritter Tools
           </h1>
           <p className="text-xl text-muted-foreground mb-8">
-            Generátory, campaign management a character sheets pro Mausritter TTRPG
+            16 generátorů pro Mausritter TTRPG - postavy, NPC, hexy, dungeony a další
           </p>
-          <div className="flex gap-4 justify-center">
-            <button className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition">
-              Start Free →
-            </button>
-            <button className="bg-secondary text-secondary-foreground px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition">
-              Learn More
-            </button>
+          <div className="flex justify-center">
+            <Link href="/generators" className="bg-primary text-primary-foreground px-10 py-4 rounded-lg text-lg font-semibold hover:opacity-90 transition shadow-lg">
+              Zobrazit Generátory →
+            </Link>
           </div>
         </div>
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          <div className="bg-card p-6 rounded-lg border-2 border-border shadow-sm">
-            <div className="text-4xl mb-4">🎲</div>
-            <h3 className="text-xl font-semibold mb-2">Generátory</h3>
-            <p className="text-muted-foreground">
-              17 nástrojů pro generování postav, NPC, hexů, dungeonů a dalších
-            </p>
-          </div>
-
-          <div className="bg-card p-6 rounded-lg border-2 border-border shadow-sm">
-            <div className="text-4xl mb-4">🗺️</div>
-            <h3 className="text-xl font-semibold mb-2">Hexcrawl Manager</h3>
-            <p className="text-muted-foreground">
-              Spravuj kampaně, mapy, zvěsti a objevování světa
-            </p>
-          </div>
-
-          <div className="bg-card p-6 rounded-lg border-2 border-border shadow-sm">
-            <div className="text-4xl mb-4">⚔️</div>
-            <h3 className="text-xl font-semibold mb-2">Character Sheets</h3>
-            <p className="text-muted-foreground">
-              Sleduj své postavy, inventář, HP a progression
-            </p>
-          </div>
-        </div>
-
-        {/* Features List */}
-        <div className="bg-card p-8 rounded-lg border-2 border-border shadow-sm mb-16">
-          <h2 className="text-2xl font-bold mb-4">✨ Features</h2>
-          <ul className="space-y-2 text-muted-foreground">
-            <li className="flex items-center gap-2">
-              <span className="text-green-500">✅</span>
-              17 generátorů (character, NPC, hex, dungeon, settlement, atd.)
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-green-500">✅</span>
-              Campaign management pro GM
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-green-500">✅</span>
-              Character sheets pro hráče
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-green-500">✅</span>
-              Real-time dice roller
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-green-500">✅</span>
-              100% zdarma
-            </li>
-          </ul>
+        {/* Coming Soon */}
+        <div className="bg-card/50 border-2 border-dashed border-primary/30 rounded-lg p-8 mb-16 max-w-2xl mx-auto text-center">
+          <p className="text-lg text-muted-foreground">
+            <span className="text-2xl mr-2">💡</span>
+            <strong className="text-foreground">Připravujeme:</strong> Campaign Tracker
+          </p>
+          <p className="text-sm text-muted-foreground mt-2">
+            Správa kampaní, persistentní postavy a sdílené herní session - již brzy!
+          </p>
+          <Link href="/roadmap" className="mt-4 inline-block text-primary hover:underline font-semibold transition">
+            → Zjisti, co připravujeme! 🗺️
+          </Link>
         </div>
 
         {/* Footer */}
@@ -81,9 +42,18 @@ export default function Home() {
             Mausritter je © Games Omnivorous (neoficiální fan tool)
           </p>
           <div className="flex gap-4 justify-center mt-4">
-            <a href="#" className="hover:text-primary transition">GitHub</a>
-            <a href="#" className="hover:text-primary transition">Discord</a>
-            <a href="#" className="hover:text-primary transition">Docs</a>
+            <Link href="/generators" className="hover:text-primary transition">
+              Generátory
+            </Link>
+            <Link href="/roadmap" className="hover:text-primary transition">
+              Roadmap
+            </Link>
+            <a href={`${apiUrl}/docs`} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition">
+              API Docs
+            </a>
+            <a href="https://mausritter.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition">
+              Mausritter
+            </a>
           </div>
         </footer>
       </div>
