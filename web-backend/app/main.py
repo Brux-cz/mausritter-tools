@@ -21,10 +21,9 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:3000",
-        "http://localhost:3001",
-        "https://mausritter-tools.vercel.app",
-        "https://mausritter-tools-git-master-bruxs-projects.vercel.app",
+        "http://localhost:3001",  # Next.js dev server (port 3001)
+        "https://mausritter-tools.vercel.app",  # Production
+        "https://mausritter-tools-git-master-bruxs-projects.vercel.app",  # Git branch URL
         "https://*.vercel.app",  # Všechny Vercel preview URLs
     ],
     allow_credentials=True,
