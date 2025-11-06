@@ -1,0 +1,13 @@
+# Build outputs - Vercel má buildovat sám
+out/
+.vercel/
+.next/
+
+# Node modules
+node_modules/
+
+# Development
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
