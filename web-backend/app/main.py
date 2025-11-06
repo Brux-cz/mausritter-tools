@@ -17,10 +17,16 @@ app = FastAPI(
     redoc_url="/redoc",
 )
 
-# CORS middleware (pro development - v production nastavit specific origins)
+# CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:3001"],  # Next.js dev server
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost:3001",
+        "https://mausritter-tools.vercel.app",
+        "https://mausritter-tools-git-master-bruxs-projects.vercel.app",
+        "https://*.vercel.app",  # Všechny Vercel preview URLs
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
