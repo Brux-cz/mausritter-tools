@@ -4,12 +4,18 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { generateHexcrawl, type HexcrawlResponse } from "@/lib/api";
+import { generateHexcrawl, type HexcrawlResponse, type HexcrawlHex } from "@/lib/api";
 import { toast } from "sonner";
+import HexMap from "@/components/generators/HexMap";
+import HexDetail from "@/components/generators/HexDetail";
 
 export default function HexcrawlGeneratorPage() {
   const [loading, setLoading] = useState(false);
   const [hexcrawl, setHexcrawl] = useState<HexcrawlResponse | null>(null);
+  const [selectedHex, setSelectedHex] = useState<{
+    index: number;
+    hex: HexcrawlHex;
+  } | null>(null);
 
   const handleGenerate = async () => {
     setLoading(true);
@@ -34,6 +40,7 @@ export default function HexcrawlGeneratorPage() {
 
   const handleReset = () => {
     setHexcrawl(null);
+    setSelectedHex(null);
   };
 
   return (
@@ -118,13 +125,54 @@ export default function HexcrawlGeneratorPage() {
               </Card>
 
               {/* Tabs for detailed content */}
-              <Tabs defaultValue="hexes" className="w-full">
-                <TabsList className="grid w-full grid-cols-4">
+              <Tabs defaultValue="map" className="w-full">
+                <TabsList className="grid w-full grid-cols-5">
+                  <TabsTrigger value="map">🗺️ Mapa</TabsTrigger>
                   <TabsTrigger value="hexes">Hexy ({hexcrawl.hexes.length})</TabsTrigger>
                   <TabsTrigger value="settlements">Osady ({hexcrawl.settlements.length})</TabsTrigger>
                   <TabsTrigger value="dungeons">Dungeony ({hexcrawl.dungeons.length})</TabsTrigger>
                   <TabsTrigger value="rumors">Zvěsti ({hexcrawl.rumors.length})</TabsTrigger>
                 </TabsList>
+
+                {/* MAP TAB - NEW! */}
+                <TabsContent value="map" className="space-y-4">
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    {/* Map - 2/3 width on desktop */}
+                    <div className="lg:col-span-2">
+                      <HexMap
+                        hexcrawl={hexcrawl}
+                        onHexSelect={(idx, hex) => {
+                          setSelectedHex({ index: idx, hex });
+                        }}
+                      />
+                    </div>
+
+                    {/* Detail Panel - 1/3 width on desktop */}
+                    <div className="lg:col-span-1">
+                      {selectedHex ? (
+                        <HexDetail
+                          hex={selectedHex.hex}
+                          hexNumber={selectedHex.index + 1}
+                          onClose={() => setSelectedHex(null)}
+                        />
+                      ) : (
+                        <Card className="w-full h-fit sticky top-4">
+                          <CardHeader>
+                            <CardTitle className="text-lg">Žádný hex vybrán</CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <p className="text-sm text-muted-foreground">
+                              Klikni na hex v mapě pro zobrazení detailů.
+                            </p>
+                            <p className="text-sm text-muted-foreground mt-2">
+                              💡 <strong>Tip:</strong> Kliknutím na hex ho odkryješ/zakryješ (Fog of War).
+                            </p>
+                          </CardContent>
+                        </Card>
+                      )}
+                    </div>
+                  </div>
+                </TabsContent>
 
                 {/* HEXES TAB */}
                 <TabsContent value="hexes" className="space-y-3">
