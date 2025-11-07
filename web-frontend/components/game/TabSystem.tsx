@@ -1,6 +1,7 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import HexMapViewer from "@/components/game/HexMapViewer";
 
 export default function TabSystem() {
   return (
@@ -28,16 +29,8 @@ export default function TabSystem() {
       </TabsList>
 
       {/* Tab Content Areas */}
-      <TabsContent value="hexmap" className="flex-1 m-0 p-4 data-[state=active]:flex data-[state=active]:flex-col">
-        <div className="flex-1 bg-white rounded-lg border border-amber-200 flex items-center justify-center">
-          <div className="text-center text-gray-500">
-            <p className="text-xl mb-2">🗺️ Hex Map</p>
-            <p className="text-sm">Interactive hex map coming soon</p>
-            <p className="text-xs text-gray-400 mt-2">
-              Phase 1B - Hex grid visualization
-            </p>
-          </div>
-        </div>
+      <TabsContent value="hexmap" className="flex-1 m-0 data-[state=active]:flex data-[state=active]:flex-col">
+        <HexMapViewer />
       </TabsContent>
 
       <TabsContent value="tactical" className="flex-1 m-0 p-4 data-[state=active]:flex data-[state=active]:flex-col">
