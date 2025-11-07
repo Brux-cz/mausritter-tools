@@ -135,6 +135,11 @@ export interface CampaignState {
 
   // Weather & Encounters
   weather: WeatherState;
+  currentWeather?: {
+    condition: string;
+    roll: number;
+    icon?: string;
+  };
   encounters: Encounter[];
 
   // Bestiary
@@ -189,6 +194,13 @@ export function createEmptyCampaign(name: string = "New Campaign"): CampaignStat
 // Mock data for testing
 export function createMockCampaign(): CampaignState {
   const campaign = createEmptyCampaign("Thornwood Vale");
+
+  // Initialize current weather
+  campaign.currentWeather = {
+    condition: campaign.weather.current,
+    roll: campaign.weather.roll,
+    icon: "🌤️",
+  };
 
   // Add 4 test mice
   campaign.party = [

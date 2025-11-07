@@ -1,40 +1,41 @@
-import type { Mouse } from '@/lib/types/campaign';
+"use client";
 
-interface MouseDetailSidebarProps {
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
+import { Badge } from "@/components/ui/badge";
+import type { Mouse } from "@/lib/types/campaign";
+
+interface MouseDetailSheetProps {
   mouse: Mouse | null;
   isOpen: boolean;
   onClose: () => void;
 }
 
-export default function MouseDetailSidebar({ mouse, isOpen, onClose }: MouseDetailSidebarProps) {
-  if (!isOpen || !mouse) return null;
+export default function MouseDetailSheet({
+  mouse,
+  isOpen,
+  onClose,
+}: MouseDetailSheetProps) {
+  if (!mouse) return null;
 
   return (
-    <>
-      {/* Backdrop */}
-      <div
-        className="fixed inset-0 bg-black bg-opacity-30 z-40"
-        onClick={onClose}
-      />
-
-      {/* Sidebar */}
-      <div className="fixed right-0 top-0 h-full w-96 bg-white shadow-2xl z-50 overflow-y-auto">
-        {/* Header */}
-        <div className="sticky top-0 bg-amber-600 text-white p-4 flex items-center justify-between">
-          <h2 className="text-xl font-bold flex items-center gap-2">
+    <Sheet open={isOpen} onOpenChange={onClose}>
+      <SheetContent className="w-[400px] sm:w-[540px] overflow-y-auto">
+        <SheetHeader>
+          <SheetTitle className="flex items-center gap-2 text-xl">
             <span>🐭</span>
             <span>{mouse.name}</span>
-          </h2>
-          <button
-            onClick={onClose}
-            className="text-white hover:text-amber-200 text-2xl leading-none"
-          >
-            ×
-          </button>
-        </div>
+          </SheetTitle>
+          <SheetDescription>Character sheet for {mouse.name}</SheetDescription>
+        </SheetHeader>
 
         {/* Content */}
-        <div className="p-6">
+        <div className="mt-6 space-y-6">
           {/* Basic Stats */}
           <div className="mb-6">
             <h3 className="text-lg font-semibold text-amber-900 mb-3">
@@ -130,12 +131,9 @@ export default function MouseDetailSidebar({ mouse, isOpen, onClose }: MouseDeta
               </h3>
               <div className="flex flex-wrap gap-2">
                 {mouse.conditions.map((condition, index) => (
-                  <span
-                    key={index}
-                    className="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium"
-                  >
+                  <Badge key={index} variant="destructive">
                     {condition}
-                  </span>
+                  </Badge>
                 ))}
               </div>
             </div>
@@ -175,7 +173,7 @@ export default function MouseDetailSidebar({ mouse, isOpen, onClose }: MouseDeta
             </button>
           </div>
         </div>
-      </div>
-    </>
+      </SheetContent>
+    </Sheet>
   );
 }

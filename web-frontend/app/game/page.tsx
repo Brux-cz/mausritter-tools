@@ -1,11 +1,18 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { createMockCampaign } from '@/lib/types/campaign';
-import type { CampaignState, Mouse } from '@/lib/types/campaign';
-import PartyPanel from '@/components/game/PartyPanel';
-import MouseDetailSidebar from '@/components/game/MouseDetailSidebar';
-import TimeWeatherPanel from '@/components/game/TimeWeatherPanel';
+import { useState, useEffect } from "react";
+import { createMockCampaign } from "@/lib/types/campaign";
+import type { CampaignState, Mouse } from "@/lib/types/campaign";
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable";
+import TopBar from "@/components/game/TopBar";
+import LeftSidebar from "@/components/game/LeftSidebar";
+import RightSidebar from "@/components/game/RightSidebar";
+import TabSystem from "@/components/game/TabSystem";
+import MouseDetailSheet from "@/components/game/MouseDetailSidebar";
 
 export default function GamePage() {
   const [campaign, setCampaign] = useState<CampaignState | null>(null);
@@ -14,13 +21,13 @@ export default function GamePage() {
 
   // Load campaign from localStorage or create mock
   useEffect(() => {
-    const savedCampaign = localStorage.getItem('mausritter-campaign');
+    const savedCampaign = localStorage.getItem("mausritter-campaign");
     if (savedCampaign) {
       setCampaign(JSON.parse(savedCampaign));
     } else {
       const mockCampaign = createMockCampaign();
       setCampaign(mockCampaign);
-      localStorage.setItem('mausritter-campaign', JSON.stringify(mockCampaign));
+      localStorage.setItem("mausritter-campaign", JSON.stringify(mockCampaign));
     }
   }, []);
 
@@ -28,7 +35,7 @@ export default function GamePage() {
   useEffect(() => {
     if (campaign) {
       campaign.lastModified = new Date();
-      localStorage.setItem('mausritter-campaign', JSON.stringify(campaign));
+      localStorage.setItem("mausritter-campaign", JSON.stringify(campaign));
     }
   }, [campaign]);
 
@@ -44,89 +51,48 @@ export default function GamePage() {
 
   if (!campaign) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-lg">Loading campaign...</div>
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-amber-50 to-orange-50">
+        <div className="text-lg text-amber-900">Loading campaign...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 p-4">
-      {/* Header */}
-      <header className="mb-6">
-        <h1 className="text-3xl font-bold text-amber-900 mb-2">
-          🎲 {campaign.name}
-        </h1>
-        <p className="text-amber-700">GM Dashboard</p>
-      </header>
+    <div className="h-screen flex flex-col bg-gradient-to-br from-amber-50 to-orange-50">
+      {/* Top Bar - 40px */}
+      <TopBar campaign={campaign} />
 
-      {/* Party Panel */}
-      <PartyPanel
-        party={campaign.party}
-        onMouseClick={handleMouseClick}
-      />
+      {/* Main Layout - Resizable Panels */}
+      <ResizablePanelGroup
+        direction="horizontal"
+        className="flex-1 overflow-hidden"
+      >
+        {/* Left Sidebar */}
+        <ResizablePanel defaultSize={15} minSize={10} maxSize={25}>
+          <LeftSidebar
+            campaign={campaign}
+            onMouseClick={handleMouseClick}
+            onUpdateCampaign={setCampaign}
+          />
+        </ResizablePanel>
 
-      {/* Time & Weather Widgets */}
-      <TimeWeatherPanel
-        campaign={campaign}
-        onUpdateCampaign={setCampaign}
-      />
+        <ResizableHandle withHandle />
 
-      {/* Main Content Area - Placeholder for now */}
-      <div className="mt-6 bg-white rounded-lg shadow-lg p-6 min-h-[400px]">
-        <div className="text-center text-gray-500">
-          <p className="text-xl mb-2">🗺️ Hex Map</p>
-          <p>Coming soon: Interactive hex map will appear here</p>
-        </div>
-      </div>
+        {/* Main Content Area */}
+        <ResizablePanel defaultSize={70} minSize={50}>
+          <TabSystem />
+        </ResizablePanel>
 
-      {/* Quick Actions */}
-      <div className="mt-6 bg-white rounded-lg shadow-lg p-4">
-        <h3 className="text-lg font-semibold text-amber-900 mb-3">
-          🔗 Quick Actions
-        </h3>
-        <div className="flex flex-wrap gap-2">
-          <button className="px-4 py-2 bg-amber-600 text-white rounded hover:bg-amber-700 transition">
-            Generate NPC
-          </button>
-          <button className="px-4 py-2 bg-amber-600 text-white rounded hover:bg-amber-700 transition">
-            Roll Encounter
-          </button>
-          <button className="px-4 py-2 bg-amber-600 text-white rounded hover:bg-amber-700 transition">
-            Random Table
-          </button>
-          <button className="px-4 py-2 bg-amber-600 text-white rounded hover:bg-amber-700 transition">
-            Add Settlement
-          </button>
-        </div>
-      </div>
+        <ResizableHandle withHandle />
 
-      {/* Quick Rolls Panel */}
-      <div className="mt-4 bg-white rounded-lg shadow-lg p-4">
-        <h3 className="text-lg font-semibold text-amber-900 mb-3">
-          🎲 Quick Rolls
-        </h3>
-        <div className="flex gap-2">
-          <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-            d6
-          </button>
-          <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-            2d6
-          </button>
-          <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-            d20
-          </button>
-          <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-            d100
-          </button>
-        </div>
-        <div className="mt-2 text-sm text-gray-600">
-          Last roll: --
-        </div>
-      </div>
+        {/* Right Sidebar */}
+        <ResizablePanel defaultSize={15} minSize={10} maxSize={25}>
+          <RightSidebar />
+        </ResizablePanel>
+      </ResizablePanelGroup>
 
-      {/* Mouse Detail Sidebar */}
-      <MouseDetailSidebar
+      {/* Mouse Detail Sheet Modal */}
+      <MouseDetailSheet
         mouse={selectedMouse}
         isOpen={sidebarOpen}
         onClose={handleCloseSidebar}
