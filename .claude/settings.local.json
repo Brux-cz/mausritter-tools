@@ -30,7 +30,8 @@
       "Bash(test:*)",
       "Bash(git push)",
       "Bash(timeout 5 bash:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(npx shadcn@latest add:*)"
     ],
     "deny": [],
     "ask": []
