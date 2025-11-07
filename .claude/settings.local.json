@@ -26,7 +26,11 @@
       "Bash(npm run dev:*)",
       "Bash(cat:*)",
       "Bash(timeout 30 bash:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(test:*)",
+      "Bash(git push)",
+      "Bash(timeout 5 bash:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []

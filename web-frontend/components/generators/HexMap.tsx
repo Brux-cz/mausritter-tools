@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { HexcrawlResponse, HexcrawlHex } from "@/lib/api";
 import {
-  offsetToScreen,
-  getGridViewBox,
+  getHexagonLayout,
   hexagonPoints,
 } from "@/lib/hexMath";
 
@@ -19,12 +18,27 @@ interface HexState {
 }
 
 export default function HexMap({ hexcrawl, onHexSelect }: HexMapProps) {
-  // State: Fog of War - initially all hexes unrevealed
+  // State: Fog of War - initially all hexes revealed
   const [hexStates, setHexStates] = useState<HexState[]>(
-    hexcrawl.hexes.map(() => ({ revealed: false, selected: false }))
+    hexcrawl.hexes.map(() => ({ revealed: true, selected: false }))
   );
 
-  const viewBox = getGridViewBox(5, 5);
+  // Get hexagon layout positions
+  const hexLayout = useMemo(() => getHexagonLayout(), []);
+
+  // Calculate viewBox to fit the hexagon shape
+  const viewBox = useMemo(() => {
+    const padding = 80;
+    const xCoords = hexLayout.map((h) => h.x);
+    const yCoords = hexLayout.map((h) => h.y);
+    const minX = Math.min(...xCoords) - 70;
+    const maxX = Math.max(...xCoords) + 70;
+    const minY = Math.min(...yCoords) - 70;
+    const maxY = Math.max(...yCoords) + 70;
+    const width = maxX - minX + padding;
+    const height = maxY - minY + padding;
+    return `${minX - padding / 2} ${minY - padding / 2} ${width} ${height}`;
+  }, [hexLayout]);
 
   // Click handler: toggle revealed state
   const handleHexClick = (index: number, e: React.MouseEvent) => {
@@ -48,15 +62,14 @@ export default function HexMap({ hexcrawl, onHexSelect }: HexMapProps) {
     <div className="flex flex-col items-center gap-4 p-4">
       {/* SVG Hex Grid */}
       <svg
-        viewBox={viewBox.viewBox}
+        viewBox={viewBox}
         className="w-full max-w-4xl border-2 border-slate-700 rounded-lg bg-slate-950"
-        style={{ aspectRatio: `${viewBox.width} / ${viewBox.height}` }}
       >
-        {/* Render 25 hexes in 5x5 grid */}
+        {/* Render 25 hexes in hexagon layout */}
         {hexcrawl.hexes.map((hex, idx) => {
-          const col = idx % 5;
-          const row = Math.floor(idx / 5);
-          const { x, y } = offsetToScreen(col, row);
+          const layout = hexLayout[idx];
+          if (!layout) return null; // Safety check
+          const { x, y } = layout;
           const points = hexagonPoints(x, y);
           const state = hexStates[idx];
 

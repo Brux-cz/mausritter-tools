@@ -134,3 +134,45 @@ export function getNeighbors(
     (n) => n.col >= 0 && n.col < 5 && n.row >= 0 && n.row < 5
   );
 }
+
+/**
+ * Generate hexagon-shaped layout for 25 hexes (centered pattern)
+ * Pattern: 3-4-5-4-3-3-3 rows (total 25)
+ * Returns array of {col, row, centerX, centerY} for each hex index
+ */
+export interface HexLayout {
+  col: number;
+  row: number;
+  x: number;
+  y: number;
+}
+
+export function getHexagonLayout(): HexLayout[] {
+  // Hexagon shape pattern (row: [start_col, num_hexes])
+  // Adjusted for 25 hexes total in diamond/hexagon shape
+  const pattern = [
+    { row: 0, startCol: 1, count: 3 },  // Top: 3 hexes (indices 0-2)
+    { row: 1, startCol: 0.5, count: 4 },  // 4 hexes (indices 3-6)
+    { row: 2, startCol: 0, count: 5 },    // Center: 5 hexes (indices 7-11)
+    { row: 3, startCol: 0.5, count: 4 },  // 4 hexes (indices 12-15)
+    { row: 4, startCol: 1, count: 3 },  // 3 hexes (indices 16-18)
+    { row: 5, startCol: 1, count: 3 },  // 3 hexes (indices 19-21)
+    { row: 6, startCol: 1, count: 3 },  // Bottom: 3 hexes (indices 22-24)
+  ];
+
+  const layout: HexLayout[] = [];
+  let hexIndex = 0;
+
+  for (const { row, startCol, count } of pattern) {
+    for (let i = 0; i < count; i++) {
+      const col = startCol + i;
+      const { x, y } = offsetToScreen(col, row);
+      layout.push({ col, row, x, y });
+      hexIndex++;
+      if (hexIndex >= 25) break;
+    }
+    if (hexIndex >= 25) break;
+  }
+
+  return layout;
+}
