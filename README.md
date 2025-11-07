@@ -8,6 +8,21 @@
 
 ---
 
+## 📖 DŮLEŽITÁ DOKUMENTACE - KDE ZAČÍT
+
+**🚀 Návrat k práci?** Začni zde:
+
+| Dokument | Účel | Link |
+|----------|------|------|
+| 📋 **Quick Start** | "Kde jsem skončil" - jak pokračovat | [web-frontend/docs/CURRENT_WORK.md](web-frontend/docs/CURRENT_WORK.md) |
+| 🗺️ **Roadmapa** | Kompletní plán GM Dashboard (Phase 1-6) | [web-frontend/docs/game-dashboard-roadmap.md](web-frontend/docs/game-dashboard-roadmap.md) |
+| 🔧 **Hex Fix** | Jak opravit hexagon geometrii | [web-frontend/docs/hex-layout-fix.md](web-frontend/docs/hex-layout-fix.md) |
+| ⚙️ **Claude Config** | Development workflow, porty, CORS | [.claude/CLAUDE.md](.claude/CLAUDE.md) |
+
+**📍 Aktuální branch:** `feature/game-page` (GM Dashboard - Phase 1A ✅ hotovo)
+
+---
+
 ## 🎯 Co to je?
 
 Mausritter Tools je neoficiální fan nástroj pro TTRPG hru [Mausritter](https://mausritter.com) od Games Omnivorous. Poskytuje:
