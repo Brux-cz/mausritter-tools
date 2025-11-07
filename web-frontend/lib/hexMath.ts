@@ -4,7 +4,7 @@
  */
 
 // Pointy-top hexagon constants
-const HEX_RADIUS = 60; // px (distance from center to corner)
+const HEX_RADIUS = 30; // px (distance from center to corner)
 
 export interface HexCoord {
   q: number; // Axial coordinate (cube x)
@@ -35,9 +35,16 @@ export function offsetToAxial(col: number, row: number): HexCoord {
  * @param r Axial r coordinate (row-like)
  */
 export function axialToScreen(q: number, r: number): ScreenCoord {
-  // Pointy-top hexagon formulas
-  const x = HEX_RADIUS * (Math.sqrt(3) * q + (Math.sqrt(3) / 2) * r);
+  // Constants for Pointy-Top conversion
+  const SQRT_3 = Math.sqrt(3);
+
+  // x = R * (sqrt(3) * q + (sqrt(3) / 2) * r)
+  const x = HEX_RADIUS * (SQRT_3 * q + (SQRT_3 / 2) * r);
+  // y = R * (3 / 2) * r
   const y = HEX_RADIUS * ((3 / 2) * r);
+
+  // Tato funkce vrací souřadnice RELATIVNÍ ke středu mřížky (0,0).
+  // Při vykreslování v SVG/Canvasu MUSÍTE posunout (x, y) o polovinu šířky/výšky Viewportu.
   return { x, y };
 }
 
@@ -79,7 +86,7 @@ export function getGridViewBox(cols: number = 5, rows: number = 5) {
 export function hexagonPoints(centerX: number, centerY: number): string {
   const points: string[] = [];
   for (let i = 0; i < 6; i++) {
-    const angle = (Math.PI / 3) * i; // 60 degrees between points
+    const angle = (Math.PI / 3) * i - Math.PI / 6; // Posun pro Pointy-Top
     const px = centerX + HEX_RADIUS * Math.cos(angle);
     const py = centerY + HEX_RADIUS * Math.sin(angle);
     points.push(`${px},${py}`);
@@ -141,54 +148,47 @@ export function getNeighbors(
  * Returns array of {col, row, x, y} for each hex index
  */
 export interface HexLayout {
-  col: number;
-  row: number;
+  col: number; // Axial q
+  row: number; // Axial r
   x: number;
   y: number;
+  label?: number;
 }
 
 /**
- * Classic 19-hex pattern (spiral from center)
- * Pattern matches traditional Mausritter hex map:
- *       8
- *     19  9
- *   18  2  10
- *  7  1  3  11
- * 17  6  4  12
- *  16  5  13
- *    15 14
+ * 19-hexagonový klastr ve tvaru květu (plástve): 1 hex uprostřed, 6 vnitřní prstenec, 12 vnější prstenec.
  */
 export function get19HexLayout(): HexLayout[] {
   const axialCoords = [
-    // Center hex #1
-    { q: 0, r: 0 },    // #1 (center)
+    // Střed
+    { q: 0, r: 0, label: 1 },
 
-    // Ring 1: 6 hexes around center (clockwise from top)
-    { q: 0, r: -1 },   // #2 (top)
-    { q: 1, r: -1 },   // #3 (top-right)
-    { q: 1, r: 0 },    // #4 (right)
-    { q: 0, r: 1 },    // #5 (bottom-right)
-    { q: -1, r: 1 },   // #6 (bottom-left)
-    { q: -1, r: 0 },   // #7 (left)
+    // Vnitřní prstenec (přímí sousedé centra)
+    { q: -1, r: 0, label: 2 },
+    { q: 0, r: -1, label: 3 },
+    { q: 1, r: -1, label: 4 },
+    { q: 1, r: 0, label: 5 },
+    { q: 0, r: 1, label: 6 },
+    { q: -1, r: 1, label: 7 },
 
-    // Ring 2: 12 hexes (clockwise from top)
-    { q: 0, r: -2 },   // #8 (top)
-    { q: 1, r: -2 },   // #9 (top-right)
-    { q: 2, r: -2 },   // #10 (top-right-right)
-    { q: 2, r: -1 },   // #11 (right-top)
-    { q: 2, r: 0 },    // #12 (right)
-    { q: 1, r: 1 },    // #13 (right-bottom)
-    { q: 0, r: 2 },    // #14 (bottom-right)
-    { q: -1, r: 2 },   // #15 (bottom)
-    { q: -2, r: 2 },   // #16 (bottom-left-left)
-    { q: -2, r: 1 },   // #17 (left-bottom)
-    { q: -2, r: 0 },   // #18 (left)
-    { q: -1, r: -1 },  // #19 (left-top)
+    // Vnější prstenec (hexagony ve vzdálenosti 2 od centra)
+    { q: -2, r: 0, label: 8 },
+    { q: -1, r: -1, label: 9 },
+    { q: 0, r: -2, label: 10 },
+    { q: 1, r: -2, label: 11 },
+    { q: 2, r: -2, label: 12 },
+    { q: 2, r: -1, label: 13 },
+    { q: 2, r: 0, label: 14 },
+    { q: 1, r: 1, label: 15 },
+    { q: 0, r: 2, label: 16 },
+    { q: -1, r: 2, label: 17 },
+    { q: -2, r: 2, label: 18 },
+    { q: -2, r: 1, label: 19 },
   ];
 
-  return axialCoords.map(({ q, r }) => {
+  return axialCoords.map(({ q, r, label }) => {
     const { x, y } = axialToScreen(q, r);
-    return { col: q, row: r, x, y };
+    return { col: q, row: r, x, y, label };
   });
 }
 
