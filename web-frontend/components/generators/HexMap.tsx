@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from "react";
 import { HexcrawlResponse, HexcrawlHex } from "@/lib/api";
 import {
-  getHexagonLayout,
+  get25HexLayout,
   hexagonPoints,
 } from "@/lib/hexMath";
 
@@ -23,8 +23,8 @@ export default function HexMap({ hexcrawl, onHexSelect }: HexMapProps) {
     hexcrawl.hexes.map(() => ({ revealed: true, selected: false }))
   );
 
-  // Get hexagon layout positions
-  const hexLayout = useMemo(() => getHexagonLayout(), []);
+  // Get hexagon layout positions (25-hex for hexcrawl generator)
+  const hexLayout = useMemo(() => get25HexLayout(), []);
 
   // Calculate viewBox to fit the hexagon shape
   const viewBox = useMemo(() => {

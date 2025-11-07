@@ -30,13 +30,14 @@ export function offsetToAxial(col: number, row: number): HexCoord {
 
 /**
  * Convert axial coordinates to screen coordinates
- * Pointy-top orientation
- * @param q Axial q coordinate
- * @param r Axial r coordinate
+ * Pointy-top orientation (hexagons with points up/down)
+ * @param q Axial q coordinate (column-like)
+ * @param r Axial r coordinate (row-like)
  */
 export function axialToScreen(q: number, r: number): ScreenCoord {
-  const x = HEX_RADIUS * ((3 / 2) * q);
-  const y = HEX_RADIUS * ((Math.sqrt(3) / 2) * q + Math.sqrt(3) * r);
+  // Pointy-top hexagon formulas
+  const x = HEX_RADIUS * (Math.sqrt(3) * q + (Math.sqrt(3) / 2) * r);
+  const y = HEX_RADIUS * ((3 / 2) * r);
   return { x, y };
 }
 
@@ -136,9 +137,8 @@ export function getNeighbors(
 }
 
 /**
- * Generate hexagon-shaped layout for 25 hexes (centered pattern)
- * Pattern: 3-4-5-4-3-3-3 rows (total 25)
- * Returns array of {col, row, centerX, centerY} for each hex index
+ * Generate hexagon-shaped layout for variable number of hexes
+ * Returns array of {col, row, x, y} for each hex index
  */
 export interface HexLayout {
   col: number;
@@ -147,32 +147,107 @@ export interface HexLayout {
   y: number;
 }
 
-export function getHexagonLayout(): HexLayout[] {
-  // Hexagon shape pattern (row: [start_col, num_hexes])
-  // Adjusted for 25 hexes total in diamond/hexagon shape
-  const pattern = [
-    { row: 0, startCol: 1, count: 3 },  // Top: 3 hexes (indices 0-2)
-    { row: 1, startCol: 0.5, count: 4 },  // 4 hexes (indices 3-6)
-    { row: 2, startCol: 0, count: 5 },    // Center: 5 hexes (indices 7-11)
-    { row: 3, startCol: 0.5, count: 4 },  // 4 hexes (indices 12-15)
-    { row: 4, startCol: 1, count: 3 },  // 3 hexes (indices 16-18)
-    { row: 5, startCol: 1, count: 3 },  // 3 hexes (indices 19-21)
-    { row: 6, startCol: 1, count: 3 },  // Bottom: 3 hexes (indices 22-24)
+/**
+ * Classic 19-hex pattern (spiral from center)
+ * Pattern matches traditional Mausritter hex map:
+ *       8
+ *     19  9
+ *   18  2  10
+ *  7  1  3  11
+ * 17  6  4  12
+ *  16  5  13
+ *    15 14
+ */
+export function get19HexLayout(): HexLayout[] {
+  const axialCoords = [
+    // Center hex #1
+    { q: 0, r: 0 },    // #1 (center)
+
+    // Ring 1: 6 hexes around center (clockwise from top)
+    { q: 0, r: -1 },   // #2 (top)
+    { q: 1, r: -1 },   // #3 (top-right)
+    { q: 1, r: 0 },    // #4 (right)
+    { q: 0, r: 1 },    // #5 (bottom-right)
+    { q: -1, r: 1 },   // #6 (bottom-left)
+    { q: -1, r: 0 },   // #7 (left)
+
+    // Ring 2: 12 hexes (clockwise from top)
+    { q: 0, r: -2 },   // #8 (top)
+    { q: 1, r: -2 },   // #9 (top-right)
+    { q: 2, r: -2 },   // #10 (top-right-right)
+    { q: 2, r: -1 },   // #11 (right-top)
+    { q: 2, r: 0 },    // #12 (right)
+    { q: 1, r: 1 },    // #13 (right-bottom)
+    { q: 0, r: 2 },    // #14 (bottom-right)
+    { q: -1, r: 2 },   // #15 (bottom)
+    { q: -2, r: 2 },   // #16 (bottom-left-left)
+    { q: -2, r: 1 },   // #17 (left-bottom)
+    { q: -2, r: 0 },   // #18 (left)
+    { q: -1, r: -1 },  // #19 (left-top)
   ];
 
-  const layout: HexLayout[] = [];
-  let hexIndex = 0;
+  return axialCoords.map(({ q, r }) => {
+    const { x, y } = axialToScreen(q, r);
+    return { col: q, row: r, x, y };
+  });
+}
 
-  for (const { row, startCol, count } of pattern) {
-    for (let i = 0; i < count; i++) {
-      const col = startCol + i;
-      const { x, y } = offsetToScreen(col, row);
-      layout.push({ col, row, x, y });
-      hexIndex++;
-      if (hexIndex >= 25) break;
-    }
-    if (hexIndex >= 25) break;
-  }
+/**
+ * 25-hex layout for hexcrawl generator (5x5 grid pattern)
+ */
+export function get25HexLayout(): HexLayout[] {
+  const axialCoords = [
+    // Row r=-2 (top, 3 hexes)
+    { q: 0, r: -2 },   // #1
+    { q: 1, r: -2 },   // #2
+    { q: 2, r: -2 },   // #3
 
-  return layout;
+    // Row r=-1 (4 hexes)
+    { q: -1, r: -1 },  // #4
+    { q: 0, r: -1 },   // #5
+    { q: 1, r: -1 },   // #6
+    { q: 2, r: -1 },   // #7
+
+    // Row r=0 (center, 5 hexes)
+    { q: -2, r: 0 },   // #8
+    { q: -1, r: 0 },   // #9
+    { q: 0, r: 0 },    // #10 (center)
+    { q: 1, r: 0 },    // #11
+    { q: 2, r: 0 },    // #12
+
+    // Row r=1 (4 hexes)
+    { q: -1, r: 1 },   // #13
+    { q: 0, r: 1 },    // #14
+    { q: 1, r: 1 },    // #15
+    { q: 2, r: 1 },    // #16
+
+    // Row r=2 (3 hexes)
+    { q: 0, r: 2 },    // #17
+    { q: 1, r: 2 },    // #18
+    { q: 2, r: 2 },    // #19
+
+    // Row r=3 (3 hexes)
+    { q: 0, r: 3 },    // #20
+    { q: 1, r: 3 },    // #21
+    { q: 2, r: 3 },    // #22
+
+    // Row r=4 (bottom, 3 hexes)
+    { q: 0, r: 4 },    // #23
+    { q: 1, r: 4 },    // #24
+    { q: 2, r: 4 },    // #25
+  ];
+
+  return axialCoords.map(({ q, r }) => {
+    const { x, y } = axialToScreen(q, r);
+    return { col: q, row: r, x, y };
+  });
+}
+
+/**
+ * Default layout function (for backwards compatibility)
+ * Uses 19-hex layout for standalone map generator
+ * Note: HexMap component for hexcrawl still explicitly uses get25HexLayout()
+ */
+export function getHexagonLayout(): HexLayout[] {
+  return get19HexLayout();
 }
