@@ -2,6 +2,11 @@
 
 mluv se mnou českým jazykem
 
+## 🎯 AKTUÁLNÍ PRÁCE
+**Branch:** `feature/game-page` | **Stránka:** `/game` (GM Dashboard)
+**Stav:** Phase 1A ✅ hotovo (Party Panel, Time/Weather) → Phase 1B 🔄 připraveno (Tab System, Bestiary, Canvas)
+📖 Dokumentace: [CURRENT_WORK.md](../web-frontend/docs/CURRENT_WORK.md) | [Roadmapa](../web-frontend/docs/game-dashboard-roadmap.md)
+
 ## 🌐 Production (OVĚŘENO)
 - **Frontend**: https://mausritter-tools.vercel.app (Vercel)
 - **Backend**: https://mausritter-tools.onrender.com (Render)
