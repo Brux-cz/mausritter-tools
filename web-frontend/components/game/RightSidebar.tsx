@@ -8,6 +8,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
+import BestiaryPanel from "@/components/game/BestiaryPanel";
 
 interface DiceRoll {
   id: string;
@@ -66,6 +67,16 @@ export default function RightSidebar() {
         defaultValue={["notes", "dice"]}
         className="w-full"
       >
+        {/* Bestiary Section */}
+        <AccordionItem value="bestiary" className="border-b border-amber-200">
+          <AccordionTrigger className="px-3 py-2 text-sm font-semibold text-amber-900 hover:bg-amber-100 hover:no-underline">
+            📚 Bestiary
+          </AccordionTrigger>
+          <AccordionContent className="px-2 pb-2">
+            <BestiaryPanel />
+          </AccordionContent>
+        </AccordionItem>
+
         {/* Quick Notes Section */}
         <AccordionItem value="notes" className="border-b border-amber-200">
           <AccordionTrigger className="px-3 py-2 text-sm font-semibold text-amber-900 hover:bg-amber-100 hover:no-underline">

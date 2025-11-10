@@ -2,56 +2,8 @@
 
 import { useState } from "react";
 import type { HexData } from "@/lib/types/campaign";
-
-// Hex geometry constants
-const HEX_SIZE = 40; // radius of hexagon
-const HEX_WIDTH = Math.sqrt(3) * HEX_SIZE;
-const HEX_HEIGHT = 2 * HEX_SIZE;
-
-// 19-hex honeycomb pattern (axial coordinates)
-const HEX_COORDINATES = [
-  // Center
-  { q: 0, r: 0 },
-  // First ring (6 hexes)
-  { q: 1, r: 0 },
-  { q: 1, r: -1 },
-  { q: 0, r: -1 },
-  { q: -1, r: 0 },
-  { q: -1, r: 1 },
-  { q: 0, r: 1 },
-  // Second ring (12 hexes)
-  { q: 2, r: 0 },
-  { q: 2, r: -1 },
-  { q: 2, r: -2 },
-  { q: 1, r: -2 },
-  { q: 0, r: -2 },
-  { q: -1, r: -1 },
-  { q: -2, r: 0 },
-  { q: -2, r: 1 },
-  { q: -2, r: 2 },
-  { q: -1, r: 2 },
-  { q: 0, r: 2 },
-  { q: 1, r: 1 },
-];
-
-// Convert axial coordinates to pixel coordinates
-function axialToPixel(q: number, r: number): { x: number; y: number } {
-  const x = HEX_SIZE * (Math.sqrt(3) * q + (Math.sqrt(3) / 2) * r);
-  const y = HEX_SIZE * ((3 / 2) * r);
-  return { x, y };
-}
-
-// Generate hexagon SVG path
-function hexagonPath(centerX: number, centerY: number, size: number): string {
-  const angles = [0, 60, 120, 180, 240, 300];
-  const points = angles.map((angle) => {
-    const rad = (Math.PI / 180) * angle;
-    const x = centerX + size * Math.cos(rad);
-    const y = centerY + size * Math.sin(rad);
-    return `${x},${y}`;
-  });
-  return `M${points.join("L")}Z`;
-}
+import { get19HexLayout, hexagonPoints } from "@/lib/hexMath";
+import type { HexLayout } from "@/lib/hexMath";
 
 // Get terrain emoji
 function getTerrainEmoji(terrain: string): string {
@@ -68,12 +20,15 @@ function getTerrainEmoji(terrain: string): string {
 }
 
 export default function HexMapViewer() {
+  // Get hex layout from library
+  const hexLayout = get19HexLayout();
+
   // Initialize mock hexes
   const [hexes, setHexes] = useState<HexData[]>(() =>
-    HEX_COORDINATES.map((coord, index) => ({
+    hexLayout.map((layout, index) => ({
       id: `hex-${index}`,
-      q: coord.q,
-      r: coord.r,
+      q: layout.col, // Axial q coordinate
+      r: layout.row, // Axial r coordinate
       terrain: index === 0 ? "settlement" : "unknown",
       explored: index === 0, // Only center hex explored by default
       notes: "",
@@ -97,12 +52,12 @@ export default function HexMapViewer() {
     alert("Generate World - připojení na backend bude přidáno!");
   };
 
-  // Calculate SVG viewBox
-  const padding = HEX_SIZE * 3;
-  const minX = -padding;
-  const minY = -padding;
-  const width = HEX_SIZE * 10;
-  const height = HEX_SIZE * 10;
+  // Calculate SVG viewBox (HEX_RADIUS = 30)
+  const padding = 120; // Extra space around hex grid
+  const minX = -200;
+  const minY = -200;
+  const width = 400;
+  const height = 400;
 
   return (
     <div className="flex flex-col h-full bg-white">
@@ -126,9 +81,10 @@ export default function HexMapViewer() {
           className="w-full h-full"
           style={{ maxWidth: "800px", margin: "0 auto" }}
         >
-          {hexes.map((hex) => {
-            const { x, y } = axialToPixel(hex.q, hex.r);
-            const path = hexagonPath(x, y, HEX_SIZE);
+          {hexes.map((hex, index) => {
+            const layout = hexLayout[index];
+            const { x, y } = layout;
+            const points = hexagonPoints(x, y);
             const isExplored = hex.explored;
 
             return (
@@ -138,8 +94,8 @@ export default function HexMapViewer() {
                 className="cursor-pointer transition-all hover:opacity-80"
               >
                 {/* Hex background */}
-                <path
-                  d={path}
+                <polygon
+                  points={points}
                   fill={isExplored ? "#fef3c7" : "#d1d5db"}
                   stroke={selectedHex?.id === hex.id ? "#f59e0b" : "#6b7280"}
                   strokeWidth={selectedHex?.id === hex.id ? 3 : 1.5}
@@ -176,7 +132,7 @@ export default function HexMapViewer() {
                 {/* Coordinates (debug) */}
                 <text
                   x={x}
-                  y={y + HEX_SIZE * 0.6}
+                  y={y + 18}
                   fontSize="8"
                   textAnchor="middle"
                   fill="#6b7280"
